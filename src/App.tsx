@@ -1,11 +1,14 @@
 import React from 'react';
 import AppContainer from './components/AppContainer/AppContainer';
-import styled from 'styled-components';
+import RoomInfo from './components/RoomInfo/RoomInfo';
+import RoomProvider from './components/RoomProvider/RoomProvider';
 
 export default function App() {
   return (
-    <AppContainer>
-      <h1>Ahoy!</h1>
-    </AppContainer>
+    <RoomProvider>
+      <AppContainer>
+        <RoomInfo />
+      </AppContainer>
+    </RoomProvider>
   );
 }
