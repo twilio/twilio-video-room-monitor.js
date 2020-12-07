@@ -22,7 +22,7 @@ export default function RoomInfo() {
           <Datum label="Room Name:" value={room?.name} />
           <Datum label="SID" value={room?.sid} />
           <Datum label="State" value={roomState} />
-          <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity)} />
+          <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity || null)} />
           <Datum label="Media Region" value={room?.mediaRegion} />
           <Datum label="Is Recording" value={String(isRecording)} />
         </>
