@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import useDrag from '../../hooks/useDrag/useDrag/useDrag';
+import useDrag from '../../hooks/useDrag/useDrag';
 import { theme } from '../theme';
 
 const Container = styled.div`
