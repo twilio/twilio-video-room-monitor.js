@@ -16,6 +16,7 @@ This will compile the app into a single file (`dist/index.js`). This file will b
 (function () {
   var tag = document.createElement('script');
   tag.src = 'http://localhost:1234/index.js';
+  window.getTwilioRoom = () => twilioRoom; // Update this function to return your Twilio Room object
   document.body.appendChild(tag);
 })();
 ```
