@@ -25,7 +25,7 @@ This snippet will tear down the app if it is already running. This means that th
 
 #### `npm run build`
 
-This will compile the app into a single file (`dist/index.js`) and exit. It will not re-compile when changes are detected.
+This will compile a minified version of the app into a single file (`dist/index.js`) and exit. It will not re-compile when changes are detected.
 
 #### `npm run ts`
 
