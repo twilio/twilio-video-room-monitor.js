@@ -16,6 +16,7 @@ This will compile the app into a single file (`dist/index.js`). This file will b
 (function () {
   var tag = document.createElement('script');
   tag.src = 'http://localhost:1234/index.js';
+  window.getTwilioRoom = () => twilioRoom; // Update this function to return your Twilio Room object
   document.body.appendChild(tag);
 })();
 ```
@@ -24,7 +25,7 @@ This snippet will tear down the app if it is already running. This means that th
 
 #### `npm run build`
 
-This will compile the app into a single file (`dist/index.js`) and exit. It will not re-compile when changes are detected.
+This will compile a minified version of the app into a single file (`dist/index.js`) and exit. It will not re-compile when changes are detected.
 
 #### `npm run ts`
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import useDrag from '../../hooks/useDrag/useDrag/useDrag';
+import useDrag from '../../hooks/useDrag/useDrag';
+import useRoom from '../../hooks/useRoom/useRoom';
 import { theme } from '../theme';
 
 const Container = styled.div`
@@ -39,13 +40,14 @@ const ChildrenContainer = styled.div`
 
 export default function AppContainer({ children }: { children: React.ReactNode }) {
   const { draggableRef, dragContainerRef } = useDrag();
+  const room = useRoom();
 
   return (
     <Container ref={dragContainerRef as any}>
       <Bar ref={draggableRef as any}>
         <span>Twilio Video Inspector</span>
       </Bar>
-      <ChildrenContainer>{children}</ChildrenContainer>
+      <ChildrenContainer>{room ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
     </Container>
   );
 }

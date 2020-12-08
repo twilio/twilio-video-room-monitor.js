@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.tsx",
-    "build": "parcel build index.jsx --no-source-maps",
+    "build": "parcel build src/index.tsx --no-source-maps",
     "ts": "tsc --noEmit",
     "ts:watch": "tsc --noEmit --watch"
   },
@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^14.14.10",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/styled-components": "^5.1.4",
