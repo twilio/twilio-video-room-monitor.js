@@ -17,7 +17,7 @@ export class GetStatsEvent extends Event {
     this.room = room;
     this.stats = stats;
 
-    Object.setPrototypeOf(this, GetStatsEvent);
+    Object.setPrototypeOf(this, GetStatsEvent.prototype);
   }
 }
 
