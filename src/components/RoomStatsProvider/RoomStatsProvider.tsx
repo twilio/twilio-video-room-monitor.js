@@ -3,16 +3,16 @@ import { Stats } from '../../util/getStats';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
 
-export const StatsContext = React.createContext<Stats | null>(null);
+export const RoomStatsContext = React.createContext<Stats | null>(null);
 
 export const RoomStatsProvider: React.FC = ({
   children,
 }) => {
   const room = useRoom();
   const stats = useGetStats(room);
-  return <StatsContext.Provider value={stats}>
+  return <RoomStatsContext.Provider value={stats}>
     {children}
-  </StatsContext.Provider>;
+  </RoomStatsContext.Provider>;
 };
 
 export default RoomStatsProvider;
