@@ -9,7 +9,7 @@ createGlobalStyle`
 `;
 
 const Container = styled.div`
-  width: 400px;
+  width: 500px;
   height: 85vh;
   position: fixed;
   top: 0;
@@ -64,7 +64,7 @@ export default function AppContainer({ children }: { children: React.ReactNode }
         <span>Twilio Video Inspector</span>
       </Bar>
       <OverflowContainer>
-        <ChildrenContainer>{true ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
+        <ChildrenContainer>{room ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
       </OverflowContainer>
     </Container>
   );
