@@ -25,18 +25,3 @@ export default function usePublications(participant: Participant) {
 
   return publications;
 }
-
-export function useVideoTrackPublications(participant: Participant) {
-  const publications = usePublications(participant);
-  return publications.filter((publication) => publication.kind === 'video');
-}
-
-export function useAudioTrackPublications(participant: Participant) {
-  const publications = usePublications(participant);
-  return publications.filter((publication) => publication.kind === 'audio');
-}
-
-export function useDataTrackPublications(participant: Participant) {
-  const publications = usePublications(participant);
-  return publications.filter((publication) => publication.kind === 'data');
-}
