@@ -46,7 +46,7 @@ const OverflowContainer = styled.div`
 const ChildrenContainer = styled.div`
   height: 100%;
   overflow-y: auto;
-  padding: 0px 10px;
+  padding: 0px 10px 20px;
 `;
 
 export default function AppContainer({ children }: { children: React.ReactNode }) {

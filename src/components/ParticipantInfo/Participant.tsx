@@ -1,7 +1,7 @@
 import React from 'react';
 import { Accordion } from '../typography/Accordion/Accordion';
 import Datum from '../typography/Datum/Datum';
-import { Participant as ParticipantImpl } from 'twilio-video';
+import { Participant as ParticipantImpl, LocalVideoTrackPublication, RemoteVideoTrackPublication } from 'twilio-video';
 import useParticipantNetworkQualityLevel from '../../hooks/useParticipantNetworkQualityLevel/useParticipantNetworkQualityLevel';
 import useParticipantIsReconnecting from '../../hooks/useParticipantIsReconnecting/useParticipantIsReconnecting';
 import {
@@ -9,6 +9,8 @@ import {
   useDataTrackPublications,
   useVideoTrackPublications,
 } from '../../hooks/usePublications/usePublications';
+
+import { VideoTrackPublicationInfo } from './VideoTrackPublicationInfo';
 
 export const Participant: React.FC<{ participant: ParticipantImpl }> = ({ participant }) => {
   const networkQualityLevel = useParticipantNetworkQualityLevel(participant);
@@ -25,7 +27,14 @@ export const Participant: React.FC<{ participant: ParticipantImpl }> = ({ partic
       <Datum label="networkQualityLevel" value={String(networkQualityLevel)} />
       <Accordion label={`Data Tracks (${dataTrackPublications.length})`}></Accordion>
       <Accordion label={`Audio Tracks (${audioTrackPublications.length})`}></Accordion>
-      <Accordion label={`Video Tracks (${videoTrackPublications.length})`}></Accordion>
+      <Accordion label={`Video Tracks (${videoTrackPublications.length})`}>
+        {videoTrackPublications.map((videoTrackPublication) => (
+          <VideoTrackPublicationInfo
+            key={videoTrackPublication.trackSid}
+            publication={videoTrackPublication as LocalVideoTrackPublication | RemoteVideoTrackPublication}
+          />
+        ))}
+      </Accordion>
     </Accordion>
   );
 };

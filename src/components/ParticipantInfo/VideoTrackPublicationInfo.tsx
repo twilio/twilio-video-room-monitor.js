@@ -31,7 +31,7 @@ const VideoTrackInfo: React.FC<{
   );
 };
 
-export const VideoTrackPublication: React.FC<{
+export const VideoTrackPublicationInfo: React.FC<{
   publication: LocalVideoTrackPublication | RemoteVideoTrackPublication;
 }> = ({ publication }) => {
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;

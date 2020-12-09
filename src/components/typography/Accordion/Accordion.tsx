@@ -16,9 +16,11 @@ const ChildrenContainer = styled.div`
   border-left: 1px solid #333;
 `;
 
-const LabelContainer = styled.div`
+const LabelContainer = styled.div<{ isClickable: boolean }>`
   display: flex;
   align-items: center;
+  ${(props) => props.isClickable && 'cursor: pointer;'}
+
   & > span {
     margin-left: 10px;
   }
@@ -26,11 +28,12 @@ const LabelContainer = styled.div`
 
 export const Accordion: React.FC<{ label: string }> = ({ children, label }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const hasChildren = !!children;
 
   return (
     <div>
-      <LabelContainer onClick={() => setIsOpen((prev) => !prev)}>
-        <Triangle isOpen={isOpen} />
+      <LabelContainer onClick={() => hasChildren && setIsOpen((prev) => !prev)} isClickable={hasChildren}>
+        {hasChildren && <Triangle isOpen={isOpen} />}
         <span>{label}</span>
       </LabelContainer>
       {isOpen && <ChildrenContainer>{children}</ChildrenContainer>}
