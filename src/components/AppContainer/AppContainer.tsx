@@ -6,7 +6,7 @@ import { theme } from '../theme';
 
 const Container = styled.div`
   width: 400px;
-  height: 80vh;
+  height: min(400px, 80vh);
   position: fixed;
   top: 0;
   background: rgba(0, 0, 0, 0.8);
@@ -24,6 +24,8 @@ const Container = styled.div`
   }
 `;
 
+const BAR_HEIGHT = '25px';
+
 const Bar = styled.div`
   cursor: move;
   position: absolute;
@@ -32,10 +34,19 @@ const Bar = styled.div`
   right: 0;
   border-bottom: 1px solid ${theme.borderColor};
   padding: 2px 8px;
+  height: ${BAR_HEIGHT};
+`;
+
+const OverflowContainer = styled.div`
+  overflow: hidden;
+  height: 100%;
+  padding-top: ${BAR_HEIGHT};
 `;
 
 const ChildrenContainer = styled.div`
-  padding: 30px 10px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0px 10px;
 `;
 
 export default function AppContainer({ children }: { children: React.ReactNode }) {
@@ -47,7 +58,9 @@ export default function AppContainer({ children }: { children: React.ReactNode }
       <Bar ref={draggableRef as any}>
         <span>Twilio Video Inspector</span>
       </Bar>
-      <ChildrenContainer>{room ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
+      <OverflowContainer>
+        <ChildrenContainer>{true ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
+      </OverflowContainer>
     </Container>
   );
 }
