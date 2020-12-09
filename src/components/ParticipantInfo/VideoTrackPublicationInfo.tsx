@@ -9,6 +9,7 @@ import {
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
+import usePublishPriority from '../../hooks/usePublishPriority/usePublishPriority';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
 import { theme } from '../theme';
@@ -44,6 +45,7 @@ const Container = styled.div`
 export const VideoTrackPublicationInfo: React.FC<{
   publication: LocalVideoTrackPublication | RemoteVideoTrackPublication;
 }> = ({ publication }) => {
+  const publishPriority = usePublishPriority(publication);
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;
 
   return (
@@ -51,7 +53,7 @@ export const VideoTrackPublicationInfo: React.FC<{
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
-      <Datum label="publishPriority" value={String(publication.publishPriority)} />
+      <Datum label="publishPriority" value={String(publishPriority)} />
       {track && <VideoTrackInfo track={track} />}
     </Container>
   );
