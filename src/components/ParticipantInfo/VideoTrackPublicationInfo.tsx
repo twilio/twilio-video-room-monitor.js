@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import {
   LocalVideoTrack,
   LocalVideoTrackPublication,
@@ -10,6 +11,7 @@ import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
+import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
 
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
@@ -31,18 +33,26 @@ const VideoTrackInfo: React.FC<{
   );
 };
 
+const Container = styled.div`
+  &:not(:last-child) {
+    border-bottom: 1px solid ${theme.borderColor};
+    margin-bottom: 3px;
+  }
+  padding-bottom: 3px;
+`;
+
 export const VideoTrackPublicationInfo: React.FC<{
   publication: LocalVideoTrackPublication | RemoteVideoTrackPublication;
 }> = ({ publication }) => {
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;
 
   return (
-    <>
+    <Container>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
       <Datum label="publishPriority" value={String(publication.publishPriority)} />
       {track && <VideoTrackInfo track={track} />}
-    </>
+    </Container>
   );
 };
