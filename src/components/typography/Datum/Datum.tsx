@@ -2,7 +2,7 @@ import React from 'react';
 
 type DatumProps = {
   label: string;
-  value?: string;
+  value: string;
 };
 
 export default function Datum({ label, value }: DatumProps) {

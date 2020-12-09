@@ -12,6 +12,8 @@ export default function RoomInfo() {
   const roomState = useRoomState();
   const isRecording = useIsRecording();
 
+  if (!room) return null;
+
   return (
     <div>
       <Headline>Room information:</Headline>
@@ -19,11 +21,11 @@ export default function RoomInfo() {
         <span>Not connected to a Twilio Video room.</span>
       ) : (
         <>
-          <Datum label="Room Name:" value={room?.name} />
-          <Datum label="SID" value={room?.sid} />
+          <Datum label="Room Name:" value={room.name} />
+          <Datum label="SID" value={room.sid} />
           <Datum label="State" value={roomState} />
           <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity || null)} />
-          <Datum label="Media Region" value={room?.mediaRegion} />
+          <Datum label="Media Region" value={room.mediaRegion} />
           <Datum label="Is Recording" value={String(isRecording)} />
         </>
       )}
