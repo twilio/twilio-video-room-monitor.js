@@ -15,14 +15,19 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^14.14.10",
+    "@types/plotly.js": "^1.54.4",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "@types/react-plotly.js": "^2.2.4",
+    "@types/react-router": "^5.1.8",
     "@types/styled-components": "^5.1.4",
     "@types/twilio-video": "^2.7.2",
     "parcel-bundler": "^1.12.4",
+    "plotly.js": "^1.58.2",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-plotly.js": "^2.5.1",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {

@@ -3,6 +3,7 @@ import AppContainer from './components/AppContainer/AppContainer';
 import RoomInfo from './components/RoomInfo/RoomInfo';
 import RoomProvider from './components/RoomProvider/RoomProvider';
 import RoomStatsProvider from './components/RoomStatsProvider/RoomStatsProvider';
+import Plot from './components/StatsCharts/StatsCharts';
 
 export default function App() {
   return (
@@ -10,6 +11,7 @@ export default function App() {
       <RoomStatsProvider>
         <AppContainer>
           <RoomInfo />
+          <Plot />
         </AppContainer>
       </RoomStatsProvider>
     </RoomProvider>
