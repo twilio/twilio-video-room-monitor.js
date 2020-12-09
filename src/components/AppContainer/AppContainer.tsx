@@ -1,15 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import useDrag from '../../hooks/useDrag/useDrag';
 import useRoom from '../../hooks/useRoom/useRoom';
 import { theme } from '../theme';
 
+createGlobalStyle`
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+`;
+
 const Container = styled.div`
-  width: 400px;
-  height: 80vh;
+  width: 500px;
+  height: 85vh;
   position: fixed;
   top: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   z-index: 10000;
   border: 1px solid ${theme.borderColor};
   & h1,
@@ -21,8 +25,11 @@ const Container = styled.div`
   & span,
   & p {
     color: ${theme.borderColor};
+    font-family: 'Inter', sans-serif;
   }
 `;
+
+const BAR_HEIGHT = '25px';
 
 const Bar = styled.div`
   cursor: move;
@@ -32,10 +39,19 @@ const Bar = styled.div`
   right: 0;
   border-bottom: 1px solid ${theme.borderColor};
   padding: 2px 8px;
+  height: ${BAR_HEIGHT};
+`;
+
+const OverflowContainer = styled.div`
+  overflow: hidden;
+  height: 100%;
+  padding-top: ${BAR_HEIGHT};
 `;
 
 const ChildrenContainer = styled.div`
-  padding: 30px 10px;
+  height: 100%;
+  overflow-y: auto;
+  padding: 0px 10px 20px;
 `;
 
 export default function AppContainer({ children }: { children: React.ReactNode }) {
@@ -47,7 +63,9 @@ export default function AppContainer({ children }: { children: React.ReactNode }
       <Bar ref={draggableRef as any}>
         <span>Twilio Video Inspector</span>
       </Bar>
-      <ChildrenContainer>{room ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
+      <OverflowContainer>
+        <ChildrenContainer>{room ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
+      </OverflowContainer>
     </Container>
   );
 }
