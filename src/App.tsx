@@ -3,14 +3,17 @@ import AppContainer from './components/AppContainer/AppContainer';
 import ParticipantInfo from './components/ParticipantInfo/ParticipantInfo';
 import RoomInfo from './components/RoomInfo/RoomInfo';
 import RoomProvider from './components/RoomProvider/RoomProvider';
+import RoomStatsProvider from './components/RoomStatsProvider/RoomStatsProvider';
 
 export default function App() {
   return (
     <RoomProvider>
-      <AppContainer>
-        <RoomInfo />
-        <ParticipantInfo />
-      </AppContainer>
+      <RoomStatsProvider>
+        <AppContainer>
+          <RoomInfo />
+          <ParticipantInfo />
+        </AppContainer>
+      </RoomStatsProvider>
     </RoomProvider>
   );
 }
