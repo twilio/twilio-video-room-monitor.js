@@ -4,7 +4,7 @@ import ParticipantInfo from './components/ParticipantInfo/ParticipantInfo';
 import RoomInfo from './components/RoomInfo/RoomInfo';
 import RoomProvider from './components/RoomProvider/RoomProvider';
 import RoomStatsProvider from './components/RoomStatsProvider/RoomStatsProvider';
-import Plot from './components/StatsCharts/StatsCharts';
+import ReceiveBandwidthChart from './components/StatsCharts/ReceiveBandwidth/ReceiveBandwidthChart';
 
 export default function App() {
   return (
@@ -13,7 +13,7 @@ export default function App() {
         <AppContainer>
           <RoomInfo />
           <ParticipantInfo />
-          <Plot />
+          <ReceiveBandwidthChart />
         </AppContainer>
       </RoomStatsProvider>
     </RoomProvider>
