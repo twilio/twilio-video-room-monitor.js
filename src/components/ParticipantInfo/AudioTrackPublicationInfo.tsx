@@ -7,6 +7,7 @@ import {
   RemoteAudioTrackPublication,
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
+import { useTrackBandwidth } from '../../hooks/useStats/useStats';
 import useTrack from '../../hooks/useTrack/useTrack';
 import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
@@ -35,12 +36,14 @@ export const AudioTrackPublicationInfo: React.FC<{
   publication: LocalAudioTrackPublication | RemoteAudioTrackPublication;
 }> = ({ publication }) => {
   const track = useTrack(publication) as LocalAudioTrack | RemoteAudioTrack | undefined;
+  const trackBandwidth = useTrackBandwidth(publication.trackSid);
 
   return (
     <Container>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
+      <Datum label="bandwidth" value={String(trackBandwidth) + 'kbps'} />
       {track && <AudioTrackInfo track={track} />}
     </Container>
   );

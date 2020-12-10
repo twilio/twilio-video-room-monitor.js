@@ -17,4 +17,20 @@ declare module 'twilio-video' {
   interface RemoteVideoTrack {
     isSwitchedOff: boolean;
   }
+
+  interface LocalAudioTrackStats {
+    bytesReceived: undefined;
+  }
+
+  interface LocalVideoTrackStats {
+    bytesReceived: undefined;
+  }
+
+  interface RemoteAudioTrackStats {
+    bytesSent: undefined;
+  }
+
+  interface RemoteVideoTrackStats {
+    bytesSent: undefined;
+  }
 }

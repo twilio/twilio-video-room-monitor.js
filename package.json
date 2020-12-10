@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel src/index.tsx",
+    "start": "parcel src/index.tsx --no-hmr",
     "build": "parcel build src/index.tsx --no-source-maps",
     "ts": "tsc --noEmit",
     "ts:watch": "tsc --noEmit --watch"
