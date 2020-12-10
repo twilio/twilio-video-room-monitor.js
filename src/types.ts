@@ -34,3 +34,11 @@ declare module 'twilio-video' {
     bytesSent: undefined;
   }
 }
+
+declare global {
+  interface Window {
+    TwilioVideoInspector: {
+      destroy: () => void;
+    };
+  }
+}
