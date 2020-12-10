@@ -33,6 +33,10 @@ declare module 'twilio-video' {
   interface RemoteVideoTrackStats {
     bytesSent: undefined;
   }
+
+  interface Room {
+    _options: object;
+  }
 }
 
 declare global {
