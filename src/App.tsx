@@ -10,8 +10,17 @@ export default function App() {
     <RoomProvider>
       <RoomStatsProvider>
         <AppContainer>
-          <RoomInfo />
-          <ParticipantInfo />
+          {(activeTab) => (
+            <>
+              {activeTab === 'roomInfo' && (
+                <>
+                  <RoomInfo />
+                  <ParticipantInfo />
+                </>
+              )}
+              {activeTab === 'graphs' && <>Graphs!</>}
+            </>
+          )}
         </AppContainer>
       </RoomStatsProvider>
     </RoomProvider>

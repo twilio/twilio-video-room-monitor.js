@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import useDrag from '../../hooks/useDrag/useDrag';
 import useRoom from '../../hooks/useRoom/useRoom';
@@ -16,6 +16,7 @@ const Container = styled.div`
   background: rgba(0, 0, 0, 0.9);
   z-index: 10000;
   border: 1px solid ${theme.borderColor};
+  color: ${theme.borderColor};
   & h1,
   & h2,
   & h3,
@@ -24,7 +25,6 @@ const Container = styled.div`
   & h6,
   & span,
   & p {
-    color: ${theme.borderColor};
     font-family: 'Inter', sans-serif;
   }
 `;
@@ -92,23 +92,58 @@ const CloseIconContainer = styled.div`
   }
 `;
 
-export default function AppContainer({ children }: { children: React.ReactNode }) {
+const RightBarContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const TabSelector = styled.span<{ isActive: boolean }>`
+  position: relative;
+  margin: 0px 6px;
+  color: ${(props) => (props.isActive ? theme.textColor : '#555')};
+  cursor: pointer;
+
+  &:first-child:after {
+    content: '';
+    position: absolute;
+    height: 12px;
+    background: #ddd;
+    width: 1px;
+    right: -6px;
+    top: 4px;
+  }
+`;
+
+export default function AppContainer({
+  children,
+}: {
+  children: (activeTab: 'roomInfo' | 'graphs') => React.ReactNode;
+}) {
   const { draggableRef, dragContainerRef } = useDrag();
+  const [activeTab, setActiveTab] = useState<'roomInfo' | 'graphs'>('roomInfo');
   const room = useRoom();
 
   return (
     <Container ref={dragContainerRef as any}>
       <Bar ref={draggableRef as any}>
         <span>Twilio Video Inspector</span>
-        <CloseIconContainer onClick={() => window.TwilioVideoInspector.destroy()}>
-          <svg width="20" height="20" viewBox="0 0 24 24">
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </svg>
-        </CloseIconContainer>
+        <RightBarContainer>
+          <TabSelector isActive={activeTab === 'roomInfo'} onClick={() => setActiveTab('roomInfo')}>
+            Info
+          </TabSelector>
+          <TabSelector isActive={activeTab === 'graphs'} onClick={() => setActiveTab('graphs')}>
+            Stats
+          </TabSelector>
+          <CloseIconContainer onClick={() => window.TwilioVideoInspector.destroy()}>
+            <svg width="20" height="20" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </CloseIconContainer>
+        </RightBarContainer>
       </Bar>
       <OverflowContainer>
-        <ChildrenContainer>{room ? children : <span>No Twilio Room detected.</span>}</ChildrenContainer>
+        <ChildrenContainer>{room ? children(activeTab) : <span>No Twilio Room detected.</span>}</ChildrenContainer>
       </OverflowContainer>
     </Container>
   );
