@@ -12,10 +12,22 @@ export default function App() {
     <RoomProvider>
       <RoomStatsProvider>
         <AppContainer>
-          <RoomInfo />
-          <ParticipantInfo />
-          <ReceiveBandwidthChart />
-          <SentBandwidthChart />
+          {(activeTab: string) => (
+            <>
+              {activeTab === 'info' && (
+                <>
+                  <RoomInfo />
+                  <ParticipantInfo />
+                </>
+              )}
+              {activeTab === 'stats' && (
+                <>
+                  <ReceiveBandwidthChart />
+                  <SentBandwidthChart />
+                </>
+              )}
+            </>
+          )}
         </AppContainer>
       </RoomStatsProvider>
     </RoomProvider>
