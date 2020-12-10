@@ -7,7 +7,20 @@ export default function useStats() {
   return stats;
 }
 
-function getAllTracks(statsReport: StatsReport) {
+function getAllStats(statsReports: StatsReport[]) {
+  return statsReports.reduce((p, c) => {
+    return {
+      localAudioTrackStats: [...p.localAudioTrackStats, ...c.localAudioTrackStats],
+      localVideoTrackStats: [...p.localVideoTrackStats, ...c.localVideoTrackStats],
+      remoteAudioTrackStats: [...p.remoteAudioTrackStats, ...c.remoteAudioTrackStats],
+      remoteVideoTrackStats: [...p.remoteVideoTrackStats, ...c.remoteVideoTrackStats],
+      peerConnectionId: '',
+    };
+  });
+}
+
+function getAllTracks(statsReports: StatsReport[]) {
+  const statsReport = getAllStats(statsReports);
   const { localAudioTrackStats, localVideoTrackStats, remoteAudioTrackStats, remoteVideoTrackStats } = statsReport;
 
   const allTracks = [
@@ -20,8 +33,8 @@ function getAllTracks(statsReport: StatsReport) {
   return allTracks;
 }
 
-export function getTrackData(trackSid: string, statsReport: StatsReport) {
-  const allCurrentTracks = getAllTracks(statsReport);
+export function getTrackData(trackSid: string, statsReports: StatsReport[]) {
+  const allCurrentTracks = getAllTracks(statsReports);
   return allCurrentTracks.filter((t) => t.trackSid === trackSid);
 }
 
@@ -32,14 +45,10 @@ export function useTrackBandwidth(trackSid: string) {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const currentTrackData = getTrackData(trackSid, stats.statsReports[0]);
-  const previousTrackData = getTrackData(trackSid, previousStats.statsReports[0]);
+  const currentTrackData = getTrackData(trackSid, stats.statsReports);
+  const previousTrackData = getTrackData(trackSid, previousStats.statsReports);
 
-  if (
-    currentTrackData.length === 0 ||
-    previousTrackData.length === 0 ||
-    currentTrackData.length !== previousTrackData.length
-  ) {
+  if (currentTrackData.length === 0 || previousTrackData.length === 0) {
     return null;
   }
 
@@ -56,8 +65,8 @@ export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const currentTrackData = getAllTracks(stats.statsReports[0]);
-  const previousTrackData = getAllTracks(previousStats.statsReports[0]);
+  const currentTrackData = getAllTracks(stats.statsReports);
+  const previousTrackData = getAllTracks(previousStats.statsReports);
 
   if (currentTrackData.length === 0 || previousTrackData.length === 0) return null;
 
@@ -68,4 +77,13 @@ export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
   const previousTime = previousTrackData[0]?.timestamp;
 
   return round((currentBytes - previousBytes) / (currentTime / previousTime) / 1000);
+}
+
+export function useTrackData(trackSid: string) {
+  const { stats, previousStats } = useStats();
+  if (!stats || !previousStats) return null;
+
+  const trackData = getTrackData(trackSid, stats.statsReports);
+
+  return trackData[0];
 }

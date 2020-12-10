@@ -3,23 +3,36 @@ import styled from 'styled-components';
 import {
   LocalAudioTrack,
   LocalAudioTrackPublication,
+  LocalAudioTrackStats,
   RemoteAudioTrack,
   RemoteAudioTrackPublication,
+  RemoteAudioTrackStats,
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
-import { useTrackBandwidth } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
 import useTrack from '../../hooks/useTrack/useTrack';
 import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
 
 const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;
-}> = ({ track }) => {
+  trackSid: string; // Passing trackSid from the publication object beacuse it not on the LocalAudioTrack object
+}> = ({ track, trackSid }) => {
   const isEnabled = useIsTrackEnabled(track);
+  const trackBandwidth = useTrackBandwidth(trackSid);
+  const trackData = useTrackData(trackSid) as LocalAudioTrackStats | RemoteAudioTrackStats | null;
 
   return (
     <>
       <Datum label="isEnabled" value={String(isEnabled)} />
+      <Datum label="Bandwidth" value={String(trackBandwidth) + 'kbps'} />
+      {trackData && (
+        <>
+          <Datum label="Codec" value={String(trackData.codec)} />
+          <Datum label="Jitter" value={String(trackData.jitter)} />
+          <Datum label="Packets Lost" value={String(trackData.packetsLost)} />
+        </>
+      )}
     </>
   );
 };
@@ -36,15 +49,13 @@ export const AudioTrackPublicationInfo: React.FC<{
   publication: LocalAudioTrackPublication | RemoteAudioTrackPublication;
 }> = ({ publication }) => {
   const track = useTrack(publication) as LocalAudioTrack | RemoteAudioTrack | undefined;
-  const trackBandwidth = useTrackBandwidth(publication.trackSid);
 
   return (
     <Container>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
-      <Datum label="bandwidth" value={String(trackBandwidth) + 'kbps'} />
-      {track && <AudioTrackInfo track={track} />}
+      {track && <AudioTrackInfo track={track} trackSid={publication.trackSid} />}
     </Container>
   );
 };

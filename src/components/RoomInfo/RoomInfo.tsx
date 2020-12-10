@@ -3,7 +3,6 @@ import useDominantSpeaker from '../../hooks/useDominantSpeaker/useDominantSpeake
 import useIsRecording from '../../hooks/useIsRecording/useIsRecording';
 import useRoom from '../../hooks/useRoom/useRoom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
-import { useTotalBandwidth } from '../../hooks/useStats/useStats';
 import Datum from '../typography/Datum/Datum';
 import Headline from '../typography/Headline/Headline';
 
