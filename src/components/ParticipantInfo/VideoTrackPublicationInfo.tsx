@@ -3,14 +3,16 @@ import styled from 'styled-components';
 import {
   LocalVideoTrack,
   LocalVideoTrackPublication,
+  LocalVideoTrackStats,
   RemoteVideoTrack,
   RemoteVideoTrackPublication,
+  RemoteVideoTrackStats,
   VideoTrack,
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import usePublishPriority from '../../hooks/usePublishPriority/usePublishPriority';
-import { useTrackBandwidth } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
 import { theme } from '../theme';
@@ -21,16 +23,27 @@ const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
 
 const VideoTrackInfo: React.FC<{
   track: LocalVideoTrack | RemoteVideoTrack;
-}> = ({ track }) => {
+  trackSid: string; // Passing trackSid from the publication object beacuse it not on the LocalVideoTrack object
+}> = ({ track, trackSid }) => {
   const dimensions = useVideoTrackDimensions(track);
   const isSwitchedOff = useIsTrackSwitchedOff(track);
   const isEnabled = useIsTrackEnabled(track);
+  const trackBandwidth = useTrackBandwidth(trackSid);
+  const trackData = useTrackData(trackSid) as LocalVideoTrackStats | RemoteVideoTrackStats | null;
 
   return (
     <>
       <Datum label="Dimensions" value={getDimensionString(dimensions)} />
       <Datum label="isSwitchedOff" value={String(isSwitchedOff)} />
       <Datum label="isEnabled" value={String(isEnabled)} />
+      <Datum label="Bandwidth" value={String(trackBandwidth) + 'kbps'} />
+      {trackData && (
+        <>
+          <Datum label="Codec" value={String(trackData.codec)} />
+          <Datum label="Framerate" value={String(trackData?.frameRate)} />
+          <Datum label="Packets Lost" value={String(trackData?.packetsLost)} />
+        </>
+      )}
     </>
   );
 };
@@ -48,7 +61,6 @@ export const VideoTrackPublicationInfo: React.FC<{
 }> = ({ publication }) => {
   const publishPriority = usePublishPriority(publication);
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;
-  const trackBandwidth = useTrackBandwidth(publication.trackSid);
 
   return (
     <Container>
@@ -56,8 +68,7 @@ export const VideoTrackPublicationInfo: React.FC<{
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
       <Datum label="publishPriority" value={String(publishPriority)} />
-      <Datum label="bandwidth" value={String(trackBandwidth) + 'kbps'} />
-      {track && <VideoTrackInfo track={track} />}
+      {track && <VideoTrackInfo track={track} trackSid={publication.trackSid} />}
     </Container>
   );
 };
