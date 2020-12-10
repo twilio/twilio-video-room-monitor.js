@@ -23,7 +23,7 @@ const apexOptions = {
   },
   theme: {
     mode: 'dark',
-    palette: 'palette10',
+    palette: 'palette2',
     monochrome: {
       enabled: false,
       color: '#FF9800',
@@ -38,7 +38,7 @@ const apexOptions = {
     curve: 'smooth',
   },
   title: {
-    text: 'Received Bandwidth Chart',
+    text: 'Sent Bandwidth Chart',
     align: 'left',
   },
   markers: {
@@ -53,8 +53,8 @@ const apexOptions = {
   },
 };
 
-export default function ReceiveBandwidthChart() {
-  const totalBandwidth = useTotalBandwidth('bytesReceived');
+export default function SentBandwidthChart() {
+  const totalBandwidth = useTotalBandwidth('bytesSent');
   const [bandwidthArr, setBandwidthArr] = useState<{ x: number; y: number }[]>([]);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function ReceiveBandwidthChart() {
     <div>
       <ReactApexChart
         options={apexOptions}
-        series={[{ name: 'Received Bandwidth', data: bandwidthArr }]}
+        series={[{ name: 'sent bandwidth', data: bandwidthArr }]}
         type="line"
         height={350}
       />

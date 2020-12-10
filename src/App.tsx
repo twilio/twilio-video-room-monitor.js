@@ -5,6 +5,7 @@ import RoomInfo from './components/RoomInfo/RoomInfo';
 import RoomProvider from './components/RoomProvider/RoomProvider';
 import RoomStatsProvider from './components/RoomStatsProvider/RoomStatsProvider';
 import ReceiveBandwidthChart from './components/StatsCharts/ReceiveBandwidth/ReceiveBandwidthChart';
+import SentBandwidthChart from './components/StatsCharts/SentBandwidthChart/SentBandwidthChart';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <RoomInfo />
           <ParticipantInfo />
           <ReceiveBandwidthChart />
+          <SentBandwidthChart />
         </AppContainer>
       </RoomStatsProvider>
     </RoomProvider>
