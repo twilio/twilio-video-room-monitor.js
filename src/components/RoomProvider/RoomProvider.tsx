@@ -10,11 +10,15 @@ export default function RoomProvider({ children }: { children: React.ReactNode }
     // Here we poll to get the room object. This is so the twilio-video-inspector can
     // handle the edge case where it is started before the user has connected to a room.
     const intervalID = setInterval(() => {
-      try {
+      // @ts-ignore
+      if (window._TwilioVideo && window._TwilioVideo.rooms.length > 0) {
         // @ts-ignore
-        const twilioRoom = window.getTwilioRoom();
-        setRoom(twilioRoom);
-      } catch (e) {}
+        setRoom(window._TwilioVideo.rooms[0]);
+        // @ts-ignore
+      } else if (window.getTwilioRoom) {
+        // @ts-ignore
+        setRoom(window.getTwilioRoom());
+      }
     }, 1000);
 
     return () => {
