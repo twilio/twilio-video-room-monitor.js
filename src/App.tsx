@@ -12,13 +12,13 @@ export default function App() {
         <AppContainer>
           {(activeTab) => (
             <>
-              {activeTab === 'roomInfo' && (
+              {activeTab === 'info' && (
                 <>
                   <RoomInfo />
                   <ParticipantInfo />
                 </>
               )}
-              {activeTab === 'graphs' && <>Graphs!</>}
+              {activeTab === 'stats' && <>Graphs!</>}
             </>
           )}
         </AppContainer>

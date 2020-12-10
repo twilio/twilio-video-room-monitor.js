@@ -114,13 +114,9 @@ const TabSelector = styled.span<{ isActive: boolean }>`
   }
 `;
 
-export default function AppContainer({
-  children,
-}: {
-  children: (activeTab: 'roomInfo' | 'graphs') => React.ReactNode;
-}) {
+export default function AppContainer({ children }: { children: (activeTab: 'info' | 'stats') => React.ReactNode }) {
   const { draggableRef, dragContainerRef } = useDrag();
-  const [activeTab, setActiveTab] = useState<'roomInfo' | 'graphs'>('roomInfo');
+  const [activeTab, setActiveTab] = useState<'info' | 'stats'>('info');
   const room = useRoom();
 
   return (
@@ -128,10 +124,10 @@ export default function AppContainer({
       <Bar ref={draggableRef as any}>
         <span>Twilio Video Inspector</span>
         <RightBarContainer>
-          <TabSelector isActive={activeTab === 'roomInfo'} onClick={() => setActiveTab('roomInfo')}>
+          <TabSelector isActive={activeTab === 'info'} onClick={() => setActiveTab('info')}>
             Info
           </TabSelector>
-          <TabSelector isActive={activeTab === 'graphs'} onClick={() => setActiveTab('graphs')}>
+          <TabSelector isActive={activeTab === 'stats'} onClick={() => setActiveTab('stats')}>
             Stats
           </TabSelector>
           <CloseIconContainer onClick={() => window.TwilioVideoInspector.destroy()}>
