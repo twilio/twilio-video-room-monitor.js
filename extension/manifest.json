@@ -10,5 +10,8 @@
   "permissions": [
     "activeTab"
   ],
+  "web_accessible_resources": [
+    "web_accessible/index.js"
+  ],
   "manifest_version": 2
 }

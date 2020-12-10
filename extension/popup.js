@@ -8,10 +8,10 @@ function setChildTextNode(elementId, text) {
 // this code is executed on target tab. It runs in separate js context from the
 // rest of the page.
 const scriptCode = '' +
-  ' var tag = document.createElement("script");          ' +
-  ' tag.src = "http://localhost:1234/index.js";          ' +
-  ' console.log("open inspector version 3");             ' +
-  ' document.body.appendChild(tag);              ';
+  ' console.log("open inspector version 6");                      ' +
+  ' var tag = document.createElement("script");                   ' +
+  ' tag.src = chrome.runtime.getURL("web_accessible/index.js");   ' +
+  ' document.body.appendChild(tag);                               ';
 
 function openVideoInspector() {
   setChildTextNode('openInspectorResults', 'loading...');
