@@ -30,7 +30,7 @@ export const Participant: React.FC<{ participant: ParticipantImpl }> = ({ partic
       <Datum label="SID" value={participant.sid} />
       <Datum label="isReconnecting" value={String(isReconnecting)} />
       <Datum label="networkQualityLevel" value={String(networkQualityLevel)} />
-      <Accordion label={`Data Tracks (${dataTrackPublications.length})`}></Accordion>
+      <Accordion label={`Data Tracks (${dataTrackPublications.length})`}>{/* TODO */}</Accordion>
       <Accordion label={`Audio Tracks (${audioTrackPublications.length})`}>
         {audioTrackPublications.map((audioTrackPublication) => (
           <AudioTrackPublicationInfo

@@ -17,7 +17,6 @@ if (existingContainer) {
   ReactDOM.render(<App />, container);
 }
 
-// @ts-ignore
 window.TwilioVideoInspector = window.TwilioVideoInspector || {
   destroy: () => ReactDOM.unmountComponentAtNode(document.getElementById(CONTAINER_ID)!),
 };

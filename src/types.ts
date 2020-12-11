@@ -33,4 +33,16 @@ declare module 'twilio-video' {
   interface RemoteVideoTrackStats {
     bytesSent: undefined;
   }
+
+  interface Room {
+    _options: object;
+  }
+}
+
+declare global {
+  interface Window {
+    TwilioVideoInspector: {
+      destroy: () => void;
+    };
+  }
 }
