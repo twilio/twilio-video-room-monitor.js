@@ -5,7 +5,7 @@ import { useTotalBandwidth } from '../../../hooks/useStats/useStats';
 
 const ChartContainer = styled.div`
   margin: 10px;
-  height: 250px;
+  height: 200px;
 `;
 
 const apexOptions = {
