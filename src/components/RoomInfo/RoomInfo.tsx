@@ -12,7 +12,7 @@ export default function RoomInfo() {
   const dominantSpeaker = useDominantSpeaker();
   const roomState = useRoomState();
   const isRecording = useIsRecording();
-  const cpuInfo = useCpuInfo()
+  const cpuInfo = useCpuInfo();
 
   if (!room) return null;
 
@@ -29,7 +29,7 @@ export default function RoomInfo() {
           <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity || null)} />
           <Datum label="Media Region" value={room.mediaRegion} />
           <Datum label="Is Recording" value={String(isRecording)} />
-          <Datum label="Processors" value={String(cpuInfo?.numOfProcessors)} />
+          <Datum label="Processors" value={String(cpuInfo?.cpuInfo?.cpuInfo?.numOfProcessors)} />
         </>
       )}
     </div>
