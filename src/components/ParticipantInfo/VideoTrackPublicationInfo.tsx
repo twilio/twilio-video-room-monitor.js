@@ -54,6 +54,10 @@ const Container = styled.div`
     margin-bottom: 3px;
   }
   padding-bottom: 3px;
+
+  &:hover {
+    background: rgba(50, 50, 50, 0.9);
+  }
 `;
 
 export const VideoTrackPublicationInfo: React.FC<{
@@ -62,8 +66,20 @@ export const VideoTrackPublicationInfo: React.FC<{
   const publishPriority = usePublishPriority(publication);
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;
 
+  const handleMouseEnter = () => {
+    track?._attachments?.forEach((el) => {
+      el.style.filter = 'brightness(1.5)';
+    });
+  };
+
+  const handleMouseLeave = () => {
+    track?._attachments?.forEach((el) => {
+      el.style.filter = '';
+    });
+  };
+
   return (
-    <Container>
+    <Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
