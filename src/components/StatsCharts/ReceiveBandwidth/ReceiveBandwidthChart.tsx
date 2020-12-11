@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import styled from 'styled-components';
 import { useTotalBandwidth } from '../../../hooks/useStats/useStats';
+
+const ChartContainer = styled.div`
+  margin: 10px;
+  height: 250px;
+`;
 
 const apexOptions = {
   chart: {
+    background: 'transparent',
     id: 'realtime',
-    height: '100%',
     type: 'line',
     animations: {
       enabled: true,
@@ -38,15 +44,23 @@ const apexOptions = {
     curve: 'smooth',
   },
   title: {
-    text: 'Received Bandwidth Chart',
+    text: 'Bytes Received (kbps)',
     align: 'left',
   },
   markers: {
     size: 0,
   },
   xaxis: {
-    type: 'numeric',
-    range: 100,
+    range: 50,
+    axisTicks: {
+      show: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    labels: {
+      show: false,
+    },
   },
   legend: {
     show: false,
@@ -57,18 +71,28 @@ export default function ReceiveBandwidthChart() {
   const totalBandwidth = useTotalBandwidth('bytesReceived');
   const [bandwidthArr, setBandwidthArr] = useState<{ x: number; y: number }[]>([]);
 
+  const startTimeRef = useRef(Date.now() / 1000);
+
   useEffect(() => {
-    setBandwidthArr((prev) => [...prev, { x: performance.now() / 1000, y: totalBandwidth || 0 }]);
+    setBandwidthArr(function (prev) {
+      let y = 0;
+      if (totalBandwidth === null || totalBandwidth < 0) {
+        y = prev[prev.length - 1]?.y || 0;
+      } else {
+        y = totalBandwidth;
+      }
+      return [...prev, { x: Date.now() / 1000 - startTimeRef.current, y: y }];
+    });
   }, [totalBandwidth]);
 
   return (
-    <div>
+    <ChartContainer>
       <ReactApexChart
         options={apexOptions}
-        series={[{ name: 'Received Bandwidth', data: bandwidthArr }]}
+        series={[{ name: 'Bytes Received (kbps)', data: bandwidthArr }]}
         type="line"
-        height={350}
+        height="100%"
       />
-    </div>
+    </ChartContainer>
   );
 }
