@@ -11,14 +11,10 @@ const ChartContainer = styled.div`
 const apexOptions = {
   chart: {
     background: 'transparent',
-    id: 'realtime',
+    id: 'receivedBandwidth',
     type: 'line',
     animations: {
-      enabled: true,
-      easing: 'linear',
-      dynamicAnimation: {
-        speed: 1000,
-      },
+      enabled: false,
     },
     toolbar: {
       show: false,
@@ -27,15 +23,9 @@ const apexOptions = {
       enabled: false,
     },
   },
+  colors: ['#f00'],
   theme: {
     mode: 'dark',
-    palette: 'palette10',
-    monochrome: {
-      enabled: false,
-      color: '#FF9800',
-      shadeTo: 'light',
-      shadeIntensity: 0.65,
-    },
   },
   dataLabels: {
     enabled: false,
@@ -44,14 +34,14 @@ const apexOptions = {
     curve: 'smooth',
   },
   title: {
-    text: 'Bytes Received (kbps)',
+    text: 'Total Bytes Received (kbps)',
     align: 'left',
   },
   markers: {
     size: 0,
   },
   xaxis: {
-    range: 50,
+    range: 75,
     axisTicks: {
       show: false,
     },
@@ -62,8 +52,12 @@ const apexOptions = {
       show: false,
     },
   },
+  yaxis: { min: 0, max: 1000 },
   legend: {
     show: false,
+  },
+  tooltip: {
+    enabled: false,
   },
 };
 
@@ -81,7 +75,7 @@ export default function ReceiveBandwidthChart() {
       } else {
         y = totalBandwidth;
       }
-      return [...prev, { x: Date.now() / 1000 - startTimeRef.current, y: y }];
+      return [...prev, { x: Date.now() / 1000, y: y }];
     });
   }, [totalBandwidth]);
 

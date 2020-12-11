@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styled from 'styled-components';
 import { useTotalBandwidth } from '../../../hooks/useStats/useStats';
@@ -11,14 +11,10 @@ const ChartContainer = styled.div`
 const apexOptions = {
   chart: {
     background: 'transparent',
-    id: 'realtime',
+    id: 'sentBandwidth',
     type: 'line',
     animations: {
-      enabled: true,
-      easing: 'linear',
-      dynamicAnimation: {
-        speed: 1000,
-      },
+      enabled: false,
     },
     toolbar: {
       show: false,
@@ -27,15 +23,9 @@ const apexOptions = {
       enabled: false,
     },
   },
+  colors: ['#f00'],
   theme: {
     mode: 'dark',
-    palette: 'palette2',
-    monochrome: {
-      enabled: false,
-      color: '#FF9800',
-      shadeTo: 'light',
-      shadeIntensity: 0.65,
-    },
   },
   dataLabels: {
     enabled: false,
@@ -44,14 +34,14 @@ const apexOptions = {
     curve: 'smooth',
   },
   title: {
-    text: 'Bytes Sent (kbps)',
+    text: 'Total Bytes Sent (kbps)',
     align: 'left',
   },
   markers: {
     size: 0,
   },
   xaxis: {
-    range: 50,
+    range: 75,
     axisTicks: {
       show: false,
     },
@@ -62,16 +52,18 @@ const apexOptions = {
       show: false,
     },
   },
+  yaxis: { min: 0, max: 1000 },
   legend: {
     show: false,
+  },
+  tooltip: {
+    enabled: false,
   },
 };
 
 export default function SentBandwidthChart() {
   const totalBandwidth = useTotalBandwidth('bytesSent');
   const [bandwidthArr, setBandwidthArr] = useState<{ x: number; y: number }[]>([]);
-
-  const startTimeRef = useRef(Date.now() / 1000);
 
   useEffect(() => {
     setBandwidthArr(function (prev) {
@@ -81,7 +73,7 @@ export default function SentBandwidthChart() {
       } else {
         y = totalBandwidth;
       }
-      return [...prev, { x: Date.now() / 1000 - startTimeRef.current, y: y }];
+      return [...prev, { x: Date.now() / 1000, y: y }];
     });
   }, [totalBandwidth]);
 

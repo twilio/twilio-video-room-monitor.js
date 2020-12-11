@@ -58,7 +58,7 @@ export function useTrackBandwidth(trackSid: string) {
   const currentTime = currentTrackData[0]?.timestamp;
   const previousTime = previousTrackData[0]?.timestamp;
 
-  return round((currentBytes - previousBytes) / (currentTime / previousTime) / 1000);
+  return round((currentBytes - previousBytes) / (currentTime - previousTime));
 }
 
 export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
@@ -68,7 +68,13 @@ export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
   const currentTrackData = getAllTracks(stats.statsReports);
   const previousTrackData = getAllTracks(previousStats.statsReports);
 
-  if (currentTrackData.length === 0 || previousTrackData.length === 0) return null;
+  if (
+    currentTrackData.length === 0 ||
+    previousTrackData.length === 0 ||
+    currentTrackData.length !== previousTrackData.length
+  ) {
+    return null;
+  }
 
   const currentBytes = sum(currentTrackData.map((d) => d[kind] ?? 0));
   const previousBytes = sum(previousTrackData.map((d) => d[kind] ?? 0));
@@ -76,7 +82,7 @@ export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
   const currentTime = currentTrackData[0]?.timestamp;
   const previousTime = previousTrackData[0]?.timestamp;
 
-  return round((currentBytes - previousBytes) / (currentTime / previousTime) / 1000);
+  return round((currentBytes - previousBytes) / (currentTime - previousTime));
 }
 
 export function useTrackData(trackSid: string) {
