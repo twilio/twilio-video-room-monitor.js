@@ -5,12 +5,14 @@ import useRoom from '../../hooks/useRoom/useRoom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import Datum from '../typography/Datum/Datum';
 import Headline from '../typography/Headline/Headline';
+import useCpuInfo from '../../hooks/useCpuInfo/useCpuInfo';
 
 export default function RoomInfo() {
   const room = useRoom();
   const dominantSpeaker = useDominantSpeaker();
   const roomState = useRoomState();
   const isRecording = useIsRecording();
+  const cpuInfo = useCpuInfo()
 
   if (!room) return null;
 
@@ -27,6 +29,7 @@ export default function RoomInfo() {
           <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity || null)} />
           <Datum label="Media Region" value={room.mediaRegion} />
           <Datum label="Is Recording" value={String(isRecording)} />
+          <Datum label="Processors" value={String(cpuInfo?.numOfProcessors)} />
         </>
       )}
     </div>
