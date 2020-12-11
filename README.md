@@ -21,7 +21,13 @@ This will compile the app into a single file (`dist/index.js`). This file will b
 })();
 ```
 
-This snippet will tear down the app if it is already running. This means that this snippet can be run multiple times on a page without having to reload the page.
+This snippet will tear down the app if it is already running. This means that this
+snippet can be run multiple times on a page without having to reload the page.
+
+Alternatively: You can use a chrome extension to invoke twilio-video-inspector.
+Step 1) copy generated `index.js` into `extension/web_accessible/index.js`
+Step 2)  Install chrome extension from the `extension` directory following instructions [here](https://developer.chrome.com/docs/extensions/mv2/getstarted/)
+Now on any web page using twilio-video, Clicking the extension will invoke video-inspector,
 
 #### `npm run build`
 

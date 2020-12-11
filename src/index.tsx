@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
+console.log('loading index.tsx...');
 const CONTAINER_ID = 'TwilioVideoInspectorContainer';
 
 const existingContainer = document.getElementById(CONTAINER_ID);
