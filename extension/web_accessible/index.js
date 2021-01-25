@@ -32146,7 +32146,10 @@ function RoomProvider(_ref) {
         setRoom(window._TwilioVideo.rooms[0]); // @ts-ignore
       } else if (window.getTwilioRoom) {
         // @ts-ignore
-        setRoom(window.getTwilioRoom());
+        setRoom(window.getTwilioRoom()); // @ts-ignore
+      } else if (window.twilioRoom) {
+        // @ts-ignore
+        setRoom(window.twilioRoom);
       }
     }, 1000);
     return function () {

@@ -18,6 +18,10 @@ export default function RoomProvider({ children }: { children: React.ReactNode }
       } else if (window.getTwilioRoom) {
         // @ts-ignore
         setRoom(window.getTwilioRoom());
+        // @ts-ignore
+      } else if (window.twilioRoom) {
+        // @ts-ignore
+        setRoom(window.twilioRoom);
       }
     }, 1000);
 
