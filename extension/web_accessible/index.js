@@ -32210,7 +32210,7 @@ var _theme = require("../theme");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 7px;\n  cursor: ", ";\n\n  & svg {\n    stroke: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 1em;\n  cursor: ", ";\n\n  & svg {\n    stroke: ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -32277,7 +32277,7 @@ var _theme = require("../theme");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  margin: 0px 6px;\n  color: ", ";\n  cursor: pointer;\n  height: 37px;\n  padding: 8px;\n  border-bottom: ", ";\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  margin: 0px 6px;\n  color: ", ";\n  cursor: pointer;\n  padding: 8px;\n  border-bottom: ", ";\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -32297,7 +32297,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  border-left: 1px solid ", ";\n  height: 2.5em;\n  width: 2.5em;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n\n  & svg {\n    stroke: ", ";\n  }\n\n  &:hover {\n    background: rgba(50, 50, 50, 0.9);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-left: 1px solid ", ";\n  height: 2.7em;\n  width: 2.7em;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n\n  & svg {\n    stroke: ", ";\n  }\n\n  &:hover {\n    background: rgba(50, 50, 50, 0.9);\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -32452,7 +32452,7 @@ function AppContainer(_ref) {
     ref: draggableRef
   }, _react.default.createElement("span", {
     style: {
-      padding: '8px'
+      padding: '0.57em'
     }
   }, "Twilio Video Inspector"), _react.default.createElement(_styles.RightBarContainer, null, _react.default.createElement(_styles.TabSelector, {
     isActive: activeTab === 'info',
@@ -32567,7 +32567,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  padding-top: 8px;\n  margin-bottom: 8px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding-top: 0.4em;\n  margin-bottom: 0.5em;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -34164,7 +34164,7 @@ function RoomInfo() {
   var cpuInfo = (0, _useCpuInfo.default)();
   if (!room) return null;
   return _react.default.createElement("div", null, _react.default.createElement(_Headline.default, null, "Room information:"), roomState === 'disconnected' ? _react.default.createElement("span", null, "Not connected to a Twilio Video room.") : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Datum.default, {
-    label: "Room Name:",
+    label: "Room Name",
     value: room.name
   }), _react.default.createElement(_Datum.default, {
     label: "SID",
