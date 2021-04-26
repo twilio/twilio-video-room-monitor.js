@@ -23,7 +23,7 @@ export default function RoomInfo() {
         <span>Not connected to a Twilio Video room.</span>
       ) : (
         <>
-          <Datum label="Room Name:" value={room.name} />
+          <Datum label="Room Name" value={room.name} />
           <Datum label="SID" value={room.sid} />
           <Datum label="State" value={roomState} />
           <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity || null)} />
