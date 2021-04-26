@@ -5,7 +5,7 @@ import { theme } from '../theme';
 
 const CopyButtonContainer = styled.div<{ hasRoom: boolean }>`
   display: flex;
-  margin: 0 7px;
+  margin: 0 1em;
   cursor: ${({ hasRoom }) => (hasRoom ? 'pointer' : 'initial')};
 
   & svg {

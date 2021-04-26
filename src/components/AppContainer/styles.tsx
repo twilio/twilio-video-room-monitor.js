@@ -53,8 +53,8 @@ export const ChildrenContainer = styled.div`
 
 export const CloseIconContainer = styled.div`
   border-left: 1px solid ${theme.borderColor};
-  height: 2.5em;
-  width: 2.5em;
+  height: 2.7em;
+  width: 2.7em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -79,7 +79,6 @@ export const TabSelector = styled.span<{ isActive: boolean }>`
   margin: 0px 6px;
   color: ${(props) => (props.isActive ? theme.textColor : '#555')};
   cursor: pointer;
-  height: 37px;
   padding: 8px;
   border-bottom: ${(props) => (props.isActive ? '2px solid white' : '')};
 `;

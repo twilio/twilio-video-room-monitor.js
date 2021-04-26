@@ -25,7 +25,7 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
   return (
     <Container ref={dragContainerRef as any}>
       <Bar ref={draggableRef as any}>
-        <span style={{ padding: '8px' }}>Twilio Video Inspector</span>
+        <span style={{ padding: '0.57em' }}>Twilio Video Inspector</span>
         <RightBarContainer>
           <TabSelector isActive={activeTab === 'info'} onClick={() => setActiveTab('info')}>
             Info
