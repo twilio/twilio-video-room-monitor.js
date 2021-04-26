@@ -6,7 +6,6 @@ export const Container = styled.div`
   height: 85vh;
   position: fixed;
   top: 0;
-  background: rgba(0, 0, 0, 0.9);
   z-index: 10000;
   border: 1px solid ${theme.borderColor};
   color: ${theme.borderColor};
@@ -26,16 +25,16 @@ export const BAR_HEIGHT = '25px';
 
 export const Bar = styled.div`
   cursor: move;
+  background: black;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   border-bottom: 1px solid ${theme.borderColor};
-  padding: 2px 0px 2px 8px;
-  height: ${BAR_HEIGHT};
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 20000;
 `;
 
 export const OverflowContainer = styled.div`
@@ -48,12 +47,14 @@ export const ChildrenContainer = styled.div`
   height: 100%;
   overflow-y: auto;
   padding: 0px 10px 20px;
+  background: black;
+  opacity: 0.8;
 `;
 
 export const CloseIconContainer = styled.div`
   border-left: 1px solid ${theme.borderColor};
-  height: calc(${BAR_HEIGHT} - 1px);
-  width: ${BAR_HEIGHT};
+  height: 2.5em;
+  width: 2.5em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,14 +79,7 @@ export const TabSelector = styled.span<{ isActive: boolean }>`
   margin: 0px 6px;
   color: ${(props) => (props.isActive ? theme.textColor : '#555')};
   cursor: pointer;
-
-  &:first-child:after {
-    content: '';
-    position: absolute;
-    height: 12px;
-    background: #ddd;
-    width: 1px;
-    right: -6px;
-    top: 4px;
-  }
+  height: 37px;
+  padding: 8px;
+  border-bottom: ${(props) => (props.isActive ? '2px solid white' : '')};
 `;
