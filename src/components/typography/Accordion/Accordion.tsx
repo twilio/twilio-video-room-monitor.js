@@ -24,6 +24,7 @@ const LabelContainer = styled.div<{ isClickable: boolean }>`
   & > span {
     margin-left: 10px;
     font-size: ${theme.fontSizes.small};
+    padding: 8px 0;
   }
 
   &:hover {

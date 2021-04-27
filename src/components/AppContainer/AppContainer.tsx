@@ -25,7 +25,7 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
   return (
     <Container ref={dragContainerRef as any}>
       <Bar ref={draggableRef as any}>
-        <span>Twilio Video Inspector</span>
+        <span style={{ padding: '0.57em' }}>Twilio Video Inspector</span>
         <RightBarContainer>
           <TabSelector isActive={activeTab === 'info'} onClick={() => setActiveTab('info')}>
             Info
@@ -35,9 +35,19 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
           </TabSelector>
           <CopyButton />
           <CloseIconContainer onClick={() => window.TwilioVideoInspector.destroy()}>
-            <svg width="20" height="20" viewBox="0 0 24 24">
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
+            <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M1.768 1.768a.347.347 0 01.491 0l15.973 15.973a.347.347 0 01-.492.49L1.768 2.26a.347.347 0 010-.49z"
+                fill="#DDD"
+              />
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M18.232 1.768a.347.347 0 010 .491L2.258 18.232a.347.347 0 11-.49-.491L17.74 1.768a.347.347 0 01.492"
+                fill="#DDD"
+              />
             </svg>
           </CloseIconContainer>
         </RightBarContainer>

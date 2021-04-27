@@ -32210,7 +32210,7 @@ var _theme = require("../theme");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 7px;\n  cursor: ", ";\n\n  & svg {\n    stroke: ", ";\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  margin: 0 1em;\n  cursor: ", ";\n\n  & svg {\n    stroke: ", ";\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -32248,19 +32248,18 @@ function CopyButton() {
   }, _react.default.createElement("svg", {
     width: "20",
     height: "20",
-    viewBox: "-2 -2 28 28",
-    strokeWidth: "1",
-    strokeLinecap: "round",
-    strokeLinejoin: "round"
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
   }, _react.default.createElement("path", {
-    d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-  }), _react.default.createElement("rect", {
-    x: "8",
-    y: "2",
-    width: "8",
-    height: "4",
-    rx: "1",
-    ry: "1"
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M4.917.413c0-.274.223-.496.5-.496h6.666c.133 0 .26.052.354.145l5 4.959c.093.093.146.219.146.35v11.57a.498.498 0 01-.5.496H5.417a.498.498 0 01-.5-.495V.412zm1 .495v15.538h10.666V5.576L11.876.909h-5.96z",
+    fill: "#DDD"
+  }), _react.default.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M12.083-.083c.276 0 .5.222.5.496v4.462h4.5c.276 0 .5.222.5.496a.498.498 0 01-.5.496h-5a.498.498 0 01-.5-.496V.413c0-.274.224-.496.5-.496zM2.417 2.892c0-.274.223-.496.5-.496h2.5c.276 0 .5.222.5.496a.498.498 0 01-.5.496h-2v15.537h10.666v-1.983c0-.274.224-.496.5-.496s.5.222.5.495v2.48a.498.498 0 01-.5.496H2.917a.498.498 0 01-.5-.496V2.89z",
+    fill: "#DDD"
   })));
 }
 },{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../../hooks/useRoom/useRoom":"hooks/useRoom/useRoom.ts","../theme":"components/theme.ts"}],"components/AppContainer/styles.tsx":[function(require,module,exports) {
@@ -32278,7 +32277,7 @@ var _theme = require("../theme");
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject7() {
-  var data = _taggedTemplateLiteral(["\n  position: relative;\n  margin: 0px 6px;\n  color: ", ";\n  cursor: pointer;\n\n  &:first-child:after {\n    content: '';\n    position: absolute;\n    height: 12px;\n    background: #ddd;\n    width: 1px;\n    right: -6px;\n    top: 4px;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  position: relative;\n  margin: 0px 6px;\n  color: ", ";\n  cursor: pointer;\n  padding: 8px;\n  border-bottom: ", ";\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -32298,7 +32297,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = _taggedTemplateLiteral(["\n  border-left: 1px solid ", ";\n  height: calc(", " - 1px);\n  width: ", ";\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n\n  & svg {\n    stroke: ", ";\n  }\n\n  &:hover {\n    background: rgba(50, 50, 50, 0.9);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  border-left: 1px solid ", ";\n  height: 2.7em;\n  width: 2.7em;\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  cursor: pointer;\n\n  & svg {\n    stroke: ", ";\n  }\n\n  &:hover {\n    background: rgba(50, 50, 50, 0.9);\n  }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -32308,7 +32307,7 @@ function _templateObject5() {
 }
 
 function _templateObject4() {
-  var data = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-y: auto;\n  padding: 0px 10px 20px;\n"]);
+  var data = _taggedTemplateLiteral(["\n  height: 100%;\n  overflow-y: auto;\n  padding: 0px 10px 20px;\n  background: black;\n  opacity: 0.8;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -32328,7 +32327,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = _taggedTemplateLiteral(["\n  cursor: move;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  border-bottom: 1px solid ", ";\n  padding: 2px 0px 2px 8px;\n  height: ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"]);
+  var data = _taggedTemplateLiteral(["\n  cursor: move;\n  background: black;\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  border-bottom: 1px solid ", ";\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  z-index: 20000;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -32338,7 +32337,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  width: 500px;\n  height: 85vh;\n  position: fixed;\n  top: 0;\n  background: rgba(0, 0, 0, 0.9);\n  z-index: 10000;\n  border: 1px solid ", ";\n  color: ", ";\n  & h1,\n  & h2,\n  & h3,\n  & h4,\n  & h5,\n  & h6,\n  & span,\n  & p {\n    font-family: 'Inter', sans-serif;\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  width: 500px;\n  height: 85vh;\n  position: fixed;\n  top: 0;\n  z-index: 10000;\n  border: 1px solid ", ";\n  color: ", ";\n  & h1,\n  & h2,\n  & h3,\n  & h4,\n  & h5,\n  & h6,\n  & span,\n  & p {\n    font-family: 'Inter', sans-serif;\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -32355,7 +32354,7 @@ exports.Container = Container;
 var BAR_HEIGHT = '25px';
 exports.BAR_HEIGHT = BAR_HEIGHT;
 
-var Bar = _styledComponents.default.div(_templateObject2(), _theme.theme.borderColor, BAR_HEIGHT);
+var Bar = _styledComponents.default.div(_templateObject2(), _theme.theme.borderColor);
 
 exports.Bar = Bar;
 
@@ -32367,7 +32366,7 @@ var ChildrenContainer = _styledComponents.default.div(_templateObject4());
 
 exports.ChildrenContainer = ChildrenContainer;
 
-var CloseIconContainer = _styledComponents.default.div(_templateObject5(), _theme.theme.borderColor, BAR_HEIGHT, BAR_HEIGHT, _theme.theme.borderColor);
+var CloseIconContainer = _styledComponents.default.div(_templateObject5(), _theme.theme.borderColor, _theme.theme.borderColor);
 
 exports.CloseIconContainer = CloseIconContainer;
 
@@ -32377,6 +32376,8 @@ exports.RightBarContainer = RightBarContainer;
 
 var TabSelector = _styledComponents.default.span(_templateObject7(), function (props) {
   return props.isActive ? _theme.theme.textColor : '#555';
+}, function (props) {
+  return props.isActive ? '2px solid white' : '';
 });
 
 exports.TabSelector = TabSelector;
@@ -32449,7 +32450,11 @@ function AppContainer(_ref) {
     ref: dragContainerRef
   }, _react.default.createElement(_styles.Bar, {
     ref: draggableRef
-  }, _react.default.createElement("span", null, "Twilio Video Inspector"), _react.default.createElement(_styles.RightBarContainer, null, _react.default.createElement(_styles.TabSelector, {
+  }, _react.default.createElement("span", {
+    style: {
+      padding: '0.57em'
+    }
+  }, "Twilio Video Inspector"), _react.default.createElement(_styles.RightBarContainer, null, _react.default.createElement(_styles.TabSelector, {
     isActive: activeTab === 'info',
     onClick: function onClick() {
       return setActiveTab('info');
@@ -32466,17 +32471,18 @@ function AppContainer(_ref) {
   }, _react.default.createElement("svg", {
     width: "20",
     height: "20",
-    viewBox: "0 0 24 24"
-  }, _react.default.createElement("line", {
-    x1: "18",
-    y1: "6",
-    x2: "6",
-    y2: "18"
-  }), _react.default.createElement("line", {
-    x1: "6",
-    y1: "6",
-    x2: "18",
-    y2: "18"
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg"
+  }, _react.default.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M1.768 1.768a.347.347 0 01.491 0l15.973 15.973a.347.347 0 01-.492.49L1.768 2.26a.347.347 0 010-.49z",
+    fill: "#DDD"
+  }), _react.default.createElement("path", {
+    "fill-rule": "evenodd",
+    "clip-rule": "evenodd",
+    d: "M18.232 1.768a.347.347 0 010 .491L2.258 18.232a.347.347 0 11-.49-.491L17.74 1.768a.347.347 0 01.492",
+    fill: "#DDD"
   }))))), _react.default.createElement(_styles.OverflowContainer, null, _react.default.createElement(_styles.ChildrenContainer, null, room ? children(activeTab) : _react.default.createElement("span", null, "No Twilio Room detected."))));
 }
 },{"react":"../node_modules/react/index.js","styled-components":"../node_modules/styled-components/dist/styled-components.browser.esm.js","../../hooks/useDrag/useDrag":"hooks/useDrag/useDrag.tsx","../../hooks/useRoom/useRoom":"hooks/useRoom/useRoom.ts","./CopyButton":"components/AppContainer/CopyButton.tsx","./styles":"components/AppContainer/styles.tsx"}],"hooks/useParticipants/useParticipants.ts":[function(require,module,exports) {
@@ -32561,7 +32567,7 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  margin: 0.5em 0;\n"]);
+  var data = _taggedTemplateLiteral(["\n  padding-top: 0.4em;\n  margin-bottom: 0.5em;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -32608,7 +32614,7 @@ function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _templateObject3() {
-  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  ", "\n\n  & > span {\n    margin-left: 10px;\n    font-size: ", ";\n  }\n\n  &:hover {\n    background: rgba(50, 50, 50, 0.9);\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  display: flex;\n  align-items: center;\n  ", "\n\n  & > span {\n    margin-left: 10px;\n    font-size: ", ";\n    padding: 8px 0;\n  }\n\n  &:hover {\n    background: rgba(50, 50, 50, 0.9);\n  }\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -34158,7 +34164,7 @@ function RoomInfo() {
   var cpuInfo = (0, _useCpuInfo.default)();
   if (!room) return null;
   return _react.default.createElement("div", null, _react.default.createElement(_Headline.default, null, "Room information:"), roomState === 'disconnected' ? _react.default.createElement("span", null, "Not connected to a Twilio Video room.") : _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_Datum.default, {
-    label: "Room Name:",
+    label: "Room Name",
     value: room.name
   }), _react.default.createElement(_Datum.default, {
     label: "SID",
