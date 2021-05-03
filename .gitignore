@@ -1,3 +1,10 @@
+# dependencies
 node_modules/
+
+# testing
+coverage
+
 dist/
 .cache/
+
+junit.xml
