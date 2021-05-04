@@ -26,7 +26,7 @@ export class GetStatsUtil extends EventTarget {
   pollIntervalId: number | undefined;
 
   start(interval: number = 1000): void {
-    this.pollIntervalId = setInterval(() => {
+    this.pollIntervalId = window.setInterval(() => {
       for (const room of this.rooms.keys()) {
         this.updateStats(room);
       }

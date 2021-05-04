@@ -67,12 +67,14 @@ export const VideoTrackPublicationInfo: React.FC<{
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;
 
   const handleMouseEnter = () => {
+    // @ts-ignore
     track?._attachments?.forEach((el) => {
       el.style.filter = 'brightness(1.5)';
     });
   };
 
   const handleMouseLeave = () => {
+    // @ts-ignore
     track?._attachments?.forEach((el) => {
       el.style.filter = '';
     });

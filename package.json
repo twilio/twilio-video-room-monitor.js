@@ -33,7 +33,7 @@
     "react-dom": "^17.0.1",
     "react-plotly.js": "^2.5.1",
     "styled-components": "^5.2.1",
-    "twilio-video": "https://github.com/twilio/twilio-video.js/archive/2.11.0-rc1.tar.gz"
+    "twilio-video": "^2.13.1"
   },
   "devDependencies": {
     "jest": "26.6.3",

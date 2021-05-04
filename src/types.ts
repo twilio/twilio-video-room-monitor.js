@@ -1,6 +1,10 @@
 import * as Video from 'twilio-video';
 
 declare module 'twilio-video' {
+  // This helps to create union types between Local and Remote TrackPublication
+  interface LocalTrackPublication {
+    publishPriority: undefined;
+  }
   interface LocalVideoTrack {
     isSwitchedOff: undefined;
   }
