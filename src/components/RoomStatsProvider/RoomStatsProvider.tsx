@@ -1,17 +1,17 @@
 import React, { useRef } from 'react';
-import { Stats } from '../../util/getStats';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
+import { StatsReport } from 'twilio-video';
 
 interface RoomStats {
-  stats: Stats | null;
-  previousStats: Stats | null;
+  stats?: StatsReport[];
+  previousStats?: StatsReport[];
 }
 
-export const RoomStatsContext = React.createContext<RoomStats>({ stats: null, previousStats: null });
+export const RoomStatsContext = React.createContext<RoomStats>(null!);
 
 export const RoomStatsProvider: React.FC = ({ children }) => {
-  const previousStatsRef = useRef<Stats | null>(null);
+  const previousStatsRef = useRef<StatsReport[]>();
 
   const room = useRoom();
   const stats = useGetStats(room);
