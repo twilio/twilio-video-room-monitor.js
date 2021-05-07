@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`The RoomInfo component should render information about the room if connected to a Twilio Video room 1`] = `
+<div>
+  <div>
+    <h4
+      class="sc-gsTCUz fIfjRg"
+    >
+      Room information:
+    </h4>
+    <div>
+      <span
+        class="sc-bdfBwQ cJyRjB"
+      >
+        Room Name
+        : 
+        test123
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdfBwQ cJyRjB"
+      >
+        SID
+        : 
+        XXXXXXXXXXXXX1234
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdfBwQ cJyRjB"
+      >
+        State
+        : 
+        connected
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdfBwQ cJyRjB"
+      >
+        Dominant Speaker
+        : 
+        null
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdfBwQ cJyRjB"
+      >
+        Media Region
+        : 
+        testRegion
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdfBwQ cJyRjB"
+      >
+        Is Recording
+        : 
+        false
+      </span>
+    </div>
+    <div>
+      <span
+        class="sc-bdfBwQ cJyRjB"
+      >
+        Processors
+        : 
+        undefined
+      </span>
+    </div>
+  </div>
+</div>
+`;
