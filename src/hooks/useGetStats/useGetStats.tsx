@@ -1,29 +1,21 @@
-import React from 'react';
-import { Room } from 'twilio-video';
-import { GetStatsEvent, GetStatsUtil, Stats } from '../../util/getStats';
-
-const getStatsUtil = new GetStatsUtil();
-getStatsUtil.start();
+import { useState, useEffect } from 'react';
+import { Room, StatsReport } from 'twilio-video';
 
 export default function useGetStats(room?: Room) {
-  const [stats, setStats] = React.useState<Stats | null>(null);
+  const [stats, setStats] = useState<StatsReport[]>();
 
-  React.useEffect(() => {
-    if (!room) { return; }
+  useEffect(() => {
+    let intervalId: number;
 
-    const eventListener = (event: Event) => {
-      if (event instanceof GetStatsEvent && event.room === room) {
-        setStats(event.stats);
-      }
-    };
+    if (room) {
+      const getStats = () => room.getStats().then((stats) => setStats(stats));
+      getStats();
+      intervalId = window.setInterval(getStats, 1000);
 
-    getStatsUtil.addEventListener(GetStatsEvent.type, eventListener);
-
-    getStatsUtil.getStats(room);
-
-    return () => {
-      getStatsUtil.removeEventListener(GetStatsEvent.type, eventListener);
-    };
+      return () => {
+        window.clearInterval(intervalId);
+      };
+    }
   }, [room]);
 
   return stats;

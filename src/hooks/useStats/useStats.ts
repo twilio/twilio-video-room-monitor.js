@@ -45,8 +45,8 @@ export function useTrackBandwidth(trackSid: string) {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const currentTrackData = getTrackData(trackSid, stats.statsReports);
-  const previousTrackData = getTrackData(trackSid, previousStats.statsReports);
+  const currentTrackData = getTrackData(trackSid, stats);
+  const previousTrackData = getTrackData(trackSid, previousStats);
 
   if (currentTrackData.length === 0 || previousTrackData.length === 0) {
     return null;
@@ -65,8 +65,8 @@ export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const currentTrackData = getAllTracks(stats.statsReports);
-  const previousTrackData = getAllTracks(previousStats.statsReports);
+  const currentTrackData = getAllTracks(stats);
+  const previousTrackData = getAllTracks(previousStats);
 
   if (
     currentTrackData.length === 0 ||
@@ -89,7 +89,7 @@ export function useTrackData(trackSid: string) {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const trackData = getTrackData(trackSid, stats.statsReports);
+  const trackData = getTrackData(trackSid, stats);
 
   return trackData[0];
 }
