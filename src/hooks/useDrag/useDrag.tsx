@@ -16,18 +16,26 @@ export default function useDrag() {
         dragContainerEl.style.top = `${e.clientY - y}px`;
       };
 
-      draggableEl.addEventListener('mousedown', (e) => {
+      const handleMouseDown = (e: MouseEvent) => {
         mousePositionRef.current.x = e.clientX - dragContainerEl.offsetLeft;
         mousePositionRef.current.y = e.clientY - dragContainerEl.offsetTop;
         document.body.addEventListener('mousemove', handleMousemove);
-      });
+      };
 
-      document.body.addEventListener('mouseup', () => {
+      const handleMouseUp = () => {
         document.body.removeEventListener('mousemove', handleMousemove);
         mousePositionRef.current = { x: 0, y: 0 };
-      });
+      };
+
+      draggableEl.addEventListener('mousedown', handleMouseDown);
+      document.body.addEventListener('mouseup', handleMouseUp);
+
+      return () => {
+        draggableEl.removeEventListener('mousedown', handleMouseDown);
+        document.body.removeEventListener('mouseup', handleMouseUp);
+      };
     }
-  });
+  }, []);
 
   return { draggableRef, dragContainerRef };
 }
