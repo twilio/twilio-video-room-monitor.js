@@ -6,4 +6,5 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   reporters: ['default', 'jest-junit'],
   coveragePathIgnorePatterns: ['node_modules'],
+  clearMocks: true,
 };
