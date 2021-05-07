@@ -1,6 +1,5 @@
 import useGetStats, { INTERVAL } from './useGetStats';
 import { act, renderHook } from '@testing-library/react-hooks';
-import { Room } from 'twilio-video';
 
 const mockRoom = {
   getStats: jest.fn(() => Promise.resolve('mockStats')),
