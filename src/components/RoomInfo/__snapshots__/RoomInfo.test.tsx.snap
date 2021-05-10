@@ -4,13 +4,13 @@ exports[`The RoomInfo component should render information about the room if conn
 <div>
   <div>
     <h4
-      class="sc-gsTCUz fIfjRg"
+      class="sc-gtsrHT rBrWG"
     >
       Room information:
     </h4>
     <div>
       <span
-        class="sc-bdfBwQ cJyRjB"
+        class="sc-bdnxRM dGumvq"
       >
         Room Name
         : 
@@ -19,7 +19,7 @@ exports[`The RoomInfo component should render information about the room if conn
     </div>
     <div>
       <span
-        class="sc-bdfBwQ cJyRjB"
+        class="sc-bdnxRM dGumvq"
       >
         SID
         : 
@@ -28,7 +28,7 @@ exports[`The RoomInfo component should render information about the room if conn
     </div>
     <div>
       <span
-        class="sc-bdfBwQ cJyRjB"
+        class="sc-bdnxRM dGumvq"
       >
         State
         : 
@@ -37,7 +37,7 @@ exports[`The RoomInfo component should render information about the room if conn
     </div>
     <div>
       <span
-        class="sc-bdfBwQ cJyRjB"
+        class="sc-bdnxRM dGumvq"
       >
         Dominant Speaker
         : 
@@ -46,7 +46,7 @@ exports[`The RoomInfo component should render information about the room if conn
     </div>
     <div>
       <span
-        class="sc-bdfBwQ cJyRjB"
+        class="sc-bdnxRM dGumvq"
       >
         Media Region
         : 
@@ -55,7 +55,7 @@ exports[`The RoomInfo component should render information about the room if conn
     </div>
     <div>
       <span
-        class="sc-bdfBwQ cJyRjB"
+        class="sc-bdnxRM dGumvq"
       >
         Is Recording
         : 
@@ -64,7 +64,7 @@ exports[`The RoomInfo component should render information about the room if conn
     </div>
     <div>
       <span
-        class="sc-bdfBwQ cJyRjB"
+        class="sc-bdnxRM dGumvq"
       >
         Processors
         : 
