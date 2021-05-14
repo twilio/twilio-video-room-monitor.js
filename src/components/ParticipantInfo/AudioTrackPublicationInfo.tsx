@@ -14,9 +14,9 @@ import useTrack from '../../hooks/useTrack/useTrack';
 import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
 
-const AudioTrackInfo: React.FC<{
+export const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;
-  trackSid: string; // Passing trackSid from the publication object beacuse it not on the LocalAudioTrack object
+  trackSid: string; // Passing trackSid from the publication object because it not on the LocalAudioTrack object
 }> = ({ track, trackSid }) => {
   const isEnabled = useIsTrackEnabled(track);
   const trackBandwidth = useTrackBandwidth(trackSid);
