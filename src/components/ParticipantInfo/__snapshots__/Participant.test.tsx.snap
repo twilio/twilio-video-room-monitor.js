@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ParticipantInfo component should render correctly when there is a participant 1`] = `
+<Accordion
+  label="mockIdentity"
+>
+  <Datum
+    label="SID"
+    value="testSid"
+  />
+  <Datum
+    label="isReconnecting"
+    value="false"
+  />
+  <Datum
+    label="networkQualityLevel"
+    value="4"
+  />
+  <Accordion
+    label="Data Tracks (0)"
+  />
+  <Accordion
+    label="Audio Tracks (1)"
+  >
+    <AudioTrackPublicationInfo
+      key="testAudioSid"
+      publication={
+        Object {
+          "kind": "audio",
+          "trackName": "microphone-123456",
+          "trackSid": "testAudioSid",
+        }
+      }
+    />
+  </Accordion>
+  <Accordion
+    label="Video Tracks (1)"
+  >
+    <VideoTrackPublicationInfo
+      key="testVideoSid"
+      publication={
+        Object {
+          "kind": "video",
+          "trackName": "camera-123456",
+          "trackSid": "testVideoSid",
+        }
+      }
+    />
+  </Accordion>
+</Accordion>
+`;

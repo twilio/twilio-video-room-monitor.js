@@ -21,9 +21,9 @@ import Datum from '../typography/Datum/Datum';
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
   dimensions ? `${dimensions.width} x ${dimensions.height}` : 'undefined';
 
-const VideoTrackInfo: React.FC<{
+export const VideoTrackInfo: React.FC<{
   track: LocalVideoTrack | RemoteVideoTrack;
-  trackSid: string; // Passing trackSid from the publication object beacuse it not on the LocalVideoTrack object
+  trackSid: string; // Passing trackSid from the publication object because it not on the LocalVideoTrack object
 }> = ({ track, trackSid }) => {
   const dimensions = useVideoTrackDimensions(track);
   const isSwitchedOff = useIsTrackSwitchedOff(track);
