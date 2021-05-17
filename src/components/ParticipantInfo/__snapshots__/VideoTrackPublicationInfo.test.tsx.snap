@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the VideoTrackInfo component should render correctly if a video track is present 1`] = `
+<Fragment>
+  <Datum
+    label="Dimensions"
+    value="1280 x 720"
+  />
+  <Datum
+    label="isSwitchedOff"
+    value="false"
+  />
+  <Datum
+    label="isEnabled"
+    value="true"
+  />
+  <Datum
+    label="Bandwidth"
+    value="351.9kbps"
+  />
+  <Datum
+    label="Codec"
+    value="testCodec"
+  />
+  <Datum
+    label="Framerate"
+    value="null"
+  />
+  <Datum
+    label="Packets Lost"
+    value="7"
+  />
+</Fragment>
+`;
+
+exports[`the VideoTrackPublicationInfo component should render correctly 1`] = `
+<styled.div
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+>
+  <Datum
+    label="Name"
+    value="testName"
+  />
+  <Datum
+    label="SID"
+    value="testSid"
+  />
+  <Datum
+    label="isSubscribed"
+    value="true"
+  />
+  <Datum
+    label="publishPriority"
+    value="standard"
+  />
+  <VideoTrackInfo
+    track="testTrack"
+    trackSid="testSid"
+  />
+</styled.div>
+`;

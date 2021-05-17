@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the AudioTrackInfo component should render correctly if an audio track is present 1`] = `
+<Fragment>
+  <Datum
+    label="isEnabled"
+    value="true"
+  />
+  <Datum
+    label="Bandwidth"
+    value="1kbps"
+  />
+  <Datum
+    label="Codec"
+    value="testCodec"
+  />
+  <Datum
+    label="Jitter"
+    value="2"
+  />
+  <Datum
+    label="Packets Lost"
+    value="7"
+  />
+</Fragment>
+`;
+
+exports[`the AudioTrackPublicationInfo component should render correctly 1`] = `
+<styled.div>
+  <Datum
+    label="Name"
+    value="testName"
+  />
+  <Datum
+    label="SID"
+    value="testSid"
+  />
+  <Datum
+    label="isSubscribed"
+    value="true"
+  />
+  <AudioTrackInfo
+    track="testTrack"
+    trackSid="testSid"
+  />
+</styled.div>
+`;

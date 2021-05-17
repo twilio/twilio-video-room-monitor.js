@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the ParticipantInfo component should render correctly for each participant when a room exists 1`] = `
+<Fragment>
+  <styled.h4>
+    Participant Information:
+  </styled.h4>
+  <Participant />
+  <Participant
+    key="testSid1"
+    participant={
+      Object {
+        "identity": "test user1",
+        "isReconnecting": false,
+        "networkQualityLevel": 4,
+        "sid": "testSid1",
+      }
+    }
+  />
+  <Participant
+    key="testSid2"
+    participant={
+      Object {
+        "identity": "test user2",
+        "isReconnecting": false,
+        "networkQualityLevel": 3,
+        "sid": "testSid2",
+      }
+    }
+  />
+</Fragment>
+`;

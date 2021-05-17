@@ -15,7 +15,7 @@ import usePublications from '../../hooks/usePublications/usePublications';
 import { VideoTrackPublicationInfo } from './VideoTrackPublicationInfo';
 import { AudioTrackPublicationInfo } from './AudioTrackPublicationInfo';
 
-export const Participant: React.FC<{ participant: ParticipantImpl }> = ({ participant }) => {
+export const Participant = ({ participant }: { participant: ParticipantImpl }) => {
   const networkQualityLevel = useParticipantNetworkQualityLevel(participant);
   const isReconnecting = useParticipantIsReconnecting(participant);
 
