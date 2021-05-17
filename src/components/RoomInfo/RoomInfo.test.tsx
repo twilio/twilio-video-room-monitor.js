@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import RoomInfo from './RoomInfo';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 
@@ -19,13 +19,13 @@ mockUseRoomState.mockImplementation(() => 'connected');
 
 describe('The RoomInfo component', () => {
   it('should render information about the room if connected to a Twilio Video room', () => {
-    const { container } = render(<RoomInfo />);
-    expect(container).toMatchSnapshot();
+    const wrapper = shallow(<RoomInfo />);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should display warning when not connected to a Twilio Video room', () => {
     mockUseRoomState.mockImplementationOnce(() => 'disconnected');
-    const { getByText } = render(<RoomInfo />);
-    expect(getByText('Not connected to a Twilio Video room.')).toBeTruthy();
+    const wrapper = shallow(<RoomInfo />);
+    expect(wrapper.contains(<span>Not connected to a Twilio Video room.</span>)).toBe(true)
   });
 });
