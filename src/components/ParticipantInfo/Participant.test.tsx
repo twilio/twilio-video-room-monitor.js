@@ -9,8 +9,8 @@ jest.mock('../../hooks/usePublications/usePublications', () => () => [
   { trackName: 'microphone-123456', kind: 'audio', trackSid: 'testAudioSid' },
 ]);
 
-describe('the ParticipantInfo component', () => {
-  it('should render correctly when there is a participant', () => {
+describe('the Participant component', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<Participant participant={{ identity: 'mockIdentity', sid: 'testSid' } as any} />);
     expect(wrapper).toMatchSnapshot();
   });
