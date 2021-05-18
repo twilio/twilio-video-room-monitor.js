@@ -1,9 +1,9 @@
 import React from 'react';
-import useStats from '../../../hooks/useStats/useStats';
 import LineChart from '../LineChart/LineChart';
+import { useStats } from '../../../hooks/useStats/useStats';
 
 export default function ReceiveBandwidthChart() {
-  const { receivedBytesHistory } = useStats();
+  const { receivedBitrateHistory } = useStats();
 
-  return <LineChart data={receivedBytesHistory} yAxisLabel={'Bytes Received'} title="Total Bytes Received (kbps)" />;
+  return <LineChart data={receivedBitrateHistory} yAxisLabel={'Bytes Received'} title="Total Bytes Received (kbps)" />;
 }
