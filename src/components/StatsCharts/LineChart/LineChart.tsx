@@ -31,10 +31,8 @@ interface LineChartProps {
 }
 
 export default function LineChart({ data, title, yAxisLabel, hidden }: LineChartProps) {
-  const minTime = Date.now() - UPDATE_INTERVAL * MAX_STAT_HISTORY_LENGTH;
-  const filteredData = connectNulls(data.filter((d) => d.x >= minTime));
-
-  const xDomainMin = Math.min(min(filteredData, (d) => d.x) ?? 0, minTime);
+  const minTime = Date.now() - UPDATE_INTERVAL * MAX_STAT_HISTORY_LENGTH + 1000;
+  const xDomainMin = Math.min(min(data, (d) => d.x) ?? 0, minTime);
 
   if (hidden) return null;
 
@@ -46,7 +44,7 @@ export default function LineChart({ data, title, yAxisLabel, hidden }: LineChart
         width={465}
         xScale={{
           type: 'time',
-          domain: [xDomainMin, max(filteredData, (d) => d.x) ?? 0],
+          domain: [xDomainMin, max(data, (d) => d.x) ?? 0],
         }}
         yScale={{
           type: 'linear',
@@ -67,7 +65,7 @@ export default function LineChart({ data, title, yAxisLabel, hidden }: LineChart
         />
         <LineSeries
           dataKey="x"
-          data={filteredData}
+          data={connectNulls(data)}
           xAccessor={(d) => d.x}
           yAccessor={(d) => d.y}
           curve={curveMonotoneX}
