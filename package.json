@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "concurrently npm:parcel:watch npm:ts:watch",
     "test": "cross-env TZ=utc jest",
-    "start": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible",
+    "parcel:watch": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible",
     "build": "parcel build src/index.tsx --no-source-maps --out-dir extension/web_accessible --experimental-scope-hoisting",
     "ts": "tsc --noEmit",
     "ts:watch": "tsc --noEmit --watch"
@@ -23,6 +24,7 @@
     "@types/react-dom": "^17.0.0",
     "@types/styled-components": "^5.1.4",
     "@visx/xychart": "^1.10.1",
+    "concurrently": "^6.1.0",
     "cross-env": "7.0.3",
     "d3-array": "^2.12.1",
     "parcel-bundler": "^1.12.4",
