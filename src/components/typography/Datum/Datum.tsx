@@ -11,7 +11,7 @@ const Text = styled.span`
   font-size: ${theme.fontSizes.small};
 `;
 
-export default function Datum({ label, value }: DatumProps) {
+function Datum({ label, value }: DatumProps) {
   return (
     <div>
       <Text>
@@ -20,3 +20,5 @@ export default function Datum({ label, value }: DatumProps) {
     </div>
   );
 }
+
+export default React.memo(Datum);
