@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently npm:parcel:watch npm:ts:watch",
     "test": "cross-env TZ=utc jest",
-    "parcel:watch": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible",
+    "parcel:watch": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible --log-level 1",
     "build": "parcel build src/index.tsx --no-source-maps --out-dir extension/web_accessible --experimental-scope-hoisting",
     "ts": "tsc --noEmit",
     "ts:watch": "tsc --noEmit --watch"
