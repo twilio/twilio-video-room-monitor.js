@@ -1,13 +1,14 @@
 import React from 'react';
 import { chartDatum } from '../../../types';
 import { connectNulls } from '../../../utils/utils';
+import { curveMonotoneX } from '@visx/curve';
 import Headline from '../../typography/Headline/Headline';
 import { MAX_STAT_HISTORY_LENGTH, UPDATE_INTERVAL } from '../../../constants';
 import { min, max } from 'd3-array';
 import { XYChart, Axis, LineSeries, Grid, buildChartTheme } from '@visx/xychart';
 
 export function formatBitrate(bytes: number, suffixIndex = 0): string {
-  const suffixes = ['kbps', 'mbps', 'gbps'];
+  const suffixes = ['K', 'M', 'G'];
   if (bytes < 1000) return +bytes.toFixed(0) + ' ' + suffixes[suffixIndex];
   return formatBitrate(bytes / 1024, suffixIndex + 1);
 }
@@ -51,7 +52,7 @@ export default function LineChart({ data, title, yAxisLabel, hidden }: LineChart
           type: 'linear',
           domain: [0, Math.max(50, max(data, (d) => d.y)!)],
         }}
-        margin={{ top: 10, left: 75, right: 0, bottom: 50 }}
+        margin={{ top: 10, left: 65, right: 0, bottom: 50 }}
         theme={theme}
       >
         <Grid columns={false} numTicks={5} strokeDasharray="2" />
@@ -62,9 +63,15 @@ export default function LineChart({ data, title, yAxisLabel, hidden }: LineChart
           label={yAxisLabel}
           numTicks={5}
           tickFormat={(d) => formatBitrate(d)}
-          labelOffset={48}
+          labelOffset={36}
         />
-        <LineSeries dataKey="x" data={filteredData} xAccessor={(d) => d.x} yAccessor={(d) => d.y} />
+        <LineSeries
+          dataKey="x"
+          data={filteredData}
+          xAccessor={(d) => d.x}
+          yAccessor={(d) => d.y}
+          curve={curveMonotoneX}
+        />
       </XYChart>
     </>
   );
