@@ -1,18 +1,18 @@
 import React from 'react';
+import Datum from '../typography/Datum/Datum';
+import Headline from '../typography/Headline/Headline';
 import useDominantSpeaker from '../../hooks/useDominantSpeaker/useDominantSpeaker';
 import useIsRecording from '../../hooks/useIsRecording/useIsRecording';
 import useRoom from '../../hooks/useRoom/useRoom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
-import Datum from '../typography/Datum/Datum';
-import Headline from '../typography/Headline/Headline';
-import useCpuInfo from '../../hooks/useCpuInfo/useCpuInfo';
+import { useStats } from '../../hooks/useStats/useStats';
 
 export default function RoomInfo() {
   const room = useRoom();
   const dominantSpeaker = useDominantSpeaker();
   const roomState = useRoomState();
   const isRecording = useIsRecording();
-  const cpuInfo = useCpuInfo();
+  const { currentReceivedBitrate, currentSentBitrate } = useStats();
 
   if (!room) return null;
 
@@ -29,7 +29,8 @@ export default function RoomInfo() {
           <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity || null)} />
           <Datum label="Media Region" value={room.mediaRegion} />
           <Datum label="Is Recording" value={String(isRecording)} />
-          <Datum label="Processors" value={String(cpuInfo?.cpuInfo?.cpuInfo?.numOfProcessors)} />
+          <Datum label="Total Sent Bandwidth (kbps)" value={String(currentSentBitrate)} />
+          <Datum label="Total Received Bandwidth (kbps)" value={String(currentReceivedBitrate)} />
         </>
       )}
     </div>
