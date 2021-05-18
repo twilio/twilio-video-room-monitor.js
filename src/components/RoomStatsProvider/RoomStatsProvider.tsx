@@ -1,25 +1,25 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { chartDatum } from '../../types';
+import { getTotalBandwidth } from '../../hooks/useStats/useStats';
+import { MAX_STAT_HISTORY_LENGTH } from '../../constants';
+import { StatsReport } from 'twilio-video';
+import { truncateFront } from '../../utils/utils';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
-import { StatsReport } from 'twilio-video';
-import { datum } from '../../types';
-import { getTotalBandwidth } from '../../hooks/useStats/useStats';
-import { truncateFront } from '../../utils/utils';
-import { MAX_STAT_HISTORY_LENGTH } from '../../constants';
 
 interface RoomStats {
   stats?: StatsReport[];
   previousStats?: StatsReport[];
-  receivedBytesHistory: datum[];
-  sentBytesHistory: datum[];
+  receivedBytesHistory: chartDatum[];
+  sentBytesHistory: chartDatum[];
 }
 
 export const RoomStatsContext = React.createContext<RoomStats>(null!);
 
 export const RoomStatsProvider: React.FC = ({ children }) => {
   const previousStatsRef = useRef<StatsReport[]>();
-  const [receivedBytesHistory, setReceivedBytesHistory] = useState<datum[]>([]);
-  const [sentBytesHistory, setSentBytesHistory] = useState<datum[]>([]);
+  const [receivedBytesHistory, setReceivedBytesHistory] = useState<chartDatum[]>([]);
+  const [sentBytesHistory, setSentBytesHistory] = useState<chartDatum[]>([]);
 
   const room = useRoom();
   const stats = useGetStats(room);

@@ -1,6 +1,6 @@
-import { datum } from '../types';
+import { chartDatum } from '../types';
 
-export function connectNulls(data: datum[]) {
+export function connectNulls(data: chartDatum[]) {
   return data.map((d, i) => {
     const previousY = data[i - 1]?.y;
     if (d.y === null && data[i - 1]?.y !== null) {
