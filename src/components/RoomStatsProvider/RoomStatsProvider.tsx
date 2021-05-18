@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { chartDatum } from '../../types';
 import { getTotalBandwidth } from '../../hooks/useStats/useStats';
 import { MAX_STAT_HISTORY_LENGTH } from '../../constants';
@@ -10,16 +10,18 @@ import useRoom from '../../hooks/useRoom/useRoom';
 interface RoomStats {
   stats?: StatsReport[];
   previousStats?: StatsReport[];
-  receivedBytesHistory: chartDatum[];
-  sentBytesHistory: chartDatum[];
+  receivedBitrateHistory: chartDatum[];
+  sentBitrateHistory: chartDatum[];
+  currentReceivedBitrate: number | null;
+  currentSentBitrate: number | null;
 }
 
 export const RoomStatsContext = React.createContext<RoomStats>(null!);
 
 export const RoomStatsProvider: React.FC = ({ children }) => {
   const previousStatsRef = useRef<StatsReport[]>();
-  const receivedBytesHistoryRef = useRef<chartDatum[]>([]);
-  const sentBytesHistoryRef = useRef<chartDatum[]>([]);
+  const receivedBitrateHistoryRef = useRef<chartDatum[]>([]);
+  const sentBitrateHistoryRef = useRef<chartDatum[]>([]);
 
   const room = useRoom();
   const stats = useGetStats(room);
@@ -27,21 +29,26 @@ export const RoomStatsProvider: React.FC = ({ children }) => {
   const previousStats = previousStatsRef.current;
   previousStatsRef.current = stats;
 
-  const totalReceivedBandwidth = getTotalBandwidth('bytesReceived', stats, previousStats);
-  const newReceivedBytesHistroy = receivedBytesHistoryRef.current.concat({ x: Date.now(), y: totalReceivedBandwidth });
-  receivedBytesHistoryRef.current = truncateFront(newReceivedBytesHistroy, MAX_STAT_HISTORY_LENGTH);
+  const totalReceivedBitrate = getTotalBandwidth('bytesReceived', stats, previousStats);
+  const newReceivedBytesHistroy = receivedBitrateHistoryRef.current.concat({
+    x: Date.now(),
+    y: totalReceivedBitrate,
+  });
+  receivedBitrateHistoryRef.current = truncateFront(newReceivedBytesHistroy, MAX_STAT_HISTORY_LENGTH);
 
-  const totalSentBandwidth = getTotalBandwidth('bytesSent', stats, previousStats);
-  const newSentBytesHistroy = sentBytesHistoryRef.current.concat({ x: Date.now(), y: totalSentBandwidth });
-  sentBytesHistoryRef.current = truncateFront(newSentBytesHistroy, MAX_STAT_HISTORY_LENGTH);
+  const totalSentBitrate = getTotalBandwidth('bytesSent', stats, previousStats);
+  const newSentBytesHistroy = sentBitrateHistoryRef.current.concat({ x: Date.now(), y: totalSentBitrate });
+  sentBitrateHistoryRef.current = truncateFront(newSentBytesHistroy, MAX_STAT_HISTORY_LENGTH);
 
   return (
     <RoomStatsContext.Provider
       value={{
         stats,
         previousStats,
-        receivedBytesHistory: receivedBytesHistoryRef.current,
-        sentBytesHistory: sentBytesHistoryRef.current,
+        receivedBitrateHistory: receivedBitrateHistoryRef.current,
+        sentBitrateHistory: sentBitrateHistoryRef.current,
+        currentReceivedBitrate: receivedBitrateHistoryRef.current.slice(-1)[0]?.y,
+        currentSentBitrate: sentBitrateHistoryRef.current.slice(-1)[0]?.y,
       }}
     >
       {children}
