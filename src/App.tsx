@@ -6,7 +6,6 @@ import RoomProvider from './components/RoomProvider/RoomProvider';
 import RoomStatsProvider from './components/RoomStatsProvider/RoomStatsProvider';
 import ReceiveBandwidthChart from './components/StatsCharts/ReceiveBandwidth/ReceiveBandwidthChart';
 import SentBandwidthChart from './components/StatsCharts/SentBandwidthChart/SentBandwidthChart';
-import CPUChart from './components/StatsCharts/CPUChart/CPUChart';
 
 export default function App() {
   return (
@@ -21,13 +20,8 @@ export default function App() {
                   <ParticipantInfo />
                 </>
               )}
-              {activeTab === 'stats' && (
-                <>
-                  <ReceiveBandwidthChart />
-                  <SentBandwidthChart />
-                  <CPUChart />
-                </>
-              )}
+              <ReceiveBandwidthChart hidden={activeTab !== 'stats'} />
+              <SentBandwidthChart hidden={activeTab !== 'stats'} />
             </>
           )}
         </AppContainer>
