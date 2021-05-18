@@ -61,8 +61,11 @@ export function useTrackBandwidth(trackSid: string) {
   return round((currentBytes - previousBytes) / (currentTime - previousTime));
 }
 
-export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
-  const { stats, previousStats } = useStats();
+export function getTotalBandwidth(
+  kind: 'bytesSent' | 'bytesReceived',
+  stats: StatsReport[] | undefined,
+  previousStats: StatsReport[] | undefined
+) {
   if (!stats || !previousStats) return null;
 
   const currentTrackData = getAllTracks(stats);
