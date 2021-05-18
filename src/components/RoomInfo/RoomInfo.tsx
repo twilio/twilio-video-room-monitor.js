@@ -17,7 +17,7 @@ export default function RoomInfo() {
   if (!room) return null;
 
   return (
-    <div>
+    <div style={{ marginBottom: '1em' }}>
       <Headline>Room information:</Headline>
       {roomState === 'disconnected' ? (
         <span>Not connected to a Twilio Video room.</span>

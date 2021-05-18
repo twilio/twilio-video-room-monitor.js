@@ -16,14 +16,16 @@ export const Container = styled.div`
   & h5,
   & h6,
   & span,
-  & p {
+  & p,
+  & text {
     font-family: 'Inter', sans-serif;
   }
 `;
 
-export const BAR_HEIGHT = '25px';
+export const BAR_HEIGHT = '2.8em';
 
 export const Bar = styled.div`
+  height: ${BAR_HEIGHT};
   cursor: move;
   background: black;
   position: absolute;
@@ -46,7 +48,7 @@ export const OverflowContainer = styled.div`
 export const ChildrenContainer = styled.div`
   height: 100%;
   overflow-y: auto;
-  padding: 0px 10px 20px;
+  padding: 0.4em 0.8em 0.4em;
   background: black;
   opacity: 0.8;
 `;
