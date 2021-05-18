@@ -20,8 +20,12 @@ export default function App() {
                   <ParticipantInfo />
                 </>
               )}
-              <ReceiveBandwidthChart hidden={activeTab !== 'stats'} />
-              <SentBandwidthChart hidden={activeTab !== 'stats'} />
+              {activeTab === 'stats' && (
+                <>
+                  <ReceiveBandwidthChart />
+                  <SentBandwidthChart />
+                </>
+              )}
             </>
           )}
         </AppContainer>

@@ -9,7 +9,7 @@ import { XYChart, Axis, LineSeries, Grid, buildChartTheme } from '@visx/xychart'
 
 export function formatBitrate(bytes: number, suffixIndex = 0): string {
   const suffixes = ['K', 'M', 'G'];
-  if (bytes < 1000) return +bytes.toFixed(0) + ' ' + suffixes[suffixIndex];
+  if (bytes < 1000) return +bytes.toFixed(suffixIndex) + ' ' + suffixes[suffixIndex];
   return formatBitrate(bytes / 1024, suffixIndex + 1);
 }
 
@@ -27,14 +27,11 @@ interface LineChartProps {
   data: chartDatum[];
   title: string;
   yAxisLabel: string;
-  hidden: boolean;
 }
 
-export default function LineChart({ data, title, yAxisLabel, hidden }: LineChartProps) {
+export default function LineChart({ data, title, yAxisLabel }: LineChartProps) {
   const minTime = Date.now() - UPDATE_INTERVAL * MAX_STAT_HISTORY_LENGTH + 1000;
   const xDomainMin = Math.min(min(data, (d) => d.x) ?? 0, minTime);
-
-  if (hidden) return null;
 
   return (
     <>
