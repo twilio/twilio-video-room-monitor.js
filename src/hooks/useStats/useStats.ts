@@ -2,7 +2,7 @@ import React from 'react';
 import { StatsReport } from 'twilio-video';
 import { RoomStatsContext } from '../../components/RoomStatsProvider/RoomStatsProvider';
 
-export default function useStats() {
+export function useStats() {
   const stats = React.useContext(RoomStatsContext);
   return stats;
 }
@@ -68,24 +68,33 @@ export function getTotalBandwidth(
 ) {
   if (!stats || !previousStats) return null;
 
-  const currentTrackData = getAllTracks(stats);
-  const previousTrackData = getAllTracks(previousStats);
+  const currentTrackData = getAllTracks(stats).filter((track) => typeof track[kind] !== 'undefined');
+  const previousTrackData = getAllTracks(previousStats).filter((track) => typeof track[kind] !== 'undefined');
 
-  if (
-    currentTrackData.length === 0 ||
-    previousTrackData.length === 0 ||
-    currentTrackData.length !== previousTrackData.length
-  ) {
-    return null;
-  }
+  // Calculate the bandwidth consumption for each individual track
+  const bandwidthPerTrack = currentTrackData
+    .map((currentTrack) => {
+      // Find the corresponding track source from the previousTrackData array.
+      const prevTrack = previousTrackData.find((t) => t.ssrc === currentTrack.ssrc);
 
-  const currentBytes = sum(currentTrackData.map((d) => d[kind] ?? 0));
-  const previousBytes = sum(previousTrackData.map((d) => d[kind] ?? 0));
+      // If no corresponding track is found (because the track was recently published),
+      // then it won't be possible to compute bandwidth usage, so null will be returned.
+      if (!prevTrack) return null;
 
-  const currentTime = currentTrackData[0]?.timestamp;
-  const previousTime = previousTrackData[0]?.timestamp;
+      const currentBytes = currentTrack[kind] ?? null;
+      const prevBytes = prevTrack[kind] ?? null;
 
-  return round((currentBytes - previousBytes) / (currentTime - previousTime));
+      if (currentBytes !== null && prevBytes !== null) {
+        // Calulate bytes per second
+        return (currentBytes - prevBytes) / (currentTrack.timestamp - prevTrack.timestamp);
+      } else {
+        return null;
+      }
+    })
+    // Remove and null values
+    .filter((t) => t !== null) as number[];
+
+  return round(sum(bandwidthPerTrack));
 }
 
 export function useTrackData(trackSid: string) {
