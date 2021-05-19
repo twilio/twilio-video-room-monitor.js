@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AudioTrackPublicationInfo, AudioTrackInfo } from './AudioTrackPublicationInfo';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 
 jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
