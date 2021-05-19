@@ -3,7 +3,13 @@ import LineChart from '../LineChart/LineChart';
 import { useStats } from '../../../hooks/useStats/useStats';
 
 export default function ReceiveBandwidthChart() {
-  const { receivedBitrateHistory } = useStats();
+  const { receivedBitrateHistory, currentReceivedBitrate } = useStats();
 
-  return <LineChart data={receivedBitrateHistory} yAxisLabel={'Bytes Received'} title="Total Bytes Received (kbps)" />;
+  return (
+    <LineChart
+      data={receivedBitrateHistory}
+      yAxisLabel={'Bits per second'}
+      title={`Total Bandwidth Received: ${currentReceivedBitrate?.toLocaleString()}kbps`}
+    />
+  );
 }
