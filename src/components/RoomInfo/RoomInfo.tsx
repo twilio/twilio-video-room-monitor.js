@@ -29,8 +29,8 @@ export default function RoomInfo() {
           <Datum label="Dominant Speaker" value={String(dominantSpeaker?.identity || null)} />
           <Datum label="Media Region" value={room.mediaRegion} />
           <Datum label="Is Recording" value={String(isRecording)} />
-          <Datum label="Total Sent Bandwidth (kbps)" value={String(currentSentBitrate?.toLocaleString())} />
-          <Datum label="Total Received Bandwidth (kbps)" value={String(currentReceivedBitrate?.toLocaleString())} />
+          <Datum label="Total Sent Bandwidth" value={String(currentSentBitrate?.toLocaleString()) + 'kbps'} />
+          <Datum label="Total Received Bandwidth" value={String(currentReceivedBitrate?.toLocaleString()) + 'kbps'} />
         </>
       )}
     </div>
