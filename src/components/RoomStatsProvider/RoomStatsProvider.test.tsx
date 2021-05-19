@@ -1,6 +1,6 @@
 import React from 'react';
 import { renderHook } from '@testing-library/react-hooks';
-import RoomStatsProvider from './RoomStatsProvider';
+import RoomStatsProvider, { truncateFront } from './RoomStatsProvider';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
 import * as statsHooks from '../../hooks/useStats/useStats';
@@ -14,6 +14,14 @@ jest.mock('../../hooks/useGetStats/useGetStats', () => jest.fn(() => 'mockStats'
 
 const mockUseGetStats = useGetStats as jest.Mock<any>;
 const mockUseRoom = useRoom as jest.Mock<any>;
+
+describe('the truncateFront function', () => {
+  it('should remove elements from the front of the array so that the arrays length remains less than or equal to the specified limit', () => {
+    const data = [1, 2, 3, 4, 5, 6, 7, 8];
+    expect(truncateFront(data, 10)).toEqual(data); // Do nothing when the limit is larger than the array length
+    expect(truncateFront(data, 6)).toEqual([3, 4, 5, 6, 7, 8]);
+  });
+});
 
 describe('the RoomStatsProvider component', () => {
   it('should correctly return stats and previousStats', () => {

@@ -2,7 +2,7 @@ import React from 'react';
 import LineChart, { connectNulls, formatBitrate } from './LineChart';
 import { shallow } from 'enzyme';
 import * as constants from '../../../constants';
-import { LineSeries, XYChart } from '@visx/xychart';
+import { XYChart } from '@visx/xychart';
 
 // @ts-ignore
 constants.MAX_STAT_HISTORY_LENGTH = 5;
