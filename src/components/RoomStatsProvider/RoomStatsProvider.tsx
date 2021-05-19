@@ -32,15 +32,15 @@ export const RoomStatsProvider: React.FC = ({ children }) => {
   previousStatsRef.current = stats;
 
   const totalReceivedBitrate = getTotalBandwidth('bytesReceived', stats, previousStats);
-  const newReceivedBytesHistroy = receivedBitrateHistoryRef.current.concat({
+  const newReceivedBytesHistory = receivedBitrateHistoryRef.current.concat({
     x: Date.now(),
     y: totalReceivedBitrate,
   });
-  receivedBitrateHistoryRef.current = truncateFront(newReceivedBytesHistroy, MAX_STAT_HISTORY_LENGTH);
+  receivedBitrateHistoryRef.current = truncateFront(newReceivedBytesHistory, MAX_STAT_HISTORY_LENGTH);
 
   const totalSentBitrate = getTotalBandwidth('bytesSent', stats, previousStats);
-  const newSentBytesHistroy = sentBitrateHistoryRef.current.concat({ x: Date.now(), y: totalSentBitrate });
-  sentBitrateHistoryRef.current = truncateFront(newSentBytesHistroy, MAX_STAT_HISTORY_LENGTH);
+  const newSentBytesHistory = sentBitrateHistoryRef.current.concat({ x: Date.now(), y: totalSentBitrate });
+  sentBitrateHistoryRef.current = truncateFront(newSentBytesHistory, MAX_STAT_HISTORY_LENGTH);
 
   return (
     <RoomStatsContext.Provider
