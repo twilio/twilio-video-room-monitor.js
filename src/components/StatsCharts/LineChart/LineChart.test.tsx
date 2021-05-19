@@ -1,7 +1,7 @@
 import React from 'react';
-import LineChart, { connectNulls, formatBitrate } from './LineChart';
-import { shallow } from 'enzyme';
 import * as constants from '../../../constants';
+import LineChart, { formatBitrate } from './LineChart';
+import { shallow } from 'enzyme';
 import { XYChart } from '@visx/xychart';
 
 // @ts-ignore
@@ -27,26 +27,6 @@ describe('the formatBitrate function', () => {
     it(`should format ${testCase.bytes} to "${testCase.result}"`, () => {
       expect(formatBitrate(testCase.bytes)).toBe(testCase.result);
     });
-  });
-});
-
-describe('the connectNulls function', () => {
-  it('should overwrite y values that are null with the previous y value, if any', () => {
-    const data = [
-      { x: 10, y: null },
-      { x: 20, y: 10 },
-      { x: 30, y: null },
-      { x: 40, y: 20 },
-    ];
-
-    const result = [
-      { x: 10, y: null },
-      { x: 20, y: 10 },
-      { x: 30, y: 10 },
-      { x: 40, y: 20 },
-    ];
-
-    expect(connectNulls(data)).toEqual(result);
   });
 });
 

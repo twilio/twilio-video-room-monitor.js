@@ -12,17 +12,6 @@ export function formatBitrate(bytes: number, suffixIndex = 0): string {
   return formatBitrate(bytes / 1000, suffixIndex + 1);
 }
 
-export function connectNulls(data: chartDatum[]) {
-  return data.map((d, i) => {
-    const previousY = data[i - 1]?.y;
-    if (d.y === null && previousY !== null && i !== 0) {
-      return { x: d.x, y: previousY };
-    } else {
-      return d;
-    }
-  });
-}
-
 const theme = buildChartTheme({
   backgroundColor: 'transparent',
   colors: ['#E22525'],
@@ -70,13 +59,7 @@ export default function LineChart({ data, title, yAxisLabel }: LineChartProps) {
           tickFormat={(d) => formatBitrate(d)}
           labelOffset={36}
         />
-        <LineSeries
-          dataKey="x"
-          data={connectNulls(data)}
-          xAccessor={(d) => d.x}
-          yAccessor={(d) => d.y}
-          curve={curveMonotoneX}
-        />
+        <LineSeries dataKey="x" data={data} xAccessor={(d) => d.x} yAccessor={(d) => d.y} curve={curveMonotoneX} />
       </XYChart>
     </>
   );
