@@ -5,7 +5,7 @@ import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUt
 import useTrack from '../../hooks/useTrack/useTrack';
 
 jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
-jest.mock('../../hooks/useStats/useStats');
+jest.mock('../../hooks/useStats/useStatsUtils');
 jest.mock('../../hooks/useTrack/useTrack');
 
 const mockUseTrackBandwidth = useTrackBandwidth as jest.Mock<any>;

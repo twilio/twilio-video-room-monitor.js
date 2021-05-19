@@ -7,7 +7,7 @@ import useTrack from '../../hooks/useTrack/useTrack';
 jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
 jest.mock('../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => false);
 jest.mock('../../hooks/usePublishPriority/usePublishPriority', () => () => 'standard');
-jest.mock('../../hooks/useStats/useStats');
+jest.mock('../../hooks/useStats/useStatsUtils');
 jest.mock('../../hooks/useTrack/useTrack');
 jest.mock('../../hooks/useVideoTrackDimensions/useVideoTrackDimensions', () => () => ({ width: 1280, height: 720 }));
 
