@@ -72,7 +72,7 @@ export function getTotalBandwidth(
   const previousTrackData = getAllTracks(previousStats).filter((track) => typeof track[kind] !== 'undefined');
 
   // Calculate the bandwidth consumption for each individual track
-  const bandwidthPerTrack = currentTrackData
+  const bandwidthPerTrack = (currentTrackData
     .map((currentTrack) => {
       // Find the corresponding track source from the previousTrackData array.
       const prevTrack = previousTrackData.find((t) => t.ssrc === currentTrack.ssrc);
@@ -85,14 +85,17 @@ export function getTotalBandwidth(
       const prevBytes = prevTrack[kind] ?? null;
 
       if (currentBytes !== null && prevBytes !== null) {
-        // Calulate bytes per second
+        // Calculate bytes per second
         return ((currentBytes - prevBytes) / (currentTrack.timestamp - prevTrack.timestamp)) * 8;
       } else {
         return null;
       }
     })
-    // Remove and null values
-    .filter((t) => t !== null) as number[];
+    // Remove any null values
+    .filter((t) => t !== null) as number[])
+    // Occasionally, the bytes sent or received can be reset to lower values, which produces negative
+    // bandwidth results. Here we discard any of these negative results.
+    .filter((t) => t >= 0);
 
   return round(sum(bandwidthPerTrack));
 }
