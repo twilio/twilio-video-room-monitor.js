@@ -58,7 +58,7 @@ export function useTrackBandwidth(trackSid: string) {
   const currentTime = currentTrackData[0]?.timestamp;
   const previousTime = previousTrackData[0]?.timestamp;
 
-  return round((currentBytes - previousBytes) / (currentTime - previousTime));
+  return round((currentBytes - previousBytes) / (currentTime - previousTime)) * 8;
 }
 
 export function getTotalBandwidth(
@@ -86,7 +86,7 @@ export function getTotalBandwidth(
 
       if (currentBytes !== null && prevBytes !== null) {
         // Calulate bytes per second
-        return (currentBytes - prevBytes) / (currentTrack.timestamp - prevTrack.timestamp);
+        return ((currentBytes - prevBytes) / (currentTrack.timestamp - prevTrack.timestamp)) * 8;
       } else {
         return null;
       }
