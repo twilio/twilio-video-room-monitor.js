@@ -2,23 +2,23 @@
 
 exports[`the AudioTrackInfo component should render correctly if an audio track is present 1`] = `
 <Fragment>
-  <Datum
+  <Memo(Datum)
     label="isEnabled"
     value="true"
   />
-  <Datum
+  <Memo(Datum)
     label="Bandwidth"
-    value="1kbps"
+    value="1,234.56kbps"
   />
-  <Datum
+  <Memo(Datum)
     label="Codec"
     value="testCodec"
   />
-  <Datum
+  <Memo(Datum)
     label="Jitter"
     value="2"
   />
-  <Datum
+  <Memo(Datum)
     label="Packets Lost"
     value="7"
   />
@@ -27,15 +27,15 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
 
 exports[`the AudioTrackPublicationInfo component should render correctly 1`] = `
 <styled.div>
-  <Datum
+  <Memo(Datum)
     label="Name"
     value="testName"
   />
-  <Datum
+  <Memo(Datum)
     label="SID"
     value="testSid"
   />
-  <Datum
+  <Memo(Datum)
     label="isSubscribed"
     value="true"
   />

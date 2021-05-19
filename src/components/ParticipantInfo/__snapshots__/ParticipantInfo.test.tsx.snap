@@ -2,9 +2,9 @@
 
 exports[`the ParticipantInfo component should render correctly for each participant when a room exists 1`] = `
 <Fragment>
-  <styled.h4>
+  <Memo(styled.h4)>
     Participant Information:
-  </styled.h4>
+  </Memo(styled.h4)>
   <Participant />
   <Participant
     key="testSid1"

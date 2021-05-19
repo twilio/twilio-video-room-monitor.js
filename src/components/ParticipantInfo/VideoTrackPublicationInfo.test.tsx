@@ -15,7 +15,7 @@ const mockUseTrackBandwidth = useTrackBandwidth as jest.Mock<any>;
 const mockUseTrackData = useTrackData as jest.Mock<any>;
 const mockUseTrack = useTrack as jest.Mock<any>;
 
-mockUseTrackBandwidth.mockImplementation(() => 351.9);
+mockUseTrackBandwidth.mockImplementation(() => 1234.56);
 mockUseTrackData.mockImplementation(() => ({ codec: 'testCodec', frameRate: null, packetsLost: 7 }));
 mockUseTrack.mockImplementation(() => 'testTrack');
 
