@@ -1,6 +1,5 @@
 import React from 'react';
 import { chartDatum } from '../../../types';
-import { connectNulls } from '../../../utils/utils';
 import { curveMonotoneX } from '@visx/curve';
 import Headline from '../../typography/Headline/Headline';
 import { MAX_STAT_HISTORY_LENGTH, UPDATE_INTERVAL } from '../../../constants';
@@ -10,7 +9,18 @@ import { XYChart, Axis, LineSeries, Grid, buildChartTheme } from '@visx/xychart'
 export function formatBitrate(bytes: number, suffixIndex = 0): string {
   const suffixes = ['K', 'M', 'G'];
   if (bytes < 1000) return +bytes.toFixed(suffixIndex) + ' ' + suffixes[suffixIndex];
-  return formatBitrate(bytes / 1024, suffixIndex + 1);
+  return formatBitrate(bytes / 1000, suffixIndex + 1);
+}
+
+export function connectNulls(data: chartDatum[]) {
+  return data.map((d, i) => {
+    const previousY = data[i - 1]?.y;
+    if (d.y === null && previousY !== null && i !== 0) {
+      return { x: d.x, y: previousY };
+    } else {
+      return d;
+    }
+  });
 }
 
 const theme = buildChartTheme({

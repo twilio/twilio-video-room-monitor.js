@@ -3,7 +3,6 @@ import { chartDatum } from '../../types';
 import { getTotalBandwidth } from '../../hooks/useStats/useStats';
 import { MAX_STAT_HISTORY_LENGTH } from '../../constants';
 import { StatsReport } from 'twilio-video';
-import { truncateFront } from '../../utils/utils';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
 
@@ -15,6 +14,9 @@ interface RoomStats {
   currentReceivedBitrate: number | null;
   currentSentBitrate: number | null;
 }
+
+export const truncateFront = (arr: any[], limit: number) =>
+  arr.slice(Math.max(0, arr.length - limit), arr.length + limit);
 
 export const RoomStatsContext = React.createContext<RoomStats>(null!);
 
