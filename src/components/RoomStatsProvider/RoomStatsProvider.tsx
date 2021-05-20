@@ -15,8 +15,7 @@ interface RoomStats {
   currentSentBitrate: number | null;
 }
 
-export const truncateFront = (arr: any[], limit: number) =>
-  arr.slice(Math.max(0, arr.length - limit), arr.length + limit);
+export const truncateFront = (arr: any[], limit: number) => arr.slice(Math.max(0, arr.length - limit), arr.length);
 
 export const RoomStatsContext = React.createContext<RoomStats>(null!);
 
