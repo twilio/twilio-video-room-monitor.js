@@ -9,7 +9,7 @@ import {
   RemoteAudioTrackStats,
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';

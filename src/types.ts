@@ -10,19 +10,19 @@ declare module 'twilio-video' {
   }
 
   interface LocalAudioTrackStats {
-    bytesReceived: undefined;
+    bytesReceived?: undefined;
   }
 
   interface LocalVideoTrackStats {
-    bytesReceived: undefined;
+    bytesReceived?: undefined;
   }
 
   interface RemoteAudioTrackStats {
-    bytesSent: undefined;
+    bytesSent?: undefined;
   }
 
   interface RemoteVideoTrackStats {
-    bytesSent: undefined;
+    bytesSent?: undefined;
   }
 
   interface Room {
