@@ -130,7 +130,7 @@ describe('the useTrackBandwidth function', () => {
     mockUseStats.mockImplementationOnce(() => ({
       stats: [
         {
-          localAudioTrackStats: [],
+          localAudioTrackStats: [{ trackSid: 'mockTrackSid2' }, { trackSid: 'mockTrackSid2' }],
           localVideoTrackStats: [],
           remoteAudioTrackStats: [],
           remoteVideoTrackStats: [],
@@ -153,10 +153,7 @@ describe('the useTrackBandwidth function', () => {
       stats: [
         {
           localAudioTrackStats: [],
-          localVideoTrackStats: [
-            { trackSid: 'mockTrackSid', bytesSent: 10093654, timestamp: 1621447129665 },
-            'mockLocalVideoTrack2',
-          ],
+          localVideoTrackStats: [{ trackSid: 'mockTrackSid', bytesSent: 10093654, timestamp: 1621447129665 }],
           remoteAudioTrackStats: [],
           remoteVideoTrackStats: [],
         },
@@ -164,10 +161,7 @@ describe('the useTrackBandwidth function', () => {
       previousStats: [
         {
           localAudioTrackStats: [],
-          localVideoTrackStats: [
-            { trackSid: 'mockTrackSid', bytesSent: 9534648, timestamp: 1621447094450 },
-            'mockLocalVideoTrack2',
-          ],
+          localVideoTrackStats: [{ trackSid: 'mockTrackSid', bytesSent: 9534648, timestamp: 1621447094450 }],
           remoteAudioTrackStats: [],
           remoteVideoTrackStats: [],
         },
