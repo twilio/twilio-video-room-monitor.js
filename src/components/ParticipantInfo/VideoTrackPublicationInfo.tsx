@@ -12,7 +12,7 @@ import {
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import usePublishPriority from '../../hooks/usePublishPriority/usePublishPriority';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
 import { theme } from '../theme';

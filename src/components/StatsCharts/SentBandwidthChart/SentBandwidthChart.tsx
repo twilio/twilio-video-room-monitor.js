@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import styled from 'styled-components';
-import { useTotalBandwidth } from '../../../hooks/useStats/useStats';
+import { useTotalBandwidth } from '../../../hooks/useStats/useStatsUtils';
 
 const ChartContainer = styled.div`
   margin: 10px;
