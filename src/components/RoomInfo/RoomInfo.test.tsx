@@ -13,11 +13,9 @@ jest.mock('../../hooks/useRoom/useRoom', () => () => ({
   mediaRegion: 'testRegion',
 }));
 jest.mock('../../hooks/useRoomState/useRoomState');
-jest.mock('../../hooks/useStats/useStats', () => ({
-  useStats: () => ({
-    currentReceivedBitrate: 1234.56,
-    currentSentBitrate: 6543.21,
-  }),
+jest.mock('../../hooks/useStats/useStats', () => () => ({
+  currentReceivedBitrate: 1234.56,
+  currentSentBitrate: 6543.21,
 }));
 
 const mockUseRoomState = useRoomState as jest.Mock<any>;
