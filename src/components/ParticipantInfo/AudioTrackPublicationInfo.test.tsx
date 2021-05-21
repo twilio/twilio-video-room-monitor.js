@@ -1,18 +1,18 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AudioTrackPublicationInfo, AudioTrackInfo } from './AudioTrackPublicationInfo';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 
 jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
-jest.mock('../../hooks/useStats/useStats');
+jest.mock('../../hooks/useStats/useStatsUtils');
 jest.mock('../../hooks/useTrack/useTrack');
 
 const mockUseTrackBandwidth = useTrackBandwidth as jest.Mock<any>;
 const mockUseTrackData = useTrackData as jest.Mock<any>;
 const mockUseTrack = useTrack as jest.Mock<any>;
 
-mockUseTrackBandwidth.mockImplementation(() => 1);
+mockUseTrackBandwidth.mockImplementation(() => 1234.56);
 mockUseTrackData.mockImplementation(() => ({ codec: 'testCodec', jitter: 2, packetsLost: 7 }));
 mockUseTrack.mockImplementation(() => 'testTrack');
 

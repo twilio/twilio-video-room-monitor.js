@@ -1,0 +1,2 @@
+export const MAX_STAT_HISTORY_LENGTH = 120;
+export const UPDATE_INTERVAL = 1000;

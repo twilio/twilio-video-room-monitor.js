@@ -9,7 +9,7 @@ import {
   RemoteAudioTrackStats,
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
@@ -25,7 +25,7 @@ export const AudioTrackInfo: React.FC<{
   return (
     <>
       <Datum label="isEnabled" value={String(isEnabled)} />
-      <Datum label="Bandwidth" value={String(trackBandwidth) + 'kbps'} />
+      <Datum label="Bandwidth" value={String(trackBandwidth?.toLocaleString()) + 'kbps'} />
       {trackData && (
         <>
           <Datum label="Codec" value={String(trackData.codec)} />

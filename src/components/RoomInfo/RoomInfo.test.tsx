@@ -13,6 +13,10 @@ jest.mock('../../hooks/useRoom/useRoom', () => () => ({
   mediaRegion: 'testRegion',
 }));
 jest.mock('../../hooks/useRoomState/useRoomState');
+jest.mock('../../hooks/useStats/useStats', () => () => ({
+  currentReceivedBitrate: 1234.56,
+  currentSentBitrate: 6543.21,
+}));
 
 const mockUseRoomState = useRoomState as jest.Mock<any>;
 mockUseRoomState.mockImplementation(() => 'connected');
@@ -26,6 +30,6 @@ describe('The RoomInfo component', () => {
   it('should display warning when not connected to a Twilio Video room', () => {
     mockUseRoomState.mockImplementationOnce(() => 'disconnected');
     const wrapper = shallow(<RoomInfo />);
-    expect(wrapper.contains(<span>Not connected to a Twilio Video room.</span>)).toBe(true)
+    expect(wrapper.contains(<span>Not connected to a Twilio Video room.</span>)).toBe(true);
   });
 });

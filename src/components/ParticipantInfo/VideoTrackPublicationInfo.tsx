@@ -12,7 +12,7 @@ import {
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import usePublishPriority from '../../hooks/usePublishPriority/usePublishPriority';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStats';
+import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
 import { theme } from '../theme';
@@ -36,7 +36,7 @@ export const VideoTrackInfo: React.FC<{
       <Datum label="Dimensions" value={getDimensionString(dimensions)} />
       <Datum label="isSwitchedOff" value={String(isSwitchedOff)} />
       <Datum label="isEnabled" value={String(isEnabled)} />
-      <Datum label="Bandwidth" value={String(trackBandwidth) + 'kbps'} />
+      <Datum label="Bandwidth" value={String(trackBandwidth?.toLocaleString()) + 'kbps'} />
       {trackData && (
         <>
           <Datum label="Codec" value={String(trackData.codec)} />

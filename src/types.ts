@@ -1,4 +1,4 @@
-import * as Video from 'twilio-video';
+export type chartDatum = { x: number; y: number | null };
 
 declare module 'twilio-video' {
   // This helps to create union types between Local and Remote TrackPublication
@@ -10,19 +10,19 @@ declare module 'twilio-video' {
   }
 
   interface LocalAudioTrackStats {
-    bytesReceived: undefined;
+    bytesReceived?: undefined;
   }
 
   interface LocalVideoTrackStats {
-    bytesReceived: undefined;
+    bytesReceived?: undefined;
   }
 
   interface RemoteAudioTrackStats {
-    bytesSent: undefined;
+    bytesSent?: undefined;
   }
 
   interface RemoteVideoTrackStats {
-    bytesSent: undefined;
+    bytesSent?: undefined;
   }
 
   interface Room {
