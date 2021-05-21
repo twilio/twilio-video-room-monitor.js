@@ -1,5 +1,6 @@
-import useGetStats, { INTERVAL } from './useGetStats';
+import useGetStats from './useGetStats';
 import { act, renderHook } from '@testing-library/react-hooks';
+import { UPDATE_INTERVAL } from '../../constants';
 
 const mockRoom = {
   getStats: jest.fn(() => Promise.resolve('mockStats')),
@@ -14,7 +15,7 @@ describe('the useGetStats hook', () => {
     expect(result.current).toBe(undefined);
 
     await act(async () => {
-      jest.runTimersToTime(INTERVAL);
+      jest.runTimersToTime(UPDATE_INTERVAL);
       await waitForNextUpdate();
     });
 
@@ -22,7 +23,7 @@ describe('the useGetStats hook', () => {
 
     await act(async () => {
       mockRoom.getStats.mockImplementationOnce(() => Promise.resolve('mockStats2'));
-      jest.runTimersToTime(INTERVAL);
+      jest.runTimersToTime(UPDATE_INTERVAL);
       await waitForNextUpdate();
     });
 

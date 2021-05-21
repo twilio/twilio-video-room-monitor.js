@@ -6,7 +6,6 @@ import RoomProvider from './components/RoomProvider/RoomProvider';
 import RoomStatsProvider from './components/RoomStatsProvider/RoomStatsProvider';
 import ReceiveBandwidthChart from './components/StatsCharts/ReceiveBandwidth/ReceiveBandwidthChart';
 import SentBandwidthChart from './components/StatsCharts/SentBandwidthChart/SentBandwidthChart';
-import CPUChart from './components/StatsCharts/CPUChart/CPUChart';
 
 export default function App() {
   return (
@@ -25,7 +24,6 @@ export default function App() {
                 <>
                   <ReceiveBandwidthChart />
                   <SentBandwidthChart />
-                  <CPUChart />
                 </>
               )}
             </>

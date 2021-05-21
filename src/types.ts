@@ -1,4 +1,4 @@
-import * as Video from 'twilio-video';
+export type chartDatum = { x: number; y: number | null };
 
 declare module 'twilio-video' {
   // This helps to create union types between Local and Remote TrackPublication

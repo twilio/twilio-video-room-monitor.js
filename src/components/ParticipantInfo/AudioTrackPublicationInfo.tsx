@@ -25,7 +25,7 @@ export const AudioTrackInfo: React.FC<{
   return (
     <>
       <Datum label="isEnabled" value={String(isEnabled)} />
-      <Datum label="Bandwidth" value={String(trackBandwidth) + 'kbps'} />
+      <Datum label="Bandwidth" value={String(trackBandwidth?.toLocaleString()) + 'kbps'} />
       {trackData && (
         <>
           <Datum label="Codec" value={String(trackData.codec)} />

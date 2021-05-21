@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "concurrently npm:parcel:watch npm:ts:watch",
     "test": "cross-env TZ=utc jest",
-    "start": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible",
-    "build": "parcel build src/index.tsx --no-source-maps --out-dir extension/web_accessible",
+    "parcel:watch": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible --log-level 1",
+    "build": "parcel build src/index.tsx --no-source-maps --out-dir extension/web_accessible --experimental-scope-hoisting",
     "ts": "tsc --noEmit",
     "ts:watch": "tsc --noEmit --watch"
   },
@@ -15,21 +16,23 @@
   "license": "ISC",
   "dependencies": {
     "@types/chrome": "0.0.126",
+    "@types/d3-array": "^2.9.0",
     "@types/jest": "26.0.23",
     "@types/node": "^14.14.10",
-    "@types/plotly.js": "^1.54.4",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/styled-components": "^5.1.4",
-    "apexcharts": "^3.26.1",
+    "@visx/xychart": "^1.10.1",
+    "concurrently": "^6.1.0",
     "cross-env": "7.0.3",
+    "d3-array": "^2.12.1",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
-    "react-apexcharts": "^1.3.7",
     "react-dom": "^17.0.1",
+    "react-spring": "^9.1.2",
     "styled-components": "^5.2.1",
-    "twilio-video": "^2.13.1"
+    "twilio-video": "^2.14.0"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^5.1.2",

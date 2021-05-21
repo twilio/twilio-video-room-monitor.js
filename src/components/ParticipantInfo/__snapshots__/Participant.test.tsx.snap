@@ -4,15 +4,15 @@ exports[`the Participant component should render correctly 1`] = `
 <Accordion
   label="mockIdentity"
 >
-  <Datum
+  <Memo(Datum)
     label="SID"
     value="testSid"
   />
-  <Datum
+  <Memo(Datum)
     label="isReconnecting"
     value="false"
   />
-  <Datum
+  <Memo(Datum)
     label="networkQualityLevel"
     value="4"
   />
