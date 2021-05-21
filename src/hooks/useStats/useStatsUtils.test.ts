@@ -7,7 +7,29 @@ const mockUseStats = useStats as jest.Mock<any>;
 
 mockUseStats.mockImplementation(() => ({ stats: false, previousStats: false }));
 
+describe('the round function', () => {
+  it('should round a number to one decimal place', () => {
+    expect(statsHooks.round(1.234)).toBe(1.2);
+    expect(statsHooks.round(200)).toBe(200);
+    expect(statsHooks.round(39.99)).toBe(40);
+    expect(statsHooks.round(5001.04)).toBe(5001);
+    expect(statsHooks.round(28751.45)).toBe(28751.5);
+  });
+});
+
 describe('the getAllStats function', () => {
+  it('should return a empty stats object when it receives an empty array', () => {
+    const result = {
+      localAudioTrackStats: [],
+      localVideoTrackStats: [],
+      peerConnectionId: '',
+      remoteAudioTrackStats: [],
+      remoteVideoTrackStats: [],
+    };
+
+    expect(statsHooks.getAllStats([])).toEqual(result);
+  });
+
   it('should return an object with stats arrays from local and remote audio and video tracks', () => {
     const data = [
       {
@@ -167,7 +189,7 @@ describe('the useTrackBandwidth function', () => {
         },
       ],
     }));
-    expect(statsHooks.useTrackBandwidth('mockTrackSid')).toEqual(15.9);
+    expect(statsHooks.useTrackBandwidth('mockTrackSid')).toEqual(127.2);
   });
 });
 
@@ -200,5 +222,95 @@ describe('the useTrackData function', () => {
       ],
     }));
     expect(statsHooks.useTrackData('mockTrackSid')).toEqual({ trackSid: 'mockTrackSid', name: 'mockTrack1' });
+  });
+});
+
+describe('the getTotalBandwidth function', () => {
+  const stats = [
+    {
+      localAudioTrackStats: [{ bytesSent: 40000, timestamp: 2000, ssrc: 1 }],
+      localVideoTrackStats: [{ bytesSent: 40000, timestamp: 2000, ssrc: 2 }],
+      remoteAudioTrackStats: [{ bytesReceived: 20000, timestamp: 2000, ssrc: 3 }],
+      remoteVideoTrackStats: [{ bytesReceived: 20000, timestamp: 2000, ssrc: 4 }],
+    },
+  ];
+
+  const previousStats = [
+    {
+      localAudioTrackStats: [{ bytesSent: 1000, timestamp: 1000, ssrc: 1 }],
+      localVideoTrackStats: [{ bytesSent: 1000, timestamp: 1000, ssrc: 2 }],
+      remoteAudioTrackStats: [{ bytesReceived: 1000, timestamp: 1000, ssrc: 3 }],
+      remoteVideoTrackStats: [{ bytesReceived: 1000, timestamp: 1000, ssrc: 4 }],
+    },
+  ];
+
+  describe('when "kind" is "bytesReceived"', () => {
+    it('should correctly return bandwidth', () => {
+      expect(statsHooks.getTotalBandwidth('bytesReceived', stats as any, previousStats as any)).toEqual(304);
+    });
+
+    it('should correctly return bandwidth when bytesReceived is null', () => {
+      const modifiedStats = [
+        {
+          localAudioTrackStats: [{ bytesSent: null, timestamp: 2000, ssrc: 1 }],
+          localVideoTrackStats: [{ bytesSent: null, timestamp: 2000, ssrc: 2 }],
+          remoteAudioTrackStats: [{ bytesReceived: null, timestamp: 2000, ssrc: 3 }],
+          remoteVideoTrackStats: [{ bytesReceived: null, timestamp: 2000, ssrc: 4 }],
+        },
+      ];
+
+      const modifiedPreviousStats = [
+        {
+          localAudioTrackStats: [{ bytesSent: null, timestamp: 1000, ssrc: 1 }],
+          localVideoTrackStats: [{ bytesSent: null, timestamp: 1000, ssrc: 2 }],
+          remoteAudioTrackStats: [{ bytesReceived: null, timestamp: 1000, ssrc: 3 }],
+          remoteVideoTrackStats: [{ bytesReceived: null, timestamp: 1000, ssrc: 4 }],
+        },
+      ];
+
+      expect(statsHooks.getTotalBandwidth('bytesReceived', modifiedStats as any, modifiedPreviousStats as any)).toEqual(
+        0
+      );
+    });
+
+    it("should correctly return bandwidth when previous track information doesn't exist", () => {
+      const modifiedPreviousStats = [
+        {
+          localAudioTrackStats: [{ bytesSent: 1000, timestamp: 1000, ssrc: 5 }],
+          localVideoTrackStats: [{ bytesSent: 1000, timestamp: 1000, ssrc: 6 }],
+          remoteAudioTrackStats: [{ bytesReceived: 1000, timestamp: 1000, ssrc: 7 }],
+          remoteVideoTrackStats: [{ bytesReceived: 1000, timestamp: 1000, ssrc: 8 }],
+        },
+      ];
+
+      expect(statsHooks.getTotalBandwidth('bytesReceived', stats as any, modifiedPreviousStats as any)).toEqual(0);
+    });
+
+    it('should correctly return bandwidth when bytesReceived decreases over time', () => {
+      const modifiedPreviousStats = [
+        {
+          localAudioTrackStats: [{ bytesSent: 1000, timestamp: 1000, ssrc: 1 }],
+          localVideoTrackStats: [{ bytesSent: 1000, timestamp: 1000, ssrc: 2 }],
+          remoteAudioTrackStats: [{ bytesReceived: 1000, timestamp: 1000, ssrc: 3 }],
+          remoteVideoTrackStats: [{ bytesReceived: 21000, timestamp: 1000, ssrc: 4 }],
+        },
+      ];
+
+      expect(statsHooks.getTotalBandwidth('bytesReceived', stats as any, modifiedPreviousStats as any)).toEqual(152);
+    });
+  });
+
+  describe('when "kind" is "bytesSent"', () => {
+    it('should correctly return bandwidth', () => {
+      expect(statsHooks.getTotalBandwidth('bytesSent', stats as any, previousStats as any)).toEqual(624);
+    });
+  });
+
+  it('should return null when "stats" is undefined', () => {
+    expect(statsHooks.getTotalBandwidth('bytesSent', undefined, previousStats as any)).toEqual(null);
+  });
+
+  it('should return null when "stats" and "previousStats" are undefined', () => {
+    expect(statsHooks.getTotalBandwidth('bytesSent', undefined, undefined)).toEqual(null);
   });
 });
