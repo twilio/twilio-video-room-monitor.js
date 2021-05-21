@@ -1,5 +1,7 @@
 # Twilio Video Inspector
 
+[![CircleCI](https://circleci.com/gh/twilio/twilio-video-inspector.svg?style=svg&circle-token=<e455a056673b1eb7a7692269da5154167b0eb32a)](https://circleci.com/gh/twilio/twilio-video-inspector)
+
 ### Install dependencies:
 
 ```
