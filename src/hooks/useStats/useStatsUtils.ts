@@ -62,6 +62,7 @@ export function useTrackBandwidth(trackSid: string) {
   const currentTime = currentTrackData[0]?.timestamp;
   const previousTime = previousTrackData[0]?.timestamp;
 
+  // Calculate kilobytes per second. The timestamp is in milliseconds.
   return round((currentBytes - previousBytes) / (currentTime - previousTime)) * 8;
 }
 
@@ -92,7 +93,7 @@ export function getTotalBandwidth(
         const prevBytes = prevTrack[kind] ?? null;
 
         if (currentBytes !== null && prevBytes !== null) {
-          // Calculate bytes per second
+          // Calculate kilobytes per second. The timestamp is in milliseconds.
           return ((currentBytes - prevBytes) / (currentTrack.timestamp - prevTrack.timestamp)) * 8;
         } else {
           return null;
