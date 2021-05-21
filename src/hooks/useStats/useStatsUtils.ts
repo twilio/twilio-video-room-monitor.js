@@ -1,7 +1,16 @@
 import { StatsReport } from 'twilio-video';
+import { sum } from 'd3-array';
 import useStats from './useStats';
 
 export function getAllStats(statsReports: StatsReport[]) {
+  const initialValue = {
+    localAudioTrackStats: [],
+    localVideoTrackStats: [],
+    remoteAudioTrackStats: [],
+    remoteVideoTrackStats: [],
+    peerConnectionId: '',
+  };
+
   return statsReports.reduce((p, c) => {
     return {
       localAudioTrackStats: [...p.localAudioTrackStats, ...c.localAudioTrackStats],
@@ -10,7 +19,7 @@ export function getAllStats(statsReports: StatsReport[]) {
       remoteVideoTrackStats: [...p.remoteVideoTrackStats, ...c.remoteVideoTrackStats],
       peerConnectionId: '',
     };
-  });
+  }, initialValue);
 }
 
 export function getAllTracks(statsReports: StatsReport[]) {
@@ -32,9 +41,10 @@ export function getTrackData(trackSid: string, statsReports: StatsReport[]) {
   return allCurrentTracks.filter((t) => t.trackSid === trackSid);
 }
 
-const sum = (arr: number[]) => arr.reduce((a, b) => a + b, 0);
-const round = (num: number) => Math.round((num + Number.EPSILON) * 10) / 10;
+export const round = (num: number) => Math.round((num + Number.EPSILON) * 10) / 10;
 
+// Returns the bandwidth usage for a given track SID in kilobytes per second.
+// Returns null when track doesn't exist, or when information is not available.
 export function useTrackBandwidth(trackSid: string) {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
@@ -52,31 +62,50 @@ export function useTrackBandwidth(trackSid: string) {
   const currentTime = currentTrackData[0]?.timestamp;
   const previousTime = previousTrackData[0]?.timestamp;
 
-  return round((currentBytes - previousBytes) / (currentTime - previousTime));
+  return round((currentBytes - previousBytes) / (currentTime - previousTime)) * 8;
 }
 
-export function useTotalBandwidth(kind: 'bytesSent' | 'bytesReceived') {
-  const { stats, previousStats } = useStats();
+// Returns the bandwidth usage for all local or remote tracks in kilobytes per second.
+// Returns null when information is not available.
+export function getTotalBandwidth(
+  kind: 'bytesSent' | 'bytesReceived',
+  stats: StatsReport[] | undefined,
+  previousStats: StatsReport[] | undefined
+) {
   if (!stats || !previousStats) return null;
 
-  const currentTrackData = getAllTracks(stats);
-  const previousTrackData = getAllTracks(previousStats);
+  const currentTrackData = getAllTracks(stats).filter((track) => typeof track[kind] !== 'undefined');
+  const previousTrackData = getAllTracks(previousStats).filter((track) => typeof track[kind] !== 'undefined');
 
-  if (
-    currentTrackData.length === 0 ||
-    previousTrackData.length === 0 ||
-    currentTrackData.length !== previousTrackData.length
-  ) {
-    return null;
-  }
+  // Calculate the bandwidth consumption for each individual track
+  const bandwidthPerTrack = (
+    currentTrackData
+      .map((currentTrack) => {
+        // Find the corresponding track source from the previousTrackData array.
+        const prevTrack = previousTrackData.find((t) => t.ssrc === currentTrack.ssrc);
 
-  const currentBytes = sum(currentTrackData.map((d) => d[kind] ?? 0));
-  const previousBytes = sum(previousTrackData.map((d) => d[kind] ?? 0));
+        // If no corresponding track is found (because the track was recently published),
+        // then it won't be possible to compute bandwidth usage, so null will be returned.
+        if (!prevTrack) return null;
 
-  const currentTime = currentTrackData[0]?.timestamp;
-  const previousTime = previousTrackData[0]?.timestamp;
+        const currentBytes = currentTrack[kind] ?? null;
+        const prevBytes = prevTrack[kind] ?? null;
 
-  return round((currentBytes - previousBytes) / (currentTime - previousTime));
+        if (currentBytes !== null && prevBytes !== null) {
+          // Calculate bytes per second
+          return ((currentBytes - prevBytes) / (currentTrack.timestamp - prevTrack.timestamp)) * 8;
+        } else {
+          return null;
+        }
+      })
+      // Remove any null values
+      .filter((t) => t !== null) as number[]
+  )
+    // Occasionally, the bytes sent or received can be reset to lower values, which produces negative
+    // bandwidth results. Here we discard any of these negative results.
+    .filter((t) => t >= 0);
+
+  return round(sum(bandwidthPerTrack));
 }
 
 export function useTrackData(trackSid: string) {
