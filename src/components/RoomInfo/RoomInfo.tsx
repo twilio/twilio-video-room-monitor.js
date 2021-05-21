@@ -5,7 +5,7 @@ import useDominantSpeaker from '../../hooks/useDominantSpeaker/useDominantSpeake
 import useIsRecording from '../../hooks/useIsRecording/useIsRecording';
 import useRoom from '../../hooks/useRoom/useRoom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
-import { useStats } from '../../hooks/useStats/useStats';
+import useStats from '../../hooks/useStats/useStats';
 
 export default function RoomInfo() {
   const room = useRoom();

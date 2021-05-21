@@ -1,6 +1,6 @@
 import React from 'react';
 import LineChart from '../LineChart/LineChart';
-import { useStats } from '../../../hooks/useStats/useStats';
+import useStats from '../../../hooks/useStats/useStats';
 
 export default function SentBandwidthChart() {
   const { sentBitrateHistory, currentSentBitrate } = useStats();

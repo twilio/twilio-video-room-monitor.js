@@ -3,7 +3,8 @@ import { renderHook } from '@testing-library/react-hooks';
 import RoomStatsProvider, { truncateFront } from './RoomStatsProvider';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
-import * as statsHooks from '../../hooks/useStats/useStats';
+import useStats from '../../hooks/useStats/useStats';
+import * as statsHooks from '../../hooks/useStats/useStatsUtils';
 
 // @ts-ignore
 statsHooks.getTotalBandwidth = jest.fn((kind) => (kind === 'bytesReceived' ? 0 : 1));
@@ -26,7 +27,7 @@ describe('the truncateFront function', () => {
 describe('the RoomStatsProvider component', () => {
   it('should correctly return stats and previousStats', () => {
     const wrapper: React.FC = ({ children }) => <RoomStatsProvider>{children}</RoomStatsProvider>;
-    const { result, rerender } = renderHook(statsHooks.useStats, { wrapper });
+    const { result, rerender } = renderHook(useStats, { wrapper });
 
     expect(mockUseRoom).toHaveBeenCalled();
     expect(mockUseGetStats).toHaveBeenCalledWith('mockRoom');
@@ -43,7 +44,7 @@ describe('the RoomStatsProvider component', () => {
     Date.now = () => 1000;
 
     const wrapper: React.FC = ({ children }) => <RoomStatsProvider>{children}</RoomStatsProvider>;
-    const { result, rerender } = renderHook(statsHooks.useStats, { wrapper });
+    const { result, rerender } = renderHook(useStats, { wrapper });
 
     expect(result.current).toMatchObject({
       receivedBitrateHistory: [{ x: 1000, y: 0 }],

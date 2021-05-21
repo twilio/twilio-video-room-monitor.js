@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { chartDatum } from '../../types';
-import { getTotalBandwidth } from '../../hooks/useStats/useStats';
+import { getTotalBandwidth } from '../../hooks/useStats/useStatsUtils';
 import { MAX_STAT_HISTORY_LENGTH } from '../../constants';
 import { StatsReport } from 'twilio-video';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
