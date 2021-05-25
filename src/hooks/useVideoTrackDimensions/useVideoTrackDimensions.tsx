@@ -10,7 +10,7 @@ export default function useVideoTrackDimensions(track?: TrackType) {
     setDimensions(track?.dimensions);
 
     if (track) {
-      const handleDimensionsChanged = (track: TrackType) => setDimensions(track?.dimensions);
+      const handleDimensionsChanged = (currentTrack: TrackType) => setDimensions(currentTrack?.dimensions);
       track.on('dimensionsChanged', handleDimensionsChanged);
       return () => {
         track.off('dimensionsChanged', handleDimensionsChanged);

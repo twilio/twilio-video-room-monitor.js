@@ -26,7 +26,7 @@ declare module 'twilio-video' {
   }
 
   interface Room {
-    _options: object;
+    _options: Record<string, unknown>;
   }
 }
 
