@@ -36,11 +36,7 @@ jobs:
 
       - store_test_results:
           path: test-reports
-
-      - run:
-          name: 'Eslint'
-          command: npm run lint -- --max-warnings 0
-
+      
       - run:
           name: 'TypeScript'
           command: npm run ts
