@@ -47,7 +47,7 @@ function getCpuTime(cpuInfo: chrome.system.cpu.CpuInfo) {
 }
 
 export function getCpuPercent() {
-  const { cpuInfo, prevCpuInfo } = useCpuInfo();
+  const { cpuInfo, prevCpuInfo } = useCpuInfo(); // eslint-disable-line
 
   if (!cpuInfo || !prevCpuInfo) return null;
 
