@@ -18,18 +18,18 @@ describe('the useIsRecording hook', () => {
   });
 
   it('should return true when "room.isRecording" is true', () => {
-    const { result } = renderHook(() => useIsRecording());
+    const { result } = renderHook(useIsRecording);
     expect(result.current).toBe(true);
   });
 
   it('should return false when "room.isRecording" is false', () => {
     mockRoom.isRecording = false;
-    const { result } = renderHook(() => useIsRecording());
+    const { result } = renderHook(useIsRecording);
     expect(result.current).toBe(false);
   });
 
   it('should respond to "recordingStopped" events', () => {
-    const { result } = renderHook(() => useIsRecording());
+    const { result } = renderHook(useIsRecording);
     act(() => {
       mockRoom.emit('recordingStopped');
     });
@@ -38,15 +38,22 @@ describe('the useIsRecording hook', () => {
 
   it('should respond to "recordingStarted" events', () => {
     mockRoom.isRecording = false;
-    const { result } = renderHook(() => useIsRecording());
+    const { result } = renderHook(useIsRecording);
     act(() => {
       mockRoom.emit('recordingStarted');
     });
     expect(result.current).toBe(true);
   });
 
+  it('should not attach listeners when there is no room', () => {
+    mockUseRoom.mockImplementation(() => undefined);
+    renderHook(useIsRecording);
+    expect(mockRoom.listenerCount('recordingStarted')).toBe(0);
+    expect(mockRoom.listenerCount('recordingStopped')).toBe(0);
+  });
+
   it('should clean up listeners on unmount', () => {
-    const { unmount } = renderHook(() => useIsRecording());
+    const { unmount } = renderHook(useIsRecording);
     unmount();
     expect(mockRoom.listenerCount('recordingStarted')).toBe(0);
     expect(mockRoom.listenerCount('recordingStopped')).toBe(0);
