@@ -9,7 +9,7 @@ export default function useGetStats(room?: Room) {
     let intervalId: number;
 
     if (room) {
-      const getStats = () => room.getStats().then((stats) => setStats(stats));
+      const getStats = () => room.getStats().then((updatedStats) => setStats(updatedStats));
       getStats();
       intervalId = window.setInterval(getStats, UPDATE_INTERVAL);
 

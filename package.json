@@ -7,9 +7,11 @@
     "start": "concurrently npm:parcel:watch npm:ts:watch",
     "test": "cross-env TZ=utc jest",
     "parcel:watch": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible --log-level 1",
+    "lint": "eslint src",
     "build": "parcel build src/index.tsx --no-source-maps --out-dir extension/web_accessible --experimental-scope-hoisting",
     "ts": "tsc --noEmit",
-    "ts:watch": "tsc --noEmit --watch"
+    "ts:watch": "tsc --noEmit --watch",
+    "test:ci": "cross-env TZ=utc jest --ci --runInBand --reporters=default --reporters=jest-junit --coverage --silent"
   },
   "keywords": [],
   "author": "",
@@ -37,9 +39,19 @@
   "devDependencies": {
     "@testing-library/react-hooks": "^5.1.2",
     "@types/enzyme": "^3.10.4",
+    "@typescript-eslint/eslint-plugin": "4.25.0",
+    "@typescript-eslint/parser": "4.25.0",
     "@wojtekmaj/enzyme-adapter-react-17": "0.6.1",
+    "babel-eslint": "10.1.0",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
+    "eslint": "7.27.0",
+    "eslint-config-react-app": "6.0.0",
+    "eslint-plugin-flowtype": "5.7.2",
+    "eslint-plugin-import": "2.23.3",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.23.2",
+    "eslint-plugin-react-hooks": "4.2.0",
     "jest": "26.6.3",
     "jest-junit": "12.0.0",
     "ts-jest": "26.5.5",
@@ -49,5 +61,14 @@
     "snapshotSerializers": [
       "enzyme-to-json/serializer"
     ]
+  },
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "no-shadow": "off",
+      "@typescript-eslint/no-shadow": [
+        "warn"
+      ]
+    }
   }
 }
