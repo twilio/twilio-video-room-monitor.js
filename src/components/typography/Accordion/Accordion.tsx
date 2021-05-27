@@ -16,7 +16,7 @@ const ChildrenContainer = styled.div`
   border-left: 1px solid ${theme.borderColor};
 `;
 
-const LabelContainer = styled.div<{ isClickable: boolean }>`
+export const LabelContainer = styled.div<{ isClickable: boolean }>`
   display: flex;
   align-items: center;
   ${(props) => props.isClickable && 'cursor: pointer;'}
