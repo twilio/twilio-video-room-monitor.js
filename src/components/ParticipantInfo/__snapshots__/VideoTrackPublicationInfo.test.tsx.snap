@@ -34,10 +34,7 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
 `;
 
 exports[`the VideoTrackPublicationInfo component should render correctly 1`] = `
-<styled.div
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
->
+<styled.div>
   <Memo(Datum)
     label="Name"
     value="testName"
