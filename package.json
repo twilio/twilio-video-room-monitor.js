@@ -28,6 +28,7 @@
     "concurrently": "^6.1.0",
     "cross-env": "7.0.3",
     "d3-array": "^2.12.1",
+    "eventemitter3": "^4.0.7",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
