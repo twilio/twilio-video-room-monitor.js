@@ -1,22 +1,44 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import EventEmitter from 'eventemitter3';
+import { Room } from 'twilio-video';
+import { roomRegistry } from './components/RoomProvider/RoomProvider';
 
-console.log('loading index.tsx...');
-const CONTAINER_ID = 'TwilioVideoInspectorContainer';
+class TwilioVideoInspector extends EventEmitter {
+  container?: HTMLDivElement;
 
-const existingContainer = document.getElementById(CONTAINER_ID);
+  get isOpen() {
+    return Boolean(this.container);
+  }
 
-if (existingContainer) {
-  ReactDOM.unmountComponentAtNode(existingContainer);
-  ReactDOM.render(<App />, existingContainer);
-} else {
-  const container = document.createElement('div');
-  document.body.appendChild(container);
-  container.id = CONTAINER_ID;
-  ReactDOM.render(<App />, container);
+  openInspector() {
+    if (!this.container) {
+      const container = document.createElement('div');
+      document.body.appendChild(container);
+      container.id = 'TwilioVideoInspectorContainer';
+      ReactDOM.render(<App />, container);
+      this.container = container;
+      this.emit('opened');
+    }
+  }
+
+  closeInspector() {
+    if (this.container) {
+      ReactDOM.unmountComponentAtNode(this.container);
+      this.container.remove();
+      this.container = undefined;
+      this.emit('closed');
+    }
+  }
+
+  toggleInspector() {
+    this.isOpen ? this.closeInspector() : this.openInspector();
+  }
+
+  registerTwilioRoom(room: Room) {
+    roomRegistry.emit('roomRegistered', room);
+  }
 }
 
-window.TwilioVideoInspector = window.TwilioVideoInspector || {
-  destroy: () => ReactDOM.unmountComponentAtNode(document.getElementById(CONTAINER_ID)!),
-};
+export default new TwilioVideoInspector();
