@@ -15,7 +15,7 @@ describe('the useParticipantNetworkQualityLevel hook', () => {
     expect(result.current).toBe(4);
   });
 
-  it('should return respond to "networkQualityLevelChanged" events', async () => {
+  it('should respond to "networkQualityLevelChanged" events', async () => {
     mockParticipant.networkQualityLevel = 4;
     const { result } = renderHook(() => useParticipantNetworkQualityLevel(mockParticipant));
     act(() => {
