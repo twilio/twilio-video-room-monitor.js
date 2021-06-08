@@ -12,7 +12,7 @@ export default function ParticipantInfo() {
 
   return (
     <>
-      <Headline>Participant Information:</Headline>
+      <Headline>Participant Information ({participants.length}):</Headline>
       <Participant participant={room.localParticipant} />
       {participants.map((participant) => (
         <Participant key={participant.sid} participant={participant} />
