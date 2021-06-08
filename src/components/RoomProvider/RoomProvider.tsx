@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Room } from 'twilio-video';
-import EventEmitter from 'eventemitter3';
-
-export const roomRegistry = new EventEmitter();
+import TwilioVideoInspector from '../../index';
 
 export const RoomContext = React.createContext<Room | undefined>(undefined);
 
@@ -10,11 +8,15 @@ export default function RoomProvider({ children }: { children: React.ReactNode }
   const [room, setRoom] = useState<Room>();
 
   useEffect(() => {
+    if (TwilioVideoInspector.room) {
+      setRoom(TwilioVideoInspector.room);
+    }
+
     const handleRoomRegister = (room: Room) => setRoom(room);
-    roomRegistry.on('roomRegistered', handleRoomRegister);
+    TwilioVideoInspector.on('roomRegistered', handleRoomRegister);
 
     return () => {
-      roomRegistry.off('roomRegistered', handleRoomRegister);
+      TwilioVideoInspector.off('roomRegistered', handleRoomRegister);
     };
   }, []);
 
