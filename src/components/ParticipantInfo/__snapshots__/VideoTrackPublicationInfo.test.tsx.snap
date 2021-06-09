@@ -1,5 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`the VideoTrackInfo component should render correctly for the LocalVideoTrack when both packetsSent and packetsLost are defined 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="Dimensions"
+    value="1280 x 720"
+  />
+  <Memo(Datum)
+    label="isSwitchedOff"
+    value="false"
+  />
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Framerate"
+    value="null"
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value="56"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="30.601%"
+  />
+</Fragment>
+`;
+
+exports[`the VideoTrackInfo component should render correctly for the LocalVideoTrack when packetsLost is 0 and packetsSent is defined 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="Dimensions"
+    value="1280 x 720"
+  />
+  <Memo(Datum)
+    label="isSwitchedOff"
+    value="false"
+  />
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Framerate"
+    value="null"
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value="0"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="0%"
+  />
+</Fragment>
+`;
+
 exports[`the VideoTrackInfo component should render correctly for the RemoteVideoTrack when both packetsReceived and packetsLost are defined 1`] = `
 <Fragment>
   <Memo(Datum)
@@ -37,81 +111,7 @@ exports[`the VideoTrackInfo component should render correctly for the RemoteVide
 </Fragment>
 `;
 
-exports[`the VideoTrackInfo component should render correctly for the RemoteVideoTrack when both packetsSent and packetsLost are defined 1`] = `
-<Fragment>
-  <Memo(Datum)
-    label="Dimensions"
-    value="1280 x 720"
-  />
-  <Memo(Datum)
-    label="isSwitchedOff"
-    value="false"
-  />
-  <Memo(Datum)
-    label="isEnabled"
-    value="true"
-  />
-  <Memo(Datum)
-    label="Bandwidth"
-    value="1,234.56kbps"
-  />
-  <Memo(Datum)
-    label="Codec"
-    value="testCodec"
-  />
-  <Memo(Datum)
-    label="Framerate"
-    value="null"
-  />
-  <Memo(Datum)
-    label="Packets Lost"
-    value="56"
-  />
-  <Memo(Datum)
-    label="Packet Loss Percentage"
-    value="30.601%"
-  />
-</Fragment>
-`;
-
 exports[`the VideoTrackInfo component should render correctly for the RemoteVideoTrack when packetsLost is 0 and packetsReceived is defined 1`] = `
-<Fragment>
-  <Memo(Datum)
-    label="Dimensions"
-    value="1280 x 720"
-  />
-  <Memo(Datum)
-    label="isSwitchedOff"
-    value="false"
-  />
-  <Memo(Datum)
-    label="isEnabled"
-    value="true"
-  />
-  <Memo(Datum)
-    label="Bandwidth"
-    value="1,234.56kbps"
-  />
-  <Memo(Datum)
-    label="Codec"
-    value="testCodec"
-  />
-  <Memo(Datum)
-    label="Framerate"
-    value="null"
-  />
-  <Memo(Datum)
-    label="Packets Lost"
-    value="0"
-  />
-  <Memo(Datum)
-    label="Packet Loss Percentage"
-    value="0%"
-  />
-</Fragment>
-`;
-
-exports[`the VideoTrackInfo component should render correctly for the RemoteVideoTrack when packetsLost is 0 and packetsSent is defined 1`] = `
 <Fragment>
   <Memo(Datum)
     label="Dimensions"

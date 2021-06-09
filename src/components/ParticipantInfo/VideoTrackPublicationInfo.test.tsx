@@ -48,7 +48,7 @@ describe('the VideoTrackInfo component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly for the RemoteVideoTrack when both packetsSent and packetsLost are defined', () => {
+  it('should render correctly for the LocalVideoTrack when both packetsSent and packetsLost are defined', () => {
     mockUseTrackData.mockImplementationOnce(() => (
       { codec: 'testCodec', frameRate: null, packetsLost: 56, packetsSent: 183 }
     ));
@@ -64,7 +64,7 @@ describe('the VideoTrackInfo component', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('should render correctly for the RemoteVideoTrack when packetsLost is 0 and packetsSent is defined', () => {
+  it('should render correctly for the LocalVideoTrack when packetsLost is 0 and packetsSent is defined', () => {
     mockUseTrackData.mockImplementationOnce(() => (
       { codec: 'testCodec', frameRate: null, packetsLost: 0, packetsSent: 10 }
     ));
