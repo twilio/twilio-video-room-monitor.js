@@ -5,7 +5,10 @@ import EventEmitter from 'eventemitter3';
 import { Room } from 'twilio-video';
 
 class TwilioVideoInspector extends EventEmitter {
+  // @internal
   private container?: HTMLDivElement;
+
+  // @internal
   room?: Room;
 
   get isOpen() {
