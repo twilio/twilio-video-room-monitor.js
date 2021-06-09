@@ -45,7 +45,7 @@ export const VideoTrackInfo: React.FC<{
           <Datum label="Codec" value={String(trackData.codec)} />
           <Datum label="Framerate" value={String(trackData?.frameRate)} />
           <Datum label="Packets Lost" value={String(trackData?.packetsLost)} />
-          <Datum label="Packet Loss Percentage" value={String(lossPercentage) + '%'} />
+          <Datum label="Packet Loss Percentage" value={String(lossPercentage?.toLocaleString()) + '%'} />
         </>
       )}
     </>
