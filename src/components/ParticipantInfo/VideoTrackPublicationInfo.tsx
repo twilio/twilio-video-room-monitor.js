@@ -32,7 +32,7 @@ export const VideoTrackInfo: React.FC<{
   const trackData = useTrackData(trackSid) as LocalVideoTrackStats | RemoteVideoTrackStats | null;
   
   const totalPackets = trackData ? (trackData as any).packetsReceived ?? (trackData as any).packetsSent : null;
-  const lossPercentage = totalPackets && (trackData?.packetsLost || trackData?.packetsLost == 0) ? (trackData?.packetsLost/totalPackets) * 100 : null; 
+  const lossPercentage = totalPackets && (trackData?.packetsLost || trackData?.packetsLost === 0) ? (trackData?.packetsLost/totalPackets) * 100 : null; 
 
   return (
     <>

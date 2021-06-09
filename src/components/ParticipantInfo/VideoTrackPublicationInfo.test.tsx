@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import { VideoTrackPublicationInfo, VideoTrackInfo } from './VideoTrackPublicationInfo';
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
-import { RemoteVideoTrack } from 'twilio-video';
 
 jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
 jest.mock('../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => false);
