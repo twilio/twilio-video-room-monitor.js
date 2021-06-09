@@ -14,7 +14,7 @@ describe('the useParticipantIsReconnecting hook', () => {
     expect(result.current).toBe(false);
   });
 
-  it('should return respond to "reconnecting" events', async () => {
+  it('should respond to "reconnecting" events', async () => {
     const { result } = renderHook(() => useParticipantIsReconnecting(mockParticipant));
     act(() => {
       mockParticipant.emit('reconnecting');
@@ -22,7 +22,7 @@ describe('the useParticipantIsReconnecting hook', () => {
     expect(result.current).toBe(true);
   });
 
-  it('should return respond to "reconnected" events', async () => {
+  it('should respond to "reconnected" events', async () => {
     const { result } = renderHook(() => useParticipantIsReconnecting(mockParticipant));
     act(() => {
       mockParticipant.emit('reconnecting');

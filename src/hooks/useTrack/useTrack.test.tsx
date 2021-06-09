@@ -15,7 +15,7 @@ describe('the useTrack hook', () => {
     expect(result.current).toBe('mockTrack');
   });
 
-  it('should return respond to "subscribed" events', async () => {
+  it('should respond to "subscribed" events', async () => {
     mockPublication.track = 'mockTrack';
     const { result } = renderHook(() => useTrack(mockPublication));
     act(() => {
@@ -24,7 +24,7 @@ describe('the useTrack hook', () => {
     expect(result.current).toBe('newMockTrack');
   });
 
-  it('should return respond to "unsubscribed" events', async () => {
+  it('should respond to "unsubscribed" events', async () => {
     mockPublication.track = 'mockTrack';
     const { result } = renderHook(() => useTrack(mockPublication));
     act(() => {

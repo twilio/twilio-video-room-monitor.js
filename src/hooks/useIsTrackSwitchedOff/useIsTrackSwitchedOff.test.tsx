@@ -20,7 +20,7 @@ describe('the useIsTrackSwitchedOff hook', () => {
     expect(result.current).toBe(true);
   });
 
-  it('should return respond to "switchedOff" events', async () => {
+  it('should respond to "switchedOff" events', async () => {
     mockTrack.isSwitchedOff = false;
     const { result } = renderHook(() => useIsTrackSwitchedOff(mockTrack));
     act(() => {
@@ -30,7 +30,7 @@ describe('the useIsTrackSwitchedOff hook', () => {
     expect(result.current).toBe(true);
   });
 
-  it('should return respond to "switchedOn" events', async () => {
+  it('should respond to "switchedOn" events', async () => {
     mockTrack.isEnabled = true;
     const { result } = renderHook(() => useIsTrackSwitchedOff(mockTrack));
     act(() => {
