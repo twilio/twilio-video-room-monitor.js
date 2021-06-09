@@ -1,5 +1,150 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`the AudioTrackInfo component should render correctly for the LocalVideoTrack when both packetsSent and packetsLost are defined 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Jitter"
+    value="undefined"
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value="56"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="30.601%"
+  />
+</Fragment>
+`;
+
+exports[`the AudioTrackInfo component should render correctly for the LocalVideoTrack when packetsLost is 0 and packetsSent is defined 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Jitter"
+    value="undefined"
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value="0"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="0%"
+  />
+</Fragment>
+`;
+
+exports[`the AudioTrackInfo component should render correctly for the RemoteAudioTrack when both packetsReceived and packetsLost are defined 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Jitter"
+    value="undefined"
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value="7"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="7%"
+  />
+</Fragment>
+`;
+
+exports[`the AudioTrackInfo component should render correctly for the RemoteAudioTrack when packetsLost is not defined 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Jitter"
+    value="undefined"
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value="null"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="undefined%"
+  />
+</Fragment>
+`;
+
+exports[`the AudioTrackInfo component should render correctly for the RemoteVideoTrack when packetsLost is 0 and packetsReceived is defined 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Jitter"
+    value="undefined"
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value="0"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="0%"
+  />
+</Fragment>
+`;
+
 exports[`the AudioTrackInfo component should render correctly if an audio track is present 1`] = `
 <Fragment>
   <Memo(Datum)
@@ -21,6 +166,10 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
   <Memo(Datum)
     label="Packets Lost"
     value="7"
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="undefined%"
   />
 </Fragment>
 `;
