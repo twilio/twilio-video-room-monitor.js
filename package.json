@@ -5,7 +5,7 @@
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
   "scripts": {
-    "start": "concurrently npm:parcel:watch npm:ts:watch",
+    "start": "npm run ts:watch",
     "test": "cross-env TZ=utc jest",
     "test:ci": "cross-env TZ=utc jest --ci --runInBand --reporters=default --reporters=jest-junit --coverage --silent",
     "lint": "eslint src",
@@ -28,7 +28,6 @@
     "@types/react-dom": "^17.0.0",
     "@types/styled-components": "^5.1.4",
     "@visx/xychart": "^1.10.1",
-    "concurrently": "^6.1.0",
     "cross-env": "7.0.3",
     "d3-array": "^2.12.1",
     "eventemitter3": "^4.0.7",
