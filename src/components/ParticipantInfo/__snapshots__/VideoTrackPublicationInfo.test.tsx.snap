@@ -32,7 +32,7 @@ exports[`the VideoTrackInfo component should render correctly for the RemoteVide
   />
   <Memo(Datum)
     label="Packet Loss Percentage"
-    value="7.000000000000001%"
+    value="7%"
   />
 </Fragment>
 `;
@@ -69,7 +69,7 @@ exports[`the VideoTrackInfo component should render correctly for the RemoteVide
   />
   <Memo(Datum)
     label="Packet Loss Percentage"
-    value="30.601092896174865%"
+    value="30.601%"
   />
 </Fragment>
 `;
@@ -180,7 +180,7 @@ exports[`the VideoTrackInfo component should render correctly for the RemoteVide
   />
   <Memo(Datum)
     label="Packet Loss Percentage"
-    value="null%"
+    value="undefined%"
   />
 </Fragment>
 `;
@@ -217,7 +217,7 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
   />
   <Memo(Datum)
     label="Packet Loss Percentage"
-    value="null%"
+    value="undefined%"
   />
 </Fragment>
 `;
