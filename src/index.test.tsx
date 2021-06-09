@@ -64,10 +64,10 @@ describe('the Twilio Video Inspector API', () => {
     expect(TwilioVideoInspector.emit).toHaveBeenCalledWith('closed');
   });
 
-  it('should register a room with the roomRegistry when registerTwilioRoom is called', () => {
+  it('should register a room with the roomRegistry when registerVideoRoom is called', () => {
     jest.spyOn(roomRegistry, 'emit');
 
-    TwilioVideoInspector.registerTwilioRoom('mockRoom' as any);
+    TwilioVideoInspector.registerVideoRoom('mockRoom' as any);
     expect(roomRegistry.emit).toHaveBeenCalledWith('roomRegistered', 'mockRoom');
     expect(roomRegistry.room).toBe('mockRoom');
   });

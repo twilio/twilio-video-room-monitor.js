@@ -40,8 +40,8 @@ class TwilioVideoInspector extends EventEmitter<{
     this.isOpen ? this.closeInspector() : this.openInspector();
   }
 
-  registerTwilioRoom(room: Room) {
-    roomRegistry.registerTwilioRoom(room);
+  registerVideoRoom(room: Room) {
+    roomRegistry.registerVideoRoom(room);
   }
 }
 

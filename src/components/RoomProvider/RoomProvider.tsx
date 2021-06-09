@@ -5,7 +5,7 @@ import { Room } from 'twilio-video';
 class RoomRegistry extends EventEmitter<{ roomRegistered: [Room] }> {
   room?: Room;
 
-  registerTwilioRoom(room: Room) {
+  registerVideoRoom(room: Room) {
     this.room = room;
     this.emit('roomRegistered', room);
   }

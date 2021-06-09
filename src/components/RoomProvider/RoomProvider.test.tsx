@@ -16,7 +16,7 @@ describe('the RoomProvider component', () => {
   });
 
   it('should return the room when it is registered before the RoomProvider has initialized', () => {
-    RoomProviderObj.roomRegistry.registerTwilioRoom('mockRoom' as any);
+    RoomProviderObj.roomRegistry.registerVideoRoom('mockRoom' as any);
     const { result } = renderHook(useRoom, { wrapper });
     expect(result.current).toBe('mockRoom');
   });
@@ -24,7 +24,7 @@ describe('the RoomProvider component', () => {
   it('should return the room when it is registered after the RoomProvider has initialized', () => {
     const { result } = renderHook(useRoom, { wrapper });
     act(() => {
-      RoomProviderObj.roomRegistry.registerTwilioRoom('mockRoom' as any);
+      RoomProviderObj.roomRegistry.registerVideoRoom('mockRoom' as any);
     });
     expect(result.current).toBe('mockRoom');
   });
