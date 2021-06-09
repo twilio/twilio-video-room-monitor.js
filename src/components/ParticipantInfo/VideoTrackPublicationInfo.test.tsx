@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { VideoTrackPublicationInfo, VideoTrackInfo } from './VideoTrackPublicationInfo';
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
+import { RemoteVideoTrack } from 'twilio-video';
 
 jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
 jest.mock('../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => false);
@@ -30,6 +31,47 @@ describe('the VideoTrackInfo component', () => {
     const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
     expect(wrapper.find({ label: 'Codec' }).exists()).toBeFalsy();
   });
+
+  it('should render correctly for the RemoteVideoTrack when packetsLost is not defined', () => {
+    mockUseTrackData.mockImplementationOnce(() => (
+      { codec: 'testCodec', frameRate: null, packetsLost: null}
+    ));
+    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly for the RemoteVideoTrack when both packetsReceived and packetsLost are defined', () => {
+    mockUseTrackData.mockImplementationOnce(() => (
+      { codec: 'testCodec', frameRate: null, packetsLost: 7, packetsReceived: 100 }
+    ));
+    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly for the RemoteVideoTrack when both packetsSent and packetsLost are defined', () => {
+    mockUseTrackData.mockImplementationOnce(() => (
+      { codec: 'testCodec', frameRate: null, packetsLost: 56, packetsSent: 183 }
+    ));
+    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly for the RemoteVideoTrack when packetsLost is 0 and packetsReceived is defined', () => {
+    mockUseTrackData.mockImplementationOnce(() => (
+      { codec: 'testCodec', frameRate: null, packetsLost: 0, packetsReceived: 10 }
+    ));
+    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should render correctly for the RemoteVideoTrack when packetsLost is 0 and packetsSent is defined', () => {
+    mockUseTrackData.mockImplementationOnce(() => (
+      { codec: 'testCodec', frameRate: null, packetsLost: 0, packetsSent: 10 }
+    ));
+    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper).toMatchSnapshot();
+  });
+
 });
 
 describe('the VideoTrackPublicationInfo component', () => {
