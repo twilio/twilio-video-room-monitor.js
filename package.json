@@ -5,7 +5,7 @@
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
   "scripts": {
-    "start": "npm run ts:watch",
+    "start": "tsc --watch",
     "test": "cross-env TZ=utc jest",
     "test:ci": "cross-env TZ=utc jest --ci --runInBand --reporters=default --reporters=jest-junit --coverage --silent",
     "lint": "eslint src",
@@ -13,8 +13,7 @@
     "build": "npm run build:node && npm run build:browser",
     "build:node": "tsc --declaration",
     "build:browser": "parcel build src/index.tsx --no-source-maps --out-dir dist/browser --target browser --experimental-scope-hoisting --global TwilioVideoInspector",
-    "ts": "tsc --noEmit",
-    "ts:watch": "tsc --watch"
+    "ts": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
