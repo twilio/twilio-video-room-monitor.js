@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import EventEmitter from 'eventemitter3';
 import { Room } from 'twilio-video';
+import { roomRegistry } from './components/RoomProvider/RoomProvider';
 
-class TwilioVideoInspector extends EventEmitter {
+class TwilioVideoInspector extends EventEmitter<{
+  opened: [];
+  closed: [];
+}> {
   // @internal
   private container?: HTMLDivElement;
-
-  // @internal
-  room?: Room;
 
   get isOpen() {
     return Boolean(this.container);
@@ -40,8 +41,7 @@ class TwilioVideoInspector extends EventEmitter {
   }
 
   registerTwilioRoom(room: Room) {
-    this.room = room;
-    this.emit('roomRegistered', room);
+    roomRegistry.registerTwilioRoom(room);
   }
 }
 

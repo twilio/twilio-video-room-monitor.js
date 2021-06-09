@@ -1,4 +1,5 @@
 import React from 'react';
+import { roomRegistry } from './components/RoomProvider/RoomProvider';
 import TwilioVideoInspector from './index';
 
 jest.mock('./App', () => () => <div>Test</div>);
@@ -63,11 +64,11 @@ describe('the Twilio Video Inspector API', () => {
     expect(TwilioVideoInspector.emit).toHaveBeenCalledWith('closed');
   });
 
-  it('should emit the roomRegistered event when a room is registered', () => {
-    jest.spyOn(TwilioVideoInspector, 'emit');
+  it('should register a room with the roomRegistry when registerTwilioRoom is called', () => {
+    jest.spyOn(roomRegistry, 'emit');
 
     TwilioVideoInspector.registerTwilioRoom('mockRoom' as any);
-    expect(TwilioVideoInspector.emit).toHaveBeenCalledWith('roomRegistered', 'mockRoom');
-    expect(TwilioVideoInspector.room).toBe('mockRoom');
+    expect(roomRegistry.emit).toHaveBeenCalledWith('roomRegistered', 'mockRoom');
+    expect(roomRegistry.room).toBe('mockRoom');
   });
 });

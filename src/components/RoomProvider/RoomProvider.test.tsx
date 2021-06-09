@@ -1,14 +1,13 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import React from 'react';
 import useRoom from '../../hooks/useRoom/useRoom';
-import RoomProvider from './RoomProvider';
-import TwilioVideoInspector from '../../index';
+import RoomProvider, * as RoomProviderObj from './RoomProvider';
 
 const wrapper: React.FC = ({ children }) => <RoomProvider>{children}</RoomProvider>;
 
 describe('the RoomProvider component', () => {
   afterEach(() => {
-    TwilioVideoInspector.room = undefined;
+    RoomProviderObj.roomRegistry.room = undefined;
   });
 
   it('should return undefined by default', () => {
@@ -17,7 +16,7 @@ describe('the RoomProvider component', () => {
   });
 
   it('should return the room when it is registered before the RoomProvider has initialized', () => {
-    TwilioVideoInspector.registerTwilioRoom('mockRoom' as any);
+    RoomProviderObj.roomRegistry.registerTwilioRoom('mockRoom' as any);
     const { result } = renderHook(useRoom, { wrapper });
     expect(result.current).toBe('mockRoom');
   });
@@ -25,7 +24,7 @@ describe('the RoomProvider component', () => {
   it('should return the room when it is registered after the RoomProvider has initialized', () => {
     const { result } = renderHook(useRoom, { wrapper });
     act(() => {
-      TwilioVideoInspector.registerTwilioRoom('mockRoom' as any);
+      RoomProviderObj.roomRegistry.registerTwilioRoom('mockRoom' as any);
     });
     expect(result.current).toBe('mockRoom');
   });
@@ -33,8 +32,8 @@ describe('the RoomProvider component', () => {
   it('should remove listeners on unmount', () => {
     const { unmount } = renderHook(useRoom, { wrapper });
 
-    expect(TwilioVideoInspector.listenerCount('roomRegistered')).toBe(1);
+    expect(RoomProviderObj.roomRegistry.listenerCount('roomRegistered')).toBe(1);
     unmount();
-    expect(TwilioVideoInspector.listenerCount('roomRegistered')).toBe(0);
+    expect(RoomProviderObj.roomRegistry.listenerCount('roomRegistered')).toBe(0);
   });
 });
