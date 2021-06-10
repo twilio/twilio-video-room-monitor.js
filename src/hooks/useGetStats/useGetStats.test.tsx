@@ -43,4 +43,11 @@ describe('the useGetStats hook', () => {
     unmount();
     expect(window.clearInterval).toHaveBeenCalled();
   });
+
+  it('should not call setInterval when there is no room', async () => {
+    jest.spyOn(window, 'setInterval');
+    const { result } = renderHook(() => useGetStats());
+    expect(result.current).toBe(undefined);
+    expect(window.setInterval).not.toHaveBeenCalled();
+  });
 });

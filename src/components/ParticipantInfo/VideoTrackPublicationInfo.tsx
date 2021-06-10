@@ -70,22 +70,8 @@ export const VideoTrackPublicationInfo: React.FC<{
   const publishPriority = usePublishPriority(publication);
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;
 
-  const handleMouseEnter = () => {
-    // @ts-ignore
-    track?._attachments?.forEach((el) => {
-      el.style.filter = 'brightness(1.5)';
-    });
-  };
-
-  const handleMouseLeave = () => {
-    // @ts-ignore
-    track?._attachments?.forEach((el) => {
-      el.style.filter = '';
-    });
-  };
-
   return (
-    <Container onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+    <Container>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />

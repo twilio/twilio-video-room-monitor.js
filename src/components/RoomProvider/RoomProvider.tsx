@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import EventEmitter from 'eventemitter3';
 import { Room } from 'twilio-video';
+
+class RoomRegistry extends EventEmitter<{ roomRegistered: [Room] }> {
+  room?: Room;
+
+  registerVideoRoom(room: Room) {
+    this.room = room;
+    this.emit('roomRegistered', room);
+  }
+}
+
+export const roomRegistry = new RoomRegistry();
 
 export const RoomContext = React.createContext<Room | undefined>(undefined);
 
@@ -7,28 +19,17 @@ export default function RoomProvider({ children }: { children: React.ReactNode }
   const [room, setRoom] = useState<Room>();
 
   useEffect(() => {
-    // Here we poll to get the room object. This is so the twilio-video-inspector can
-    // handle the edge case where it is started before the user has connected to a room.
-    const intervalID = setInterval(() => {
-      // @ts-ignore
-      if (window._TwilioVideo && window._TwilioVideo.rooms.length > 0) {
-        // @ts-ignore
-        setRoom(window._TwilioVideo.rooms[0]);
-        // @ts-ignore
-      } else if (window.getTwilioRoom) {
-        // @ts-ignore
-        setRoom(window.getTwilioRoom());
-        // @ts-ignore
-      } else if (window.twilioRoom) {
-        // @ts-ignore
-        setRoom(window.twilioRoom);
-      }
-    }, 1000);
+    if (roomRegistry.room) {
+      setRoom(roomRegistry.room);
+    }
+
+    const handleRoomRegister = (room: Room) => setRoom(room);
+    roomRegistry.on('roomRegistered', handleRoomRegister);
 
     return () => {
-      clearInterval(intervalID);
+      roomRegistry.off('roomRegistered', handleRoomRegister);
     };
-  });
+  }, []);
 
   return <RoomContext.Provider value={room}>{children}</RoomContext.Provider>;
 }

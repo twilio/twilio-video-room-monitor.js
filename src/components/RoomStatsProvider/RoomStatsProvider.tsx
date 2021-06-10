@@ -6,7 +6,7 @@ import { StatsReport } from 'twilio-video';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
 
-interface RoomStats {
+export interface RoomStats {
   stats?: StatsReport[];
   previousStats?: StatsReport[];
   receivedBitrateHistory: chartDatum[];
