@@ -18,7 +18,8 @@
     "noImplicitThis": true,
     "strictNullChecks": true,
     "outDir": "dist/node",
-    "stripInternal": true
+    "stripInternal": true,
+    "declaration": true
   },
   "include": ["src"]
 }

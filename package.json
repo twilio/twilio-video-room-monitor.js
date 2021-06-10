@@ -11,7 +11,7 @@
     "lint": "eslint src",
     "parcel:watch": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible --global TwilioVideoInspector",
     "build": "npm run build:node && npm run build:browser",
-    "build:node": "tsc --declaration",
+    "build:node": "tsc",
     "build:browser": "parcel build src/index.tsx --no-source-maps --out-dir dist/browser --target browser --experimental-scope-hoisting --global TwilioVideoInspector",
     "ts": "tsc --noEmit"
   },
