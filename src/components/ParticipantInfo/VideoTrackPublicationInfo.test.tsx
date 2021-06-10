@@ -31,46 +31,83 @@ describe('the VideoTrackInfo component', () => {
     expect(wrapper.find({ label: 'Codec' }).exists()).toBeFalsy();
   });
 
-  it('should render correctly for the RemoteVideoTrack when packetsLost is not defined', () => {
-    mockUseTrackData.mockImplementationOnce(() => (
-      { codec: 'testCodec', frameRate: null, packetsLost: null}
-    ));
-    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
-    expect(wrapper).toMatchSnapshot();
-  });
+  describe('the Packet Loss Percentage', () => {
+    it('should display null when packetsLost, packetsReceived and packetsSent are not defined', () => {
+      mockUseTrackData.mockImplementationOnce(() => ({
+        codec: 'testCodec',
+        frameRate: null,
+        packetsLost: null,
+      }));
+      const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('null%');
+    });
+  
+    it('should display a value for the RemoteVideoTrack when both packetsReceived and packetsLost are defined', () => {
+      mockUseTrackData.mockImplementationOnce(() => ({
+        codec: 'testCodec',
+        frameRate: null,
+        packetsLost: 7,
+        packetsReceived: 100,
+      }));
+      const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('7%');
+    });
+  
+    it('should display a value for the LocalVideoTrack when both packetsSent and packetsLost are defined', () => {
+      mockUseTrackData.mockImplementationOnce(() => ({
+        codec: 'testCodec',
+        frameRate: null,
+        packetsLost: 30,
+        packetsSent: 29448,
+      }));
+      const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0.102%');
+    });
+  
+    it('should display 0% for the RemoteVideoTrack when packetsLost is 0 and packetsReceived is defined', () => {
+      mockUseTrackData.mockImplementationOnce(() => ({
+        codec: 'testCodec',
+        frameRate: null,
+        packetsLost: 0,
+        packetsReceived: 29448,
+      }));
+      const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0%');
+    });
+  
+    it('should display 0% for the LocalVideoTrack when packetsLost is 0 and packetsSent is defined', () => {
+      mockUseTrackData.mockImplementationOnce(() => ({
+        codec: 'testCodec',
+        frameRate: null,
+        packetsLost: 0,
+        packetsSent: 2134,
+      }));
+      const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0%');
+    });
 
-  it('should render correctly for the RemoteVideoTrack when both packetsReceived and packetsLost are defined', () => {
-    mockUseTrackData.mockImplementationOnce(() => (
-      { codec: 'testCodec', frameRate: null, packetsLost: 7, packetsReceived: 100 }
-    ));
-    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
-    expect(wrapper).toMatchSnapshot();
+    it('should display 0% for the RemoteVideoTrack when packetsLost is null and packetsReceived is defined', () => {
+      mockUseTrackData.mockImplementationOnce(() => ({
+        codec: 'testCodec',
+        frameRate: null,
+        packetsLost: null,
+        packetsReceived: 29448,
+      }));
+      const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0%');
+    });
+  
+    it('should display 0% for the LocalVideoTrack when packetsLost is null and packetsSent is defined', () => {
+      mockUseTrackData.mockImplementationOnce(() => ({
+        codec: 'testCodec',
+        frameRate: null,
+        packetsLost: null,
+        packetsSent: 2134,
+      }));
+      const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0%');
+    });
   });
-
-  it('should render correctly for the LocalVideoTrack when both packetsSent and packetsLost are defined', () => {
-    mockUseTrackData.mockImplementationOnce(() => (
-      { codec: 'testCodec', frameRate: null, packetsLost: 56, packetsSent: 183 }
-    ));
-    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly for the RemoteVideoTrack when packetsLost is 0 and packetsReceived is defined', () => {
-    mockUseTrackData.mockImplementationOnce(() => (
-      { codec: 'testCodec', frameRate: null, packetsLost: 0, packetsReceived: 10 }
-    ));
-    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should render correctly for the LocalVideoTrack when packetsLost is 0 and packetsSent is defined', () => {
-    mockUseTrackData.mockImplementationOnce(() => (
-      { codec: 'testCodec', frameRate: null, packetsLost: 0, packetsSent: 10 }
-    ));
-    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
 });
 
 describe('the VideoTrackPublicationInfo component', () => {
