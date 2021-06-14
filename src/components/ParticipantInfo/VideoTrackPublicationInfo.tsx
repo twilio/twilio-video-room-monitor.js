@@ -37,7 +37,7 @@ export const VideoTrackInfo: React.FC<{
     const { packetsReceived, packetsSent, packetsLost } = trackData;
 
     const totalPackets = packetsReceived ?? packetsSent;
-    const numPacketsLost = packetsLost ? packetsLost : 0;
+    const numPacketsLost = packetsLost ?? 0;
 
     lossPercentage = totalPackets ? ((numPacketsLost / totalPackets) * 100).toLocaleString() : null;
   }
