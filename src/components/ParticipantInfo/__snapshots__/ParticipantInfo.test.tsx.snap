@@ -4,7 +4,7 @@ exports[`the ParticipantInfo component should render correctly for each particip
 <Fragment>
   <Memo(styled.h4)>
     Participant Information (
-    2
+    3
     ):
   </Memo(styled.h4)>
   <Participant />

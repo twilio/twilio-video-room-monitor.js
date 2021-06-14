@@ -31,6 +31,17 @@ export const VideoTrackInfo: React.FC<{
   const trackBandwidth = useTrackBandwidth(trackSid);
   const trackData = useTrackData(trackSid) as LocalVideoTrackStats | RemoteVideoTrackStats | null;
 
+  let lossPercentage: string | null;
+
+  if (trackData) {
+    const { packetsReceived, packetsSent, packetsLost } = trackData;
+
+    const totalPackets = packetsReceived ?? packetsSent;
+    const numPacketsLost = packetsLost ?? 0;
+
+    lossPercentage = totalPackets ? ((numPacketsLost / totalPackets) * 100).toLocaleString() : null;
+  }
+  
   return (
     <>
       <Datum label="Dimensions" value={getDimensionString(dimensions)} />
@@ -42,6 +53,7 @@ export const VideoTrackInfo: React.FC<{
           <Datum label="Codec" value={String(trackData.codec)} />
           <Datum label="Framerate" value={String(trackData?.frameRate)} />
           <Datum label="Packets Lost" value={String(trackData?.packetsLost)} />
+          <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
         </>
       )}
     </>

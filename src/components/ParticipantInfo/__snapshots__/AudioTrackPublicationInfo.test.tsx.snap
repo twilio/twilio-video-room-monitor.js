@@ -22,6 +22,10 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
     label="Packets Lost"
     value="7"
   />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value="null%"
+  />
 </Fragment>
 `;
 
