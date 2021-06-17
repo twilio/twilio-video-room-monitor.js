@@ -4,7 +4,7 @@ import { theme } from '../../theme';
 
 type DatumProps = {
   label: string;
-  value: string;
+  value: string | number | boolean | null | undefined;
 };
 
 const Text = styled.span`
@@ -15,7 +15,7 @@ function Datum({ label, value }: DatumProps) {
   return (
     <div>
       <Text>
-        {label}: {value}
+        {label}: {String(value)}
       </Text>
     </div>
   );
