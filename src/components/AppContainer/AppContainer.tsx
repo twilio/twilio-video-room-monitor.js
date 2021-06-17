@@ -12,6 +12,7 @@ import {
   TabSelector,
   OverflowContainer,
 } from './styles';
+import TwilioVideoInspector from '../../index';
 
 createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
@@ -34,7 +35,7 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
             Stats
           </TabSelector>
           <CopyButton />
-          <CloseIconContainer onClick={() => window.TwilioVideoInspector.destroy()}>
+          <CloseIconContainer onClick={() => TwilioVideoInspector.closeInspector()}>
             <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fillRule="evenodd"

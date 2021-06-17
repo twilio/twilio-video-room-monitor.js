@@ -1,3 +1,5 @@
+import { RemoteVideoTrack } from 'twilio-video';
+
 export type chartDatum = { x: number; y: number | null };
 
 declare module 'twilio-video' {
@@ -11,33 +13,25 @@ declare module 'twilio-video' {
 
   interface LocalAudioTrackStats {
     bytesReceived?: undefined;
-    packetsReceived?: undefined; 
+    packetsReceived?: undefined;
   }
 
   interface LocalVideoTrackStats {
     bytesReceived?: undefined;
-    packetsReceived?: undefined; 
+    packetsReceived?: undefined;
   }
 
   interface RemoteAudioTrackStats {
     bytesSent?: undefined;
-    packetsSent?: undefined; 
+    packetsSent?: undefined;
   }
 
   interface RemoteVideoTrackStats {
     bytesSent?: undefined;
-    packetsSent?: undefined; 
+    packetsSent?: undefined;
   }
 
   interface Room {
     _options: Record<string, unknown>;
-  }
-}
-
-declare global {
-  interface Window {
-    TwilioVideoInspector: {
-      destroy: () => void;
-    };
   }
 }
