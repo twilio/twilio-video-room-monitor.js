@@ -182,8 +182,16 @@ exports[`The RoomInfo component should render information about the room if conn
     <Memo(ArrayData)
       arr={
         Array [
-          [Function],
-          [Function],
+          Object {
+            "id": "32e1f5ed-1b4b-470e-bc52-03399b5d847b",
+            "isEnabled": false,
+            "isStarted": true,
+            "isStopped": false,
+            "kind": "audio",
+            "mediaStreamTrack": Object {},
+            "name": "32e1f5ed-1b4b-470e-bc52-03399b5d847b",
+            "processedTrack": null,
+          },
         ]
       }
       label="Tracks"
