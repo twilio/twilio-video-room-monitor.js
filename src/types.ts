@@ -1,6 +1,12 @@
-import { RemoteVideoTrack } from 'twilio-video';
-
 export type chartDatum = { x: number; y: number | null };
+
+export type Primitive = string | number | undefined | null | boolean;
+
+export type Arr = (Primitive | Obj)[];
+
+export interface Obj {
+  [key: string]: Primitive | Obj | Arr;
+}
 
 declare module 'twilio-video' {
   // This helps to create union types between Local and Remote TrackPublication
