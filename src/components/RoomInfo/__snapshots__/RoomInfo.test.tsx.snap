@@ -43,5 +43,162 @@ exports[`The RoomInfo component should render information about the room if conn
     label="Total Received Bandwidth"
     value="1,234.56kbps"
   />
+  <Accordion
+    label="Connection Options"
+  >
+    <Memo(NestedObject)
+      label="Audio"
+      obj={
+        Object {
+          "logLevel": Object {},
+          "loggerName": "twilio-audio",
+          "name": "testName",
+          "workaroundWebKitBug180748": true,
+        }
+      }
+    />
+    <Memo(Datum)
+      label="Automatic Subscription"
+      value={true}
+    />
+    <Memo(NestedObject)
+      label="Bandwidth Profile"
+      obj={
+        Object {
+          "video": Object {
+            "clientTrackSwitchOffControl": "auto",
+            "contentPreferencesMode": "auto",
+            "dominantSpeakerPriority": "standard",
+            "maxSubscriptionBitrate": 10,
+            "maxTracks": 100,
+            "mode": "grid",
+            "renderDimensions": Object {
+              "high": Object {
+                "height": 720,
+                "width": 1080,
+              },
+              "low": Object {
+                "height": 70,
+                "width": 100,
+              },
+              "standard": Object {
+                "height": 190,
+                "width": 340,
+              },
+            },
+            "trackSwitchOffMode": "predicted",
+          },
+        }
+      }
+    />
+    <Memo(Datum)
+      label="Dominant Speaker"
+      value={true}
+    />
+    <Memo(Datum)
+      label="DSCP Tagging"
+      value={true}
+    />
+    <Memo(Datum)
+      label="Enable DSCP"
+      value={false}
+    />
+    <Memo(NestedObject)
+      label="Event Listener"
+      obj={null}
+    />
+    <Memo(ArrayData)
+      arr={Array []}
+      label="Ice Servers"
+    />
+    <Memo(NestedObject)
+      label="Ice Transport Policy"
+    />
+    <Memo(Datum)
+      label="Insights"
+      value={true}
+    />
+    <Memo(Datum)
+      label="Max Audio Bitrate"
+      value={1600}
+    />
+    <Memo(Datum)
+      label="Max Video Bitrate"
+      value={null}
+    />
+    <Memo(Datum)
+      label="Name"
+      value="testRoom"
+    />
+    <Memo(NestedObject)
+      label="Network Quality"
+      obj={
+        Object {
+          "local": 1,
+          "remote": 1,
+        }
+      }
+    />
+    <Memo(Datum)
+      label="Region"
+      value="testRegion"
+    />
+    <Memo(ArrayData)
+      arr={
+        Array [
+          Object {
+            "PCMA": "testPCMA",
+            "PCMU": "testPCMU",
+            "isa": "testIsa",
+            "opus": "testOpus",
+          },
+        ]
+      }
+      label="Preferred Audio Codecs"
+    />
+    <Memo(ArrayData)
+      arr={
+        Array [
+          Object {
+            "codec": "VP0",
+            "simulcast": false,
+          },
+          Object {
+            "codec": "VP8",
+            "simulcast": true,
+          },
+        ]
+      }
+      label="Preferred Video Codecs"
+    />
+    <Memo(NestedObject)
+      label="Log Level"
+      obj={Object {}}
+    />
+    <Memo(Datum)
+      label="Logger Name"
+      value="logger-twilio-video"
+    />
+    <Memo(ArrayData)
+      arr={
+        Array [
+          [Function],
+          [Function],
+        ]
+      }
+      label="Tracks"
+    />
+    <Memo(NestedObject)
+      label="Video"
+      obj={
+        Object {
+          "logLevel": Object {},
+          "loggerName": "twilio-video",
+          "name": "testName",
+          "workaroundWebKitBug180748": false,
+        }
+      }
+    />
+  </Accordion>
 </div>
 `;
