@@ -6,10 +6,6 @@ import Datum from '../Datum/Datum';
 import { Accordion } from '../Accordion/Accordion';
 import { Arr } from '../../../types';
 
-const Text = styled.span`
-  font-size: ${theme.fontSizes.small};
-`;
-
 const Container = styled.div`
   &:not(:last-child) {
     border-bottom: 1px solid ${theme.borderColor};
