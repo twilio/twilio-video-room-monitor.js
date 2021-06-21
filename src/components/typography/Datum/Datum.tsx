@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Primitive } from '../../../types';
 import { theme } from '../../theme';
 
 type DatumProps = {
   label: string;
-  value: string | number | boolean | null | undefined;
+  value: Primitive;
 };
 
 const Text = styled.span`
