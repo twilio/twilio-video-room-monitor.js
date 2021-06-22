@@ -1,27 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../theme';
 import { Accordion } from '../Accordion/Accordion';
 import Datum from '../Datum/Datum';
-import { Primitive, Obj } from '../../../types';
+import { Primitive } from '../../../types';
+import StatsContainer from '../StatsContainer/StatsContainer';
 
-const Container = styled.div`
-  &:not(:last-child) {
-    border-bottom: 1px solid ${theme.borderColor};
-    margin-bottom: 3px;
-  }
-  padding-bottom: 3px;
-
-  &:hover {
-    background: rgba(50, 50, 50, 0.9);
-  }
-`;
-
-function NestedObject({ label, obj }: { label?: string; obj: Obj | Primitive }) {
+function NestedObject({ label, obj }: { label?: string; obj: Object | Primitive }) {
   if (typeof obj !== 'object' || typeof obj === 'undefined' || obj === null) {
     return <Datum label={String(label)} value={obj} />;
   }
-  const Component = label ? Accordion : Container;
+  const Component = label ? Accordion : StatsContainer;
 
   return (
     <Component label={label!}>

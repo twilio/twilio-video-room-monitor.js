@@ -1,22 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
-import { theme } from '../../theme';
 import NestedObject from '../NestedObject/NestedObject';
 import Datum from '../Datum/Datum';
 import { Accordion } from '../Accordion/Accordion';
 import { Arr } from '../../../types';
-
-const Container = styled.div`
-  &:not(:last-child) {
-    border-bottom: 1px solid ${theme.borderColor};
-    margin-bottom: 3px;
-  }
-  padding-bottom: 3px;
-
-  &:hover {
-    background: rgba(50, 50, 50, 0.9);
-  }
-`;
+import StatsContainer from '../StatsContainer/StatsContainer';
 
 function ArrayData({ label, arr }: { label: string; arr: Arr | undefined }) {
   if (typeof arr === 'undefined' || arr === null) {
@@ -27,9 +14,9 @@ function ArrayData({ label, arr }: { label: string; arr: Arr | undefined }) {
   return (
     <Accordion label={label}>
       {arr.map((obj) => (
-        <Container>
+        <StatsContainer>
           <NestedObject key="{obj}" obj={obj} />
-        </Container>
+        </StatsContainer>
       ))}
     </Accordion>
   );

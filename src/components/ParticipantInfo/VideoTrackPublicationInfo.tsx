@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   LocalVideoTrack,
   LocalVideoTrackPublication,
@@ -15,8 +14,8 @@ import usePublishPriority from '../../hooks/usePublishPriority/usePublishPriorit
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
-import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
+import StatsContainer from '../typography/StatsContainer/StatsContainer';
 
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
   dimensions ? `${dimensions.width} x ${dimensions.height}` : 'undefined';
@@ -41,7 +40,7 @@ export const VideoTrackInfo: React.FC<{
 
     lossPercentage = totalPackets ? ((numPacketsLost / totalPackets) * 100).toLocaleString() : null;
   }
-  
+
   return (
     <>
       <Datum label="Dimensions" value={getDimensionString(dimensions)} />
@@ -60,18 +59,6 @@ export const VideoTrackInfo: React.FC<{
   );
 };
 
-const Container = styled.div`
-  &:not(:last-child) {
-    border-bottom: 1px solid ${theme.borderColor};
-    margin-bottom: 3px;
-  }
-  padding-bottom: 3px;
-
-  &:hover {
-    background: rgba(50, 50, 50, 0.9);
-  }
-`;
-
 export const VideoTrackPublicationInfo: React.FC<{
   publication: LocalVideoTrackPublication | RemoteVideoTrackPublication;
 }> = ({ publication }) => {
@@ -79,12 +66,12 @@ export const VideoTrackPublicationInfo: React.FC<{
   const track = useTrack(publication) as LocalVideoTrack | RemoteVideoTrack | undefined;
 
   return (
-    <Container>
+    <StatsContainer>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
       <Datum label="publishPriority" value={String(publishPriority)} />
       {track && <VideoTrackInfo track={track} trackSid={publication.trackSid} />}
-    </Container>
+    </StatsContainer>
   );
 };
