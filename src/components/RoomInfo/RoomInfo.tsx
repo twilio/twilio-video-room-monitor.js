@@ -25,7 +25,6 @@ export default function RoomInfo() {
     bandwidthProfile,
     dscpTagging,
     enableDscp,
-    eventListener,
     iceServers,
     iceTransportPolicy,
     insights,
@@ -36,7 +35,6 @@ export default function RoomInfo() {
     region,
     preferredAudioCodecs,
     preferredVideoCodecs,
-    logLevel,
     loggerName,
     tracks,
     video,
@@ -62,10 +60,9 @@ export default function RoomInfo() {
             <NestedObject label="Audio" obj={audio} />
             <Datum label="Automatic Subscription" value={automaticSubscription} />
             <NestedObject label="Bandwidth Profile" obj={bandwidthProfile} />
-            <Datum label="Dominant Speaker" value={Boolean(dominantSpeaker)} />
+            <Datum label="Dominant Speaker" value={room._options.dominantSpeaker} />
             <Datum label="DSCP Tagging" value={dscpTagging} />
             <Datum label="Enable DSCP" value={enableDscp} />
-            <NestedObject label="Event Listener" obj={eventListener} />
             <ArrayData label="Ice Servers" arr={iceServers} />
             <NestedObject label="Ice Transport Policy" obj={iceTransportPolicy} />
             <Datum label="Insights" value={insights} />
@@ -76,7 +73,6 @@ export default function RoomInfo() {
             <Datum label="Region" value={region} />
             <ArrayData label="Preferred Audio Codecs" arr={preferredAudioCodecs} />
             <ArrayData label="Preferred Video Codecs" arr={preferredVideoCodecs} />
-            <NestedObject label="Log Level" obj={logLevel} />
             <Datum label="Logger Name" value={loggerName} />
             <ArrayData label="Tracks" arr={tracks} />
             <NestedObject label="Video" obj={video} />

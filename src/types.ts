@@ -1,12 +1,19 @@
+import {
+  CreateLocalTrackOptions,
+  BandwidthProfileOptions,
+  NetworkQualityConfiguration,
+  AudioCodec,
+  AudioCodecSettings,
+  VideoCodec,
+  VideoCodecSettings,
+  LocalTrack,
+} from 'twilio-video';
+
 export type chartDatum = { x: number; y: number | null };
 
 export type Primitive = string | number | undefined | null | boolean;
 
-export type Arr = (Primitive | Obj)[];
-
-export interface Obj {
-  [key: string]: Primitive | Obj | Arr;
-}
+export type Arr = (Primitive | Object)[];
 
 declare module 'twilio-video' {
   // This helps to create union types between Local and Remote TrackPublication
@@ -39,26 +46,25 @@ declare module 'twilio-video' {
 
   interface Room {
     _options: {
-      audio?: Primitive | Obj;
+      audio?: boolean | CreateLocalTrackOptions;
       automaticSubscription?: boolean;
-      bandwidthProfile?: Primitive | Obj;
+      bandwidthProfile?: BandwidthProfileOptions;
       dscpTagging?: boolean;
+      dominantSpeaker?: boolean;
       enableDscp?: boolean;
-      eventListener?: Primitive | Obj;
-      iceServers?: Arr;
-      iceTransportPolicy?: Primitive | Obj;
+      iceServers?: RTCIceServer[];
+      iceTransportPolicy?: RTCIceTransportPolicy;
       insights?: boolean;
       maxAudioBitrate?: number | null;
       maxVideoBitrate?: number | null;
       name?: string | null;
-      networkQuality?: Primitive | Obj;
+      networkQuality?: NetworkQualityConfiguration;
       region?: string;
-      preferredAudioCodecs?: Arr;
-      preferredVideoCodecs?: Arr;
-      logLevel?: Primitive | Obj;
+      preferredAudioCodecs?: (AudioCodec | AudioCodecSettings)[];
+      preferredVideoCodecs?: (VideoCodec | VideoCodecSettings)[];
       loggerName?: string;
-      tracks?: Arr;
-      video?: Primitive | Obj;
+      tracks?: (LocalTrack | MediaStreamTrack)[];
+      video?: boolean | CreateLocalTrackOptions;
     };
   }
 }
