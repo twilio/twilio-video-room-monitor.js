@@ -38,6 +38,27 @@ declare module 'twilio-video' {
   }
 
   interface Room {
-    _options: Record<string, unknown>;
+    _options: {
+      audio?: Primitive | Obj;
+      automaticSubscription?: boolean;
+      bandwidthProfile?: Primitive | Obj;
+      dscpTagging?: boolean;
+      enableDscp?: boolean;
+      eventListener?: Primitive | Obj;
+      iceServers?: Arr;
+      iceTransportPolicy?: Primitive | Obj;
+      insights?: boolean;
+      maxAudioBitrate?: number | null;
+      maxVideoBitrate?: number | null;
+      name?: string | null;
+      networkQuality?: Primitive | Obj;
+      region?: string;
+      preferredAudioCodecs?: Arr;
+      preferredVideoCodecs?: Arr;
+      logLevel?: Primitive | Obj;
+      loggerName?: string;
+      tracks?: Arr;
+      video?: Primitive | Obj;
+    };
   }
 }

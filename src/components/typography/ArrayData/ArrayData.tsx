@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `;
 
-function ArrayData({ label, arr }: { label: string; arr: Arr }) {
+function ArrayData({ label, arr }: { label: string; arr: Arr | undefined }) {
   if (typeof arr === 'undefined' || arr === null) {
     return <Datum label={label} value={arr} />;
   } else if (arr.length === 0) {

@@ -40,7 +40,7 @@ export default function RoomInfo() {
     loggerName,
     tracks,
     video,
-  }: any = room._options;
+  } = room._options;
 
   return (
     <div style={{ marginBottom: '1em' }}>
