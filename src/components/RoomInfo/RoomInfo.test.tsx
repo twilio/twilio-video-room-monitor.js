@@ -30,9 +30,9 @@ jest.mock('../../hooks/useRoom/useRoom', () => () => ({
         trackSwitchOffMode: 'predicted',
       },
     },
+    dominantSpeaker: true,
     dscpTagging: true,
     enableDscp: false,
-    eventListener: null,
     iceServers: [],
     iceTransportPolicy: undefined,
     insights: true,
@@ -62,7 +62,6 @@ jest.mock('../../hooks/useRoom/useRoom', () => () => ({
         simulcast: true,
       },
     ],
-    logLevel: {},
     loggerName: 'logger-twilio-video',
     tracks: [
       {

@@ -103,10 +103,6 @@ exports[`The RoomInfo component should render information about the room if conn
       label="Enable DSCP"
       value={false}
     />
-    <Memo(NestedObject)
-      label="Event Listener"
-      obj={null}
-    />
     <Memo(ArrayData)
       arr={Array []}
       label="Ice Servers"
@@ -170,10 +166,6 @@ exports[`The RoomInfo component should render information about the room if conn
         ]
       }
       label="Preferred Video Codecs"
-    />
-    <Memo(NestedObject)
-      label="Log Level"
-      obj={Object {}}
     />
     <Memo(Datum)
       label="Logger Name"
