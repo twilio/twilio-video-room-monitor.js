@@ -48,14 +48,7 @@ exports[`The RoomInfo component should render information about the room if conn
   >
     <Memo(NestedObject)
       label="Audio"
-      obj={
-        Object {
-          "logLevel": Object {},
-          "loggerName": "twilio-audio",
-          "name": "testName",
-          "workaroundWebKitBug180748": true,
-        }
-      }
+      obj={true}
     />
     <Memo(Datum)
       label="Automatic Subscription"
@@ -63,33 +56,7 @@ exports[`The RoomInfo component should render information about the room if conn
     />
     <Memo(NestedObject)
       label="Bandwidth Profile"
-      obj={
-        Object {
-          "video": Object {
-            "clientTrackSwitchOffControl": "auto",
-            "contentPreferencesMode": "auto",
-            "dominantSpeakerPriority": "standard",
-            "maxSubscriptionBitrate": 10,
-            "maxTracks": 100,
-            "mode": "grid",
-            "renderDimensions": Object {
-              "high": Object {
-                "height": 720,
-                "width": 1080,
-              },
-              "low": Object {
-                "height": 70,
-                "width": 100,
-              },
-              "standard": Object {
-                "height": 190,
-                "width": 340,
-              },
-            },
-            "trackSwitchOffMode": "predicted",
-          },
-        }
-      }
+      obj="mockBandwidthProfile"
     />
     <Memo(Datum)
       label="Dominant Speaker"
@@ -128,12 +95,7 @@ exports[`The RoomInfo component should render information about the room if conn
     />
     <Memo(NestedObject)
       label="Network Quality"
-      obj={
-        Object {
-          "local": 1,
-          "remote": 1,
-        }
-      }
+      obj={true}
     />
     <Memo(Datum)
       label="Region"
@@ -142,12 +104,7 @@ exports[`The RoomInfo component should render information about the room if conn
     <Memo(ArrayData)
       arr={
         Array [
-          Object {
-            "PCMA": "testPCMA",
-            "PCMU": "testPCMU",
-            "isa": "testIsa",
-            "opus": "testOpus",
-          },
+          "PCMU",
         ]
       }
       label="Preferred Audio Codecs"
@@ -155,14 +112,7 @@ exports[`The RoomInfo component should render information about the room if conn
     <Memo(ArrayData)
       arr={
         Array [
-          Object {
-            "codec": "VP0",
-            "simulcast": false,
-          },
-          Object {
-            "codec": "VP8",
-            "simulcast": true,
-          },
+          "VP8",
         ]
       }
       label="Preferred Video Codecs"
@@ -174,30 +124,14 @@ exports[`The RoomInfo component should render information about the room if conn
     <Memo(ArrayData)
       arr={
         Array [
-          Object {
-            "id": "32e1f5ed-1b4b-470e-bc52-03399b5d847b",
-            "isEnabled": false,
-            "isStarted": true,
-            "isStopped": false,
-            "kind": "audio",
-            "mediaStreamTrack": Object {},
-            "name": "32e1f5ed-1b4b-470e-bc52-03399b5d847b",
-            "processedTrack": null,
-          },
+          "mockTrack",
         ]
       }
       label="Tracks"
     />
     <Memo(NestedObject)
       label="Video"
-      obj={
-        Object {
-          "logLevel": Object {},
-          "loggerName": "twilio-video",
-          "name": "testName",
-          "workaroundWebKitBug180748": false,
-        }
-      }
+      obj={true}
     />
   </Accordion>
 </div>
