@@ -58,7 +58,7 @@ declare module 'twilio-video' {
       maxAudioBitrate?: number | null;
       maxVideoBitrate?: number | null;
       name?: string | null;
-      networkQuality?: NetworkQualityConfiguration;
+      networkQuality?: boolean | NetworkQualityConfiguration;
       region?: string;
       preferredAudioCodecs?: (AudioCodec | AudioCodecSettings)[];
       preferredVideoCodecs?: (VideoCodec | VideoCodecSettings)[];
