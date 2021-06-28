@@ -12,13 +12,13 @@ function NestedObject({ label, obj }: { label?: string; obj: Object | Primitive 
 
   return (
     <Component label={label!}>
-      {Object.entries(obj).map(([key, val]) => {
+      {Object.entries(obj).map(([key, val], i) => {
         if (typeof val === 'object' && !Array.isArray(val)) {
           // object
-          return <NestedObject label={key} obj={val} />;
+          return <NestedObject key={i} label={key} obj={val} />;
         } else {
           // primitives
-          return <Datum label={key} value={String(val)} />;
+          return <Datum key={i} label={key} value={val} />;
         }
       })}
     </Component>
