@@ -13,7 +13,7 @@ export type chartDatum = { x: number; y: number | null };
 
 export type Primitive = string | number | undefined | null | boolean;
 
-export type Arr = (Primitive | Object)[];
+export type Arr = (Primitive | Object)[] | null;
 
 declare module 'twilio-video' {
   // This helps to create union types between Local and Remote TrackPublication
