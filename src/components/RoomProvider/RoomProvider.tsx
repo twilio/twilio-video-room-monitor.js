@@ -23,13 +23,13 @@ export default function RoomProvider({ children }: { children: React.ReactNode }
       setRoom(roomRegistry.room);
     }
 
-    const handleRoomRegister = () => setRoom(room);
+    const handleRoomRegister = (newRoom: Room) => setRoom(newRoom);
     roomRegistry.on('roomRegistered', handleRoomRegister);
 
     return () => {
       roomRegistry.off('roomRegistered', handleRoomRegister);
     };
-  }, [room]);
+  }, []);
 
   return <RoomContext.Provider value={room}>{children}</RoomContext.Provider>;
 }
