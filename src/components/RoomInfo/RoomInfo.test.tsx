@@ -20,35 +20,32 @@ const mockUseRoomState = useRoomState as jest.Mock<any>;
 mockUseRoomState.mockImplementation(() => 'connected');
 
 const mockUseRoom = useRoom as jest.Mock<any>;
-
-beforeEach(() => {
-  mockUseRoom.mockImplementation(() => ({
-    name: 'test123',
-    sid: 'XXXXXXXXXXXXX1234',
-    mediaRegion: 'testRegion',
-    _options: {
-      audio: true,
-      automaticSubscription: true,
-      bandwidthProfile: 'mockBandwidthProfile',
-      dominantSpeaker: true,
-      dscpTagging: true,
-      enableDscp: false,
-      iceServers: [],
-      iceTransportPolicy: undefined,
-      insights: true,
-      maxAudioBitrate: 1600,
-      maxVideoBitrate: null,
-      name: 'testRoom',
-      networkQuality: true,
-      region: 'testRegion',
-      preferredAudioCodecs: ['PCMU'],
-      preferredVideoCodecs: ['VP8'],
-      loggerName: 'logger-twilio-video',
-      tracks: ['mockTrack'],
-      video: true,
-    },
-  }));
-});
+mockUseRoom.mockImplementation(() => ({
+  name: 'test123',
+  sid: 'XXXXXXXXXXXXX1234',
+  mediaRegion: 'testRegion',
+  _options: {
+    audio: true,
+    automaticSubscription: true,
+    bandwidthProfile: 'mockBandwidthProfile',
+    dominantSpeaker: true,
+    dscpTagging: true,
+    enableDscp: false,
+    iceServers: [],
+    iceTransportPolicy: undefined,
+    insights: true,
+    maxAudioBitrate: 1600,
+    maxVideoBitrate: null,
+    name: 'testRoom',
+    networkQuality: true,
+    region: 'testRegion',
+    preferredAudioCodecs: ['PCMU'],
+    preferredVideoCodecs: ['VP8'],
+    loggerName: 'logger-twilio-video',
+    tracks: ['mockTrack'],
+    video: true,
+  },
+}));
 
 describe('The RoomInfo component', () => {
   it('should render information about the room if connected to a Twilio Video room', () => {
