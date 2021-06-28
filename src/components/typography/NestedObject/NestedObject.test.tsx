@@ -2,7 +2,7 @@ import React from 'react';
 import NestedObject from './NestedObject';
 import { shallow } from 'enzyme';
 
-const testObject = { outerObject: { innerObject: 'testVal' } };
+const testObject = { outerObject: { innerObject: 'testVal' }, primitiveValue: 'foo' };
 
 describe('the NestedObject component', () => {
   describe('when there is no object', () => {
@@ -49,6 +49,11 @@ describe('the NestedObject component', () => {
               }
             }
           />
+          <Memo(Datum)
+            key="1"
+            label="primitiveValue"
+            value="foo"
+          />
         </Accordion>
       `);
     });
@@ -64,6 +69,11 @@ describe('the NestedObject component', () => {
                 "innerObject": "testVal",
               }
             }
+          />
+          <Memo(Datum)
+            key="1"
+            label="primitiveValue"
+            value="foo"
           />
         </Memo(styled.div)>
       `);
