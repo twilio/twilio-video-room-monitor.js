@@ -5,7 +5,7 @@ import { Accordion } from '../Accordion/Accordion';
 import { Arr } from '../../../types';
 import StatsContainer from '../StatsContainer/StatsContainer';
 
-function ArrayData({ label, arr }: { label: string; arr: Arr | undefined }) {
+function ArrayData({ label, arr }: { label: string; arr: Arr | null | undefined }) {
   if (typeof arr === 'undefined' || arr === null) {
     return <Datum label={label} value={arr} />;
   } else if (arr.length === 0) {
