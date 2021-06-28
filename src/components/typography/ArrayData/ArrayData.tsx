@@ -15,7 +15,7 @@ function ArrayData({ label, arr }: { label: string; arr: Arr | undefined }) {
     <Accordion label={label}>
       {arr.map((obj, i) => (
         <StatsContainer key={i}>
-          <NestedObject key={i} obj={obj} />
+          <NestedObject obj={obj} />
         </StatsContainer>
       ))}
     </Accordion>

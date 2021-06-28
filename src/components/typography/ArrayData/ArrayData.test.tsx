@@ -45,7 +45,6 @@ describe('the ArrayData component', () => {
           key="0"
         >
           <Memo(NestedObject)
-            key="0"
             obj="value1"
           />
         </Memo(styled.div)>
@@ -53,7 +52,6 @@ describe('the ArrayData component', () => {
           key="1"
         >
           <Memo(NestedObject)
-            key="1"
             obj="value2"
           />
         </Memo(styled.div)>
@@ -61,7 +59,6 @@ describe('the ArrayData component', () => {
           key="2"
         >
           <Memo(NestedObject)
-            key="2"
             obj="value3"
           />
         </Memo(styled.div)>
