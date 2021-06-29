@@ -5,7 +5,7 @@ import EventEmitter from 'eventemitter3';
 import { Room } from 'twilio-video';
 import { roomRegistry } from './components/RoomProvider/RoomProvider';
 
-class TwilioVideoInspector extends EventEmitter<{
+class TwilioRoomMonitor extends EventEmitter<{
   opened: [];
   closed: [];
 }> {
@@ -16,18 +16,18 @@ class TwilioVideoInspector extends EventEmitter<{
     return Boolean(this.container);
   }
 
-  openInspector() {
+  openMonitor() {
     if (!this.container) {
       const container = document.createElement('div');
       document.body.appendChild(container);
-      container.id = 'TwilioVideoInspectorContainer';
+      container.id = 'TwilioRoomMonitorContainer';
       ReactDOM.render(<App />, container);
       this.container = container;
       this.emit('opened');
     }
   }
 
-  closeInspector() {
+  closeMonitor() {
     if (this.container) {
       ReactDOM.unmountComponentAtNode(this.container!);
       this.container.remove();
@@ -36,8 +36,8 @@ class TwilioVideoInspector extends EventEmitter<{
     }
   }
 
-  toggleInspector() {
-    this.isOpen ? this.closeInspector() : this.openInspector();
+  toggleMonitor() {
+    this.isOpen ? this.closeMonitor() : this.openMonitor();
   }
 
   registerVideoRoom(room: Room) {
@@ -45,4 +45,4 @@ class TwilioVideoInspector extends EventEmitter<{
   }
 }
 
-export default new TwilioVideoInspector();
+export default new TwilioRoomMonitor();
