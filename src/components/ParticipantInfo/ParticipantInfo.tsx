@@ -1,14 +1,16 @@
 import React from 'react';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useRoom from '../../hooks/useRoom/useRoom';
+import useRoomState from '../../hooks/useRoomState/useRoomState';
 import Headline from '../typography/Headline/Headline';
 import { Participant } from './Participant';
 
 export default function ParticipantInfo() {
   const participants = useParticipants();
   const room = useRoom();
+  const roomState = useRoomState();
 
-  if (!room) return null;
+  if (!room || roomState === 'disconnected') return null;
 
   return (
     <>

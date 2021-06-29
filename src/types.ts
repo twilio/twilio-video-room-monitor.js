@@ -1,4 +1,19 @@
+import {
+  CreateLocalTrackOptions,
+  BandwidthProfileOptions,
+  NetworkQualityConfiguration,
+  AudioCodec,
+  AudioCodecSettings,
+  VideoCodec,
+  VideoCodecSettings,
+  LocalTrack,
+} from 'twilio-video';
+
 export type chartDatum = { x: number; y: number | null };
+
+export type Primitive = string | number | undefined | null | boolean;
+
+export type Arr = (Primitive | Object)[];
 
 declare module 'twilio-video' {
   // This helps to create union types between Local and Remote TrackPublication
@@ -11,33 +26,45 @@ declare module 'twilio-video' {
 
   interface LocalAudioTrackStats {
     bytesReceived?: undefined;
-    packetsReceived?: undefined; 
+    packetsReceived?: undefined;
   }
 
   interface LocalVideoTrackStats {
     bytesReceived?: undefined;
-    packetsReceived?: undefined; 
+    packetsReceived?: undefined;
   }
 
   interface RemoteAudioTrackStats {
     bytesSent?: undefined;
-    packetsSent?: undefined; 
+    packetsSent?: undefined;
   }
 
   interface RemoteVideoTrackStats {
     bytesSent?: undefined;
-    packetsSent?: undefined; 
+    packetsSent?: undefined;
   }
 
   interface Room {
-    _options: Record<string, unknown>;
-  }
-}
-
-declare global {
-  interface Window {
-    TwilioVideoInspector: {
-      destroy: () => void;
+    _options: {
+      audio?: boolean | CreateLocalTrackOptions;
+      automaticSubscription?: boolean;
+      bandwidthProfile?: BandwidthProfileOptions;
+      dscpTagging?: boolean;
+      dominantSpeaker?: boolean;
+      enableDscp?: boolean;
+      iceServers?: RTCIceServer[];
+      iceTransportPolicy?: RTCIceTransportPolicy;
+      insights?: boolean;
+      maxAudioBitrate?: number | null;
+      maxVideoBitrate?: number | null;
+      name?: string | null;
+      networkQuality?: boolean | NetworkQualityConfiguration;
+      region?: string;
+      preferredAudioCodecs?: (AudioCodec | AudioCodecSettings)[];
+      preferredVideoCodecs?: (VideoCodec | VideoCodecSettings)[];
+      loggerName?: string;
+      tracks?: (LocalTrack | MediaStreamTrack)[];
+      video?: boolean | CreateLocalTrackOptions;
     };
   }
 }

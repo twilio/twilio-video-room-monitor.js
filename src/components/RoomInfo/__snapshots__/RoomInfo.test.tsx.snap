@@ -43,5 +43,96 @@ exports[`The RoomInfo component should render information about the room if conn
     label="Total Received Bandwidth"
     value="1,234.56kbps"
   />
+  <Accordion
+    label="Connection Options"
+  >
+    <Memo(NestedObject)
+      label="Audio"
+      obj={true}
+    />
+    <Memo(Datum)
+      label="Automatic Subscription"
+      value={true}
+    />
+    <Memo(NestedObject)
+      label="Bandwidth Profile"
+      obj="mockBandwidthProfile"
+    />
+    <Memo(Datum)
+      label="Dominant Speaker"
+      value={true}
+    />
+    <Memo(Datum)
+      label="DSCP Tagging"
+      value={true}
+    />
+    <Memo(Datum)
+      label="Enable DSCP"
+      value={false}
+    />
+    <Memo(ArrayData)
+      arr={Array []}
+      label="Ice Servers"
+    />
+    <Memo(NestedObject)
+      label="Ice Transport Policy"
+    />
+    <Memo(Datum)
+      label="Insights"
+      value={true}
+    />
+    <Memo(Datum)
+      label="Max Audio Bitrate"
+      value={1600}
+    />
+    <Memo(Datum)
+      label="Max Video Bitrate"
+      value={null}
+    />
+    <Memo(Datum)
+      label="Name"
+      value="testRoom"
+    />
+    <Memo(NestedObject)
+      label="Network Quality"
+      obj={true}
+    />
+    <Memo(Datum)
+      label="Region"
+      value="testRegion"
+    />
+    <Memo(ArrayData)
+      arr={
+        Array [
+          "PCMU",
+        ]
+      }
+      label="Preferred Audio Codecs"
+    />
+    <Memo(ArrayData)
+      arr={
+        Array [
+          "VP8",
+        ]
+      }
+      label="Preferred Video Codecs"
+    />
+    <Memo(Datum)
+      label="Logger Name"
+      value="logger-twilio-video"
+    />
+    <Memo(ArrayData)
+      arr={
+        Array [
+          "mockTrack",
+        ]
+      }
+      label="Tracks"
+    />
+    <Memo(NestedObject)
+      label="Video"
+      obj={true}
+    />
+  </Accordion>
 </div>
 `;
