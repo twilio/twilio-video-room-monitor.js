@@ -12,7 +12,7 @@ import {
   TabSelector,
   OverflowContainer,
 } from './styles';
-import TwilioRoomMonitor from '../../index';
+import RoomMonitor from '../../index';
 
 createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
@@ -26,7 +26,7 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
   return (
     <Container ref={dragContainerRef as any}>
       <Bar ref={draggableRef as any}>
-        <span style={{ padding: '0.57em' }}>Twilio Room Monitor</span>
+        <span style={{ padding: '0.57em' }}>Twilio Video Room Monitor</span>
         <RightBarContainer>
           <TabSelector isActive={activeTab === 'info'} onClick={() => setActiveTab('info')}>
             Info
@@ -35,7 +35,7 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
             Stats
           </TabSelector>
           <CopyButton />
-          <CloseIconContainer onClick={() => TwilioRoomMonitor.closeMonitor()}>
+          <CloseIconContainer onClick={() => RoomMonitor.closeMonitor()}>
             <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fillRule="evenodd"
