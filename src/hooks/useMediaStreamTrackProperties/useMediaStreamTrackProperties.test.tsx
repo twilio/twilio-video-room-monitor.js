@@ -1,5 +1,4 @@
 import { act, renderHook } from '@testing-library/react-hooks';
-import EventEmitter from 'events';
 import useMediaStreamTrackProperties from './useMediaStreamTrackProperties';
 
 describe('the useMediaStreamTrackProperties hook', () => {
