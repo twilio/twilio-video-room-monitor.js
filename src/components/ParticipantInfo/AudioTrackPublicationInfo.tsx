@@ -9,10 +9,13 @@ import {
   RemoteAudioTrackStats,
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
+import useMediaStreamTrack from '../../hooks/useMediaStreamTrack/useMediaStreamTrack';
+import useMediaStreamTrackProperties from '../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
+import NestedObject from '../typography/NestedObject/NestedObject';
 
 export const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;
@@ -21,6 +24,8 @@ export const AudioTrackInfo: React.FC<{
   const isEnabled = useIsTrackEnabled(track);
   const trackBandwidth = useTrackBandwidth(trackSid);
   const trackData = useTrackData(trackSid) as LocalAudioTrackStats | RemoteAudioTrackStats | null;
+  const mediaStreamTrack = useMediaStreamTrack(track);
+  const mediaStreamTrackProperties = useMediaStreamTrackProperties(mediaStreamTrack);
 
   let lossPercentage: string | null;
 
@@ -43,6 +48,7 @@ export const AudioTrackInfo: React.FC<{
           <Datum label="Jitter" value={String(trackData.jitter)} />
           <Datum label="Packets Lost" value={String(trackData.packetsLost)} />
           <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
+          <NestedObject label="Media Stream Track" obj={mediaStreamTrackProperties} />
         </>
       )}
     </>

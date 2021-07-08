@@ -10,11 +10,14 @@ import {
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
+import useMediaStreamTrack from '../../hooks/useMediaStreamTrack/useMediaStreamTrack';
+import useMediaStreamTrackProperties from '../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
 import usePublishPriority from '../../hooks/usePublishPriority/usePublishPriority';
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
 import Datum from '../typography/Datum/Datum';
+import NestedObject from '../typography/NestedObject/NestedObject';
 import StatsContainer from '../typography/StatsContainer/StatsContainer';
 
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
@@ -29,6 +32,8 @@ export const VideoTrackInfo: React.FC<{
   const isEnabled = useIsTrackEnabled(track);
   const trackBandwidth = useTrackBandwidth(trackSid);
   const trackData = useTrackData(trackSid) as LocalVideoTrackStats | RemoteVideoTrackStats | null;
+  const mediaStreamTrack = useMediaStreamTrack(track);
+  const mediaStreamTrackProperties = useMediaStreamTrackProperties(mediaStreamTrack);
 
   let lossPercentage: string | null;
 
@@ -53,6 +58,7 @@ export const VideoTrackInfo: React.FC<{
           <Datum label="Framerate" value={String(trackData?.frameRate)} />
           <Datum label="Packets Lost" value={String(trackData?.packetsLost)} />
           <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
+          <NestedObject label="Media Stream Track" obj={mediaStreamTrackProperties} />
         </>
       )}
     </>
