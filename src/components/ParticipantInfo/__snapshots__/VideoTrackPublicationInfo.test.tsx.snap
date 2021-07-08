@@ -34,6 +34,18 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
     label="Packet Loss Percentage"
     value="null%"
   />
+  <Memo(NestedObject)
+    label="Media Stream Track"
+    obj={
+      Object {
+        "id": "mockId",
+        "kind": "mockKind",
+        "label": "mockLabel",
+        "muted": false,
+        "readyState": "mockReadyState",
+      }
+    }
+  />
 </Fragment>
 `;
 

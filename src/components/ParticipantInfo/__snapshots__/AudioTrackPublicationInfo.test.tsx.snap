@@ -26,6 +26,18 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
     label="Packet Loss Percentage"
     value="null%"
   />
+  <Memo(NestedObject)
+    label="Media Stream Track"
+    obj={
+      Object {
+        "id": "mockId",
+        "kind": "mockKind",
+        "label": "mockLabel",
+        "muted": false,
+        "readyState": "mockReadyState",
+      }
+    }
+  />
 </Fragment>
 `;
 
