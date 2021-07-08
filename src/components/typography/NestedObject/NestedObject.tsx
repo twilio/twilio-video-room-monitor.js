@@ -4,7 +4,6 @@ import Datum from '../Datum/Datum';
 import { Primitive } from '../../../types';
 import StatsContainer from '../StatsContainer/StatsContainer';
 import useMediaStreamTrackProperties from '../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
-import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 
 function NestedObject({ label, obj }: { label?: string; obj: Object | Primitive }) {
   if (typeof obj !== 'object' || typeof obj === 'undefined' || obj === null) {
