@@ -3,6 +3,8 @@ import { Accordion } from '../Accordion/Accordion';
 import Datum from '../Datum/Datum';
 import { Primitive } from '../../../types';
 import StatsContainer from '../StatsContainer/StatsContainer';
+import useMediaStreamTrackProperties from '../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
+import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 
 function NestedObject({ label, obj }: { label?: string; obj: Object | Primitive }) {
   if (typeof obj !== 'object' || typeof obj === 'undefined' || obj === null) {
@@ -15,6 +17,10 @@ function NestedObject({ label, obj }: { label?: string; obj: Object | Primitive 
       {Object.entries(obj).map(([key, val], i) => {
         if (typeof val === 'object' && !Array.isArray(val)) {
           // object
+          if (val instanceof MediaStreamTrack) {
+            const mediaStreamTrackProperties = useMediaStreamTrackProperties(val);
+            return <NestedObject key={i} label={key} obj={mediaStreamTrackProperties} />;
+          }
           return <NestedObject key={i} label={key} obj={val} />;
         } else {
           // primitives

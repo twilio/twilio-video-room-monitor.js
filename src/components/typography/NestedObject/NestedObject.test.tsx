@@ -4,6 +4,17 @@ import { shallow } from 'enzyme';
 
 const testObject = { outerObject: { innerObject: 'testVal' }, primitiveValue: 'foo' };
 
+Object.defineProperty(window, 'MediaStreamTrack', {
+  writable: false,
+  value: jest.fn().mockImplementation((query) => ({
+    id: '',
+    muted: false,
+    kind: '',
+    label: '',
+    readyState: '',
+  })),
+});
+
 describe('the NestedObject component', () => {
   describe('when there is no object', () => {
     it('should return a Datum component with a label when the object is undefined', () => {
