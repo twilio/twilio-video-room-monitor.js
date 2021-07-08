@@ -20,7 +20,7 @@ describe('the useMediaStreamTrackProperties hook', () => {
     const { result } = renderHook(() => useMediaStreamTrackProperties(undefined));
     expect(result.current).toStrictEqual({
       id: undefined,
-      isMuted: undefined,
+      muted: undefined,
       kind: undefined,
       label: undefined,
       readyState: undefined,
@@ -31,7 +31,7 @@ describe('the useMediaStreamTrackProperties hook', () => {
     const { result } = renderHook(() => useMediaStreamTrackProperties(mockTrack));
     expect(result.current).toStrictEqual({
       id: 'mockIdProp',
-      isMuted: 'mockMutedProp',
+      muted: 'mockMutedProp',
       kind: 'mockKindProp',
       label: 'mockLabelProp',
       readyState: 'mockReadyStateProp',
@@ -47,7 +47,7 @@ describe('the useMediaStreamTrackProperties hook', () => {
       });
       expect(result.current).toStrictEqual({
         id: 'mockIdProp',
-        isMuted: 'mockMutedProp',
+        muted: 'mockMutedProp',
         kind: 'mockKindProp',
         label: 'mockLabelProp',
         readyState: 'anotherMockReadyStateProp',
@@ -62,7 +62,7 @@ describe('the useMediaStreamTrackProperties hook', () => {
       });
       expect(result.current).toStrictEqual({
         id: 'mockIdProp',
-        isMuted: 'mockIsMutedProp',
+        muted: 'mockIsMutedProp',
         kind: 'mockKindProp',
         label: 'mockLabelProp',
         readyState: 'mockReadyStateProp',
@@ -77,7 +77,7 @@ describe('the useMediaStreamTrackProperties hook', () => {
       });
       expect(result.current).toStrictEqual({
         id: 'mockIdProp',
-        isMuted: 'mockIsNotMutedProp',
+        muted: 'mockIsNotMutedProp',
         kind: 'mockKindProp',
         label: 'mockLabelProp',
         readyState: 'mockReadyStateProp',
