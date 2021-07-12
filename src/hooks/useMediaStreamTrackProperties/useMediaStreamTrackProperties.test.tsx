@@ -87,8 +87,11 @@ describe('the useMediaStreamTrackProperties hook', () => {
 
   it('should clean up listeners on unmount', () => {
     const { unmount } = renderHook(() => useMediaStreamTrackProperties(mockTrack));
-    const remover = jest.spyOn(mockTrack, 'removeEventListener').mockImplementation(() => {});
+    const remover = jest.spyOn(mockTrack, 'removeEventListener');
     unmount();
-    expect(remover).toHaveBeenCalled();
+    expect(remover).toHaveBeenCalledTimes(3);
+    expect(remover).toHaveBeenNthCalledWith(1, 'mute', expect.any(Function));
+    expect(remover).toHaveBeenNthCalledWith(2, 'unmute', expect.any(Function));
+    expect(remover).toHaveBeenNthCalledWith(3, 'ended', expect.any(Function));
   });
 });
