@@ -3,7 +3,6 @@ import { Accordion } from '../Accordion/Accordion';
 import Datum from '../Datum/Datum';
 import { Primitive } from '../../../types';
 import StatsContainer from '../StatsContainer/StatsContainer';
-import MediaStreamTracks from '../MediaStreamTracks/MediaStreamTracks';
 
 function NestedObject({ label, obj }: { label?: string; obj: Object | Primitive }) {
   if (typeof obj !== 'object' || typeof obj === 'undefined' || obj === null) {
