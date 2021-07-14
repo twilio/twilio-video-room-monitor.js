@@ -31,7 +31,7 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
 `;
 
 exports[`the AudioTrackPublicationInfo component should render correctly 1`] = `
-<styled.div>
+<Memo(styled.div)>
   <Memo(Datum)
     label="Name"
     value="testName"
@@ -48,5 +48,5 @@ exports[`the AudioTrackPublicationInfo component should render correctly 1`] = `
     track="testTrack"
     trackSid="testSid"
   />
-</styled.div>
+</Memo(styled.div)>
 `;

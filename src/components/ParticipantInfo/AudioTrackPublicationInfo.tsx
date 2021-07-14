@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   LocalAudioTrack,
   LocalAudioTrackPublication,
@@ -12,9 +11,9 @@ import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useMediaStreamTrack from '../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
-import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
 import MediaStreamTracks from '../typography/MediaStreamTracks/MediaStreamTracks';
+import StatsContainer from '../typography/StatsContainer/StatsContainer';
 
 export const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;
@@ -53,25 +52,17 @@ export const AudioTrackInfo: React.FC<{
   );
 };
 
-const Container = styled.div`
-  &:not(:last-child) {
-    border-bottom: 1px solid ${theme.borderColor};
-    margin-bottom: 3px;
-  }
-  padding-bottom: 3px;
-`;
-
 export const AudioTrackPublicationInfo: React.FC<{
   publication: LocalAudioTrackPublication | RemoteAudioTrackPublication;
 }> = ({ publication }) => {
   const track = useTrack(publication) as LocalAudioTrack | RemoteAudioTrack | undefined;
 
   return (
-    <Container>
+    <StatsContainer>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
       {track && <AudioTrackInfo track={track} trackSid={publication.trackSid} />}
-    </Container>
+    </StatsContainer>
   );
 };
