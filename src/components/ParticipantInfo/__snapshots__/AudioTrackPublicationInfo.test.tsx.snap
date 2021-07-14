@@ -26,7 +26,7 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
     label="Packet Loss Percentage"
     value="null%"
   />
-  <Memo(MediaStreamTracks) />
+  <Memo(MediaStreamTrackInfo) />
 </Fragment>
 `;
 

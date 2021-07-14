@@ -34,7 +34,7 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
     label="Packet Loss Percentage"
     value="null%"
   />
-  <Memo(MediaStreamTracks) />
+  <Memo(MediaStreamTrackInfo) />
 </Fragment>
 `;
 

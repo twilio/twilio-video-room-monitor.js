@@ -16,7 +16,7 @@ import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUt
 import useTrack from '../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
 import Datum from '../typography/Datum/Datum';
-import MediaStreamTracks from '../typography/MediaStreamTracks/MediaStreamTracks';
+import MediaStreamTrackInfo from '../typography/MediaStreamTrackInfo/MediaStreamTrackInfo';
 import StatsContainer from '../typography/StatsContainer/StatsContainer';
 
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
@@ -58,7 +58,7 @@ export const VideoTrackInfo: React.FC<{
           <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
         </>
       )}
-      <MediaStreamTracks track={mediaStreamTrack} />
+      <MediaStreamTrackInfo track={mediaStreamTrack} />
     </>
   );
 };

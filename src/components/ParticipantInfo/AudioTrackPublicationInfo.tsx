@@ -12,7 +12,7 @@ import useMediaStreamTrack from '../../hooks/useMediaStreamTrack/useMediaStreamT
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
 import Datum from '../typography/Datum/Datum';
-import MediaStreamTracks from '../typography/MediaStreamTracks/MediaStreamTracks';
+import MediaStreamTrackInfo from '../typography/MediaStreamTrackInfo/MediaStreamTrackInfo';
 import StatsContainer from '../typography/StatsContainer/StatsContainer';
 
 export const AudioTrackInfo: React.FC<{
@@ -47,7 +47,7 @@ export const AudioTrackInfo: React.FC<{
           <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
         </>
       )}
-      <MediaStreamTracks track={mediaStreamTrack} />
+      <MediaStreamTrackInfo track={mediaStreamTrack} />
     </>
   );
 };

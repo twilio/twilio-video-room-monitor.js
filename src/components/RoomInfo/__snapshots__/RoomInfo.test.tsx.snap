@@ -121,7 +121,7 @@ exports[`The RoomInfo component should render information about the room if conn
       label="Logger Name"
       value="logger-twilio-video"
     />
-    <Memo(Tracks)
+    <Memo(ConnectionInfoTracks)
       tracks={
         Array [
           "mockTrack",
