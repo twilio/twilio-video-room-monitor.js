@@ -1,11 +1,11 @@
 import React from 'react';
-import { LocalAudioTrack, LocalDataTrack, LocalVideoTrack, Room } from 'twilio-video';
+import { LocalAudioTrack, LocalVideoTrack, Room } from 'twilio-video';
 import { Accordion } from '../Accordion/Accordion';
 import Datum from '../Datum/Datum';
-import MediaStreamTracks from '../MediaStreamTracks/MediaStreamTracks';
+import MediaStreamTrackInfo from '../MediaStreamTrackInfo/MediaStreamTrackInfo';
 import StatsContainer from '../StatsContainer/StatsContainer';
 
-function Tracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
+function ConnectionInfoTracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
   if (typeof tracks === 'undefined' || tracks === null) {
     return <Datum label="Tracks" value={tracks} />;
   }
@@ -15,7 +15,7 @@ function Tracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
         if (track instanceof MediaStreamTrack) {
           return (
             <StatsContainer key={i}>
-              <MediaStreamTracks track={track} />
+              <MediaStreamTrackInfo track={track} />
             </StatsContainer>
           );
         }
@@ -26,7 +26,7 @@ function Tracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
               <Datum label="Kind" value={kind} />
               <Datum label="Name" value={name} />
               <Datum label="ID" value={id} />
-              <MediaStreamTracks track={mediaStreamTrack} />
+              <MediaStreamTrackInfo track={mediaStreamTrack} />
             </StatsContainer>
           );
         }
@@ -47,4 +47,4 @@ function Tracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
   );
 }
 
-export default React.memo(Tracks);
+export default React.memo(ConnectionInfoTracks);

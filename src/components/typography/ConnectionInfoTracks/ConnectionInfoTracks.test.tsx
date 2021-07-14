@@ -1,5 +1,5 @@
 import React from 'react';
-import Tracks from './Tracks';
+import Tracks from './ConnectionInfoTracks';
 import { shallow } from 'enzyme';
 import { LocalVideoTrack, LocalAudioTrack, LocalDataTrack } from 'twilio-video';
 
@@ -72,7 +72,7 @@ describe('the Tracks component', () => {
           <Memo(styled.div)
             key="0"
           >
-            <Memo(MediaStreamTracks)
+            <Memo(MediaStreamTrackInfo)
               track={
                 MockMediaStreamTrack {
                   "id": "mockIdProp",
@@ -109,7 +109,7 @@ describe('the Tracks component', () => {
               label="ID"
               value="mockIdLocalAudio"
             />
-            <Memo(MediaStreamTracks)
+            <Memo(MediaStreamTrackInfo)
               track={
                 MockMediaStreamTrack {
                   "id": "mockIdProp",
@@ -146,7 +146,7 @@ describe('the Tracks component', () => {
               label="ID"
               value="mockIdLocalVideo"
             />
-            <Memo(MediaStreamTracks)
+            <Memo(MediaStreamTrackInfo)
               track={
                 MockMediaStreamTrack {
                   "id": "mockIdProp",
