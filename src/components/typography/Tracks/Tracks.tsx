@@ -30,20 +30,18 @@ function Tracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
             </StatsContainer>
           );
         }
-        if (track instanceof LocalDataTrack) {
-          const { kind, id, maxPacketLifeTime, maxRetransmits, ordered, reliable } = track;
-          return (
-            <StatsContainer key={i}>
-              <Datum label="Kind" value={kind} />
-              <Datum label="ID" value={id} />
-              <Datum label="maxPacketLifeTime" value={maxPacketLifeTime} />
-              <Datum label="maxRetransmits" value={maxRetransmits} />
-              <Datum label="Ordered" value={ordered} />
-              <Datum label="Reliable" value={reliable} />
-            </StatsContainer>
-          );
-        }
-        return null;
+        // LocalDataTrack
+        const { kind, id, maxPacketLifeTime, maxRetransmits, ordered, reliable } = track;
+        return (
+          <StatsContainer key={i}>
+            <Datum label="Kind" value={kind} />
+            <Datum label="ID" value={id} />
+            <Datum label="maxPacketLifeTime" value={maxPacketLifeTime} />
+            <Datum label="maxRetransmits" value={maxRetransmits} />
+            <Datum label="Ordered" value={ordered} />
+            <Datum label="Reliable" value={reliable} />
+          </StatsContainer>
+        );
       })}
     </Accordion>
   );
