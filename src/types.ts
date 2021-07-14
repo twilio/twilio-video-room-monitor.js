@@ -6,7 +6,8 @@ import {
   AudioCodecSettings,
   VideoCodec,
   VideoCodecSettings,
-  LocalTrack,
+  LocalDataTrack,
+  LocalAudioTrack,
 } from 'twilio-video';
 
 export type chartDatum = { x: number; y: number | null };
@@ -63,7 +64,7 @@ declare module 'twilio-video' {
       preferredAudioCodecs?: (AudioCodec | AudioCodecSettings)[];
       preferredVideoCodecs?: (VideoCodec | VideoCodecSettings)[];
       loggerName?: string;
-      tracks?: (LocalTrack | MediaStreamTrack)[];
+      tracks?: (LocalAudioTrack | LocalVideoTrack | LocalDataTrack | MediaStreamTrack)[];
       video?: boolean | CreateLocalTrackOptions;
     };
   }
