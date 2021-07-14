@@ -1,30 +1,44 @@
 import React from 'react';
 import Tracks from './Tracks';
 import { shallow } from 'enzyme';
+import { LocalVideoTrack, LocalAudioTrack, LocalDataTrack } from 'twilio-video';
 
-const mockMediaStreamTrack = {
-  id: 'mockIdProp',
-  muted: 'mockIsNotMutedProp',
-  kind: 'mockKindProp',
-  label: 'mockLabelProp',
-  readyState: 'mockReadyStateProp',
-};
-const mockLocalTrack = {
-  id: 'mockLocalId',
-  kind: 'mockLocalKind',
-  name: 'mockLocalName',
-  mediaStreamTrack: mockMediaStreamTrack,
-};
+class MockMediaStreamTrack {
+  id = 'mockIdProp';
+  muted = 'mockIsNotMutedProp';
+  kind = 'mockKindProp';
+  label = 'mockLabelProp';
+  readyState = 'mockReadyStateProp';
+}
+
+const mockMediaStreamTrack = new MockMediaStreamTrack();
+
+jest.mock('twilio-video', () => ({
+  LocalVideoTrack: class MockLocalVideoTrack {
+    kind = 'mockKindLocalVideo';
+    name = 'mockNameLocalVideo';
+    id = 'mockIdLocalVideo';
+    mediaStreamTrack = new MockMediaStreamTrack();
+  },
+  LocalAudioTrack: class MockLocalAudioTrack {
+    kind = 'mockKindLocalAudio';
+    name = 'mockNameLocalAudio';
+    id = 'mockIdLocalAudio';
+    mediaStreamTrack = new MockMediaStreamTrack();
+  },
+  LocalDataTrack: class MockLocalDataTrack {
+    kind = 'mockKindLocal';
+    name = 'mockName';
+    id = 'mockIdLocal';
+    maxPacketLifeTime = 'mockMaxPacketLifeTime';
+    maxRetransmits = 'mockMaxRetransmits';
+    ordered = 'mockOrdered';
+    reliable = 'mockReliable';
+  },
+}));
 
 Object.defineProperty(window, 'MediaStreamTrack', {
-  writable: false,
-  value: jest.fn().mockImplementation((query) => ({
-    id: '',
-    muted: false,
-    kind: '',
-    label: '',
-    readyState: '',
-  })),
+  value: MockMediaStreamTrack,
 });
 
 describe('the Tracks component', () => {
@@ -49,50 +63,18 @@ describe('the Tracks component', () => {
   });
   describe('when there are tracks in the array', () => {
     it('should return a MediaStreamTrack component for MediaStreamTrack objects', () => {
+      // @ts-ignore
       const wrapper = shallow(<Tracks tracks={[mockMediaStreamTrack]} />);
       expect(wrapper).toMatchInlineSnapshot(`
         <Accordion
           label="Tracks"
         >
-          <Memo(styled.div)>
-            <Memo(Datum)
-              label="Kind"
-              value="mockKindProp"
-            />
-            <Memo(Datum)
-              label="Name"
-            />
-            <Memo(Datum)
-              label="ID"
-              value="mockIdProp"
-            />
-            <Memo(MediaStreamTracks) />
-          </Memo(styled.div)>
-        </Accordion>
-      `);
-    });
-    it('should return a container with properties for LocalTrack objects', () => {
-      const wrapper = shallow(<Tracks tracks={[mockLocalTrack]} />);
-      expect(wrapper).toMatchInlineSnapshot(`
-        <Accordion
-          label="Tracks"
-        >
-          <Memo(styled.div)>
-            <Memo(Datum)
-              label="Kind"
-              value="mockLocalKind"
-            />
-            <Memo(Datum)
-              label="Name"
-              value="mockLocalName"
-            />
-            <Memo(Datum)
-              label="ID"
-              value="mockLocalId"
-            />
+          <Memo(styled.div)
+            key="0"
+          >
             <Memo(MediaStreamTracks)
               track={
-                Object {
+                MockMediaStreamTrack {
                   "id": "mockIdProp",
                   "kind": "mockKindProp",
                   "label": "mockLabelProp",
@@ -100,6 +82,117 @@ describe('the Tracks component', () => {
                   "readyState": "mockReadyStateProp",
                 }
               }
+            />
+          </Memo(styled.div)>
+        </Accordion>
+      `);
+    });
+    it('should return a container with properties for LocalAudioTrack objects', () => {
+      // @ts-ignore
+      const wrapper = shallow(<Tracks tracks={[new LocalAudioTrack()]} />);
+      expect(wrapper).toMatchInlineSnapshot(`
+        <Accordion
+          label="Tracks"
+        >
+          <Memo(styled.div)
+            key="0"
+          >
+            <Memo(Datum)
+              label="Kind"
+              value="mockKindLocalAudio"
+            />
+            <Memo(Datum)
+              label="Name"
+              value="mockNameLocalAudio"
+            />
+            <Memo(Datum)
+              label="ID"
+              value="mockIdLocalAudio"
+            />
+            <Memo(MediaStreamTracks)
+              track={
+                MockMediaStreamTrack {
+                  "id": "mockIdProp",
+                  "kind": "mockKindProp",
+                  "label": "mockLabelProp",
+                  "muted": "mockIsNotMutedProp",
+                  "readyState": "mockReadyStateProp",
+                }
+              }
+            />
+          </Memo(styled.div)>
+        </Accordion>
+      `);
+    });
+    it('should return a container with properties for LocalVideoTrack objects', () => {
+      // @ts-ignore
+      const wrapper = shallow(<Tracks tracks={[new LocalVideoTrack()]} />);
+      expect(wrapper).toMatchInlineSnapshot(`
+        <Accordion
+          label="Tracks"
+        >
+          <Memo(styled.div)
+            key="0"
+          >
+            <Memo(Datum)
+              label="Kind"
+              value="mockKindLocalVideo"
+            />
+            <Memo(Datum)
+              label="Name"
+              value="mockNameLocalVideo"
+            />
+            <Memo(Datum)
+              label="ID"
+              value="mockIdLocalVideo"
+            />
+            <Memo(MediaStreamTracks)
+              track={
+                MockMediaStreamTrack {
+                  "id": "mockIdProp",
+                  "kind": "mockKindProp",
+                  "label": "mockLabelProp",
+                  "muted": "mockIsNotMutedProp",
+                  "readyState": "mockReadyStateProp",
+                }
+              }
+            />
+          </Memo(styled.div)>
+        </Accordion>
+      `);
+    });
+    it('should return a container with properties for LocalDataTrack objects', () => {
+      const wrapper = shallow(<Tracks tracks={[new LocalDataTrack()]} />);
+      expect(wrapper).toMatchInlineSnapshot(`
+        <Accordion
+          label="Tracks"
+        >
+          <Memo(styled.div)
+            key="0"
+          >
+            <Memo(Datum)
+              label="Kind"
+              value="mockKindLocal"
+            />
+            <Memo(Datum)
+              label="ID"
+              value="mockIdLocal"
+            />
+            <Memo(Datum)
+              label="maxPacketLifeTime"
+              value="mockMaxPacketLifeTime"
+            />
+            <Memo(Datum)
+              label="maxRetransmits"
+              value="mockMaxRetransmits"
+            />
+            <Memo(Datum)
+              label="Ordered"
+              value="mockOrdered"
+            />
+            <Memo(Datum)
+              label="Reliable"
+              value="mockReliable"
             />
           </Memo(styled.div)>
         </Accordion>
