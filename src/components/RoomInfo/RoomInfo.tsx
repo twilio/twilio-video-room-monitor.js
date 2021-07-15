@@ -9,7 +9,7 @@ import useStats from '../../hooks/useStats/useStats';
 import { Accordion } from '../typography/Accordion/Accordion';
 import NestedObject from '../typography/NestedObject/NestedObject';
 import ArrayData from '../typography/ArrayData/ArrayData';
-import ConnectionInfoTracks from '../typography/ConnectionInfoTracks/ConnectionInfoTracks';
+import ConnectionOptionTracks from '../typography/ConnectionOptionTracks/ConnectionOptionTracks';
 
 export default function RoomInfo() {
   const room = useRoom();
@@ -75,7 +75,7 @@ export default function RoomInfo() {
             <ArrayData label="Preferred Audio Codecs" arr={preferredAudioCodecs} />
             <ArrayData label="Preferred Video Codecs" arr={preferredVideoCodecs} />
             <Datum label="Logger Name" value={loggerName} />
-            <ConnectionInfoTracks tracks={tracks} />
+            <ConnectionOptionTracks tracks={tracks} />
             <NestedObject label="Video" obj={video} />
           </Accordion>
         </>

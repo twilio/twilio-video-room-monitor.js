@@ -5,7 +5,7 @@ import Datum from '../Datum/Datum';
 import MediaStreamTrackInfo from '../MediaStreamTrackInfo/MediaStreamTrackInfo';
 import StatsContainer from '../StatsContainer/StatsContainer';
 
-function ConnectionInfoTracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
+function ConnectionOptionTracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
   if (typeof tracks === 'undefined' || tracks === null) {
     return <Datum label="Tracks" value={tracks} />;
   }
@@ -47,4 +47,4 @@ function ConnectionInfoTracks({ tracks }: { tracks: Room['_options']['tracks'] |
   );
 }
 
-export default React.memo(ConnectionInfoTracks);
+export default React.memo(ConnectionOptionTracks);

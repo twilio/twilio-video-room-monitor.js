@@ -1,5 +1,5 @@
 import React from 'react';
-import Tracks from './ConnectionInfoTracks';
+import Tracks from './ConnectionOptionTracks';
 import { shallow } from 'enzyme';
 import { LocalVideoTrack, LocalAudioTrack, LocalDataTrack } from 'twilio-video';
 
