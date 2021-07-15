@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   LocalAudioTrack,
   LocalAudioTrackPublication,
@@ -9,10 +8,12 @@ import {
   RemoteAudioTrackStats,
 } from 'twilio-video';
 import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
+import useMediaStreamTrack from '../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
 import useTrack from '../../hooks/useTrack/useTrack';
-import { theme } from '../theme';
 import Datum from '../typography/Datum/Datum';
+import MediaStreamTrackInfo from '../typography/MediaStreamTrackInfo/MediaStreamTrackInfo';
+import StatsContainer from '../typography/StatsContainer/StatsContainer';
 
 export const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;
@@ -21,6 +22,7 @@ export const AudioTrackInfo: React.FC<{
   const isEnabled = useIsTrackEnabled(track);
   const trackBandwidth = useTrackBandwidth(trackSid);
   const trackData = useTrackData(trackSid) as LocalAudioTrackStats | RemoteAudioTrackStats | null;
+  const mediaStreamTrack = useMediaStreamTrack(track);
 
   let lossPercentage: string | null;
 
@@ -45,17 +47,10 @@ export const AudioTrackInfo: React.FC<{
           <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
         </>
       )}
+      <MediaStreamTrackInfo track={mediaStreamTrack} />
     </>
   );
 };
-
-const Container = styled.div`
-  &:not(:last-child) {
-    border-bottom: 1px solid ${theme.borderColor};
-    margin-bottom: 3px;
-  }
-  padding-bottom: 3px;
-`;
 
 export const AudioTrackPublicationInfo: React.FC<{
   publication: LocalAudioTrackPublication | RemoteAudioTrackPublication;
@@ -63,11 +58,11 @@ export const AudioTrackPublicationInfo: React.FC<{
   const track = useTrack(publication) as LocalAudioTrack | RemoteAudioTrack | undefined;
 
   return (
-    <Container>
+    <StatsContainer>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={String(!!track)} />
       {track && <AudioTrackInfo track={track} trackSid={publication.trackSid} />}
-    </Container>
+    </StatsContainer>
   );
 };
