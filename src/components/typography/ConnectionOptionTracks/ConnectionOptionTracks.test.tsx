@@ -170,29 +170,18 @@ describe('the Tracks component', () => {
           <Memo(styled.div)
             key="0"
           >
-            <Memo(Datum)
-              label="Kind"
-              value="mockKindLocal"
-            />
-            <Memo(Datum)
-              label="ID"
-              value="mockIdLocal"
-            />
-            <Memo(Datum)
-              label="maxPacketLifeTime"
-              value="mockMaxPacketLifeTime"
-            />
-            <Memo(Datum)
-              label="maxRetransmits"
-              value="mockMaxRetransmits"
-            />
-            <Memo(Datum)
-              label="Ordered"
-              value="mockOrdered"
-            />
-            <Memo(Datum)
-              label="Reliable"
-              value="mockReliable"
+            <Memo(Tracks)
+              track={
+                MockLocalDataTrack {
+                  "id": "mockIdLocal",
+                  "kind": "mockKindLocal",
+                  "maxPacketLifeTime": "mockMaxPacketLifeTime",
+                  "maxRetransmits": "mockMaxRetransmits",
+                  "name": "mockName",
+                  "ordered": "mockOrdered",
+                  "reliable": "mockReliable",
+                }
+              }
             />
           </Memo(styled.div)>
         </Accordion>
