@@ -45,6 +45,10 @@ declare module 'twilio-video' {
     packetsSent?: undefined;
   }
 
+  interface RemoteDataTrack {
+    isSwitchedOff: boolean;
+  }
+
   interface Room {
     _options: {
       audio?: boolean | CreateLocalTrackOptions;
