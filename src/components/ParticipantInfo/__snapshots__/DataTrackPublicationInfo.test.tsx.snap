@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the DataTrackInfo component should render correctly if an data track is present 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="isEnabled"
+    value="true"
+  />
+  <Memo(Datum)
+    label="isSwitchedOff"
+    value="true"
+  />
+  <Memo(Datum)
+    label="Priority"
+  />
+  <Memo(Tracks)
+    track={Object {}}
+  />
+</Fragment>
+`;
+
+exports[`the DataTrackPublicationInfo component should render correctly 1`] = `
+<Memo(styled.div)>
+  <Memo(Datum)
+    label="Kind"
+  />
+  <Memo(Datum)
+    label="isSubscribed"
+    value="true"
+  />
+  <DataTrackInfo
+    track="testTrack"
+  />
+</Memo(styled.div)>
+`;
