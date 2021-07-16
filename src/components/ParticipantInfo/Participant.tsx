@@ -7,6 +7,8 @@ import {
   RemoteVideoTrackPublication,
   LocalAudioTrackPublication,
   RemoteAudioTrackPublication,
+  LocalDataTrackPublication,
+  RemoteDataTrackPublication,
 } from 'twilio-video';
 import useParticipantNetworkQualityLevel from '../../hooks/useParticipantNetworkQualityLevel/useParticipantNetworkQualityLevel';
 import useParticipantIsReconnecting from '../../hooks/useParticipantIsReconnecting/useParticipantIsReconnecting';
@@ -14,6 +16,7 @@ import usePublications from '../../hooks/usePublications/usePublications';
 
 import { VideoTrackPublicationInfo } from './VideoTrackPublicationInfo';
 import { AudioTrackPublicationInfo } from './AudioTrackPublicationInfo';
+import { DataTrackPublicationInfo } from './DataTrackPublicationInfo';
 
 export const Participant = ({ participant }: { participant: ParticipantImpl }) => {
   const networkQualityLevel = useParticipantNetworkQualityLevel(participant);
@@ -30,7 +33,13 @@ export const Participant = ({ participant }: { participant: ParticipantImpl }) =
       <Datum label="SID" value={participant.sid} />
       <Datum label="isReconnecting" value={String(isReconnecting)} />
       <Datum label="networkQualityLevel" value={String(networkQualityLevel)} />
-      <Accordion label={`Data Tracks (${dataTrackPublications.length})`}>{/* TODO */}</Accordion>
+      <Accordion label={`Data Tracks (${dataTrackPublications.length})`}>
+        {dataTrackPublications.map((dataTrackPublication) => (
+          <DataTrackPublicationInfo
+            publication={dataTrackPublication as LocalDataTrackPublication | RemoteDataTrackPublication}
+          />
+        ))}
+      </Accordion>
       <Accordion label={`Audio Tracks (${audioTrackPublications.length})`}>
         {audioTrackPublications.map((audioTrackPublication) => (
           <AudioTrackPublicationInfo
