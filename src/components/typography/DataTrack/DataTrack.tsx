@@ -7,7 +7,7 @@ function Tracks({ track }: { track: LocalDataTrack | RemoteDataTrack }) {
   const { kind, maxPacketLifeTime, maxRetransmits, ordered, reliable } = track;
 
   let idProp;
-  if (track instanceof LocalDataTrack) {
+  if (track.isEnabled === undefined) {
     idProp = { label: 'ID', value: track.id };
   } else {
     idProp = { label: 'SID', value: track.sid };
