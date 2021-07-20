@@ -6,7 +6,6 @@ import {
   AudioCodecSettings,
   VideoCodec,
   VideoCodecSettings,
-  LocalDataTrack,
   LocalAudioTrack,
 } from 'twilio-video';
 
@@ -33,6 +32,11 @@ declare module 'twilio-video' {
   interface LocalVideoTrackStats {
     bytesReceived?: undefined;
     packetsReceived?: undefined;
+  }
+
+  interface LocalDataTrack {
+    isEnabled: undefined;
+    isSwitchedOff: undefined;
   }
 
   interface RemoteAudioTrackStats {
