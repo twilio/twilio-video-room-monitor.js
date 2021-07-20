@@ -1,5 +1,5 @@
 import React from 'react';
-import { LocalAudioTrack, LocalVideoTrack, Room } from 'twilio-video';
+import { Room } from 'twilio-video';
 import { Accordion } from '../Accordion/Accordion';
 import Datum from '../Datum/Datum';
 import MediaStreamTrackInfo from '../MediaStreamTrackInfo/MediaStreamTrackInfo';
@@ -20,7 +20,7 @@ function ConnectionOptionTracks({ tracks }: { tracks: Room['_options']['tracks']
             </StatsContainer>
           );
         }
-        if (track instanceof LocalAudioTrack || track instanceof LocalVideoTrack) {
+        if (track.kind === 'audio' || track.kind === 'video') {
           const { kind, name, id, mediaStreamTrack } = track;
           return (
             <StatsContainer key={i}>

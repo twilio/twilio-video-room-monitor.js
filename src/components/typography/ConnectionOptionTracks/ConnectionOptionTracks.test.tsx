@@ -1,5 +1,5 @@
 import React from 'react';
-import Tracks from './ConnectionOptionTracks';
+import ConnectionOptionTracks from './ConnectionOptionTracks';
 import { shallow } from 'enzyme';
 import { LocalVideoTrack, LocalAudioTrack, LocalDataTrack } from 'twilio-video';
 
@@ -15,19 +15,19 @@ const mockMediaStreamTrack = new MockMediaStreamTrack();
 
 jest.mock('twilio-video', () => ({
   LocalVideoTrack: class MockLocalVideoTrack {
-    kind = 'mockKindLocalVideo';
+    kind = 'video';
     name = 'mockNameLocalVideo';
     id = 'mockIdLocalVideo';
     mediaStreamTrack = new MockMediaStreamTrack();
   },
   LocalAudioTrack: class MockLocalAudioTrack {
-    kind = 'mockKindLocalAudio';
+    kind = 'audio';
     name = 'mockNameLocalAudio';
     id = 'mockIdLocalAudio';
     mediaStreamTrack = new MockMediaStreamTrack();
   },
   LocalDataTrack: class MockLocalDataTrack {
-    kind = 'mockKindLocal';
+    kind = 'data';
     name = 'mockName';
     id = 'mockIdLocal';
     maxPacketLifeTime = 'mockMaxPacketLifeTime';
@@ -41,10 +41,10 @@ Object.defineProperty(window, 'MediaStreamTrack', {
   value: MockMediaStreamTrack,
 });
 
-describe('the Tracks component', () => {
+describe('the ConnectionOptionTracks component', () => {
   describe('when there is no track', () => {
     it('should return a Datum component with a label when the track is undefined', () => {
-      const wrapper = shallow(<Tracks tracks={undefined} />);
+      const wrapper = shallow(<ConnectionOptionTracks tracks={undefined} />);
       expect(wrapper).toMatchInlineSnapshot(`
                 <Memo(Datum)
                   label="Tracks"
@@ -52,7 +52,7 @@ describe('the Tracks component', () => {
               `);
     });
     it('should return the Datum component with a null value when the track is null', () => {
-      const wrapper = shallow(<Tracks tracks={null} />);
+      const wrapper = shallow(<ConnectionOptionTracks tracks={null} />);
       expect(wrapper).toMatchInlineSnapshot(`
                 <Memo(Datum)
                   label="Tracks"
@@ -64,7 +64,7 @@ describe('the Tracks component', () => {
   describe('when there are tracks in the array', () => {
     it('should return a MediaStreamTrack component for MediaStreamTrack objects', () => {
       // @ts-ignore
-      const wrapper = shallow(<Tracks tracks={[mockMediaStreamTrack]} />);
+      const wrapper = shallow(<ConnectionOptionTracks tracks={[mockMediaStreamTrack]} />);
       expect(wrapper).toMatchInlineSnapshot(`
         <Accordion
           label="Tracks"
@@ -89,7 +89,7 @@ describe('the Tracks component', () => {
     });
     it('should return a container with properties for LocalAudioTrack objects', () => {
       // @ts-ignore
-      const wrapper = shallow(<Tracks tracks={[new LocalAudioTrack()]} />);
+      const wrapper = shallow(<ConnectionOptionTracks tracks={[new LocalAudioTrack()]} />);
       expect(wrapper).toMatchInlineSnapshot(`
         <Accordion
           label="Tracks"
@@ -99,7 +99,7 @@ describe('the Tracks component', () => {
           >
             <Memo(Datum)
               label="Kind"
-              value="mockKindLocalAudio"
+              value="audio"
             />
             <Memo(Datum)
               label="Name"
@@ -126,7 +126,7 @@ describe('the Tracks component', () => {
     });
     it('should return a container with properties for LocalVideoTrack objects', () => {
       // @ts-ignore
-      const wrapper = shallow(<Tracks tracks={[new LocalVideoTrack()]} />);
+      const wrapper = shallow(<ConnectionOptionTracks tracks={[new LocalVideoTrack()]} />);
       expect(wrapper).toMatchInlineSnapshot(`
         <Accordion
           label="Tracks"
@@ -136,7 +136,7 @@ describe('the Tracks component', () => {
           >
             <Memo(Datum)
               label="Kind"
-              value="mockKindLocalVideo"
+              value="video"
             />
             <Memo(Datum)
               label="Name"
@@ -162,7 +162,7 @@ describe('the Tracks component', () => {
       `);
     });
     it('should return a container with properties for LocalDataTrack objects', () => {
-      const wrapper = shallow(<Tracks tracks={[new LocalDataTrack()]} />);
+      const wrapper = shallow(<ConnectionOptionTracks tracks={[new LocalDataTrack()]} />);
       expect(wrapper).toMatchInlineSnapshot(`
         <Accordion
           label="Tracks"
@@ -174,7 +174,7 @@ describe('the Tracks component', () => {
               track={
                 MockLocalDataTrack {
                   "id": "mockIdLocal",
-                  "kind": "mockKindLocal",
+                  "kind": "data",
                   "maxPacketLifeTime": "mockMaxPacketLifeTime",
                   "maxRetransmits": "mockMaxRetransmits",
                   "name": "mockName",
