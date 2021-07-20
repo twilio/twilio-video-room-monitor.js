@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the DataTrackInfo component should render correctly if an data track is present 1`] = `
+exports[`the DataTrackInfo component for LocalDataTrack objects should render correctly if a data track is present 1`] = `
+<Memo(Tracks)
+  track={Object {}}
+/>
+`;
+
+exports[`the DataTrackInfo component for RemoteDataTrack objects should render correctly if a data track is present 1`] = `
 <Fragment>
   <Memo(Datum)
     label="isEnabled"
@@ -14,7 +20,12 @@ exports[`the DataTrackInfo component should render correctly if an data track is
     label="Priority"
   />
   <Memo(Tracks)
-    track={Object {}}
+    track={
+      Object {
+        "isEnabled": true,
+        "isSwitchedOff": false,
+      }
+    }
   />
 </Fragment>
 `;

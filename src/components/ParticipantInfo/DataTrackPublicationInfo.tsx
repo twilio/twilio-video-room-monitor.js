@@ -10,12 +10,12 @@ import StatsContainer from '../typography/StatsContainer/StatsContainer';
 export const DataTrackInfo: React.FC<{
   track: LocalDataTrack | RemoteDataTrack;
 }> = ({ track }) => {
-  if (track instanceof LocalDataTrack) {
-    return <DataTrack track={track} />;
-  }
-
   const isEnabled = useIsTrackEnabled(track);
   const isSwitchedOff = useIsTrackSwitchedOff(track);
+
+  if (track.isEnabled === undefined || track.isSwitchedOff === undefined) {
+    return <DataTrack track={track} />;
+  }
 
   return (
     <>
