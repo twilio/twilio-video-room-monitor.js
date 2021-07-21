@@ -17,9 +17,9 @@ describe('the DataTrackInfo component', () => {
       const wrapper = shallow(<DataTrackInfo track={{} as any} />);
       expect(wrapper).toMatchSnapshot();
     });
-    it('should render correctly if there is no data track data', () => {
+    it('should render correctly if there is no DataTrack data', () => {
       const wrapper = shallow(<DataTrackInfo track={{} as any} />);
-      expect(wrapper.find({ isEnabled: true }).exists()).toBeFalsy();
+      expect(wrapper.find({ isEnabled: true }).exists()).toBe(false);
     });
   });
   describe('for RemoteDataTrack objects', () => {
@@ -39,6 +39,6 @@ describe('the DataTrackPublicationInfo component', () => {
   it('should not render the DataTrackInfo component if an data track is not present', () => {
     mockUseTrack.mockImplementationOnce(() => null);
     const wrapper = shallow(<DataTrackPublicationInfo publication={{ trackName: 'testName' } as any} />);
-    expect(wrapper.find(DataTrackInfo).exists()).toBeFalsy();
+    expect(wrapper.find(DataTrackInfo).exists()).toBe(false);
   });
 });
