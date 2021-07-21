@@ -6,12 +6,7 @@ import Datum from '../Datum/Datum';
 function Tracks({ track }: { track: LocalDataTrack | RemoteDataTrack }) {
   const { kind, maxPacketLifeTime, maxRetransmits, ordered, reliable } = track;
 
-  let idProp;
-  if (track.isEnabled === undefined) {
-    idProp = { label: 'ID', value: track.id };
-  } else {
-    idProp = { label: 'SID', value: track.sid };
-  }
+  const idProp = track.isEnabled === undefined ? { label: 'ID', value: track.id } : { label: 'SID', value: track.sid };
 
   return (
     <>
