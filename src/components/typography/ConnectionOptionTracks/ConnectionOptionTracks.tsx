@@ -1,9 +1,10 @@
 import React from 'react';
-import { LocalAudioTrack, LocalVideoTrack, Room } from 'twilio-video';
+import { Room } from 'twilio-video';
 import { Accordion } from '../Accordion/Accordion';
 import Datum from '../Datum/Datum';
 import MediaStreamTrackInfo from '../MediaStreamTrackInfo/MediaStreamTrackInfo';
 import StatsContainer from '../StatsContainer/StatsContainer';
+import DataTrack from '../DataTrack/DataTrack';
 
 function ConnectionOptionTracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {
   if (typeof tracks === 'undefined' || tracks === null) {
@@ -19,7 +20,7 @@ function ConnectionOptionTracks({ tracks }: { tracks: Room['_options']['tracks']
             </StatsContainer>
           );
         }
-        if (track instanceof LocalAudioTrack || track instanceof LocalVideoTrack) {
+        if (track.kind === 'audio' || track.kind === 'video') {
           const { kind, name, id, mediaStreamTrack } = track;
           return (
             <StatsContainer key={i}>
@@ -31,15 +32,9 @@ function ConnectionOptionTracks({ tracks }: { tracks: Room['_options']['tracks']
           );
         }
         // LocalDataTrack
-        const { kind, id, maxPacketLifeTime, maxRetransmits, ordered, reliable } = track;
         return (
           <StatsContainer key={i}>
-            <Datum label="Kind" value={kind} />
-            <Datum label="ID" value={id} />
-            <Datum label="maxPacketLifeTime" value={maxPacketLifeTime} />
-            <Datum label="maxRetransmits" value={maxRetransmits} />
-            <Datum label="Ordered" value={ordered} />
-            <Datum label="Reliable" value={reliable} />
+            <DataTrack track={track} />
           </StatsContainer>
         );
       })}

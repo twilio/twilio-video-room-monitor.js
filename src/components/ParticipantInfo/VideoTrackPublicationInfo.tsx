@@ -47,7 +47,7 @@ export const VideoTrackInfo: React.FC<{
   return (
     <>
       <Datum label="Dimensions" value={getDimensionString(dimensions)} />
-      <Datum label="isSwitchedOff" value={String(isSwitchedOff)} />
+      {isSwitchedOff !== undefined && <Datum label="isSwitchedOff" value={String(isSwitchedOff)} />}
       <Datum label="isEnabled" value={String(isEnabled)} />
       <Datum label="Bandwidth" value={String(trackBandwidth?.toLocaleString()) + 'kbps'} />
       {trackData && (
