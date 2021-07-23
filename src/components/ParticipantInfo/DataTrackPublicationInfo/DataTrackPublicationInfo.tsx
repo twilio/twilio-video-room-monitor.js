@@ -1,11 +1,11 @@
 import React from 'react';
 import { LocalDataTrack, LocalDataTrackPublication, RemoteDataTrack, RemoteDataTrackPublication } from 'twilio-video';
-import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
-import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
-import useTrack from '../../hooks/useTrack/useTrack';
-import DataTrack from '../typography/DataTrack/DataTrack';
-import Datum from '../typography/Datum/Datum';
-import StatsContainer from '../typography/StatsContainer/StatsContainer';
+import useIsTrackEnabled from '../../../hooks/useIsTrackEnabled/useIsTrackEnabled';
+import useIsTrackSwitchedOff from '../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
+import useTrack from '../../../hooks/useTrack/useTrack';
+import DataTrack from '../../typography/trackInformation/DataTrack/DataTrack';
+import Datum from '../../typography/shared/Datum/Datum';
+import StatsContainer from '../../typography/shared/StatsContainer/StatsContainer';
 
 export const DataTrackInfo: React.FC<{
   track: LocalDataTrack | RemoteDataTrack;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { DataTrackPublicationInfo, DataTrackInfo } from './DataTrackPublicationInfo';
-import useTrack from '../../hooks/useTrack/useTrack';
+import useTrack from '../../../hooks/useTrack/useTrack';
 
-jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
-jest.mock('../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => true);
-jest.mock('../../hooks/useTrack/useTrack');
+jest.mock('../../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
+jest.mock('../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => true);
+jest.mock('../../../hooks/useTrack/useTrack');
 
 const mockUseTrack = useTrack as jest.Mock<any>;
 
