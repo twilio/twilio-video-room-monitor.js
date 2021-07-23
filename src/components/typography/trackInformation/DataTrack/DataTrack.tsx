@@ -1,7 +1,7 @@
 import React from 'react';
 import { LocalDataTrack, RemoteDataTrack } from 'twilio-video';
 
-import Datum from '../Datum/Datum';
+import Datum from '../../shared/Datum/Datum';
 
 function Tracks({ track }: { track: LocalDataTrack | RemoteDataTrack }) {
   const { kind, maxPacketLifeTime, maxRetransmits, ordered, reliable } = track;
