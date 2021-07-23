@@ -11,9 +11,9 @@ import useIsTrackEnabled from '../../../hooks/useIsTrackEnabled/useIsTrackEnable
 import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
 import useTrack from '../../../hooks/useTrack/useTrack';
-import Datum from '../../typography/shared/Datum/Datum';
+import Datum from '../../typography/common/Datum/Datum';
 import MediaStreamTrackInfo from '../../typography/trackInformation/MediaStreamTrackInfo/MediaStreamTrackInfo';
-import StatsContainer from '../../typography/shared/StatsContainer/StatsContainer';
+import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
 
 export const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;

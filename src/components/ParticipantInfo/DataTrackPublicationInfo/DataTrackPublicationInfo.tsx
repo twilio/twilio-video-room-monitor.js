@@ -4,8 +4,8 @@ import useIsTrackEnabled from '../../../hooks/useIsTrackEnabled/useIsTrackEnable
 import useIsTrackSwitchedOff from '../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import useTrack from '../../../hooks/useTrack/useTrack';
 import DataTrack from '../../typography/trackInformation/DataTrack/DataTrack';
-import Datum from '../../typography/shared/Datum/Datum';
-import StatsContainer from '../../typography/shared/StatsContainer/StatsContainer';
+import Datum from '../../typography/common/Datum/Datum';
+import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
 
 export const DataTrackInfo: React.FC<{
   track: LocalDataTrack | RemoteDataTrack;

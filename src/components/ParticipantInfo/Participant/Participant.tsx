@@ -1,6 +1,6 @@
 import React from 'react';
-import { Accordion } from '../../typography/shared/Accordion/Accordion';
-import Datum from '../../typography/shared/Datum/Datum';
+import { Accordion } from '../../typography/common/Accordion/Accordion';
+import Datum from '../../typography/common/Datum/Datum';
 import {
   Participant as ParticipantImpl,
   LocalVideoTrackPublication,

@@ -15,9 +15,9 @@ import usePublishPriority from '../../../hooks/usePublishPriority/usePublishPrio
 import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
 import useTrack from '../../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
-import Datum from '../../typography/shared/Datum/Datum';
+import Datum from '../../typography/common/Datum/Datum';
 import MediaStreamTrackInfo from '../../typography/trackInformation/MediaStreamTrackInfo/MediaStreamTrackInfo';
-import StatsContainer from '../../typography/shared/StatsContainer/StatsContainer';
+import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
 
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
   dimensions ? `${dimensions.width} x ${dimensions.height}` : 'undefined';
