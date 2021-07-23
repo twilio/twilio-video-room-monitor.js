@@ -4,7 +4,7 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
 <Fragment>
   <Memo(Datum)
     label="isEnabled"
-    value="true"
+    value={true}
   />
   <Memo(Datum)
     label="Bandwidth"
@@ -16,11 +16,11 @@ exports[`the AudioTrackInfo component should render correctly if an audio track 
   />
   <Memo(Datum)
     label="Jitter"
-    value="2"
+    value={2}
   />
   <Memo(Datum)
     label="Packets Lost"
-    value="7"
+    value={7}
   />
   <Memo(Datum)
     label="Packet Loss Percentage"
@@ -42,7 +42,7 @@ exports[`the AudioTrackPublicationInfo component should render correctly 1`] = `
   />
   <Memo(Datum)
     label="isSubscribed"
-    value="true"
+    value={true}
   />
   <AudioTrackInfo
     track="testTrack"

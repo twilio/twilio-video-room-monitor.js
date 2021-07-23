@@ -47,15 +47,15 @@ export const VideoTrackInfo: React.FC<{
   return (
     <>
       <Datum label="Dimensions" value={getDimensionString(dimensions)} />
-      {isSwitchedOff !== undefined && <Datum label="isSwitchedOff" value={String(isSwitchedOff)} />}
-      <Datum label="isEnabled" value={String(isEnabled)} />
-      <Datum label="Bandwidth" value={String(trackBandwidth?.toLocaleString()) + 'kbps'} />
+      {isSwitchedOff !== undefined && <Datum label="isSwitchedOff" value={isSwitchedOff} />}
+      <Datum label="isEnabled" value={isEnabled} />
+      <Datum label="Bandwidth" value={trackBandwidth?.toLocaleString() + 'kbps'} />
       {trackData && (
         <>
-          <Datum label="Codec" value={String(trackData.codec)} />
-          <Datum label="Framerate" value={String(trackData?.frameRate)} />
-          <Datum label="Packets Lost" value={String(trackData?.packetsLost)} />
-          <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
+          <Datum label="Codec" value={trackData.codec} />
+          <Datum label="Framerate" value={trackData?.frameRate} />
+          <Datum label="Packets Lost" value={trackData?.packetsLost} />
+          <Datum label="Packet Loss Percentage" value={lossPercentage! + '%'} />
         </>
       )}
       <MediaStreamTrackInfo track={mediaStreamTrack} />
@@ -73,8 +73,8 @@ export const VideoTrackPublicationInfo: React.FC<{
     <StatsContainer>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
-      <Datum label="isSubscribed" value={String(!!track)} />
-      <Datum label="publishPriority" value={String(publishPriority)} />
+      <Datum label="isSubscribed" value={!!track} />
+      <Datum label="publishPriority" value={publishPriority} />
       {track && <VideoTrackInfo track={track} trackSid={publication.trackSid} />}
     </StatsContainer>
   );

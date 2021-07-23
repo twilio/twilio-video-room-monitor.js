@@ -37,14 +37,14 @@ export const AudioTrackInfo: React.FC<{
 
   return (
     <>
-      <Datum label="isEnabled" value={String(isEnabled)} />
-      <Datum label="Bandwidth" value={String(trackBandwidth?.toLocaleString()) + 'kbps'} />
+      <Datum label="isEnabled" value={isEnabled} />
+      <Datum label="Bandwidth" value={trackBandwidth?.toLocaleString() + 'kbps'} />
       {trackData && (
         <>
-          <Datum label="Codec" value={String(trackData.codec)} />
-          <Datum label="Jitter" value={String(trackData.jitter)} />
-          <Datum label="Packets Lost" value={String(trackData.packetsLost)} />
-          <Datum label="Packet Loss Percentage" value={String(lossPercentage!) + '%'} />
+          <Datum label="Codec" value={trackData.codec} />
+          <Datum label="Jitter" value={trackData.jitter} />
+          <Datum label="Packets Lost" value={trackData.packetsLost} />
+          <Datum label="Packet Loss Percentage" value={lossPercentage! + '%'} />
         </>
       )}
       <MediaStreamTrackInfo track={mediaStreamTrack} />
@@ -61,7 +61,7 @@ export const AudioTrackPublicationInfo: React.FC<{
     <StatsContainer>
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
-      <Datum label="isSubscribed" value={String(!!track)} />
+      <Datum label="isSubscribed" value={!!track} />
       {track && <AudioTrackInfo track={track} trackSid={publication.trackSid} />}
     </StatsContainer>
   );

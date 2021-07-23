@@ -10,11 +10,11 @@ exports[`the Participant component should render correctly 1`] = `
   />
   <Memo(Datum)
     label="isReconnecting"
-    value="false"
+    value={false}
   />
   <Memo(Datum)
     label="networkQualityLevel"
-    value="4"
+    value={4}
   />
   <Accordion
     label="Data Tracks (0)"

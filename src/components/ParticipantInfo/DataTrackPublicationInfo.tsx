@@ -19,8 +19,8 @@ export const DataTrackInfo: React.FC<{
 
   return (
     <>
-      <Datum label="isEnabled" value={String(isEnabled)} />
-      <Datum label="isSwitchedOff" value={String(isSwitchedOff)} />
+      <Datum label="isEnabled" value={isEnabled} />
+      <Datum label="isSwitchedOff" value={isSwitchedOff} />
       <Datum label="Priority" value={track.priority} />
       <DataTrack track={track} />
     </>
@@ -35,7 +35,7 @@ export const DataTrackPublicationInfo: React.FC<{
   return (
     <StatsContainer>
       <Datum label="Kind" value={publication.kind} />
-      <Datum label="isSubscribed" value={String(!!track)} />
+      <Datum label="isSubscribed" value={!!track} />
       {track && <DataTrackInfo track={track} />}
     </StatsContainer>
   );
