@@ -1,15 +1,15 @@
 import React from 'react';
-import Datum from '../typography/Datum/Datum';
-import Headline from '../typography/Headline/Headline';
+import Datum from '../typography/common/Datum/Datum';
+import Headline from '../typography/common/Headline/Headline';
 import useDominantSpeaker from '../../hooks/useDominantSpeaker/useDominantSpeaker';
 import useIsRecording from '../../hooks/useIsRecording/useIsRecording';
 import useRoom from '../../hooks/useRoom/useRoom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import useStats from '../../hooks/useStats/useStats';
-import { Accordion } from '../typography/Accordion/Accordion';
-import NestedObject from '../typography/NestedObject/NestedObject';
-import ArrayData from '../typography/ArrayData/ArrayData';
-import ConnectionOptionTracks from '../typography/ConnectionOptionTracks/ConnectionOptionTracks';
+import { Accordion } from '../typography/common/Accordion/Accordion';
+import NestedObject from '../typography/common/NestedObject/NestedObject';
+import ArrayData from '../typography/common/ArrayData/ArrayData';
+import ConnectionOptionTracks from '../typography/trackInformation/ConnectionOptionTracks/ConnectionOptionTracks';
 
 export default function RoomInfo() {
   const room = useRoom();

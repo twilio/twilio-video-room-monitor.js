@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Primitive } from '../../../types';
-import { theme } from '../../theme';
+import { Primitive } from '../../../../types';
+import { theme } from '../../../theme';
 
 type DatumProps = {
   label: string;

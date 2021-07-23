@@ -7,13 +7,13 @@ import {
   RemoteAudioTrackPublication,
   RemoteAudioTrackStats,
 } from 'twilio-video';
-import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
-import useMediaStreamTrack from '../../hooks/useMediaStreamTrack/useMediaStreamTrack';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
-import useTrack from '../../hooks/useTrack/useTrack';
-import Datum from '../typography/Datum/Datum';
-import MediaStreamTrackInfo from '../typography/MediaStreamTrackInfo/MediaStreamTrackInfo';
-import StatsContainer from '../typography/StatsContainer/StatsContainer';
+import useIsTrackEnabled from '../../../hooks/useIsTrackEnabled/useIsTrackEnabled';
+import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
+import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
+import useTrack from '../../../hooks/useTrack/useTrack';
+import Datum from '../../typography/common/Datum/Datum';
+import MediaStreamTrackInfo from '../../typography/trackInformation/MediaStreamTrackInfo/MediaStreamTrackInfo';
+import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
 
 export const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;

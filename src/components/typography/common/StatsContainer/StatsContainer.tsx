@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { theme } from '../../theme';
+import { theme } from '../../../theme';
 
 export default React.memo(styled.div`
   &:not(:last-child) {

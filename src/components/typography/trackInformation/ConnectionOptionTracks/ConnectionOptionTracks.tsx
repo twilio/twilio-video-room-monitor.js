@@ -1,9 +1,9 @@
 import React from 'react';
 import { Room } from 'twilio-video';
-import { Accordion } from '../Accordion/Accordion';
-import Datum from '../Datum/Datum';
+import { Accordion } from '../../common/Accordion/Accordion';
+import Datum from '../../common/Datum/Datum';
 import MediaStreamTrackInfo from '../MediaStreamTrackInfo/MediaStreamTrackInfo';
-import StatsContainer from '../StatsContainer/StatsContainer';
+import StatsContainer from '../../common/StatsContainer/StatsContainer';
 import DataTrack from '../DataTrack/DataTrack';
 
 function ConnectionOptionTracks({ tracks }: { tracks: Room['_options']['tracks'] | null }) {

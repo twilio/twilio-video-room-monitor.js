@@ -8,16 +8,16 @@ import {
   RemoteVideoTrackStats,
   VideoTrack,
 } from 'twilio-video';
-import useIsTrackEnabled from '../../hooks/useIsTrackEnabled/useIsTrackEnabled';
-import useIsTrackSwitchedOff from '../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
-import useMediaStreamTrack from '../../hooks/useMediaStreamTrack/useMediaStreamTrack';
-import usePublishPriority from '../../hooks/usePublishPriority/usePublishPriority';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
-import useTrack from '../../hooks/useTrack/useTrack';
-import useVideoTrackDimensions from '../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
-import Datum from '../typography/Datum/Datum';
-import MediaStreamTrackInfo from '../typography/MediaStreamTrackInfo/MediaStreamTrackInfo';
-import StatsContainer from '../typography/StatsContainer/StatsContainer';
+import useIsTrackEnabled from '../../../hooks/useIsTrackEnabled/useIsTrackEnabled';
+import useIsTrackSwitchedOff from '../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
+import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
+import usePublishPriority from '../../../hooks/usePublishPriority/usePublishPriority';
+import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
+import useTrack from '../../../hooks/useTrack/useTrack';
+import useVideoTrackDimensions from '../../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
+import Datum from '../../typography/common/Datum/Datum';
+import MediaStreamTrackInfo from '../../typography/trackInformation/MediaStreamTrackInfo/MediaStreamTrackInfo';
+import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
 
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
   dimensions ? `${dimensions.width} x ${dimensions.height}` : 'undefined';
