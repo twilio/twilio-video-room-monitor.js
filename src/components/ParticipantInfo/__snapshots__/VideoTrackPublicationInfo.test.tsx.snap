@@ -8,11 +8,11 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
   />
   <Memo(Datum)
     label="isSwitchedOff"
-    value="false"
+    value={false}
   />
   <Memo(Datum)
     label="isEnabled"
-    value="true"
+    value={true}
   />
   <Memo(Datum)
     label="Bandwidth"
@@ -24,11 +24,11 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
   />
   <Memo(Datum)
     label="Framerate"
-    value="null"
+    value={null}
   />
   <Memo(Datum)
     label="Packets Lost"
-    value="7"
+    value={7}
   />
   <Memo(Datum)
     label="Packet Loss Percentage"
@@ -50,7 +50,7 @@ exports[`the VideoTrackPublicationInfo component should render correctly 1`] = `
   />
   <Memo(Datum)
     label="isSubscribed"
-    value="true"
+    value={true}
   />
   <Memo(Datum)
     label="publishPriority"

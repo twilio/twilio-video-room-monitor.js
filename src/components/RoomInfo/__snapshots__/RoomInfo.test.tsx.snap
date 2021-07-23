@@ -25,7 +25,7 @@ exports[`The RoomInfo component should render information about the room if conn
   />
   <Memo(Datum)
     label="Dominant Speaker"
-    value="null"
+    value={null}
   />
   <Memo(Datum)
     label="Media Region"

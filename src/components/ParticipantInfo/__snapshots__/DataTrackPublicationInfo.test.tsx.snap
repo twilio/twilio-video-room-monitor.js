@@ -10,11 +10,11 @@ exports[`the DataTrackInfo component for RemoteDataTrack objects should render c
 <Fragment>
   <Memo(Datum)
     label="isEnabled"
-    value="true"
+    value={true}
   />
   <Memo(Datum)
     label="isSwitchedOff"
-    value="true"
+    value={true}
   />
   <Memo(Datum)
     label="Priority"
@@ -37,7 +37,7 @@ exports[`the DataTrackPublicationInfo component should render correctly 1`] = `
   />
   <Memo(Datum)
     label="isSubscribed"
-    value="true"
+    value={true}
   />
   <DataTrackInfo
     track="testTrack"

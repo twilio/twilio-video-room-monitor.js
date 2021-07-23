@@ -31,8 +31,8 @@ export const Participant = ({ participant }: { participant: ParticipantImpl }) =
   return (
     <Accordion label={participant.identity}>
       <Datum label="SID" value={participant.sid} />
-      <Datum label="isReconnecting" value={String(isReconnecting)} />
-      <Datum label="networkQualityLevel" value={String(networkQualityLevel)} />
+      <Datum label="isReconnecting" value={isReconnecting} />
+      <Datum label="networkQualityLevel" value={networkQualityLevel} />
       <Accordion label={`Data Tracks (${dataTrackPublications.length})`}>
         {dataTrackPublications.map((dataTrackPublication) => (
           <DataTrackPublicationInfo
