@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AudioTrackPublicationInfo, AudioTrackInfo } from './AudioTrackPublicationInfo';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
-import useMediaStreamTrackProperties from '../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
-import useTrack from '../../hooks/useTrack/useTrack';
+import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
+import useMediaStreamTrackProperties from '../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
+import useTrack from '../../../hooks/useTrack/useTrack';
 
-jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
-jest.mock('../../hooks/useStats/useStatsUtils');
-jest.mock('../../hooks/useTrack/useTrack');
-jest.mock('../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties');
+jest.mock('../../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
+jest.mock('../../../hooks/useStats/useStatsUtils');
+jest.mock('../../../hooks/useTrack/useTrack');
+jest.mock('../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties');
 
 const mockUseTrackBandwidth = useTrackBandwidth as jest.Mock<any>;
 const mockUseTrackData = useTrackData as jest.Mock<any>;
