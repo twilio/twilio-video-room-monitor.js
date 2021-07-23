@@ -1,7 +1,7 @@
 import React from 'react';
 import { chartDatum } from '../../../types';
 import { curveMonotoneX } from '@visx/curve';
-import Headline from '../../typography/Headline/Headline';
+import Headline from '../../typography/shared/Headline/Headline';
 import { MAX_STAT_HISTORY_LENGTH, UPDATE_INTERVAL } from '../../../constants';
 import { min, max } from 'd3-array';
 import { XYChart, Axis, LineSeries, Grid, buildChartTheme } from '@visx/xychart';
