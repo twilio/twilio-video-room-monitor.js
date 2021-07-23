@@ -1,7 +1,7 @@
 import React from 'react';
 import ArrayData from './ArrayData';
 import { shallow } from 'enzyme';
-import { Arr } from '../../../types';
+import { Arr } from '../../../../types';
 
 const testArr: Arr = ['value1', 'value2', 'value3'];
 

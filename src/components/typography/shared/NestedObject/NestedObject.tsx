@@ -1,7 +1,7 @@
 import React from 'react';
 import { Accordion } from '../Accordion/Accordion';
 import Datum from '../Datum/Datum';
-import { Primitive } from '../../../types';
+import { Primitive } from '../../../../types';
 import StatsContainer from '../StatsContainer/StatsContainer';
 
 function NestedObject({ label, obj }: { label?: string; obj: Object | Primitive }) {
