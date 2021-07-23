@@ -1,17 +1,17 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { VideoTrackPublicationInfo, VideoTrackInfo } from './VideoTrackPublicationInfo';
-import { useTrackBandwidth, useTrackData } from '../../hooks/useStats/useStatsUtils';
-import useMediaStreamTrackProperties from '../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
-import useTrack from '../../hooks/useTrack/useTrack';
+import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
+import useMediaStreamTrackProperties from '../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
+import useTrack from '../../../hooks/useTrack/useTrack';
 
-jest.mock('../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
-jest.mock('../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => false);
-jest.mock('../../hooks/usePublishPriority/usePublishPriority', () => () => 'standard');
-jest.mock('../../hooks/useStats/useStatsUtils');
-jest.mock('../../hooks/useTrack/useTrack');
-jest.mock('../../hooks/useVideoTrackDimensions/useVideoTrackDimensions', () => () => ({ width: 1280, height: 720 }));
-jest.mock('../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties');
+jest.mock('../../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
+jest.mock('../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => false);
+jest.mock('../../../hooks/usePublishPriority/usePublishPriority', () => () => 'standard');
+jest.mock('../../../hooks/useStats/useStatsUtils');
+jest.mock('../../../hooks/useTrack/useTrack');
+jest.mock('../../../hooks/useVideoTrackDimensions/useVideoTrackDimensions', () => () => ({ width: 1280, height: 720 }));
+jest.mock('../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties');
 
 const mockUseTrackBandwidth = useTrackBandwidth as jest.Mock<any>;
 const mockUseTrackData = useTrackData as jest.Mock<any>;
