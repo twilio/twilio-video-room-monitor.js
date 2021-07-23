@@ -1,6 +1,6 @@
 import React from 'react';
-import { Accordion } from '../typography/Accordion/Accordion';
-import Datum from '../typography/Datum/Datum';
+import { Accordion } from '../../typography/shared/Accordion/Accordion';
+import Datum from '../../typography/shared/Datum/Datum';
 import {
   Participant as ParticipantImpl,
   LocalVideoTrackPublication,
@@ -10,13 +10,13 @@ import {
   LocalDataTrackPublication,
   RemoteDataTrackPublication,
 } from 'twilio-video';
-import useParticipantNetworkQualityLevel from '../../hooks/useParticipantNetworkQualityLevel/useParticipantNetworkQualityLevel';
-import useParticipantIsReconnecting from '../../hooks/useParticipantIsReconnecting/useParticipantIsReconnecting';
-import usePublications from '../../hooks/usePublications/usePublications';
+import useParticipantNetworkQualityLevel from '../../../hooks/useParticipantNetworkQualityLevel/useParticipantNetworkQualityLevel';
+import useParticipantIsReconnecting from '../../../hooks/useParticipantIsReconnecting/useParticipantIsReconnecting';
+import usePublications from '../../../hooks/usePublications/usePublications';
 
-import { VideoTrackPublicationInfo } from './VideoTrackPublicationInfo';
-import { AudioTrackPublicationInfo } from './AudioTrackPublicationInfo';
-import { DataTrackPublicationInfo } from './DataTrackPublicationInfo';
+import { VideoTrackPublicationInfo } from '../VideoTrackPublicationInfo/VideoTrackPublicationInfo';
+import { AudioTrackPublicationInfo } from '../AudioTrackPublicationInfo/AudioTrackPublicationInfo';
+import { DataTrackPublicationInfo } from '../DataTrackPublicationInfo/DataTrackPublicationInfo';
 
 export const Participant = ({ participant }: { participant: ParticipantImpl }) => {
   const networkQualityLevel = useParticipantNetworkQualityLevel(participant);
