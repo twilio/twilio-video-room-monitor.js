@@ -1,0 +1,13 @@
+.circleci
+.DS_STORE
+.github
+.gitignore
+.env
+.env.template
+.vscode
+*.sw*
+coverage
+logs
+npm-debug.log
+node_modules
+tsconfig.json
