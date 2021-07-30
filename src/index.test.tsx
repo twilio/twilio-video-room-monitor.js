@@ -72,27 +72,50 @@ describe('the Twilio Video Room Monitor API', () => {
     expect(roomRegistry.room).toBe('mockRoom');
   });
 
-  it('should attach the VideoRoomMonitor to the window object when the PARCEL_TARGET environment variable is "browser"', () => {
+  it('should not attach the VideoRoomMonitor to the window object when the PARCEL_TARGET environment variable is not set', () => {
     // Clears require cache so that we get a fresh import in this test
     jest.resetModules();
-    process.env.PARCEL_TARGET = 'browser';
 
-    const VideoRoomMonitorImport = require('./index.tsx');
-
-    // @ts-ignore
-    expect(window.Twilio.VideoRoomMonitor).toBe(VideoRoomMonitorImport.VideoRoomMonitor);
-
-    // Resets these values
-    delete process.env.PARCEL_TARGET;
-    // @ts-ignore
-    delete window.Twilio;
-  });
-
-  it('should not attach the VideoRoomMonitor to the window object when the PARCEL_TARGET environment variable is not set', () => {
-    jest.resetModules();
+    // re-runs ./index.tsx
     require('./index');
 
     // @ts-ignore
     expect(window.Twilio).toBe(undefined);
+  });
+
+  describe('when the PARCEL_TARGET environment variable is "browser"', () => {
+    beforeEach(() => {
+      // Clears require cache so that we get a fresh import in this test
+      jest.resetModules();
+
+      process.env.PARCEL_TARGET = 'browser';
+    });
+
+    afterEach(() => {
+      // Resets these values
+      delete process.env.PARCEL_TARGET;
+      // @ts-ignore
+      delete window.Twilio;
+    });
+
+    it('should attach the VideoRoomMonitor to a new window.Twilio object when it does not already exist', () => {
+      const VideoRoomMonitorImport = require('./index.tsx');
+
+      // @ts-ignore
+      expect(window.Twilio.VideoRoomMonitor).toBe(VideoRoomMonitorImport.VideoRoomMonitor);
+    });
+
+    it('should attach the VideoRoomMonitor to an existing window.Twilio object when it already exists', () => {
+      // @ts-ignore
+      window.Twilio = { otherTwilioModule: 'foo' };
+
+      const VideoRoomMonitorImport = require('./index.tsx');
+
+      // @ts-ignore
+      expect(window.Twilio).toEqual({
+        VideoRoomMonitor: VideoRoomMonitorImport.VideoRoomMonitor,
+        otherTwilioModule: 'foo',
+      });
+    });
   });
 });
