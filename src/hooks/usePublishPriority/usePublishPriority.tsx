@@ -4,7 +4,9 @@ import { LocalTrackPublication, RemoteTrackPublication, Track } from 'twilio-vid
 type TrackPublication = LocalTrackPublication | RemoteTrackPublication;
 
 export default function usePublishPriority(publication: TrackPublication) {
-  const [publishPriority, setPublishPriority] = useState<Track.Priority | undefined>(publication.publishPriority);
+  const [publishPriority, setPublishPriority] = useState<Track.Priority | null | undefined>(
+    publication.publishPriority
+  );
 
   useEffect(() => {
     setPublishPriority(publication.publishPriority);

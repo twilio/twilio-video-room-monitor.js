@@ -7,7 +7,6 @@ import useTrack from '../../../hooks/useTrack/useTrack';
 
 jest.mock('../../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
 jest.mock('../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => false);
-jest.mock('../../../hooks/usePublishPriority/usePublishPriority', () => () => 'standard');
 jest.mock('../../../hooks/useStats/useStatsUtils');
 jest.mock('../../../hooks/useTrack/useTrack');
 jest.mock('../../../hooks/useVideoTrackDimensions/useVideoTrackDimensions', () => () => ({ width: 1280, height: 720 }));
@@ -38,7 +37,22 @@ describe('the VideoTrackInfo component', () => {
   it('should render correctly if there is no video track data', () => {
     mockUseTrackData.mockImplementationOnce(() => null);
     const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
-    expect(wrapper.find({ label: 'Codec' }).exists()).toBeFalsy();
+    expect(wrapper.find({ label: 'Codec' }).exists()).toBe(false);
+  });
+
+  it('should display the subscribePriority when it exists', () => {
+    const wrapper = shallow(<VideoTrackInfo track={{ priority: 'high' } as any} trackSid="testSid" />);
+    expect(wrapper.find({ label: 'subscribePriority' }).prop('value')).toBe('high');
+  });
+
+  it('should display the subscribePriority when it is null', () => {
+    const wrapper = shallow(<VideoTrackInfo track={{ priority: null } as any} trackSid="testSid" />);
+    expect(wrapper.find({ label: 'subscribePriority' }).prop('value')).toBe(null);
+  });
+
+  it('should not display the subscribePriority when it doesnt exist', () => {
+    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper.find({ label: 'subscribePriority' }).exists()).toBe(false);
   });
 
   describe('the Packet Loss Percentage', () => {
@@ -123,9 +137,27 @@ describe('the VideoTrackInfo component', () => {
 describe('the VideoTrackPublicationInfo component', () => {
   it('should render correctly', () => {
     const wrapper = shallow(
-      <VideoTrackPublicationInfo publication={{ trackName: 'testName', trackSid: 'testSid' } as any} />
+      <VideoTrackPublicationInfo
+        publication={{ trackName: 'testName', trackSid: 'testSid', publishPriority: 'standard' } as any}
+      />
     );
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('should display publishPriority when it is null', () => {
+    const wrapper = shallow(
+      <VideoTrackPublicationInfo
+        publication={{ trackName: 'testName', trackSid: 'testSid', publishPriority: null } as any}
+      />
+    );
+    expect(wrapper.find({ label: 'publishPriority' }).prop('value')).toBe(null);
+  });
+
+  it('should not display publishPriority when it does not exist', () => {
+    const wrapper = shallow(
+      <VideoTrackPublicationInfo publication={{ trackName: 'testName', trackSid: 'testSid' } as any} />
+    );
+    expect(wrapper.find({ label: 'publishPriority' }).exists()).toBe(false);
   });
 
   it('should not render the VideoTrackInfo component if a video track is not present', () => {
@@ -133,6 +165,6 @@ describe('the VideoTrackPublicationInfo component', () => {
     const wrapper = shallow(
       <VideoTrackPublicationInfo publication={{ trackName: 'testName', trackSid: 'testSid' } as any} />
     );
-    expect(wrapper.find(VideoTrackInfo).exists()).toBeFalsy();
+    expect(wrapper.find(VideoTrackInfo).exists()).toBe(false);
   });
 });

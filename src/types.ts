@@ -22,6 +22,7 @@ declare module 'twilio-video' {
   }
   interface LocalVideoTrack {
     isSwitchedOff: undefined;
+    priority: undefined;
   }
 
   interface LocalAudioTrackStats {
