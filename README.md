@@ -20,11 +20,11 @@ npm install @twilio/twilio-video-room-monitor --save
 
 Using this method, you can import 'twilio-room-monitor' like so:
 
-```
+```js
 import Video from 'twilio-video';
 import VideoRoomMontitor from 'twilio-video-room-monitor';
 
-Video.connect('token').then(room => {
+Video.connect('token').then((room) => {
   VideoRoomMontitor.registerRoom(room);
   VideoRoomMontitor.openMonitor();
 });
@@ -34,7 +34,7 @@ Video.connect('token').then(room => {
 
 You can also copy `twilio-video-room-monitor.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
 
-```
+```html
 <script src="https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor@0.0.1/dist/twilio-video-room-monitor.min.js"></script>
 ```
 
@@ -48,14 +48,14 @@ window.Twilio.VideoRoomMontitor.openMonitor()
 
 You can also run the following snippet in the browser console of a twilio-video.js app to load the inspector. Note that you must be able to register the room object in order for this to work:
 
-```
+```js
 (() => {
   const script = document.createElement('script');
   script.src = 'http://localhost:1234/index.js';
   // Register your Twilio Video Room here
   script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
-  document.body.appendChild(script)
-})()
+  document.body.appendChild(script);
+})();
 ```
 
 Using this method, you can open the monitor like so:
@@ -159,20 +159,20 @@ Runs the linter.
 
 This will host the app on a local server. This server can then be used to run the tool in the browser by using a script tag:
 
-```
+```html
 <script src="http://localhost:1234/index.js></script>
 ```
 
 Or by running this code snippet in the console of your browser:
 
-```
+```js
 (() => {
-const script = document.createElement('script');
-script.src = 'http://localhost:1234/index.js';
-// Register your Twilio Video Room here
-script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
-document.body.appendChild(script)
-})()
+  const script = document.createElement('script');
+  script.src = 'http://localhost:1234/index.js';
+  // Register your Twilio Video Room here
+  script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+  document.body.appendChild(script);
+})();
 ```
 
 After this has finished running, you can run commands to open and close the monitor within the console.
