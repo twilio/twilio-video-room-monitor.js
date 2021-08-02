@@ -2,15 +2,15 @@
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-inspector.svg?style=svg&circle-token=e455a056673b1eb7a7692269da5154167b0eb32a)](https://circleci.com/gh/twilio/twilio-video-inspector)
 
-### What is it
+## What is it
 
-This browser-based tool gives video app developers visibility and insights into the inner workings of any [Twilio Video JavaScript application](https://github.com/twilio/twilio-video-app-react). It displays real-time information that is gathered from the Video SDKs [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) and relevant browser APIs.
+This browser-based tool gives video app developers visibility and insights into the inner workings of any [Twilio Video JavaScript application](https://github.com/twilio/twilio-video.js). It displays real-time information that is gathered from the Video SDKs [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) and relevant browser APIs.
 
 ![Room Monitor gif](https://user-images.githubusercontent.com/40278237/127718088-8581c62d-13c1-4766-850d-14e4afd3ef08.gif)
 
-### Getting Started:
+## Getting Started:
 
-#### NPM
+### NPM
 
 You can install directly from npm.
 
@@ -22,66 +22,62 @@ Using this method, you can import 'twilio-room-monitor' like so:
 
 ```
 import Video from 'twilio-video';
-import RoomMonitor from 'twilio-video-room-monitor';
+import VideoRoomMontitor from 'twilio-video-room-monitor';
+
 Video.connect('token').then(room => {
-  RoomMonitor.registerRoom(room);
-  RoomMonitor.openMonitor();
+  VideoRoomMontitor.registerRoom(room);
+  VideoRoomMontitor.openMonitor();
 });
 ```
 
-#### Script Tag
+### Script Tag
 
 You can also copy `twilio-video-room-monitor.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
 
 ```
-<script src="https://some-future-url/twilio-video-room-monitor.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor@0.0.1/dist/twilio-video-room-monitor.min.js"></script>
 ```
 
 Using this method, you can open the room monitor like so:
 
 ```
-window.Twilio.RoomMonitor.openMonitor()
+window.Twilio.VideoRoomMontitor.openMonitor()
 ```
 
-#### Console Script
+### Console Script
 
-You can also run the following command to locally host the monitor tool:
-
-```
-npm run parcel:watch
-```
-
-Then in the console you can run the following code snippet to create the room monitor object:
+You can also run the following snippet in the browser console of a twilio-video.js app to load the inspector. Note that you must be able to register the room object in order for this to work:
 
 ```
 (() => {
   const script = document.createElement('script');
   script.src = 'http://localhost:1234/index.js';
-  script.onload = () => window.RoomMonitor.default.registerVideoRoom(twilioRoom); // Register your Twilio Video Room here
+  // Register your Twilio Video Room here
+  script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
   document.body.appendChild(script)
 })()
 ```
 
-Using this method, you can use the monitor like so:
+Using this method, you can open the monitor like so:
 
 ```
-Twilio.RoomMonitor.openMonitor()
+Twilio.VideoRoomMontitor.openMonitor()
 ```
 
-### API:
+## API:
 
 #### `openMonitor()`
 
 This opens the monitor and emits the `opened` event. To open the monitor, you can run this line of code in the console:
 
 ```
-Twilio.RoomMonitor.openMonitor()
+Twilio.VideoRoomMontitor.openMonitor()
 ```
 
-If you are using the script tag method, then you will need to run this instead:
+To listen for the `opened` event, you can run the following line of code:
 
 ```
-window.Twilio.RoomMonitor.openMonitor()
+VideoRoomMontior.on('opened', () => console.log('the monitor has been opened'));
 ```
 
 #### `closeMonitor()`
@@ -89,13 +85,13 @@ window.Twilio.RoomMonitor.openMonitor()
 This closes the monitor and emits the `closed` event. To close the monitor, you can run this line of code in the console:
 
 ```
-Twilio.RoomMonitor.closeMonitor()
+Twilio.VideoRoomMontitor.closeMonitor()
 ```
 
-If you are using the script tag method, then you will need to run this instead:
+To listen for the `closed` event, you can run the following line of code:
 
 ```
-window.Twilio.RoomMonitor.closeMonitor()
+VideoRoomMontior.on('closed', () => console.log('the monitor has been closed'));
 ```
 
 #### `toggleMonitor()`
@@ -103,70 +99,79 @@ window.Twilio.RoomMonitor.closeMonitor()
 This toggles the monitor to be either open or closed. If the monitor is currently closed, then it will open the monitor (and emit the `opened` event) and vice versa. To toggle the monitor, you can run this line of code in the console:
 
 ```
-Twilio.RoomMonitor.toggleMonitor()
+Twilio.VideoRoomMontitor.toggleMonitor()
 ```
 
-If you are using the script tag method, then you will need to run this instead:
+#### `registerRoom()`
+
+This registers a Twilio Video Room and emits the `roomRegistered` event. To register a room, you can run the following line of code:
 
 ```
-window.Twilio.RoomMonitor.toggleMonitor()
+Twilio.VideoRoomMonitor.registerVideoRoom(newRoom);
 ```
 
 #### `isOpen`
 
 This is a boolean value that indicates whether or not the monitor is currently open.
 
-### Local Development:
+## Local Development:
 
-#### Prerequisites
+### Prerequisites
 
 You must have the following installed:
 
 - [Node.js v14+](https://nodejs.org/en/download/)
 - NPM v7+ (comes installed with newer Node versions)
 
-#### Install dependencies:
+### Install dependencies:
 
 Run `npm install` to install all dependencies from NPM.
 
-#### Scripts
+### Scripts
 
-##### `npm start`
+#### `npm start`
 
-This will compile the app (in watch mode) into a directory (`dist/node`) that will allow users to install the Inspector with NPM.
+This will compile the app (in watch mode) into a directory (`dist/node`) that will allow users to install the Monitor locally with NPM.
 
-`npm install -S <path_to_inspector>`
+`npm install -S <path_to_monitor>`
 
-NPM will install the inspector as a symlink, so as files are edited, saved, and re-compiled, they will automatically be reflected in the application that has installed the Inspector locally.
+NPM will install the Monitor as a symlink, so as files are edited, saved, and re-compiled, they will automatically be reflected in the application that has installed the Monitor locally.
 
 Any TypeScript errors that are found will be displayed in the console.
 
-##### `npm run build`
+#### `npm run build`
 
-This will build both Node.js and browser versions of the Inspector in the `dist/` directory.
+This will build both Node.js and browser versions of the Monitor in the `dist/` directory.
 
-##### `npm run ts`
+#### `npm run ts`
 
 Run this command to check the types in the app.
 
-##### `npm test`
+#### `npm test`
 
 Runs all unit tests.
 
-##### `npm run lint`
+#### `npm run lint`
 
 Runs the linter.
 
-##### `npm run parcel:watch`
+#### `npm run parcel:watch`
 
-This will host the app on a local server. This server can then be used to run the tool in the browser by first running this code snippet in the console of your browser:
+This will host the app on a local server. This server can then be used to run the tool in the browser by using a script tag:
+
+```
+<script src="http://localhost:1234/index.js></script>
+```
+
+Or by running this code snippet in the console of your browser:
 
 ```
 (() => {
-  const script = document.createElement('script');
-  script.src = 'http://localhost:1234/index.js';
-  script.onload = () => window.RoomMonitor.default.registerVideoRoom(twilioRoom); // Register your Twilio Video Room here
-  document.body.appendChild(script)
+const script = document.createElement('script');
+script.src = 'http://localhost:1234/index.js';
+// Register your Twilio Video Room here
+script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+document.body.appendChild(script)
 })()
 ```
 
