@@ -1,4 +1,7 @@
 import React from 'react';
+import Datum from '../../typography/common/Datum/Datum';
+import MediaStreamTrackInfo from '../../typography/trackInformation/MediaStreamTrackInfo/MediaStreamTrackInfo';
+import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
 import {
   LocalVideoTrack,
   LocalVideoTrackPublication,
@@ -15,12 +18,12 @@ import usePublishPriority from '../../../hooks/usePublishPriority/usePublishPrio
 import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
 import useTrack from '../../../hooks/useTrack/useTrack';
 import useVideoTrackDimensions from '../../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
-import Datum from '../../typography/common/Datum/Datum';
-import MediaStreamTrackInfo from '../../typography/trackInformation/MediaStreamTrackInfo/MediaStreamTrackInfo';
-import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
+import { withIntervalUpdate } from '../../../hooks/useIntervalUpdate/useIntervalUpdate';
 
 const getDimensionString = (dimensions?: VideoTrack.Dimensions) =>
   dimensions ? `${dimensions.width} x ${dimensions.height}` : 'undefined';
+
+const IntervalUpdateDatum = withIntervalUpdate(Datum);
 
 export const VideoTrackInfo: React.FC<{
   track: LocalVideoTrack | RemoteVideoTrack;
@@ -50,6 +53,7 @@ export const VideoTrackInfo: React.FC<{
       {isSwitchedOff !== undefined && <Datum label="isSwitchedOff" value={isSwitchedOff} />}
       <Datum label="isEnabled" value={isEnabled} />
       <Datum label="Bandwidth" value={trackBandwidth?.toLocaleString() + 'kbps'} />
+      {track.priority !== undefined && <IntervalUpdateDatum label="subscribePriority" value={track.priority} />}
       {trackData && (
         <>
           <Datum label="Codec" value={trackData.codec} />
@@ -74,7 +78,7 @@ export const VideoTrackPublicationInfo: React.FC<{
       <Datum label="Name" value={publication.trackName} />
       <Datum label="SID" value={publication.trackSid} />
       <Datum label="isSubscribed" value={!!track} />
-      <Datum label="publishPriority" value={publishPriority} />
+      {publishPriority !== undefined && <Datum label="publishPriority" value={publishPriority} />}
       {track && <VideoTrackInfo track={track} trackSid={publication.trackSid} />}
     </StatsContainer>
   );
