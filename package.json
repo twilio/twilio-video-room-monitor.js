@@ -9,10 +9,10 @@
     "test": "cross-env TZ=utc jest",
     "test:ci": "cross-env TZ=utc jest --ci --runInBand --reporters=default --reporters=jest-junit --coverage --silent",
     "lint": "eslint src",
-    "parcel:watch": "parcel src/index.tsx --no-hmr --out-dir extension/web_accessible --global RoomMonitor",
+    "parcel:watch": "PARCEL_TARGET=browser parcel src/index.tsx --no-hmr --out-dir dist/browser",
     "build": "npm run build:node && npm run build:browser",
     "build:node": "tsc",
-    "build:browser": "parcel build src/index.tsx --no-source-maps --out-dir dist/browser --target browser --experimental-scope-hoisting --global TwilioVideoInspector",
+    "build:browser": "PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --out-dir dist/browser --target browser --experimental-scope-hoisting",
     "ts": "tsc --noEmit"
   },
   "keywords": [],

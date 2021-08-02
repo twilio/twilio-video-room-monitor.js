@@ -5,7 +5,7 @@ import EventEmitter from 'eventemitter3';
 import { Room } from 'twilio-video';
 import { roomRegistry } from './components/RoomProvider/RoomProvider';
 
-class RoomMonitor extends EventEmitter<{
+class VideoRoomMonitorImpl extends EventEmitter<{
   opened: [];
   closed: [];
 }> {
@@ -20,7 +20,7 @@ class RoomMonitor extends EventEmitter<{
     if (!this.container) {
       const container = document.createElement('div');
       document.body.appendChild(container);
-      container.id = 'RoomMonitorContainer';
+      container.id = 'TwilioVideoRoomMonitorContainer';
       ReactDOM.render(<App />, container);
       this.container = container;
       this.emit('opened');
@@ -45,4 +45,12 @@ class RoomMonitor extends EventEmitter<{
   }
 }
 
-export default new RoomMonitor();
+export const VideoRoomMonitor = new VideoRoomMonitorImpl();
+
+// Add API to window variable when the parcel target is browser
+if (process.env.PARCEL_TARGET === 'browser') {
+  // @ts-ignore
+  window.Twilio = window.Twilio || {};
+  // @ts-ignore
+  window.Twilio.VideoRoomMonitor = VideoRoomMonitor;
+}
