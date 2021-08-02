@@ -6,7 +6,7 @@
 
 This browser-based tool gives video app developers visibility and insights into the inner workings of any [Twilio Video JavaScript application](https://github.com/twilio/twilio-video-app-react). It displays real-time information that is gathered from the Video SDKs [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) and relevant browser APIs.
 
-<img style="500" alt="Twilio Video Room Monitor" src="https://user-images.githubusercontent.com/40278237/127385929-1287e06c-ff74-4303-8774-6a4c80ebcf81.png">
+![Room Monitor gif](https://user-images.githubusercontent.com/40278237/127718088-8581c62d-13c1-4766-850d-14e4afd3ef08.gif)
 
 ### Getting Started:
 
