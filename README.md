@@ -51,7 +51,8 @@ You can also run the following snippet in the browser console of a twilio-video.
 ```js
 (() => {
   const script = document.createElement('script');
-  script.src = 'http://localhost:1234/index.js';
+  script.src =
+    'https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor@0.0.1/dist/twilio-video-room-monitor.min.js';
   // Register your Twilio Video Room here
   script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
   document.body.appendChild(script);
@@ -65,6 +66,14 @@ Twilio.VideoRoomMontitor.openMonitor()
 ```
 
 ## API:
+
+#### `registerRoom()`
+
+This is a **required** step to be able to use the Video Room Monitor. This registers a Twilio Video Room. To register a room, you can run the following line of code:
+
+```
+Twilio.VideoRoomMonitor.registerVideoRoom(newRoom);
+```
 
 #### `openMonitor()`
 
@@ -100,14 +109,6 @@ This toggles the monitor to be either open or closed. If the monitor is currentl
 
 ```
 Twilio.VideoRoomMontitor.toggleMonitor()
-```
-
-#### `registerRoom()`
-
-This registers a Twilio Video Room and emits the `roomRegistered` event. To register a room, you can run the following line of code:
-
-```
-Twilio.VideoRoomMonitor.registerVideoRoom(newRoom);
 ```
 
 #### `isOpen`
