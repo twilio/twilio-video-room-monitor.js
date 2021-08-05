@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: 'Jest Unit Tests'
-          command: npm test
+          command: npm run test:ci
           environment:
             JEST_JUNIT_OUTPUT_DIR: 'test-reports/jest'
             JEST_JUNIT_OUTPUT_NAME: 'results.xml'
