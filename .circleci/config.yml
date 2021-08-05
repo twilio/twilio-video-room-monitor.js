@@ -14,7 +14,7 @@ jobs:
             - v1-deps-{{ .Branch }}
             - v1-deps
 
-      - run: npm ci
+      - run: npm i
 
       - save_cache:
           key: v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
@@ -24,7 +24,7 @@ jobs:
 
       - run:
           name: 'Jest Unit Tests'
-          command: npm run test:ci
+          command: npm run test:i
           environment:
             JEST_JUNIT_OUTPUT_DIR: 'test-reports/jest'
             JEST_JUNIT_OUTPUT_NAME: 'results.xml'
