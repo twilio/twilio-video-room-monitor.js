@@ -21,7 +21,9 @@
     "video",
     "room",
     "javascript",
-    "inspect"
+    "inspect",
+    "monitor",
+    "webrtc"
   ],
   "author": "",
   "bugs": {
