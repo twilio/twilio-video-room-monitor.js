@@ -1,7 +1,7 @@
 {
   "name": "twilio-video-room-monitor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Twilio Video Room Monitor Javascript Library",
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
   "scripts": {
@@ -24,6 +24,13 @@
     "inspect"
   ],
   "author": "",
+  "bugs": {
+    "url": "https://github.com/twilio/twilio-video-room-monitor.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twilio/twilio-video-room-monitor.js"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "@visx/xychart": "^1.10.1",
