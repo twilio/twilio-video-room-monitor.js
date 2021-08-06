@@ -8,9 +8,9 @@ exports[`The RoomInfo component should render information about the room if conn
     }
   }
 >
-  <Memo(styled.h4)>
+  <Memo(styled.h3)>
     Room information:
-  </Memo(styled.h4)>
+  </Memo(styled.h3)>
   <Memo(Datum)
     label="Room Name"
     value="test123"
