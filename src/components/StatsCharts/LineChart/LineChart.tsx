@@ -50,8 +50,8 @@ export default function LineChart({ data, title, yAxisLabel }: LineChartProps) {
         theme={theme}
       >
         <Grid columns={false} numTicks={5} strokeDasharray="2" />
-        <Grid rows={false} strokeDasharray="2" />
-        <Axis orientation="bottom" label="Time" />
+        <Grid rows={false} strokeDasharray="2" numTicks={5} />
+        <Axis orientation="bottom" label="Time" numTicks={5} />
         <Axis
           orientation="left"
           label={yAxisLabel}
