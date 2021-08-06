@@ -83,4 +83,7 @@ export const TabSelector = styled.span<{ isActive: boolean }>`
   cursor: pointer;
   padding: 8px;
   border-bottom: ${(props) => (props.isActive ? '2px solid white' : '')};
+  &:hover {
+    background: rgba(50, 50, 50, 0.9);
+  }
 `;
