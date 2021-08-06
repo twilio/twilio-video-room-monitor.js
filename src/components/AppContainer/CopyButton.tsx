@@ -22,6 +22,7 @@ const Tooltip = styled.div`
   padding: 0.2em 0.6em;
   top: 2.7em;
   left: 0%;
+  visibility: hidden;
 
   &:before {
     content: '';
@@ -33,34 +34,28 @@ const Tooltip = styled.div`
     border: 5px solid #4f4f4f;
     transform: rotate(135deg);
   }
+
+  ${CopyButtonContainer}: hover & {
+    visibility: visible;
+  }
 `;
 
 export function CopyButton() {
   const room = useRoom();
   const [shouldDisplayTooltip, setShouldDisplayTooltip] = useState(false);
 
-  const [isHovering, setIsHovering] = useState(false);
   const handleRoomCopy = () => {
     if (room) {
       const text = JSON.stringify({ ...room, connectionOptions: room._options }, null, 2);
       navigator.clipboard.writeText(text).then(() => {
         setShouldDisplayTooltip(true);
-        setIsHovering(false);
       });
     }
   };
 
   return (
-    <CopyButtonContainer
-      onClick={handleRoomCopy}
-      onMouseLeave={() => {
-        setShouldDisplayTooltip(false);
-        setIsHovering(false);
-      }}
-      hasRoom={!!room}
-      onMouseOver={() => setIsHovering(true)}
-    >
-      {!shouldDisplayTooltip && isHovering && <Tooltip>Copy Room Information</Tooltip>}
+    <CopyButtonContainer onClick={handleRoomCopy} onMouseLeave={() => setShouldDisplayTooltip(false)} hasRoom={!!room}>
+      {!shouldDisplayTooltip && <Tooltip>Copy Room Information</Tooltip>}
       {shouldDisplayTooltip && <Tooltip>Room information copied to clipboard</Tooltip>}
       <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
