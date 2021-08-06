@@ -15,7 +15,7 @@ This browser-based tool gives video app developers visibility and insights into 
 You can install directly from npm.
 
 ```
-npm install @twilio/twilio-video-room-monitor --save
+npm install @twilio/video-room-monitor --save
 ```
 
 Using this method, you can import 'twilio-room-monitor' like so:
