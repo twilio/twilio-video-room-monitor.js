@@ -36,6 +36,7 @@ export const Participant = ({ participant }: { participant: ParticipantImpl }) =
       <Accordion label={`Data Tracks (${dataTrackPublications.length})`}>
         {dataTrackPublications.map((dataTrackPublication) => (
           <DataTrackPublicationInfo
+            key={dataTrackPublication.trackSid}
             publication={dataTrackPublication as LocalDataTrackPublication | RemoteDataTrackPublication}
           />
         ))}

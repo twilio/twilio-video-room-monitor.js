@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import useRoom from '../../hooks/useRoom/useRoom';
 import { theme } from '../theme';
 
 const CopyButtonContainer = styled.div<{ hasRoom: boolean }>`
   display: flex;
+  position: relative;
   margin: 0 1em;
   cursor: ${({ hasRoom }) => (hasRoom ? 'pointer' : 'initial')};
 
@@ -13,18 +14,49 @@ const CopyButtonContainer = styled.div<{ hasRoom: boolean }>`
   }
 `;
 
+const Tooltip = styled.div`
+  position: absolute;
+  background: #4f4f4f;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  padding: 0.2em 0.6em;
+  top: 2.7em;
+  left: 0%;
+  visibility: hidden;
+
+  &:before {
+    content: '';
+    width: 0;
+    height: 0;
+    left: 5px;
+    top: -5px;
+    position: absolute;
+    border: 5px solid #4f4f4f;
+    transform: rotate(135deg);
+  }
+
+  ${CopyButtonContainer}: hover & {
+    visibility: visible;
+  }
+`;
+
 export function CopyButton() {
   const room = useRoom();
+  const [hasCopiedRoomInfo, setHasCopiedRoomInfo] = useState(false);
 
   const handleRoomCopy = () => {
     if (room) {
       const text = JSON.stringify({ ...room, connectionOptions: room._options }, null, 2);
-      navigator.clipboard.writeText(text);
+      navigator.clipboard.writeText(text).then(() => {
+        setHasCopiedRoomInfo(true);
+      });
     }
   };
 
   return (
-    <CopyButtonContainer onClick={handleRoomCopy} hasRoom={!!room} title="Copy Room Information">
+    <CopyButtonContainer onClick={handleRoomCopy} onMouseLeave={() => setHasCopiedRoomInfo(false)} hasRoom={!!room}>
+      <Tooltip>{hasCopiedRoomInfo ? 'Room information copied to clipboard' : 'Copy Room Information'}</Tooltip>
+
       <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           fillRule="evenodd"

@@ -1,2 +1,2 @@
-export const MAX_STAT_HISTORY_LENGTH = 120;
+export const MAX_STAT_HISTORY_LENGTH = 240;
 export const UPDATE_INTERVAL = 1000;
