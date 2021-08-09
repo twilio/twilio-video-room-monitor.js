@@ -7,20 +7,15 @@ jobs:
 
     steps:
       - checkout
-
       - restore_cache:
-          keys:
-            - v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
-            - v1-deps-{{ .Branch }}
-            - v1-deps
-
-      - run: npm ci
-
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: Installing dependencies
+          command: npm install
       - save_cache:
-          key: v1-deps-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "package.json" }}
           paths:
-            - ~/.npm
-            - ~/.cache
+            - ./node_modules
 
       - run:
           name: 'Jest Unit Tests'

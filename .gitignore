@@ -10,3 +10,5 @@ dist/
 junit.xml
 
 extension/web_accessible/
+
+package-lock.json
