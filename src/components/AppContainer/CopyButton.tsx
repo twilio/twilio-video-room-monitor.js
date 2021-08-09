@@ -42,21 +42,21 @@ const Tooltip = styled.div`
 
 export function CopyButton() {
   const room = useRoom();
-  const [shouldDisplayTooltip, setShouldDisplayTooltip] = useState(false);
+  const [hasCopiedRoomInfo, setHasCopiedRoomInfo] = useState(false);
 
   const handleRoomCopy = () => {
     if (room) {
       const text = JSON.stringify({ ...room, connectionOptions: room._options }, null, 2);
       navigator.clipboard.writeText(text).then(() => {
-        setShouldDisplayTooltip(true);
+        setHasCopiedRoomInfo(true);
       });
     }
   };
 
   return (
-    <CopyButtonContainer onClick={handleRoomCopy} onMouseLeave={() => setShouldDisplayTooltip(false)} hasRoom={!!room}>
-      {!shouldDisplayTooltip && <Tooltip>Copy Room Information</Tooltip>}
-      {shouldDisplayTooltip && <Tooltip>Room information copied to clipboard</Tooltip>}
+    <CopyButtonContainer onClick={handleRoomCopy} onMouseLeave={() => setHasCopiedRoomInfo(false)} hasRoom={!!room}>
+      <Tooltip>{hasCopiedRoomInfo ? 'Room information copied to clipboard' : 'Copy Room Information'}</Tooltip>
+
       <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           fillRule="evenodd"
