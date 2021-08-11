@@ -1,4 +1,4 @@
-# Twilio Video Inspector
+# Twilio Video Room Monitor
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg&circle-token=e455a056673b1eb7a7692269da5154167b0eb32a)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
 
@@ -18,11 +18,11 @@ You can install directly from npm.
 npm install @twilio/video-room-monitor --save
 ```
 
-Using this method, you can import 'twilio-room-monitor' like so:
+Using this method, you can import 't@twilio/video-room-monitor' like so:
 
 ```js
 import Video from 'twilio-video';
-import VideoRoomMontitor from 'twilio-video-room-monitor';
+import { VideoRoomMontitor } from '@twilio/video-room-monitor';
 
 Video.connect('token').then((room) => {
   VideoRoomMontitor.registerRoom(room);
