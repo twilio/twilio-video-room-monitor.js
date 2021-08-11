@@ -38,6 +38,7 @@
     "@visx/xychart": "^1.10.1",
     "d3-array": "^2.12.1",
     "eventemitter3": "^4.0.7",
+    "lodash": "^4.17.21",
     "react-spring": "^9.1.2",
     "styled-components": "^5.2.1"
   },
