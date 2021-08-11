@@ -57,7 +57,6 @@ export function CopyButton() {
       const text = JSON.stringify({ ...newRoom, connectionOptions: room._options }, null, 2);
       navigator.clipboard.writeText(text).then(() => {
         setHasCopiedRoomInfo(true);
-        console.log(hasCopiedRoomInfo);
       });
     }
   };
