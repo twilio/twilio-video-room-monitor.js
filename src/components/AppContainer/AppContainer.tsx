@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import useDrag from '../../hooks/useDrag/useDrag';
 import useRoom from '../../hooks/useRoom/useRoom';
-import { CopyButton } from './CopyButton';
+import { CopyButton } from './CopyButton/CopyButton';
 import {
   Bar,
   ChildrenContainer,

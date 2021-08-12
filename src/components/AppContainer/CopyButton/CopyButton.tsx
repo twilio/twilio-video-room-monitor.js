@@ -1,9 +1,10 @@
+import _ from 'lodash';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import useRoom from '../../hooks/useRoom/useRoom';
-import { theme } from '../theme';
+import useRoom from '../../../hooks/useRoom/useRoom';
+import { theme } from '../../theme';
 
-const CopyButtonContainer = styled.div<{ hasRoom: boolean }>`
+export const CopyButtonContainer = styled.div<{ hasRoom: boolean }>`
   display: flex;
   position: relative;
   margin: 0 1em;
@@ -14,7 +15,7 @@ const CopyButtonContainer = styled.div<{ hasRoom: boolean }>`
   }
 `;
 
-const Tooltip = styled.div`
+export const Tooltip = styled.div`
   position: absolute;
   background: #4f4f4f;
   font-size: 0.75rem;
@@ -40,13 +41,21 @@ const Tooltip = styled.div`
   }
 `;
 
+const removeProcessors = (value: any, key: any) => {
+  if (key === 'processor') {
+    return Boolean(value);
+  }
+};
+
 export function CopyButton() {
   const room = useRoom();
   const [hasCopiedRoomInfo, setHasCopiedRoomInfo] = useState(false);
 
   const handleRoomCopy = () => {
     if (room) {
-      const text = JSON.stringify({ ...room, connectionOptions: room._options }, null, 2);
+      const newRoom = _.cloneDeepWith(room, removeProcessors);
+      const newOptions = _.cloneDeepWith(room._options, removeProcessors);
+      const text = JSON.stringify({ ...newRoom, connectionOptions: newOptions }, null, 2);
       navigator.clipboard.writeText(text).then(() => {
         setHasCopiedRoomInfo(true);
       });

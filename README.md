@@ -1,4 +1,4 @@
-# Twilio Video Inspector
+# Twilio Video Room Monitor
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg&circle-token=e455a056673b1eb7a7692269da5154167b0eb32a)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
 
@@ -18,11 +18,11 @@ You can install directly from npm.
 npm install @twilio/video-room-monitor --save
 ```
 
-Using this method, you can import 'twilio-room-monitor' like so:
+Using this method, you can import '@twilio/video-room-monitor' like so:
 
 ```js
 import Video from 'twilio-video';
-import VideoRoomMontitor from 'twilio-video-room-monitor';
+import { VideoRoomMontitor } from '@twilio/video-room-monitor';
 
 Video.connect('token').then((room) => {
   VideoRoomMontitor.registerRoom(room);
@@ -46,7 +46,7 @@ window.Twilio.VideoRoomMontitor.openMonitor()
 
 ### Console Script
 
-You can also run the following snippet in the browser console of a twilio-video.js app to load the inspector. Note that you must be able to register the room object in order for this to work:
+You can also run the following snippet in the browser console of a twilio-video.js app to load the monitor. Note that you must be able to register the room object in order for this to work:
 
 ```js
 (() => {
@@ -134,7 +134,7 @@ Run `npm install` to install all dependencies from NPM.
 
 This will compile the app (in watch mode) into a directory (`dist/node`) that will allow users to install the Monitor locally with NPM.
 
-`npm install -S <path_to_monitor>`
+#### `npm install -S <path_to_monitor>`
 
 NPM will install the Monitor as a symlink, so as files are edited, saved, and re-compiled, they will automatically be reflected in the application that has installed the Monitor locally.
 
