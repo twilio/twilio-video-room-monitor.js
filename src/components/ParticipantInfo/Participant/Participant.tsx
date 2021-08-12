@@ -18,11 +18,11 @@ import { VideoTrackPublicationInfo } from '../VideoTrackPublicationInfo/VideoTra
 import { AudioTrackPublicationInfo } from '../AudioTrackPublicationInfo/AudioTrackPublicationInfo';
 import { DataTrackPublicationInfo } from '../DataTrackPublicationInfo/DataTrackPublicationInfo';
 
-export const Participant = ({ participant }: { participant: ParticipantImpl }) => {
+export const Participant = ({ participant, isLocal }: { participant: ParticipantImpl; isLocal?: boolean }) => {
   const networkQualityLevel = useParticipantNetworkQualityLevel(participant);
   const isReconnecting = useParticipantIsReconnecting(participant);
 
-  const publications = usePublications(participant);
+  const publications = usePublications(participant, isLocal);
 
   const dataTrackPublications = publications.filter((publication) => publication.kind === 'data');
   const audioTrackPublications = publications.filter((publication) => publication.kind === 'audio');
