@@ -84,7 +84,7 @@ describe('the usePublications hook', () => {
 
     it('should clear the setInterval ID when the participant changes', async () => {
       jest.spyOn(window, 'clearInterval');
-      const { result, rerender } = renderHook(({ participant, isLocal }) => usePublications(participant, isLocal), {
+      const { rerender } = renderHook(({ participant, isLocal }) => usePublications(participant, isLocal), {
         initialProps: { participant: mockParticipant, isLocal: true },
       });
       mockParticipant = new EventEmitter();
