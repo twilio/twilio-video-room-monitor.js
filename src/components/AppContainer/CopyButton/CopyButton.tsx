@@ -54,7 +54,8 @@ export function CopyButton() {
   const handleRoomCopy = () => {
     if (room) {
       const newRoom = _.cloneDeepWith(room, removeProcessors);
-      const text = JSON.stringify({ ...newRoom, connectionOptions: room._options }, null, 2);
+      const newOptions = _.cloneDeepWith(room._options, removeProcessors);
+      const text = JSON.stringify({ ...newRoom, connectionOptions: newOptions }, null, 2);
       navigator.clipboard.writeText(text).then(() => {
         setHasCopiedRoomInfo(true);
       });

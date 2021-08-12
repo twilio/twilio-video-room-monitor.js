@@ -25,6 +25,10 @@ mockUseRoom.mockImplementation(() => ({
   },
   _options: {
     name: 'test',
+    tracks: {
+      audio: { kind: 'audioOptions', processor: null },
+      video: { kind: 'videoOptions', processor: { kind: 'Options' } },
+    },
   },
 }));
 
@@ -43,7 +47,7 @@ describe('the CopyButton component', () => {
     });
   });
 
-  it('should change the processor values to booleans when the button is clicked', () => {
+  it('should change the processor values to booleans for the room object when clicked', () => {
     const wrapper = shallow(<CopyButton />);
     wrapper.find(CopyButtonContainer).simulate('click');
     expect(mockWriteText.mock.calls[0][0]).toMatchInlineSnapshot(`
@@ -72,10 +76,30 @@ describe('the CopyButton component', () => {
           }
         },
         \\"_options\\": {
-          \\"name\\": \\"test\\"
+          \\"name\\": \\"test\\",
+          \\"tracks\\": {
+            \\"audio\\": {
+              \\"kind\\": \\"audioOptions\\",
+              \\"processor\\": false
+            },
+            \\"video\\": {
+              \\"kind\\": \\"videoOptions\\",
+              \\"processor\\": true
+            }
+          }
         },
         \\"connectionOptions\\": {
-          \\"name\\": \\"test\\"
+          \\"name\\": \\"test\\",
+          \\"tracks\\": {
+            \\"audio\\": {
+              \\"kind\\": \\"audioOptions\\",
+              \\"processor\\": false
+            },
+            \\"video\\": {
+              \\"kind\\": \\"videoOptions\\",
+              \\"processor\\": true
+            }
+          }
         }
       }"
     `);
