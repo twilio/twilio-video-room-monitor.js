@@ -7,7 +7,9 @@ exports[`the ParticipantInfo component should render correctly for each particip
     3
     ):
   </Memo(styled.h3)>
-  <Participant />
+  <Participant
+    isLocal={true}
+  />
   <Participant
     key="testSid1"
     participant={
