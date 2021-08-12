@@ -18,7 +18,7 @@ You can install directly from npm.
 npm install @twilio/video-room-monitor --save
 ```
 
-Using this method, you can import 't@twilio/video-room-monitor' like so:
+Using this method, you can import '@twilio/video-room-monitor' like so:
 
 ```js
 import Video from 'twilio-video';
