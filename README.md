@@ -46,7 +46,7 @@ window.Twilio.VideoRoomMontitor.openMonitor()
 
 ### Console Script
 
-You can also run the following snippet in the browser console of a twilio-video.js app to load the inspector. Note that you must be able to register the room object in order for this to work:
+You can also run the following snippet in the browser console of a twilio-video.js app to load the monitor. Note that you must be able to register the room object in order for this to work:
 
 ```js
 (() => {
