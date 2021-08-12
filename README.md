@@ -134,7 +134,7 @@ Run `npm install` to install all dependencies from NPM.
 
 This will compile the app (in watch mode) into a directory (`dist/node`) that will allow users to install the Monitor locally with NPM.
 
-`npm install -S <path_to_monitor>`
+#### `npm install -S <path_to_monitor>`
 
 NPM will install the Monitor as a symlink, so as files are edited, saved, and re-compiled, they will automatically be reflected in the application that has installed the Monitor locally.
 
