@@ -1,6 +1,6 @@
 {
   "name": "@twilio/video-room-monitor",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Twilio Video Room Monitor Javascript Library",
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
@@ -12,7 +12,7 @@
     "parcel:watch": "cross-env PARCEL_TARGET=browser parcel src/index.tsx --no-hmr --out-dir dist/browser",
     "build": "npm run build:node && npm run build:browser",
     "build:node": "tsc",
-    "build:browser": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --out-dir dist/browser --target browser --experimental-scope-hoisting",
+    "build:browser": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --out-dir dist/browser --target browser",
     "release": "release",
     "ts": "tsc --noEmit"
   },
@@ -25,7 +25,6 @@
     "monitor",
     "webrtc"
   ],
-  "author": "",
   "bugs": {
     "url": "https://github.com/twilio/twilio-video-room-monitor.js/issues"
   },
@@ -35,16 +34,14 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@visx/xychart": "^1.10.1",
+    "@visx/xychart": "^1.18.1",
     "d3-array": "^2.12.1",
     "eventemitter3": "^4.0.7",
     "lodash": "^4.17.21",
-    "react-spring": "^9.1.2",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^5.1.2",
-    "@types/chrome": "0.0.126",
     "@types/d3-array": "^2.9.0",
     "@types/jest": "26.0.23",
     "@types/node": "^14.14.10",
@@ -98,6 +95,7 @@
     }
   },
   "files": [
-    "dist/**/!(*.test).js"
+    "dist/**/!(*.test).js",
+    "dist/node/index.d.ts"
   ]
 }
