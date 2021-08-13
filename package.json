@@ -42,7 +42,6 @@
   },
   "devDependencies": {
     "@testing-library/react-hooks": "^5.1.2",
-    "@types/chrome": "0.0.126",
     "@types/d3-array": "^2.9.0",
     "@types/jest": "26.0.23",
     "@types/node": "^14.14.10",
