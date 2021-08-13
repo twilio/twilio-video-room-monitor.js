@@ -1,6 +1,8 @@
 # Twilio Video Room Monitor
 
-[![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg&circle-token=e455a056673b1eb7a7692269da5154167b0eb32a)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
+[![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
+
+_The Twilio Video Room Monitor is currently in beta. If you have feedback on how we can improve this tool going forward, we would love to hear from you. Feel free to provide this feedback by opening an Issue._
 
 ## What is it
 
@@ -35,13 +37,13 @@ Video.connect('token').then((room) => {
 You can also copy `twilio-video-room-monitor.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor@0.0.1/dist/twilio-video-room-monitor.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor.js/dist/browser/twilio-video-room-monitor.min.js"></script>
 ```
 
 Using this method, you can open the room monitor like so:
 
-```
-window.Twilio.VideoRoomMontitor.openMonitor()
+```js
+window.Twilio.VideoRoomMontitor.openMonitor();
 ```
 
 ### Console Script
@@ -52,7 +54,7 @@ You can also run the following snippet in the browser console of a twilio-video.
 (() => {
   const script = document.createElement('script');
   script.src =
-    'https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor@0.0.1/dist/twilio-video-room-monitor.min.js';
+    'https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor.js/dist/browser/twilio-video-room-monitor.min.js';
   // Register your Twilio Video Room here
   script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
   document.body.appendChild(script);
@@ -61,8 +63,8 @@ You can also run the following snippet in the browser console of a twilio-video.
 
 Using this method, you can open the monitor like so:
 
-```
-Twilio.VideoRoomMontitor.openMonitor()
+```js
+Twilio.VideoRoomMontitor.openMonitor();
 ```
 
 ## API:
@@ -71,21 +73,21 @@ Twilio.VideoRoomMontitor.openMonitor()
 
 This is a **required** step to be able to use the Video Room Monitor. This registers a Twilio Video Room. To register a room, you can run the following line of code:
 
-```
-Twilio.VideoRoomMonitor.registerVideoRoom(newRoom);
+```js
+VideoRoomMonitor.registerVideoRoom(newRoom);
 ```
 
 #### `openMonitor()`
 
 This opens the monitor and emits the `opened` event. To open the monitor, you can run this line of code in the console:
 
-```
-Twilio.VideoRoomMontitor.openMonitor()
+```js
+VideoRoomMontitor.openMonitor();
 ```
 
 To listen for the `opened` event, you can run the following line of code:
 
-```
+```js
 VideoRoomMontior.on('opened', () => console.log('the monitor has been opened'));
 ```
 
@@ -93,13 +95,13 @@ VideoRoomMontior.on('opened', () => console.log('the monitor has been opened'));
 
 This closes the monitor and emits the `closed` event. To close the monitor, you can run this line of code in the console:
 
-```
-Twilio.VideoRoomMontitor.closeMonitor()
+```js
+VideoRoomMontitor.closeMonitor();
 ```
 
 To listen for the `closed` event, you can run the following line of code:
 
-```
+```js
 VideoRoomMontior.on('closed', () => console.log('the monitor has been closed'));
 ```
 
@@ -107,13 +109,17 @@ VideoRoomMontior.on('closed', () => console.log('the monitor has been closed'));
 
 This toggles the monitor to be either open or closed. If the monitor is currently closed, then it will open the monitor (and emit the `opened` event) and vice versa. To toggle the monitor, you can run this line of code in the console:
 
-```
-Twilio.VideoRoomMontitor.toggleMonitor()
+```js
+VideoRoomMontitor.toggleMonitor();
 ```
 
 #### `isOpen`
 
 This is a boolean value that indicates whether or not the monitor is currently open.
+
+```js
+VideoRoomMontitor.isOpen;
+```
 
 ## Local Development:
 
