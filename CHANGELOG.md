@@ -1,4 +1,4 @@
-# 1.0.0 (August 13, 2021)
+# 0.1.0 (August 13, 2021)
 
 This is the intial release of the Twilio Video Room Monitor. Developers can now use this tool to gather insights and metrics on any Twilio Video JavaScript Application.
 
