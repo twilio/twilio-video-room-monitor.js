@@ -1,0 +1,2 @@
+import { LocalTrackPublication, RemoteTrackPublication } from 'twilio-video';
+export default function useTrack(publication: LocalTrackPublication | RemoteTrackPublication | undefined): import("twilio-video").LocalVideoTrack | import("twilio-video").LocalDataTrack | import("twilio-video").RemoteDataTrack | import("twilio-video").LocalAudioTrack | import("twilio-video").RemoteAudioTrack | import("twilio-video").RemoteVideoTrack | null | undefined;
