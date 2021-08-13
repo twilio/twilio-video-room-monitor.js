@@ -1,12 +1,34 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: circleci/node:16-browsers
-    working_directory: ~/twilio-video-inspector
+version: 2.1
+parameters:
+  tag:
+    type: string
+    default: ''
+  pr_workflow:
+    type: boolean
+    default: true
+  release_workflow:
+    type: boolean
+    default: false
+  release_command:
+    type: string
+    default: 'echo no release command was specified' # release-tool specifies the real command.
 
+executors:
+  docker-node:
+    docker:
+      - image: circleci/node:16
+
+commands:
+  get-code:
     steps:
       - checkout
+      - when:
+          condition: <<pipeline.parameters.tag>>
+          steps:
+            - run: git checkout <<pipeline.parameters.tag>>
+  get-code-and-dependencies:
+    steps:
+      - get-code
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run:
@@ -16,7 +38,24 @@ jobs:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
             - ./node_modules
-
+  lint:
+    steps:
+      - get-code-and-dependencies
+      - run:
+          name: Linting
+          command: npm run lint -- --max-warnings 0
+  build:
+    steps:
+      - get-code-and-dependencies
+      - run:
+          name: Building
+          command: npm run build
+      - store_artifacts:
+          path: ./dist
+          destination: dist
+  unit-tests:
+    steps:
+      - get-code-and-dependencies
       - run:
           name: 'Jest Unit Tests'
           command: npm run test:ci
@@ -32,19 +71,57 @@ jobs:
       - store_test_results:
           path: test-reports
 
-      - run:
-          name: 'Eslint'
-          command: npm run lint -- --max-warnings 0
-
-      - run:
-          name: 'TypeScript'
-          command: npm run ts
+jobs:
+  Lint:
+    executor: docker-node
+    steps:
+      - lint
+  Build:
+    executor: docker-node
+    steps:
+      - build
+  UnitTests:
+    executor: docker-node
+    steps:
+      - unit-tests
+  ExecuteRelease:
+    executor: docker-node
+    parameters:
+      dryRun:
+        type: boolean
+        default: true
+    steps:
+      - build
+      - when:
+          condition: <<parameters.dryRun>>
+          steps:
+            - run: echo Wait for other jobs in the workflow to finish
+            - run: echo Release will execute "<<pipeline.parameters.release_command>>"
+      - unless:
+          condition: <<parameters.dryRun>>
+          steps:
+            - run: <<pipeline.parameters.release_command>>
 
 workflows:
-  version: 2
-  build-and-deploy:
+  PullRequest:
+    when: <<pipeline.parameters.pr_workflow>>
     jobs:
-      - build:
-          filters:
-            tags:
-              only: /.*/
+      - Lint
+      - Build
+      - UnitTests
+  Release:
+    when: <<pipeline.parameters.release_workflow>>
+    jobs:
+      - Lint
+      - Build
+      - UnitTests
+      - ExecuteRelease:
+          dryRun: true
+          name: Release dry run
+          requires: [Lint, Build, UnitTests]
+      - hold:
+          type: approval
+          requires: [Release dry run]
+      - ExecuteRelease:
+          dryRun: false
+          requires: [hold]
