@@ -37,7 +37,7 @@ Video.connect('token').then((room) => {
 You can also copy `twilio-video-room-monitor.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor.js/dist/browser/twilio-video-room-monitor.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@twilio/video-room-monitor/dist/browser/twilio-video-room-monitor.min.js"></script>
 ```
 
 Using this method, you can open the room monitor like so:
@@ -53,10 +53,12 @@ You can also run the following snippet in the browser console of a twilio-video.
 ```js
 (() => {
   const script = document.createElement('script');
-  script.src =
-    'https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor.js/dist/browser/twilio-video-room-monitor.min.js';
-  // Register your Twilio Video Room here
-  script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+  script.src = 'https://cdn.jsdelivr.net/npm/@twilio/video-room-monitor/dist/browser/twilio-video-room-monitor.min.js';
+  script.onload = () => {
+    // Register your Twilio Video Room here
+    window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+    window.Twilio.VideoRoomMonitor.openMonitor();
+  };
   document.body.appendChild(script);
 })();
 ```
@@ -176,8 +178,11 @@ Or by running this code snippet in the console of your browser:
 (() => {
   const script = document.createElement('script');
   script.src = 'http://localhost:1234/index.js';
-  // Register your Twilio Video Room here
-  script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+  script.onload = () => {
+    // Register your Twilio Video Room here
+    window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+    window.Twilio.VideoRoomMonitor.openMonitor();
+  };
   document.body.appendChild(script);
 })();
 ```
