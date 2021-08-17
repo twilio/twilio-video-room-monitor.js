@@ -34,29 +34,32 @@ Video.connect('token').then((room) => {
 
 ### Script Tag
 
-You can also copy `twilio-video-room-monitor.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
+You can also copy `twilio-video-room-monitor.min.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor.js/dist/browser/twilio-video-room-monitor.min.js"></script>
+<script src="https://my-server-path/twilio-video-room-monitor.min.js"></script>
 ```
 
-Using this method, you can open the room monitor like so:
+Using this method, you can register a room and open the room monitor like so:
 
 ```js
+window.Twilio.VideoRoomMontitor.registerRoom(room);
 window.Twilio.VideoRoomMontitor.openMonitor();
 ```
 
-### Console Script
+### Console Script Quickstart (not for production use)
 
-You can also run the following snippet in the browser console of a twilio-video.js app to load the monitor. Note that you must be able to register the room object in order for this to work:
+As a way to quickly use the Video Room Monitor in any Twilio Video JavaScript application, you can also run the following snippet in the browser console to load the Monitor. Note that the [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) must be exposed as a global variable so that it can be registered with the Monitor:
 
 ```js
 (() => {
   const script = document.createElement('script');
-  script.src =
-    'https://cdn.jsdelivr.net/gh/twilio/twilio-video-room-monitor.js/dist/browser/twilio-video-room-monitor.min.js';
-  // Register your Twilio Video Room here
-  script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+  script.src = 'https://cdn.jsdelivr.net/npm/@twilio/video-room-monitor/dist/browser/twilio-video-room-monitor.min.js';
+  script.onload = () => {
+    // Register your Twilio Video Room here
+    window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+    window.Twilio.VideoRoomMonitor.openMonitor();
+  };
   document.body.appendChild(script);
 })();
 ```
@@ -167,7 +170,7 @@ Runs the linter.
 This will host the app on a local server. This server can then be used to run the tool in the browser by using a script tag:
 
 ```html
-<script src="http://localhost:1234/index.js></script>
+<script src="http://localhost:1234/twilio-video-room-monitor.js></script>
 ```
 
 Or by running this code snippet in the console of your browser:
@@ -175,9 +178,12 @@ Or by running this code snippet in the console of your browser:
 ```js
 (() => {
   const script = document.createElement('script');
-  script.src = 'http://localhost:1234/index.js';
-  // Register your Twilio Video Room here
-  script.onload = () => window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+  script.src = 'http://localhost:1234/twilio-video-room-monitor.js';
+  script.onload = () => {
+    // Register your Twilio Video Room here
+    window.Twilio.VideoRoomMonitor.registerVideoRoom(twilioRoom);
+    window.Twilio.VideoRoomMonitor.openMonitor();
+  };
   document.body.appendChild(script);
 })();
 ```
