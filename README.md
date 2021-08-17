@@ -40,9 +40,10 @@ You can also copy `twilio-video-room-monitor.min.js` from the `dist/browser` fol
 <script src="https://my-server-path/twilio-video-room-monitor.min.js"></script>
 ```
 
-Using this method, you can open the room monitor like so:
+Using this method, you can register a room and open the room monitor like so:
 
 ```js
+window.Twilio.VideoRoomMontitor.registerRoom(room);
 window.Twilio.VideoRoomMontitor.openMonitor();
 ```
 

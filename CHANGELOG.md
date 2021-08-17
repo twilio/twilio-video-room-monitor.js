@@ -2,7 +2,7 @@
 
 ### Improvements
 
-- The README has been updated to provide correct jsDelivr URLs.
+- The README has been updated to provide correct jsDelivr URL and improve usage instructions.
 
 # 1.0.0-beta.1 (August 13, 2021)
 
