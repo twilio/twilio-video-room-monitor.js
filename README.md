@@ -34,10 +34,10 @@ Video.connect('token').then((room) => {
 
 ### Script Tag
 
-You can also copy `twilio-video-room-monitor.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
+You can also copy `twilio-video-room-monitor.min.js` from the `dist/browser` folder and include it directly in your web app using a `<script>` tag.
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@twilio/video-room-monitor/dist/browser/twilio-video-room-monitor.min.js"></script>
+<script src="https://my-server-path/twilio-video-room-monitor.min.js"></script>
 ```
 
 Using this method, you can open the room monitor like so:
@@ -46,9 +46,9 @@ Using this method, you can open the room monitor like so:
 window.Twilio.VideoRoomMontitor.openMonitor();
 ```
 
-### Console Script
+### Console Script Quickstart (not for production use)
 
-You can also run the following snippet in the browser console of a twilio-video.js app to load the monitor. Note that you must be able to register the room object in order for this to work:
+As a way to quickly use the Video Room Monitor in any Twilio Video JavaScript application, you can also run the following snippet in the browser console to load the Monitor. Note that the [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) must be exposed as a global variable so that it can be registered with the Monitor:
 
 ```js
 (() => {
