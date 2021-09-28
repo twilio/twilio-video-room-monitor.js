@@ -24,7 +24,7 @@ Using this method, you can import '@twilio/video-room-monitor' like so:
 
 ```js
 import Video from 'twilio-video';
-import { VideoRoomMontitor } from '@twilio/video-room-monitor';
+import { VideoRoomMonitor } from '@twilio/video-room-monitor';
 
 Video.connect('token').then((room) => {
   VideoRoomMontitor.registerRoom(room);
