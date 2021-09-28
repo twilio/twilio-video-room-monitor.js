@@ -43,8 +43,8 @@ You can also copy `twilio-video-room-monitor.min.js` from the `dist/browser` fol
 Using this method, you can register a room and open the room monitor like so:
 
 ```js
-window.Twilio.VideoRoomMontitor.registerRoom(room);
-window.Twilio.VideoRoomMontitor.openMonitor();
+window.Twilio.VideoRoomMonitor.registerRoom(room);
+window.Twilio.VideoRoomMonitor.openMonitor();
 ```
 
 ### Console Script Quickstart (not for production use)
@@ -67,7 +67,7 @@ As a way to quickly use the Video Room Monitor in any Twilio Video JavaScript ap
 Using this method, you can open the monitor like so:
 
 ```js
-Twilio.VideoRoomMontitor.openMonitor();
+Twilio.VideoRoomMonitor.openMonitor();
 ```
 
 ## API:
@@ -85,7 +85,7 @@ VideoRoomMonitor.registerVideoRoom(newRoom);
 This opens the monitor and emits the `opened` event. To open the monitor, you can run this line of code in the console:
 
 ```js
-VideoRoomMontitor.openMonitor();
+VideoRoomMonitor.openMonitor();
 ```
 
 To listen for the `opened` event, you can run the following line of code:
@@ -99,7 +99,7 @@ VideoRoomMontior.on('opened', () => console.log('the monitor has been opened'));
 This closes the monitor and emits the `closed` event. To close the monitor, you can run this line of code in the console:
 
 ```js
-VideoRoomMontitor.closeMonitor();
+VideoRoomMonitor.closeMonitor();
 ```
 
 To listen for the `closed` event, you can run the following line of code:
@@ -113,7 +113,7 @@ VideoRoomMontior.on('closed', () => console.log('the monitor has been closed'));
 This toggles the monitor to be either open or closed. If the monitor is currently closed, then it will open the monitor (and emit the `opened` event) and vice versa. To toggle the monitor, you can run this line of code in the console:
 
 ```js
-VideoRoomMontitor.toggleMonitor();
+VideoRoomMonitor.toggleMonitor();
 ```
 
 #### `isOpen`
@@ -121,7 +121,7 @@ VideoRoomMontitor.toggleMonitor();
 This is a boolean value that indicates whether or not the monitor is currently open.
 
 ```js
-VideoRoomMontitor.isOpen;
+VideoRoomMonitor.isOpen;
 ```
 
 ## Local Development:
