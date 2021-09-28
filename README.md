@@ -27,8 +27,8 @@ import Video from 'twilio-video';
 import { VideoRoomMonitor } from '@twilio/video-room-monitor';
 
 Video.connect('token').then((room) => {
-  VideoRoomMontitor.registerRoom(room);
-  VideoRoomMontitor.openMonitor();
+  VideoRoomMonitor.registerRoom(room);
+  VideoRoomMonitor.openMonitor();
 });
 ```
 
