@@ -43,7 +43,7 @@ You can also copy `twilio-video-room-monitor.min.js` from the `dist/browser` fol
 Using this method, you can register a room and open the room monitor like so:
 
 ```js
-window.Twilio.VideoRoomMonitor.registerRoom(room);
+window.Twilio.VideoRoomMonitor.registerVideoRoom(room);
 window.Twilio.VideoRoomMonitor.openMonitor();
 ```
 
@@ -72,7 +72,7 @@ Twilio.VideoRoomMonitor.openMonitor();
 
 ## API:
 
-#### `registerRoom()`
+#### `registerVideoRoom()`
 
 This is a **required** step to be able to use the Video Room Monitor. This registers a Twilio Video Room. To register a room, you can run the following line of code:
 
