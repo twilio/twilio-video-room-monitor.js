@@ -91,7 +91,7 @@ VideoRoomMonitor.openMonitor();
 To listen for the `opened` event, you can run the following line of code:
 
 ```js
-VideoRoomMontior.on('opened', () => console.log('the monitor has been opened'));
+VideoRoomMonitor.on('opened', () => console.log('the monitor has been opened'));
 ```
 
 #### `closeMonitor()`
@@ -105,7 +105,7 @@ VideoRoomMonitor.closeMonitor();
 To listen for the `closed` event, you can run the following line of code:
 
 ```js
-VideoRoomMontior.on('closed', () => console.log('the monitor has been closed'));
+VideoRoomMonitor.on('closed', () => console.log('the monitor has been closed'));
 ```
 
 #### `toggleMonitor()`
