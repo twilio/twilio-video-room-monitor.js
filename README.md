@@ -24,11 +24,11 @@ Using this method, you can import '@twilio/video-room-monitor' like so:
 
 ```js
 import Video from 'twilio-video';
-import { VideoRoomMontitor } from '@twilio/video-room-monitor';
+import { VideoRoomMonitor } from '@twilio/video-room-monitor';
 
 Video.connect('token').then((room) => {
-  VideoRoomMontitor.registerRoom(room);
-  VideoRoomMontitor.openMonitor();
+  VideoRoomMonitor.registerVideoRoom(room);
+  VideoRoomMonitor.openMonitor();
 });
 ```
 
@@ -43,8 +43,8 @@ You can also copy `twilio-video-room-monitor.min.js` from the `dist/browser` fol
 Using this method, you can register a room and open the room monitor like so:
 
 ```js
-window.Twilio.VideoRoomMontitor.registerRoom(room);
-window.Twilio.VideoRoomMontitor.openMonitor();
+window.Twilio.VideoRoomMonitor.registerVideoRoom(room);
+window.Twilio.VideoRoomMonitor.openMonitor();
 ```
 
 ### Console Script Quickstart (not for production use)
@@ -67,12 +67,12 @@ As a way to quickly use the Video Room Monitor in any Twilio Video JavaScript ap
 Using this method, you can open the monitor like so:
 
 ```js
-Twilio.VideoRoomMontitor.openMonitor();
+Twilio.VideoRoomMonitor.openMonitor();
 ```
 
 ## API:
 
-#### `registerRoom()`
+#### `registerVideoRoom()`
 
 This is a **required** step to be able to use the Video Room Monitor. This registers a Twilio Video Room. To register a room, you can run the following line of code:
 
@@ -85,13 +85,13 @@ VideoRoomMonitor.registerVideoRoom(newRoom);
 This opens the monitor and emits the `opened` event. To open the monitor, you can run this line of code in the console:
 
 ```js
-VideoRoomMontitor.openMonitor();
+VideoRoomMonitor.openMonitor();
 ```
 
 To listen for the `opened` event, you can run the following line of code:
 
 ```js
-VideoRoomMontior.on('opened', () => console.log('the monitor has been opened'));
+VideoRoomMonitor.on('opened', () => console.log('the monitor has been opened'));
 ```
 
 #### `closeMonitor()`
@@ -99,13 +99,13 @@ VideoRoomMontior.on('opened', () => console.log('the monitor has been opened'));
 This closes the monitor and emits the `closed` event. To close the monitor, you can run this line of code in the console:
 
 ```js
-VideoRoomMontitor.closeMonitor();
+VideoRoomMonitor.closeMonitor();
 ```
 
 To listen for the `closed` event, you can run the following line of code:
 
 ```js
-VideoRoomMontior.on('closed', () => console.log('the monitor has been closed'));
+VideoRoomMonitor.on('closed', () => console.log('the monitor has been closed'));
 ```
 
 #### `toggleMonitor()`
@@ -113,7 +113,7 @@ VideoRoomMontior.on('closed', () => console.log('the monitor has been closed'));
 This toggles the monitor to be either open or closed. If the monitor is currently closed, then it will open the monitor (and emit the `opened` event) and vice versa. To toggle the monitor, you can run this line of code in the console:
 
 ```js
-VideoRoomMontitor.toggleMonitor();
+VideoRoomMonitor.toggleMonitor();
 ```
 
 #### `isOpen`
@@ -121,7 +121,7 @@ VideoRoomMontitor.toggleMonitor();
 This is a boolean value that indicates whether or not the monitor is currently open.
 
 ```js
-VideoRoomMontitor.isOpen;
+VideoRoomMonitor.isOpen;
 ```
 
 ## Local Development:
