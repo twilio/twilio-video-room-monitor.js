@@ -5,7 +5,7 @@ node_modules/
 coverage
 
 dist/
-.cache/
+.parcel-cache/
 
 junit.xml
 
