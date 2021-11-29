@@ -38,13 +38,13 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@swc/helpers": "0.2.14",
-    "@visx/curve": "2.1.0",
+    "@swc/helpers": "^0.2.14",
+    "@visx/curve": "^2.1.0",
     "@visx/xychart": "^1.18.1",
     "d3-array": "^2.12.1",
     "eventemitter3": "^4.0.7",
     "lodash": "^4.17.21",
-    "react-spring": "9.3.2",
+    "react-spring": "^8.0.27",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
