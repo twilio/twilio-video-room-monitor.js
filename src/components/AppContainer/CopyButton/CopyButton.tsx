@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import cloneDeepWith from 'lodash/cloneDeepWith';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import useRoom from '../../../hooks/useRoom/useRoom';
@@ -53,8 +53,8 @@ export function CopyButton() {
 
   const handleRoomCopy = () => {
     if (room) {
-      const newRoom = _.cloneDeepWith(room, removeProcessors);
-      const newOptions = _.cloneDeepWith(room._options, removeProcessors);
+      const newRoom = cloneDeepWith(room, removeProcessors);
+      const newOptions = cloneDeepWith(room._options, removeProcessors);
       const text = JSON.stringify({ ...newRoom, connectionOptions: newOptions }, null, 2);
       navigator.clipboard.writeText(text).then(() => {
         setHasCopiedRoomInfo(true);

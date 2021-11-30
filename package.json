@@ -15,8 +15,8 @@
     "prebuild": "rimraf dist/",
     "build": "npm run build:node && npm run build:browser && npm run build:browser:min",
     "build:node": "tsc",
-    "build:browser": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --no-scope-hoist --target regular",
-    "build:browser:min": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --no-scope-hoist --target minified",
+    "build:browser": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --target regular",
+    "build:browser:min": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --target minified",
     "release": "release",
     "ts": "tsc --noEmit"
   },
@@ -38,7 +38,6 @@
   },
   "license": "Apache-2.0",
   "dependencies": {
-    "@swc/helpers": "^0.2.14",
     "@visx/curve": "^2.1.0",
     "@visx/xychart": "^1.18.1",
     "d3-array": "^2.12.1",
@@ -48,7 +47,7 @@
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
-    "@parcel/transformer-typescript-types": "2.0.1",
+    "@swc/helpers": "^0.2.14",
     "@testing-library/react-hooks": "^5.1.2",
     "@types/d3-array": "^2.9.0",
     "@types/enzyme": "^3.10.4",
@@ -109,9 +108,9 @@
   ],
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "> 1%, not IE 11",
+      "last 2 and_ff version",
+      "not op_mini all, not opera > 0, not samsung > 0"
     ],
     "development": [
       "last 1 chrome version",
@@ -120,7 +119,6 @@
     ]
   },
   "targets": {
-    "types": false,
     "regular": {
       "distDir": "dist/browser",
       "optimize": false
