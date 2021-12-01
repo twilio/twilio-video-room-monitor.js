@@ -4,19 +4,19 @@
   "description": "Twilio Video Room Monitor Javascript Library",
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
-  "regular": "dist/browser/twilio-video-room-monitor.js",
-  "minified": "dist/browser/twilio-video-room-monitor.min.js",
+  "browserTarget": "dist/browser/twilio-video-room-monitor.js",
+  "minifiedTarget": "dist/browser/twilio-video-room-monitor.min.js",
   "scripts": {
     "start": "tsc --watch",
     "test": "cross-env TZ=utc jest",
     "test:ci": "cross-env TZ=utc jest --ci --runInBand --reporters=default --reporters=jest-junit --coverage --silent",
     "lint": "eslint src",
-    "parcel:watch": "cross-env PARCEL_TARGET=browser parcel src/index.tsx --no-hmr --dist-dir dist/browser --target regular",
+    "parcel:watch": "cross-env PARCEL_TARGET=browser parcel src/index.tsx --no-hmr --dist-dir dist/browser --target browserTarget",
     "prebuild": "rimraf dist/",
     "build": "npm run build:node && npm run build:browser && npm run build:browser:min",
     "build:node": "tsc",
-    "build:browser": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --target regular",
-    "build:browser:min": "cross-env PARCEL_TARGET=browser parcel build src/index.tsx --no-source-maps --target minified",
+    "build:browser": "cross-env PARCEL_TARGET=browser parcel build --target browserTarget",
+    "build:browser:min": "cross-env PARCEL_TARGET=browser parcel build --target minifiedTarget",
     "release": "release",
     "ts": "tsc --noEmit"
   },
@@ -119,13 +119,19 @@
     ]
   },
   "targets": {
-    "regular": {
+    "browserTarget": {
+      "source": "src/index.tsx",
       "distDir": "dist/browser",
-      "optimize": false
+      "optimize": false,
+      "sourceMap": false,
+      "scopeHoist": false
     },
-    "minified": {
+    "minifiedTarget": {
+      "source": "src/index.tsx",
       "distDir": "dist/browser",
-      "optimize": true
+      "optimize": true,
+      "sourceMap": false,
+      "scopeHoist": true
     }
   }
 }
