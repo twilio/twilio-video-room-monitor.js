@@ -41,6 +41,26 @@ export function getTrackData(trackSid: string, statsReports: StatsReport[]) {
   return allCurrentTracks.filter((t) => t.trackSid === trackSid);
 }
 
+// Returns an array that only contains tracks that correspond to a simulcast layer
+// that is currently in use. All "configured" but inactive layers will be filtered out.
+export function removeInactiveLayers(
+  previousStats: StatsReport[] | undefined,
+  stats: StatsReport[] | undefined,
+  trackSid: string
+) {
+  if (!stats || !previousStats) return null;
+
+  const previousTracks = getTrackData(trackSid, previousStats);
+  const currentTracks = getTrackData(trackSid, stats);
+
+  const activeLayers = currentTracks.filter((currentTrack) => {
+    const previousTrack = previousTracks.find((t) => t.ssrc === currentTrack.ssrc);
+    return currentTrack?.bytesSent! > previousTrack?.bytesSent!;
+  });
+
+  return activeLayers;
+}
+
 export const round = (num: number) => Math.round((num + Number.EPSILON) * 10) / 10;
 
 // Returns the bandwidth usage for a given track SID in kilobytes per second.
@@ -113,7 +133,7 @@ export function useTrackData(trackSid: string) {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const trackData = getTrackData(trackSid, stats);
+  const trackData = removeInactiveLayers(previousStats, stats, trackSid);
 
-  return trackData[0];
+  return trackData![0];
 }

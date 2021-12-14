@@ -117,6 +117,48 @@ describe('the getTrackData function', () => {
   });
 });
 
+describe('the removeInactiveLayers function', () => {
+  const stats = [
+    {
+      localAudioTrackStats: [],
+      localVideoTrackStats: [
+        { trackSid: 'mockTrackSid', bytesSent: 40000, ssrc: 1 },
+        { trackSid: 'mockTrackSid', bytesSent: 30000, ssrc: 2 },
+        { trackSid: 'mockTrackSid', bytesSent: 20000, ssrc: 3 },
+      ],
+      remoteAudioTrackStats: [],
+      remoteVideoTrackStats: [],
+    },
+  ];
+  const previousStats = [
+    {
+      localAudioTrackStats: [],
+      localVideoTrackStats: [
+        { trackSid: 'mockTrackSid', bytesSent: 35000, ssrc: 1 },
+        { trackSid: 'mockTrackSid', bytesSent: 25000, ssrc: 2 },
+        { trackSid: 'mockTrackSid', bytesSent: 20000, ssrc: 3 },
+      ],
+      remoteAudioTrackStats: [],
+      remoteVideoTrackStats: [],
+    },
+  ];
+
+  it('should return an array with all tracks for a specific trackSid that have an increased bytesSent value', () => {
+    expect(statsHooks.removeInactiveLayers(previousStats as any, stats as any, 'mockTrackSid')).toEqual([
+      { trackSid: 'mockTrackSid', bytesSent: 40000, ssrc: 1 },
+      { trackSid: 'mockTrackSid', bytesSent: 30000, ssrc: 2 },
+    ]);
+  });
+
+  it('should return null when "stats" is undefined', () => {
+    expect(statsHooks.removeInactiveLayers(previousStats as any, undefined, 'mockTrackSid')).toEqual(null);
+  });
+
+  it('should return null when "stats" and "previousStats" are undefined', () => {
+    expect(statsHooks.removeInactiveLayers(undefined, undefined, 'mockTrackSid')).toEqual(null);
+  });
+});
+
 describe('the useTrackBandwidth function', () => {
   it('should return null if there are no previous stats', () => {
     mockUseStats.mockImplementationOnce(() => ({
@@ -204,8 +246,8 @@ describe('the useTrackData function', () => {
       stats: [
         {
           localAudioTrackStats: [
-            { trackSid: 'mockTrackSid', name: 'mockTrack1' },
-            { trackSid: 'mockTrackSid', name: 'mockTrack2' },
+            { trackSid: 'mockTrackSid', name: 'mockTrack1', ssrc: 'mockSsrc1', bytesSent: 5 },
+            { trackSid: 'mockTrackSid', name: 'mockTrack2', ssrc: 'mockSsrc2', bytesSent: 4 },
           ],
           localVideoTrackStats: [],
           remoteAudioTrackStats: [],
@@ -214,14 +256,22 @@ describe('the useTrackData function', () => {
       ],
       previousStats: [
         {
-          localAudioTrackStats: [],
+          localAudioTrackStats: [
+            { trackSid: 'mockTrackSid', name: 'mockTrack1', ssrc: 'mockSsrc1', bytesSent: 2 },
+            { trackSid: 'mockTrackSid', name: 'mockTrack2', ssrc: 'mockSsrc2', bytesSent: 2 },
+          ],
           localVideoTrackStats: [],
           remoteAudioTrackStats: [],
           remoteVideoTrackStats: [],
         },
       ],
     }));
-    expect(statsHooks.useTrackData('mockTrackSid')).toEqual({ trackSid: 'mockTrackSid', name: 'mockTrack1' });
+    expect(statsHooks.useTrackData('mockTrackSid')).toEqual({
+      trackSid: 'mockTrackSid',
+      name: 'mockTrack1',
+      ssrc: 'mockSsrc1',
+      bytesSent: 5,
+    });
   });
 });
 
