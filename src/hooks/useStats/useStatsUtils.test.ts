@@ -143,7 +143,7 @@ describe('the removeInactiveLayers function', () => {
     },
   ];
 
-  it('should return an array with all tracks for a specific trackSid that have an increased bytesSent value', () => {
+  it('should return an array with all tracks for a specific trackSid that have an updated bytesSent value', () => {
     expect(statsHooks.removeInactiveLayers(previousStats as any, stats as any, 'mockTrackSid')).toEqual([
       { trackSid: 'mockTrackSid', bytesSent: 40000, ssrc: 1 },
       { trackSid: 'mockTrackSid', bytesSent: 30000, ssrc: 2 },

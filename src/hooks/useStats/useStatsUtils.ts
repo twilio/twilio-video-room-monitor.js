@@ -55,7 +55,7 @@ export function removeInactiveLayers(
 
   const activeLayers = currentTracks.filter((currentTrack) => {
     const previousTrack = previousTracks.find((t) => t.ssrc === currentTrack.ssrc);
-    return currentTrack?.bytesSent! > previousTrack?.bytesSent!;
+    return currentTrack.bytesSent !== previousTrack?.bytesSent;
   });
 
   return activeLayers;
