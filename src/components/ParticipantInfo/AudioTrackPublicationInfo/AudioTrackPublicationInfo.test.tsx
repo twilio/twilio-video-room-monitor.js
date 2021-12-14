@@ -46,7 +46,7 @@ describe('the AudioTrackInfo component', () => {
         packetsLost: null,
       }));
       const wrapper = shallow(<AudioTrackInfo track={{} as any} trackSid="testSid" />);
-      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('null%');
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe(null);
     });
 
     it('should display a value for the RemoteAudioTrack when both packetsReceived and packetsLost are defined', () => {
@@ -93,7 +93,7 @@ describe('the AudioTrackInfo component', () => {
       expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0%');
     });
 
-    it('should display 0% for the RemoteAudioTrack when packetsLost is null and packetsReceived is defined', () => {
+    it('should display null for the RemoteAudioTrack when packetsLost is null and packetsReceived is defined', () => {
       mockUseTrackData.mockImplementationOnce(() => ({
         codec: 'testCodec',
         frameRate: null,
@@ -101,10 +101,10 @@ describe('the AudioTrackInfo component', () => {
         packetsReceived: 29448,
       }));
       const wrapper = shallow(<AudioTrackInfo track={{} as any} trackSid="testSid" />);
-      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0%');
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe(null);
     });
 
-    it('should display 0% for the LocalAudioTrack when packetsLost is null and packetsSent is defined', () => {
+    it('should display null for the LocalAudioTrack when packetsLost is null and packetsSent is defined', () => {
       mockUseTrackData.mockImplementationOnce(() => ({
         codec: 'testCodec',
         frameRate: null,
@@ -112,7 +112,7 @@ describe('the AudioTrackInfo component', () => {
         packetsSent: 2134,
       }));
       const wrapper = shallow(<AudioTrackInfo track={{} as any} trackSid="testSid" />);
-      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe('0%');
+      expect(wrapper.find({ label: 'Packet Loss Percentage' }).prop('value')).toBe(null);
     });
   });
 });
