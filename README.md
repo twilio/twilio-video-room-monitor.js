@@ -2,15 +2,30 @@
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
 
-_The Twilio Video Room Monitor is currently in beta. If you have feedback on how we can improve this tool going forward, we would love to hear from you. Feel free to provide this feedback by opening an Issue._
+*We want your feedback! Please feel free to open a [GitHub issue](https://github.com/twilio/twilio-video-room-monitor.js/issues) for suggested improvements or feature requests.*
 
 ## What is it
 
-This browser-based tool gives video app developers visibility and insights into the inner workings of any [Twilio Video JavaScript application](https://github.com/twilio/twilio-video.js). It displays real-time information that is gathered from the Video SDKs [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) and relevant browser APIs.
+A browser-based tool that provides [Twilio Video JavaScript](https://github.com/twilio/twilio-video.js) developers visibility into the inner workings of their video application. It displays near real-time information and metrics from the [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) and can be added to any Twilio Video JavaScript application with a few lines of code.
 
 ![Room Monitor gif](https://user-images.githubusercontent.com/40278237/127718088-8581c62d-13c1-4766-850d-14e4afd3ef08.gif)
 
-## Getting Started:
+The Twilio Video Room Monitor can be used as a tool during all phases of development or can be customized and provided to end-users as an in-call troubleshooting view. 
+
+## Changelog
+View [Changelog.md](Changelog.md) for details about our releases.
+
+## Browser Support
+
+|             | Chrome | Edge (Chromium) | Firefox | Safari |
+| ------------|--------|-----------------|---------|--------|
+| **Android** | ✓      | -               | ✓       | -      |
+| **iOS**     | ✓      | -               | -       | ✓      |
+| **Linux**   | ✓      | -               | ✓       | -      |
+| **macOS**   | ✓      | ✓               | ✓       | ✓      |
+| **Windows** | ✓      | ✓               | ✓       | -      |
+
+## Getting Started
 
 ### NPM
 
@@ -20,7 +35,7 @@ You can install directly from npm.
 npm install @twilio/video-room-monitor --save
 ```
 
-Using this method, you can import '@twilio/video-room-monitor' like so:
+Using this method, you can import `@twilio/video-room-monitor` and open the monitor like so:
 
 ```js
 import Video from 'twilio-video';
@@ -70,7 +85,7 @@ Using this method, you can open the monitor like so:
 Twilio.VideoRoomMonitor.openMonitor();
 ```
 
-## API:
+## Usage
 
 #### `registerVideoRoom()`
 
@@ -124,7 +139,7 @@ This is a boolean value that indicates whether or not the monitor is currently o
 VideoRoomMonitor.isOpen;
 ```
 
-## Local Development:
+## Local Development
 
 ### Prerequisites
 
@@ -133,15 +148,19 @@ You must have the following installed:
 - [Node.js v14+](https://nodejs.org/en/download/)
 - NPM v7+ (comes installed with newer Node versions)
 
-### Install dependencies:
+### Install dependencies
 
-Run `npm install` to install all dependencies from NPM.
+Fork and clone the repository, then install all dependencies with
+
+```
+npm install
+```
 
 ### Scripts
 
 #### `npm start`
 
-This will compile the app (in watch mode) into a directory (`dist/node`) that will allow users to install the Monitor locally with NPM.
+Compile the app (in watch mode) into a directory (`dist/node`) that will allow users to install the Monitor locally with NPM.
 
 #### `npm install -S <path_to_monitor>`
 
@@ -189,3 +208,7 @@ Or by running this code snippet in the console of your browser:
 ```
 
 After this has finished running, you can run commands to open and close the monitor within the console.
+
+
+## License
+See [LICENSE](LICENSE). 
