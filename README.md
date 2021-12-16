@@ -64,7 +64,7 @@ window.Twilio.VideoRoomMonitor.openMonitor();
 
 ### Console Script Quickstart (not for production use)
 
-As a way to quickly use the Video Room Monitor in any Twilio Video JavaScript application, you can also run the following snippet in the browser console to load the Monitor. Note that the [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) must be exposed as a global variable so that it can be registered with the Monitor:
+As a way to quickly use the Video Room Monitor in any Twilio Video JavaScript application, you can also run the following snippet in the browser console to open the Monitor:
 
 ```js
 (() => {
@@ -78,11 +78,13 @@ As a way to quickly use the Video Room Monitor in any Twilio Video JavaScript ap
   document.body.appendChild(script);
 })();
 ```
-
-Using this method, you can open the monitor like so:
+Note that the [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) must be exposed as a global variable (`twilioRoom` as seen in the above example) so that it can be registered with the Monitor.
+ 
+Using this method, you can then close or toggle the monitor like so:
 
 ```js
-Twilio.VideoRoomMonitor.openMonitor();
+Twilio.VideoRoomMonitor.closeMonitor();
+Twilio.VideoRoomMonitor.toggleMonitor();
 ```
 **NOTE:** This method is not recommended for production use due to the CDN, as we don't have control of the availability of `cdn.jsdelivr.net`. 
 
