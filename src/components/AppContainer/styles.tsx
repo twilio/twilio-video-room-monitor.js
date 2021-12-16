@@ -2,10 +2,11 @@ import styled from 'styled-components';
 import { theme } from '../theme';
 
 export const Container = styled.div`
-  width: 500px;
+  width: ${theme.monitorWidth}px;
   height: 85vh;
   position: fixed;
   top: 0;
+  transform-origin: 0 0;
   z-index: 10000;
   border: 1px solid ${theme.borderColor};
   color: ${theme.borderColor};
@@ -19,6 +20,11 @@ export const Container = styled.div`
   & p,
   & text {
     font-family: 'Inter', sans-serif;
+  }
+  @media (max-width: ${theme.monitorWidth}px) {
+    height: 100vh;
+    top: 0 !important;
+    left: 0 !important;
   }
 `;
 
