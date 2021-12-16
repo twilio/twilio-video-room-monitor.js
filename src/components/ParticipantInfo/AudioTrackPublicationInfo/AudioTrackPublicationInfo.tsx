@@ -24,16 +24,15 @@ export const AudioTrackInfo: React.FC<{
   const trackData = useTrackData(trackSid) as LocalAudioTrackStats | RemoteAudioTrackStats | null;
   const mediaStreamTrack = useMediaStreamTrack(track);
 
-  let lossPercentage: string | null;
+  let lossPercentage: string | null = '';
 
   if (trackData) {
     const { packetsReceived, packetsSent, packetsLost } = trackData;
 
     const totalPackets = packetsReceived ?? packetsSent;
-    const numPacketsLost = packetsLost;
 
     lossPercentage =
-      totalPackets && numPacketsLost !== null ? `${((numPacketsLost / totalPackets) * 100).toLocaleString()}%` : null;
+      totalPackets && packetsLost !== null ? `${((packetsLost / totalPackets) * 100).toLocaleString()}%` : null;
   }
 
   return (
@@ -45,7 +44,7 @@ export const AudioTrackInfo: React.FC<{
           <Datum label="Codec" value={trackData.codec} />
           <Datum label="Jitter" value={trackData.jitter} />
           <Datum label="Packets Lost" value={trackData.packetsLost} />
-          <Datum label="Packet Loss Percentage" value={lossPercentage!} />
+          <Datum label="Packet Loss Percentage" value={lossPercentage} />
         </>
       )}
       <MediaStreamTrackInfo track={mediaStreamTrack} />
