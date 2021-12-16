@@ -10,7 +10,7 @@ A browser-based tool that provides [Twilio Video JavaScript](https://github.com/
 
 ![Room Monitor gif](https://user-images.githubusercontent.com/40278237/127718088-8581c62d-13c1-4766-850d-14e4afd3ef08.gif)
 
-The Twilio Video Room Monitor can be used as a tool during all phases of development or can be customized and provided to end-users as an in-call troubleshooting view. 
+The Twilio Video Room Monitor can be used as a tool during all phases of development or can be forked, customized, and provided to end-users as an in-call troubleshooting view. 
 
 ## Changelog
 View [Changelog.md](Changelog.md) for details about our releases.
@@ -84,6 +84,7 @@ Using this method, you can open the monitor like so:
 ```js
 Twilio.VideoRoomMonitor.openMonitor();
 ```
+**NOTE:** This method is not recommended for production use due to the CDN, as we don't have control of the availability of `cdn.jsdelivr.net`. 
 
 ## Usage
 
