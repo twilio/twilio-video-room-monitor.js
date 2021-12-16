@@ -21,6 +21,7 @@ export const Container = styled.div`
   & text {
     font-family: 'Inter', sans-serif;
   }
+
   @media (max-width: ${theme.monitorWidth}px) {
     height: 100vh;
     top: 0 !important;

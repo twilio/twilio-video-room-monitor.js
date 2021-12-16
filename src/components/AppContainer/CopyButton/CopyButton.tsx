@@ -39,6 +39,17 @@ export const Tooltip = styled.div`
   ${CopyButtonContainer}: hover & {
     visibility: visible;
   }
+
+  @media (max-width: ${theme.monitorWidth}px) {
+    left: auto;
+    right: 0;
+
+    &:before {
+      content: '';
+      right: 5px;
+      left: auto;
+    }
+  }
 `;
 
 const removeProcessors = (value: any, key: any) => {
