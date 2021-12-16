@@ -23,7 +23,7 @@ export const Container = styled.div`
   }
 
   @media (max-width: ${theme.monitorWidth}px) {
-    height: 100vh;
+    /* !important is used here to override the style attributes used for dragging */
     top: 0 !important;
     left: 0 !important;
   }

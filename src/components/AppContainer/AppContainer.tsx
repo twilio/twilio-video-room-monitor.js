@@ -29,6 +29,7 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
   let styles: React.CSSProperties = {};
 
   if (width < theme.monitorWidth) {
+    // For mobile devices, we have the Monitor cover the entire screen using transform: scale().
     const scale = width / theme.monitorWidth;
     styles = {
       transform: `scale(${scale})`,

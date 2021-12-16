@@ -12,6 +12,8 @@ export default function useDrag() {
 
     if (draggableEl && dragContainerEl) {
       const handleMousemove = (e: MouseEvent) => {
+        // On mobile devices, we disable dragging since the Monitor is
+        // displayed over the whole screen.
         if (window.innerWidth < theme.monitorWidth) return;
 
         const { x, y } = mousePositionRef.current;
