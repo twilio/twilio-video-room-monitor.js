@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { theme } from '../../components/theme';
 
 export default function useDrag() {
   const draggableRef = useRef<HTMLDivElement>(); // The element that the user drags
@@ -11,6 +12,8 @@ export default function useDrag() {
 
     if (draggableEl && dragContainerEl) {
       const handleMousemove = (e: MouseEvent) => {
+        if (window.innerWidth < theme.monitorWidth) return;
+
         const { x, y } = mousePositionRef.current;
         dragContainerEl.style.left = `${e.clientX - x}px`;
         dragContainerEl.style.top = `${e.clientY - y}px`;
