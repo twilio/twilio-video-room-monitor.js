@@ -43,12 +43,11 @@ export function getTrackData(trackSid: string, statsReports: StatsReport[]) {
 
 // Returns an array that only contains tracks that correspond to a simulcast layer
 // that is currently in use. All "configured" but inactive layers will be filtered out.
-export function removeInactiveLayers(
-  previousStats: StatsReport[] | undefined,
-  stats: StatsReport[] | undefined,
+export function getActiveTrackData(
+  previousStats: StatsReport[],
+  stats: StatsReport[],
   trackSid: string
 ) {
-  if (!stats || !previousStats) return null;
 
   const previousTracks = getTrackData(trackSid, previousStats);
   const currentTracks = getTrackData(trackSid, stats);
@@ -133,7 +132,7 @@ export function useTrackData(trackSid: string) {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const trackData = removeInactiveLayers(previousStats, stats, trackSid);
+  const trackData = getActiveTrackData(previousStats, stats, trackSid);
 
-  return trackData![0];
+  return trackData[0];
 }

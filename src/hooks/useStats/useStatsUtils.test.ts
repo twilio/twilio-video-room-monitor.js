@@ -117,7 +117,7 @@ describe('the getTrackData function', () => {
   });
 });
 
-describe('the removeInactiveLayers function', () => {
+describe('the getActiveTrackData function', () => {
   const stats = [
     {
       localAudioTrackStats: [],
@@ -144,18 +144,10 @@ describe('the removeInactiveLayers function', () => {
   ];
 
   it('should return an array with all tracks for a specific trackSid that have an updated bytesSent value', () => {
-    expect(statsHooks.removeInactiveLayers(previousStats as any, stats as any, 'mockTrackSid')).toEqual([
+    expect(statsHooks.getActiveTrackData(previousStats as any, stats as any, 'mockTrackSid')).toEqual([
       { trackSid: 'mockTrackSid', bytesSent: 40000, ssrc: 1 },
       { trackSid: 'mockTrackSid', bytesSent: 30000, ssrc: 2 },
     ]);
-  });
-
-  it('should return null when "stats" is undefined', () => {
-    expect(statsHooks.removeInactiveLayers(previousStats as any, undefined, 'mockTrackSid')).toEqual(null);
-  });
-
-  it('should return null when "stats" and "previousStats" are undefined', () => {
-    expect(statsHooks.removeInactiveLayers(undefined, undefined, 'mockTrackSid')).toEqual(null);
   });
 });
 
