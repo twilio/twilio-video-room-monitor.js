@@ -17,7 +17,7 @@ describe('the AppContainer Component', () => {
     expect(wrapper.prop('style')).toEqual({});
   });
 
-  it('should be scaled when the window width is larger than the app container width', () => {
+  it('should be scaled when the window width is smaller than the app container width', () => {
     mockUseWindowDimensions.mockImplementationOnce(() => ({ width: theme.monitorWidth / 2, height: 500 }));
     const wrapper = shallow(<AppContainer>{() => <p>mock child</p>}</AppContainer>);
     expect(wrapper.prop('style')).toEqual({ height: '1000px', transform: 'scale(0.5)' });
