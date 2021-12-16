@@ -41,9 +41,23 @@ export function getTrackData(trackSid: string, statsReports: StatsReport[]) {
   return allCurrentTracks.filter((t) => t.trackSid === trackSid);
 }
 
+// Returns an array that only contains tracks that correspond to a simulcast layer
+// that is currently in use. All "configured" but inactive layers will be filtered out.
+export function getActiveTrackData(previousStats: StatsReport[], stats: StatsReport[], trackSid: string) {
+  const previousTracks = getTrackData(trackSid, previousStats);
+  const currentTracks = getTrackData(trackSid, stats);
+
+  const activeLayers = currentTracks.filter((currentTrack) => {
+    const previousTrack = previousTracks.find((t) => t.ssrc === currentTrack.ssrc);
+    return currentTrack.bytesSent !== previousTrack?.bytesSent;
+  });
+
+  return activeLayers;
+}
+
 export const round = (num: number) => Math.round((num + Number.EPSILON) * 10) / 10;
 
-// Returns the bandwidth usage for a given track SID in kilobytes per second.
+// Returns the bandwidth usage for a given track SID in kilobits per second.
 // Returns null when track doesn't exist, or when information is not available.
 export function useTrackBandwidth(trackSid: string) {
   const { stats, previousStats } = useStats();
@@ -62,11 +76,11 @@ export function useTrackBandwidth(trackSid: string) {
   const currentTime = currentTrackData[0]?.timestamp;
   const previousTime = previousTrackData[0]?.timestamp;
 
-  // Calculate kilobytes per second. The timestamp is in milliseconds.
+  // Calculate kilobits per second. The timestamp is in milliseconds.
   return round((currentBytes - previousBytes) / (currentTime - previousTime)) * 8;
 }
 
-// Returns the bandwidth usage for all local or remote tracks in kilobytes per second.
+// Returns the bandwidth usage for all local or remote tracks in kilobits per second.
 // Returns null when information is not available.
 export function getTotalBandwidth(
   kind: 'bytesSent' | 'bytesReceived',
@@ -93,7 +107,7 @@ export function getTotalBandwidth(
         const prevBytes = prevTrack[kind] ?? null;
 
         if (currentBytes !== null && prevBytes !== null) {
-          // Calculate kilobytes per second. The timestamp is in milliseconds.
+          // Calculate kilobits per second. The timestamp is in milliseconds.
           return ((currentBytes - prevBytes) / (currentTrack.timestamp - prevTrack.timestamp)) * 8;
         } else {
           return null;
@@ -113,7 +127,7 @@ export function useTrackData(trackSid: string) {
   const { stats, previousStats } = useStats();
   if (!stats || !previousStats) return null;
 
-  const trackData = getTrackData(trackSid, stats);
+  const trackData = getActiveTrackData(previousStats, stats, trackSid);
 
   return trackData[0];
 }

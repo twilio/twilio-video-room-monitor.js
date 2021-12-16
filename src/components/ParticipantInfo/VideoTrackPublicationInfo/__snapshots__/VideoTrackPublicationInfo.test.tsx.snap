@@ -32,7 +32,7 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
   />
   <Memo(Datum)
     label="Packet Loss Percentage"
-    value="null%"
+    value={null}
   />
   <Memo(MediaStreamTrackInfo) />
 </Fragment>

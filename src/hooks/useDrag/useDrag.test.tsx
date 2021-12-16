@@ -1,4 +1,5 @@
 import { renderHook } from '@testing-library/react-hooks';
+import { theme } from '../../components/theme';
 import useDrag from './useDrag';
 
 // This mocks the useRef hook only, but keeps the rest of the React library the same
@@ -24,6 +25,11 @@ function triggerEvent(element: HTMLElement, eventName: string, data = {} as Mous
 }
 
 describe('the useDrag hook', () => {
+  beforeEach(() => {
+    // @ts-ignore
+    window.innerWidth = 1000;
+  });
+
   it('should respond to mousemove events after a mousedown event', () => {
     const {
       result: {
@@ -39,6 +45,26 @@ describe('the useDrag hook', () => {
 
     expect(dragContainerEl!.style.top).toEqual('-96px');
     expect(dragContainerEl!.style.left).toEqual('-8px');
+  });
+
+  it('should not respond to mousemove events after a mousedown event when the window width is less than the container width', () => {
+    //@ts-ignore
+    window.innerWidth = theme.monitorWidth - 1;
+
+    const {
+      result: {
+        current: {
+          draggableRef: { current: draggableEl },
+          dragContainerRef: { current: dragContainerEl },
+        },
+      },
+    } = renderHook(useDrag);
+
+    triggerEvent(draggableEl!, 'mousedown', { clientX: 10, clientY: 100 });
+    triggerEvent(document.body, 'mousemove', { clientX: 2, clientY: 4 });
+
+    expect(dragContainerEl!.style.top).toEqual('');
+    expect(dragContainerEl!.style.left).toEqual('');
   });
 
   it('should not respond to mousemove events when there is no mousedown event', () => {

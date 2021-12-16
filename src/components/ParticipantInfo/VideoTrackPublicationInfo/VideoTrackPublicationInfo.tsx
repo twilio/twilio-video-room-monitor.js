@@ -36,15 +36,15 @@ export const VideoTrackInfo: React.FC<{
   const trackData = useTrackData(trackSid) as LocalVideoTrackStats | RemoteVideoTrackStats | null;
   const mediaStreamTrack = useMediaStreamTrack(track);
 
-  let lossPercentage: string | null;
+  let lossPercentage: string | null = '';
 
   if (trackData) {
     const { packetsReceived, packetsSent, packetsLost } = trackData;
 
     const totalPackets = packetsReceived ?? packetsSent;
-    const numPacketsLost = packetsLost ?? 0;
 
-    lossPercentage = totalPackets ? ((numPacketsLost / totalPackets) * 100).toLocaleString() : null;
+    lossPercentage =
+      totalPackets && packetsLost !== null ? `${((packetsLost / totalPackets) * 100).toLocaleString()}%` : null;
   }
 
   return (
@@ -59,7 +59,7 @@ export const VideoTrackInfo: React.FC<{
           <Datum label="Codec" value={trackData.codec} />
           <Datum label="Framerate" value={trackData?.frameRate} />
           <Datum label="Packets Lost" value={trackData?.packetsLost} />
-          <Datum label="Packet Loss Percentage" value={lossPercentage! + '%'} />
+          <Datum label="Packet Loss Percentage" value={lossPercentage} />
         </>
       )}
       <MediaStreamTrackInfo track={mediaStreamTrack} />

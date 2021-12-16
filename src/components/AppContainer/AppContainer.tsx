@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { createGlobalStyle } from 'styled-components';
 import useDrag from '../../hooks/useDrag/useDrag';
 import useRoom from '../../hooks/useRoom/useRoom';
+import useWindowDimensions from '../../hooks/useWindowDimensions/useWindowDimensions';
 import { CopyButton } from './CopyButton/CopyButton';
 import {
   Bar,
@@ -13,6 +14,7 @@ import {
   OverflowContainer,
 } from './styles';
 import { VideoRoomMonitor } from '../../index';
+import { theme } from '../theme';
 
 createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
@@ -22,9 +24,21 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
   const { draggableRef, dragContainerRef } = useDrag();
   const [activeTab, setActiveTab] = useState<'info' | 'stats'>('info');
   const room = useRoom();
+  const { width, height } = useWindowDimensions();
+
+  let styles: React.CSSProperties = {};
+
+  if (width < theme.monitorWidth) {
+    // For mobile devices, we have the Monitor cover the entire screen using transform: scale().
+    const scale = width / theme.monitorWidth;
+    styles = {
+      transform: `scale(${scale})`,
+      height: height * (1 / scale) + 'px',
+    };
+  }
 
   return (
-    <Container ref={dragContainerRef as any}>
+    <Container ref={dragContainerRef as any} style={styles}>
       <Bar ref={draggableRef as any}>
         <span style={{ padding: '0.57em' }}>Twilio Video Room Monitor</span>
         <RightBarContainer>
