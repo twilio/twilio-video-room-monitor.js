@@ -1,6 +1,6 @@
 # 1.0.0 (December 17, 2021)
 
-The `1.0.0-beta.2` Twilio Video Room Monitor has been promoted to `1.0.0` and is now Generally Available!
+The Twilio Video Room Monitor has been promoted to `1.0.0` and is now Generally Available!
 
 ### Features
 
