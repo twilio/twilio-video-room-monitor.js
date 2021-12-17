@@ -12,6 +12,8 @@ A browser-based tool that provides [Twilio Video JavaScript](https://github.com/
 
 The Twilio Video Room Monitor can be used as a tool during all phases of development or can be forked, customized, and provided to end-users as an in-call troubleshooting view. 
 
+To learn more, visit the [Video Room Monitor Documentation](https://www.twilio.com/docs/video/troubleshooting/javascript-room-monitor).
+
 ## Changelog
 View [Changelog.md](Changelog.md) for details about our releases.
 
