@@ -1,3 +1,16 @@
+# 1.0.0 (December 17, 2021)
+
+The Twilio Video Room Monitor has been promoted to `1.0.0` and is now Generally Available!
+
+### Features
+
+- Mobile support now included!
+
+### Bug Fixes
+
+- Fix issue where the Twilio Video Room Monitor would crash after clicking on the `Stats` tab when using the [Script Tag](https://github.com/twilio/twilio-video-room-monitor.js#script-tag) method from the `README.md`.
+- Thank you to @shinework [#39](https://github.com/twilio/twilio-video-room-monitor.js/pull/39) for helping us correct `README.md` typos so that our users can properly copy and paste the code snippets!
+
 # 1.0.0-beta.2 (August 16, 2021)
 
 ### Improvements
