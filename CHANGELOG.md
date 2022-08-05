@@ -1,3 +1,13 @@
+# 1.0.1 (August 5, 2022)
+
+### Improvements
+
+- Added support for React 17
+
+### Maintenance
+
+- Upgraded [a number of packages](https://github.com/twilio/twilio-video-room-monitor.js/pull/49/files#diff-7ae45ad102eab3b6d7e7896acd08c427a9b25b346470d7bc6507b6481575d519).
+
 # 1.0.0 (December 17, 2021)
 
 The Twilio Video Room Monitor has been promoted to `1.0.0` and is now Generally Available!

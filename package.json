@@ -1,6 +1,6 @@
 {
   "name": "@twilio/video-room-monitor",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Twilio Video Room Monitor Javascript Library",
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
