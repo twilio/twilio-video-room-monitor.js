@@ -10,11 +10,6 @@ describe('the useMediaStreamTrack hook', () => {
     mockTrack.mediaStreamTrack = 'mockMediaStreamTrack';
   });
 
-  it('should return undefined when track is undefined', () => {
-    const { result } = renderHook(() => useMediaStreamTrack(undefined));
-    expect(result.current).toBe(undefined);
-  });
-
   it('should return mockTrack.mediaStreamTrack by default', () => {
     const { result } = renderHook(() => useMediaStreamTrack(mockTrack));
     expect(result.current).toBe('mockMediaStreamTrack');

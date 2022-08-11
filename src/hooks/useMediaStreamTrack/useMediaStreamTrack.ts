@@ -8,7 +8,7 @@ import { AudioTrack, VideoTrack } from 'twilio-video';
  * object will stay the same. Therefore this hook is needed in order for components
  * to rerender in response to the mediaStreamTrack changing.
  */
-export default function useMediaStreamTrack(track?: AudioTrack | VideoTrack) {
+export default function useMediaStreamTrack(track: AudioTrack | VideoTrack) {
   const [mediaStreamTrack, setMediaStreamTrack] = useState(track?.mediaStreamTrack);
 
   useEffect(() => {
@@ -27,5 +27,6 @@ export default function useMediaStreamTrack(track?: AudioTrack | VideoTrack) {
     }
   }, [track]);
 
-  return mediaStreamTrack;
+  // TODO: Remove type cast here when SDK corrects type definitions
+  return mediaStreamTrack as MediaStreamTrack | null;
 }
