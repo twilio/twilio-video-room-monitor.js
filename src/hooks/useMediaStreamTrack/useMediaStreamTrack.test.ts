@@ -29,9 +29,29 @@ describe('the useMediaStreamTrack hook', () => {
     expect(result.current).toBe('anotherMockMediaStreamTrack');
   });
 
+  it('should respond to "switchedOn" events', async () => {
+    const { result } = renderHook(() => useMediaStreamTrack(mockTrack));
+    act(() => {
+      mockTrack.mediaStreamTrack = 'anotherMockMediaStreamTrack';
+      mockTrack.emit('switchedOn');
+    });
+    expect(result.current).toBe('anotherMockMediaStreamTrack');
+  });
+
+  it('should respond to "switchedOff" events', async () => {
+    const { result } = renderHook(() => useMediaStreamTrack(mockTrack));
+    act(() => {
+      mockTrack.mediaStreamTrack = 'anotherMockMediaStreamTrack';
+      mockTrack.emit('switchedOff');
+    });
+    expect(result.current).toBe('anotherMockMediaStreamTrack');
+  });
+
   it('should clean up listeners on unmount', () => {
     const { unmount } = renderHook(() => useMediaStreamTrack(mockTrack));
     unmount();
     expect(mockTrack.listenerCount('started')).toBe(0);
+    expect(mockTrack.listenerCount('switchedOn')).toBe(0);
+    expect(mockTrack.listenerCount('switchedOff')).toBe(0);
   });
 });
