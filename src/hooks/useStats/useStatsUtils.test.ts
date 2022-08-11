@@ -151,7 +151,7 @@ describe('the getActiveTrackData function', () => {
   });
 
   it('should ignore tracks with empty ssrc values', () => {
-    const stats = [
+    const statsWithoutSsrc = [
       {
         localAudioTrackStats: [],
         localVideoTrackStats: [
@@ -163,7 +163,7 @@ describe('the getActiveTrackData function', () => {
         remoteVideoTrackStats: [],
       },
     ];
-    const previousStats = [
+    const previousStatsWithoutSsrc = [
       {
         localAudioTrackStats: [],
         localVideoTrackStats: [
@@ -176,7 +176,9 @@ describe('the getActiveTrackData function', () => {
       },
     ];
 
-    expect(statsHooks.getActiveTrackData(previousStats as any, stats as any, 'mockTrackSid')).toEqual([]);
+    expect(
+      statsHooks.getActiveTrackData(previousStatsWithoutSsrc as any, statsWithoutSsrc as any, 'mockTrackSid')
+    ).toEqual([]);
   });
 });
 
