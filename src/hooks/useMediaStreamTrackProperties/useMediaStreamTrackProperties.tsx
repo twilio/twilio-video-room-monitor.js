@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 
-export default function useMediaStreamTrackProperties(mediaStreamTrack: MediaStreamTrack | null) {
-  const [muted, setMuted] = useState(mediaStreamTrack?.muted);
-  const [readyState, setReadyState] = useState(mediaStreamTrack?.readyState);
+export default function useMediaStreamTrackProperties(mediaStreamTrack: MediaStreamTrack) {
+  const [muted, setMuted] = useState(mediaStreamTrack.muted);
+  const [readyState, setReadyState] = useState(mediaStreamTrack.readyState);
 
   useEffect(() => {
-    setMuted(mediaStreamTrack?.muted);
-    setReadyState(mediaStreamTrack?.readyState);
+    setMuted(mediaStreamTrack.muted);
+    setReadyState(mediaStreamTrack.readyState);
     if (mediaStreamTrack) {
-      const handleMuted = () => setMuted(mediaStreamTrack?.muted);
-      const handleReadyState = () => setReadyState(mediaStreamTrack?.readyState);
+      const handleMuted = () => setMuted(mediaStreamTrack.muted);
+      const handleReadyState = () => setReadyState(mediaStreamTrack.readyState);
 
       mediaStreamTrack.addEventListener('mute', handleMuted);
       mediaStreamTrack.addEventListener('unmute', handleMuted);
@@ -25,8 +25,8 @@ export default function useMediaStreamTrackProperties(mediaStreamTrack: MediaStr
   return {
     muted,
     readyState,
-    id: mediaStreamTrack?.id,
-    label: mediaStreamTrack?.label,
-    kind: mediaStreamTrack?.kind,
+    id: mediaStreamTrack.id,
+    label: mediaStreamTrack.label,
+    kind: mediaStreamTrack.kind,
   };
 }
