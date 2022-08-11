@@ -43,13 +43,15 @@ export function getTrackData(trackSid: string, statsReports: StatsReport[]) {
 
 // Returns an array that only contains tracks that correspond to a simulcast layer
 // that is currently in use. All "configured" but inactive layers will be filtered out.
+// Note: this is not used to calculate bandwidth for a single track. It is only used to
+// get track information like codec, packet loss, and framerate.
 export function getActiveTrackData(previousStats: StatsReport[], stats: StatsReport[], trackSid: string) {
   const previousTracks = getTrackData(trackSid, previousStats);
   const currentTracks = getTrackData(trackSid, stats);
 
   const activeLayers = currentTracks.filter((currentTrack) => {
     const previousTrack = previousTracks.find((t) => t.ssrc === currentTrack.ssrc);
-    return currentTrack.bytesSent !== previousTrack?.bytesSent;
+    return currentTrack.bytesSent !== previousTrack?.bytesSent && currentTrack.ssrc !== '';
   });
 
   return activeLayers;
@@ -96,6 +98,9 @@ export function getTotalBandwidth(
   const bandwidthPerTrack = (
     currentTrackData
       .map((currentTrack) => {
+        // Ignore the track when ssrc is null. This means that the track is switched off
+        if (currentTrack.ssrc === '') return null;
+
         // Find the corresponding track source from the previousTrackData array.
         const prevTrack = previousTrackData.find((t) => t.ssrc === currentTrack.ssrc);
 
@@ -129,5 +134,5 @@ export function useTrackData(trackSid: string) {
 
   const trackData = getActiveTrackData(previousStats, stats, trackSid);
 
-  return trackData[0];
+  return trackData[0] || null; // trackData may be an empty array
 }
