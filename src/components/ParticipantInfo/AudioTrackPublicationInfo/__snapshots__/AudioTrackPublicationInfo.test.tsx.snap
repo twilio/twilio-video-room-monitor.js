@@ -3,9 +3,39 @@
 exports[`the AudioTrackInfo component should render correctly if an audio track is present 1`] = `
 <Fragment>
   <Memo(Datum)
-    label="isEnabled"
-    value={true}
+    label="isSwitchedOff"
+    value={false}
   />
+  <Memo(Datum)
+    label="Switch Off Reason"
+    value="mock-switchoff-reason"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Jitter"
+    value={2}
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value={7}
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value={null}
+  />
+  <Memo(MediaStreamTrackInfo) />
+</Fragment>
+`;
+
+exports[`the AudioTrackInfo component should render correctly when switchOffReason and isSwitchedOff are undefined (for local tracks) 1`] = `
+<Fragment>
   <Memo(Datum)
     label="Bandwidth"
     value="1,234.56kbps"
