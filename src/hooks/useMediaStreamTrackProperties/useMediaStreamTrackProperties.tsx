@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function useMediaStreamTrackProperties(mediaStreamTrack: MediaStreamTrack | undefined) {
+export default function useMediaStreamTrackProperties(mediaStreamTrack: MediaStreamTrack | undefined | null) {
   const [muted, setMuted] = useState(mediaStreamTrack?.muted);
   const [readyState, setReadyState] = useState(mediaStreamTrack?.readyState);
 
