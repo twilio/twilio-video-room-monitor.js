@@ -1,21 +1,25 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { VideoTrackPublicationInfo, VideoTrackInfo } from './VideoTrackPublicationInfo';
-import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
+import useIsTrackSwitchedOff from '../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import useMediaStreamTrackProperties from '../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
 import useTrack from '../../../hooks/useTrack/useTrack';
+import useTrackSwitchOffReason from '../../../hooks/useTrackSwitchOffReason/useTrackSwitchOffReason';
+import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
+import { VideoTrackPublicationInfo, VideoTrackInfo } from './VideoTrackPublicationInfo';
 
-jest.mock('../../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
-jest.mock('../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => () => false);
+jest.mock('../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff', () => jest.fn(() => false));
 jest.mock('../../../hooks/useStats/useStatsUtils');
 jest.mock('../../../hooks/useTrack/useTrack');
 jest.mock('../../../hooks/useVideoTrackDimensions/useVideoTrackDimensions', () => () => ({ width: 1280, height: 720 }));
 jest.mock('../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties');
+jest.mock('../../../hooks/useTrackSwitchOffReason/useTrackSwitchOffReason');
 
 const mockUseTrackBandwidth = useTrackBandwidth as jest.Mock<any>;
 const mockUseTrackData = useTrackData as jest.Mock<any>;
 const mockUseTrack = useTrack as jest.Mock<any>;
 const mockMediaStreamTrackProperties = useMediaStreamTrackProperties as jest.Mock<any>;
+const mockUseIsTrackSwitchedOff = useIsTrackSwitchedOff as jest.Mock<any>;
+const mockUseTrackSwitchOffReason = useTrackSwitchOffReason as jest.Mock<any>;
 
 mockUseTrackBandwidth.mockImplementation(() => 1234.56);
 mockUseTrackData.mockImplementation(() => ({ codec: 'testCodec', frameRate: null, packetsLost: 7 }));
@@ -27,6 +31,7 @@ mockMediaStreamTrackProperties.mockImplementation(() => ({
   label: 'mockLabel',
   readyState: 'mockReadyState',
 }));
+mockUseTrackSwitchOffReason.mockImplementation(() => 'mock-switchoff-reason');
 
 describe('the VideoTrackInfo component', () => {
   it('should render correctly if a video track is present', () => {
@@ -38,6 +43,13 @@ describe('the VideoTrackInfo component', () => {
     mockUseTrackData.mockImplementationOnce(() => null);
     const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
     expect(wrapper.find({ label: 'Codec' }).exists()).toBe(false);
+  });
+
+  it('should render correctly when switchOffReason and isSwitchedOff are undefined (for local tracks)', () => {
+    mockUseIsTrackSwitchedOff.mockImplementationOnce(() => undefined);
+    mockUseTrackSwitchOffReason.mockImplementationOnce(() => undefined);
+    const wrapper = shallow(<VideoTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper).toMatchSnapshot();
   });
 
   it('should display the subscribePriority when it exists', () => {

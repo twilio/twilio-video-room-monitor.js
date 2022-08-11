@@ -11,12 +11,12 @@ import {
   RemoteVideoTrackStats,
   VideoTrack,
 } from 'twilio-video';
-import useIsTrackEnabled from '../../../hooks/useIsTrackEnabled/useIsTrackEnabled';
 import useIsTrackSwitchedOff from '../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
 import usePublishPriority from '../../../hooks/usePublishPriority/usePublishPriority';
 import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
 import useTrack from '../../../hooks/useTrack/useTrack';
+import useTrackSwitchOffReason from '../../../hooks/useTrackSwitchOffReason/useTrackSwitchOffReason';
 import useVideoTrackDimensions from '../../../hooks/useVideoTrackDimensions/useVideoTrackDimensions';
 import { withIntervalUpdate } from '../../../hooks/useIntervalUpdate/useIntervalUpdate';
 
@@ -31,7 +31,7 @@ export const VideoTrackInfo: React.FC<{
 }> = ({ track, trackSid }) => {
   const dimensions = useVideoTrackDimensions(track);
   const isSwitchedOff = useIsTrackSwitchedOff(track);
-  const isEnabled = useIsTrackEnabled(track);
+  const trackSwitchOffReason = useTrackSwitchOffReason(track);
   const trackBandwidth = useTrackBandwidth(trackSid);
   const trackData = useTrackData(trackSid) as LocalVideoTrackStats | RemoteVideoTrackStats | null;
   const mediaStreamTrack = useMediaStreamTrack(track);
@@ -50,8 +50,9 @@ export const VideoTrackInfo: React.FC<{
   return (
     <>
       <Datum label="Dimensions" value={getDimensionString(dimensions)} />
+      {/* Only show isSwitchedOff and trackSwitchOffReason for remote tracks */}
       {isSwitchedOff !== undefined && <Datum label="isSwitchedOff" value={isSwitchedOff} />}
-      <Datum label="isEnabled" value={isEnabled} />
+      {trackSwitchOffReason !== undefined && <Datum label="Switch Off Reason" value={trackSwitchOffReason} />}
       <Datum label="Bandwidth" value={trackBandwidth?.toLocaleString() + 'kbps'} />
       {track.priority !== undefined && <IntervalUpdateDatum label="subscribePriority" value={track.priority} />}
       {trackData && (
