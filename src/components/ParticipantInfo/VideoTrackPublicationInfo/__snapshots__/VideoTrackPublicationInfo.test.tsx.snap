@@ -11,8 +11,38 @@ exports[`the VideoTrackInfo component should render correctly if a video track i
     value={false}
   />
   <Memo(Datum)
-    label="isEnabled"
-    value={true}
+    label="Switch Off Reason"
+    value="mock-switchoff-reason"
+  />
+  <Memo(Datum)
+    label="Bandwidth"
+    value="1,234.56kbps"
+  />
+  <Memo(Datum)
+    label="Codec"
+    value="testCodec"
+  />
+  <Memo(Datum)
+    label="Framerate"
+    value={null}
+  />
+  <Memo(Datum)
+    label="Packets Lost"
+    value={7}
+  />
+  <Memo(Datum)
+    label="Packet Loss Percentage"
+    value={null}
+  />
+  <Memo(MediaStreamTrackInfo) />
+</Fragment>
+`;
+
+exports[`the VideoTrackInfo component should render correctly when switchOffReason and isSwitchedOff are undefined (for local tracks) 1`] = `
+<Fragment>
+  <Memo(Datum)
+    label="Dimensions"
+    value="1280 x 720"
   />
   <Memo(Datum)
     label="Bandwidth"

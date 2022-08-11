@@ -7,19 +7,21 @@ import {
   RemoteAudioTrackPublication,
   RemoteAudioTrackStats,
 } from 'twilio-video';
-import useIsTrackEnabled from '../../../hooks/useIsTrackEnabled/useIsTrackEnabled';
-import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
-import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
-import useTrack from '../../../hooks/useTrack/useTrack';
 import Datum from '../../typography/common/Datum/Datum';
 import MediaStreamTrackInfo from '../../typography/trackInformation/MediaStreamTrackInfo/MediaStreamTrackInfo';
 import StatsContainer from '../../typography/common/StatsContainer/StatsContainer';
+import useIsTrackSwitchedOff from '../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
+import useMediaStreamTrack from '../../../hooks/useMediaStreamTrack/useMediaStreamTrack';
+import useTrack from '../../../hooks/useTrack/useTrack';
+import useTrackSwitchOffReason from '../../../hooks/useTrackSwitchOffReason/useTrackSwitchOffReason';
+import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
 
 export const AudioTrackInfo: React.FC<{
   track: LocalAudioTrack | RemoteAudioTrack;
   trackSid: string; // Passing trackSid from the publication object because it not on the LocalAudioTrack object
 }> = ({ track, trackSid }) => {
-  const isEnabled = useIsTrackEnabled(track);
+  const isSwitchedOff = useIsTrackSwitchedOff(track);
+  const trackSwitchOffReason = useTrackSwitchOffReason(track);
   const trackBandwidth = useTrackBandwidth(trackSid);
   const trackData = useTrackData(trackSid) as LocalAudioTrackStats | RemoteAudioTrackStats | null;
   const mediaStreamTrack = useMediaStreamTrack(track);
@@ -37,7 +39,9 @@ export const AudioTrackInfo: React.FC<{
 
   return (
     <>
-      <Datum label="isEnabled" value={isEnabled} />
+      {/* Only show isSwitchedOff and trackSwitchOffReason for remote tracks */}
+      {isSwitchedOff !== undefined && <Datum label="isSwitchedOff" value={isSwitchedOff} />}
+      {trackSwitchOffReason !== undefined && <Datum label="Switch Off Reason" value={trackSwitchOffReason} />}
       <Datum label="Bandwidth" value={trackBandwidth?.toLocaleString() + 'kbps'} />
       {trackData && (
         <>

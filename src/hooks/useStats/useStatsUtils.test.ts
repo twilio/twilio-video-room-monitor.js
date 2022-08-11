@@ -149,6 +149,37 @@ describe('the getActiveTrackData function', () => {
       { trackSid: 'mockTrackSid', bytesSent: 30000, ssrc: 2 },
     ]);
   });
+
+  it('should ignore tracks with empty ssrc values', () => {
+    const statsWithoutSsrc = [
+      {
+        localAudioTrackStats: [],
+        localVideoTrackStats: [
+          { trackSid: 'mockTrackSid', bytesSent: 40000, ssrc: '' },
+          { trackSid: 'mockTrackSid', bytesSent: 30000, ssrc: '' },
+          { trackSid: 'mockTrackSid', bytesSent: 20000, ssrc: '' },
+        ],
+        remoteAudioTrackStats: [],
+        remoteVideoTrackStats: [],
+      },
+    ];
+    const previousStatsWithoutSsrc = [
+      {
+        localAudioTrackStats: [],
+        localVideoTrackStats: [
+          { trackSid: 'mockTrackSid', bytesSent: 35000, ssrc: '' },
+          { trackSid: 'mockTrackSid', bytesSent: 25000, ssrc: '' },
+          { trackSid: 'mockTrackSid', bytesSent: 20000, ssrc: '' },
+        ],
+        remoteAudioTrackStats: [],
+        remoteVideoTrackStats: [],
+      },
+    ];
+
+    expect(
+      statsHooks.getActiveTrackData(previousStatsWithoutSsrc as any, statsWithoutSsrc as any, 'mockTrackSid')
+    ).toEqual([]);
+  });
 });
 
 describe('the useTrackBandwidth function', () => {
@@ -230,6 +261,28 @@ describe('the useTrackBandwidth function', () => {
 describe('the useTrackData function', () => {
   it('should return null if there are no stats or previous stats', () => {
     mockUseStats.mockImplementation(() => ({ stats: false, previousStats: false }));
+    expect(statsHooks.useTrackData('mockTrackSid')).toEqual(null);
+  });
+
+  it('should return null if all stats dont have ssrc strings', () => {
+    mockUseStats.mockImplementationOnce(() => ({
+      stats: [
+        {
+          localAudioTrackStats: [{ trackSid: 'mockTrackSid', name: 'mockTrack1', ssrc: '', bytesSent: 5 }],
+          localVideoTrackStats: [],
+          remoteAudioTrackStats: [],
+          remoteVideoTrackStats: [],
+        },
+      ],
+      previousStats: [
+        {
+          localAudioTrackStats: [{ trackSid: 'mockTrackSid', name: 'mockTrack1', ssrc: '', bytesSent: 2 }],
+          localVideoTrackStats: [],
+          remoteAudioTrackStats: [],
+          remoteVideoTrackStats: [],
+        },
+      ],
+    }));
     expect(statsHooks.useTrackData('mockTrackSid')).toEqual(null);
   });
 

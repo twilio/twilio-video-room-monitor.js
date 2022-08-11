@@ -1,3 +1,7 @@
+# 2.0.0-preview.1
+
+- The room monitor has been updated to be compatible with version 3 of the [twilio-video Javascript SDK](https://github.com/twilio/twilio-video.js). For more information about what is new in version 3, please see the [changelog entry](https://github.com/twilio/twilio-video.js/blob/3.0.0-preview.1/CHANGELOG.md#300-preview1-july-25-2022).
+
 # 1.0.1 (August 5, 2022)
 
 ### Improvements

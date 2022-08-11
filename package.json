@@ -1,6 +1,6 @@
 {
   "name": "@twilio/video-room-monitor",
-  "version": "1.0.1-dev",
+  "version": "2.0.0-preview.1",
   "description": "Twilio Video Room Monitor Javascript Library",
   "main": "dist/node/index.js",
   "types": "dist/node/index.d.ts",
@@ -80,13 +80,13 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^26.5.5",
     "twilio-release-tool": "^1.0.2",
-    "twilio-video": "^2.14.0",
+    "twilio-video": "^3.0.0-preview.1",
     "typescript": "^4.2.4"
   },
   "peerDependencies": {
     "react": "^16.8.0 || ^17.0.0",
     "react-dom": "^16.8.0 || ^17.0.0",
-    "twilio-video": "^2.14.0"
+    "twilio-video": "^3.0.0-preview"
   },
   "jest": {
     "snapshotSerializers": [

@@ -1,19 +1,24 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AudioTrackPublicationInfo, AudioTrackInfo } from './AudioTrackPublicationInfo';
-import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
+import useIsTrackSwitchedOff from '../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff';
 import useMediaStreamTrackProperties from '../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties';
 import useTrack from '../../../hooks/useTrack/useTrack';
+import useTrackSwitchOffReason from '../../../hooks/useTrackSwitchOffReason/useTrackSwitchOffReason';
+import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';
 
-jest.mock('../../../hooks/useIsTrackEnabled/useIsTrackEnabled', () => () => true);
 jest.mock('../../../hooks/useStats/useStatsUtils');
 jest.mock('../../../hooks/useTrack/useTrack');
 jest.mock('../../../hooks/useMediaStreamTrackProperties/useMediaStreamTrackProperties');
+jest.mock('../../../hooks/useIsTrackSwitchedOff/useIsTrackSwitchedOff');
+jest.mock('../../../hooks/useTrackSwitchOffReason/useTrackSwitchOffReason');
 
 const mockUseTrackBandwidth = useTrackBandwidth as jest.Mock<any>;
 const mockUseTrackData = useTrackData as jest.Mock<any>;
 const mockUseTrack = useTrack as jest.Mock<any>;
 const mockMediaStreamTrackProperties = useMediaStreamTrackProperties as jest.Mock<any>;
+const mockUseIsTrackSwitchedOff = useIsTrackSwitchedOff as jest.Mock<any>;
+const mockUseTrackSwitchOffReason = useTrackSwitchOffReason as jest.Mock<any>;
 
 mockUseTrackBandwidth.mockImplementation(() => 1234.56);
 mockUseTrackData.mockImplementation(() => ({ codec: 'testCodec', jitter: 2, packetsLost: 7 }));
@@ -25,6 +30,8 @@ mockMediaStreamTrackProperties.mockImplementation(() => ({
   label: 'mockLabel',
   readyState: 'mockReadyState',
 }));
+mockUseIsTrackSwitchedOff.mockImplementation(() => false);
+mockUseTrackSwitchOffReason.mockImplementation(() => 'mock-switchoff-reason');
 
 describe('the AudioTrackInfo component', () => {
   it('should render correctly if an audio track is present', () => {
@@ -36,6 +43,13 @@ describe('the AudioTrackInfo component', () => {
     mockUseTrackData.mockImplementationOnce(() => null);
     const wrapper = shallow(<AudioTrackInfo track={{} as any} trackSid="testSid" />);
     expect(wrapper.find({ label: 'Codec' }).exists()).toBeFalsy();
+  });
+
+  it('should render correctly when switchOffReason and isSwitchedOff are undefined (for local tracks)', () => {
+    mockUseIsTrackSwitchedOff.mockImplementationOnce(() => undefined);
+    mockUseTrackSwitchOffReason.mockImplementationOnce(() => undefined);
+    const wrapper = shallow(<AudioTrackInfo track={{} as any} trackSid="testSid" />);
+    expect(wrapper).toMatchSnapshot();
   });
 
   describe('the Packet Loss Percentage', () => {

@@ -16,17 +16,6 @@ describe('the useMediaStreamTrackProperties hook', () => {
     mockTrack.kind = 'mockKindProp';
   });
 
-  it('should return an object where the values are undefined when the track is undefined', () => {
-    const { result } = renderHook(() => useMediaStreamTrackProperties(undefined));
-    expect(result.current).toStrictEqual({
-      id: undefined,
-      muted: undefined,
-      kind: undefined,
-      label: undefined,
-      readyState: undefined,
-    });
-  });
-
   it('should return the initial values of the track properties by default', () => {
     const { result } = renderHook(() => useMediaStreamTrackProperties(mockTrack));
     expect(result.current).toStrictEqual({

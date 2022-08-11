@@ -1,12 +1,11 @@
 import {
   CreateLocalTrackOptions,
-  BandwidthProfileOptions,
+  BandwidthProfile,
   NetworkQualityConfiguration,
   AudioCodec,
   AudioCodecSettings,
   VideoCodec,
   VideoCodecSettings,
-  LocalAudioTrack,
 } from 'twilio-video';
 
 export type chartDatum = { x: number; y: number | null };
@@ -16,13 +15,24 @@ export type Primitive = string | number | undefined | null | boolean;
 export type Arr = (Primitive | Object)[];
 
 declare module 'twilio-video' {
-  // This helps to create union types between Local and Remote TrackPublication
+  // This helps to create union types between Local and Remote TrackPublications
   interface LocalTrackPublication {
     publishPriority: undefined;
   }
+
+  interface LocalDataTrack {
+    priority: undefined;
+  }
+
   interface LocalVideoTrack {
     isSwitchedOff: undefined;
+    switchOffReason: undefined;
     priority: undefined;
+  }
+
+  interface LocalAudioTrack {
+    isSwitchedOff: undefined;
+    switchOffReason: undefined;
   }
 
   interface LocalAudioTrackStats {
@@ -58,7 +68,7 @@ declare module 'twilio-video' {
     _options: {
       audio?: boolean | CreateLocalTrackOptions;
       automaticSubscription?: boolean;
-      bandwidthProfile?: BandwidthProfileOptions;
+      bandwidthProfile?: BandwidthProfile;
       dscpTagging?: boolean;
       dominantSpeaker?: boolean;
       enableDscp?: boolean;

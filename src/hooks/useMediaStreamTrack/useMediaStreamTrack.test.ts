@@ -10,11 +10,6 @@ describe('the useMediaStreamTrack hook', () => {
     mockTrack.mediaStreamTrack = 'mockMediaStreamTrack';
   });
 
-  it('should return undefined when track is undefined', () => {
-    const { result } = renderHook(() => useMediaStreamTrack(undefined));
-    expect(result.current).toBe(undefined);
-  });
-
   it('should return mockTrack.mediaStreamTrack by default', () => {
     const { result } = renderHook(() => useMediaStreamTrack(mockTrack));
     expect(result.current).toBe('mockMediaStreamTrack');
@@ -29,9 +24,29 @@ describe('the useMediaStreamTrack hook', () => {
     expect(result.current).toBe('anotherMockMediaStreamTrack');
   });
 
+  it('should respond to "switchedOn" events', async () => {
+    const { result } = renderHook(() => useMediaStreamTrack(mockTrack));
+    act(() => {
+      mockTrack.mediaStreamTrack = 'anotherMockMediaStreamTrack';
+      mockTrack.emit('switchedOn');
+    });
+    expect(result.current).toBe('anotherMockMediaStreamTrack');
+  });
+
+  it('should respond to "switchedOff" events', async () => {
+    const { result } = renderHook(() => useMediaStreamTrack(mockTrack));
+    act(() => {
+      mockTrack.mediaStreamTrack = 'anotherMockMediaStreamTrack';
+      mockTrack.emit('switchedOff');
+    });
+    expect(result.current).toBe('anotherMockMediaStreamTrack');
+  });
+
   it('should clean up listeners on unmount', () => {
     const { unmount } = renderHook(() => useMediaStreamTrack(mockTrack));
     unmount();
     expect(mockTrack.listenerCount('started')).toBe(0);
+    expect(mockTrack.listenerCount('switchedOn')).toBe(0);
+    expect(mockTrack.listenerCount('switchedOff')).toBe(0);
   });
 });
