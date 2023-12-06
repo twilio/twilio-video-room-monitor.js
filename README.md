@@ -2,7 +2,9 @@
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
 
-*We want your feedback! Please feel free to open a [GitHub issue](https://github.com/twilio/twilio-video-room-monitor.js/issues) for suggested improvements or feature requests.*
+> [!WARNING]  
+> We are no longer allowing new customers to onboard to Twilio Video. Effective **December 5th, 2024**, Twilio Video will End of Life (EOL) and will cease to function for all customers. Customers may transition to any video provider they choose, however, we are recommending customers migrate to the Zoom Video SDK and we have prepared a [Migration Guide](https://developers.zoom.us/docs/video-sdk/twilio/). Additional information on this EOL is available in our Help Center [here](https://support.twilio.com/hc/en-us/articles/20950630029595-Programmable-Video-End-of-Life-Notice).
+
 
 ## What is it
 
