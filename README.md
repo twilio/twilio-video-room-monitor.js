@@ -2,10 +2,6 @@
 
 [![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
 
-> [!WARNING]  
-> We are no longer allowing new customers to onboard to Twilio Video. Effective **December 5th, 2024**, Twilio Video will End of Life (EOL) and will cease to function for all customers. Customers may transition to any video provider they choose, however, we are recommending customers migrate to the Zoom Video SDK and we have prepared a [Migration Guide](https://developers.zoom.us/docs/video-sdk/twilio/). Additional information on this EOL is available in our Help Center [here](https://support.twilio.com/hc/en-us/articles/20950630029595-Programmable-Video-End-of-Life-Notice).
-
-
 ## What is it
 
 A browser-based tool that provides [Twilio Video JavaScript](https://github.com/twilio/twilio-video.js) developers visibility into the inner workings of their video application. It displays near real-time information and metrics from the [Room object](https://media.twiliocdn.com/sdk/js/video/releases/2.14.0/docs/Room.html) and can be added to any Twilio Video JavaScript application with a few lines of code.
