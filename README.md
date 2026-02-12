@@ -1,6 +1,6 @@
 # Twilio Video Room Monitor
 
-[![CircleCI](https://circleci.com/gh/twilio/twilio-video-room-monitor.js.svg?style=svg)](https://circleci.com/gh/twilio/twilio-video-room-monitor.js)
+**THIS plugin's repo is currently archived**
 
 ## What is it
 
