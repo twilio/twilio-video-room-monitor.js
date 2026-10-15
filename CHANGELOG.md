@@ -14,6 +14,7 @@
 - Upgraded `styled-components` to 6.x and `eventemitter3` to 5.x.
 - Removed the unused `react-spring` 8.x dependency.
 - Upgraded the development toolchain (TypeScript 6, Jest 30, ESLint 9, Parcel 2.16) and now track `package-lock.json`. Local development requires Node.js 22 or later.
+- Migrated the test suite from Enzyme to React Testing Library, replaced snapshot tests with explicit assertions, and added tests for opening and closing the Monitor with React 18 and 19. Test files are now type-checked by `npm run ts`.
 
 # 1.0.1 (August 5, 2022)
 

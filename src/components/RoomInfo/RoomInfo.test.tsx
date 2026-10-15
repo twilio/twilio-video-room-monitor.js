@@ -1,11 +1,9 @@
-import { shallow } from 'enzyme';
+import { fireEvent, render, screen } from '@testing-library/react';
 import RoomInfo from './RoomInfo';
 import useRoomState from '../../hooks/useRoomState/useRoomState';
 import useRoom from '../../hooks/useRoom/useRoom';
 
-jest.mock('../../hooks/useDominantSpeaker/useDominantSpeaker', () => () => ({
-  dominantSpeaker: { identity: 'testIdentity' },
-}));
+jest.mock('../../hooks/useDominantSpeaker/useDominantSpeaker', () => () => ({ identity: 'testIdentity' }));
 jest.mock('../../hooks/useIsRecording/useIsRecording', () => () => 'false');
 jest.mock('../../hooks/useRoom/useRoom');
 
@@ -14,6 +12,9 @@ jest.mock('../../hooks/useStats/useStats', () => () => ({
   currentReceivedBitrate: 1234.56,
   currentSentBitrate: 6543.21,
 }));
+jest.mock('../typography/trackInformation/ConnectionOptionTracks/ConnectionOptionTracks', () => ({ tracks }: any) => (
+  <div>connection option tracks: {tracks.join(', ')}</div>
+));
 
 const mockUseRoomState = useRoomState as jest.Mock<any>;
 mockUseRoomState.mockImplementation(() => 'connected');
@@ -48,19 +49,57 @@ mockUseRoom.mockImplementation(() => ({
 
 describe('The RoomInfo component', () => {
   it('should render information about the room if connected to a Twilio Video room', () => {
-    const wrapper = shallow(<RoomInfo />);
-    expect(wrapper).toMatchSnapshot();
+    render(<RoomInfo />);
+    [
+      'Room Name: test123',
+      'SID: XXXXXXXXXXXXX1234',
+      'State: connected',
+      'Dominant Speaker: testIdentity',
+      'Media Region: testRegion',
+      'Is Recording: false',
+      'Total Sent Bandwidth: 6,543.21kbps',
+      'Total Received Bandwidth: 1,234.56kbps',
+    ].forEach((text) => expect(screen.getByText(text)).toBeInTheDocument());
   });
 
-  it('should not render anything and return null if the room does not exist', () => {
+  it('should display the connection options when the Connection Options accordion is opened', () => {
+    render(<RoomInfo />);
+    expect(screen.queryByText('Automatic Subscription: true')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByText('Connection Options'));
+    [
+      'Audio: true',
+      'Automatic Subscription: true',
+      'Bandwidth Profile: mockBandwidthProfile',
+      'Dominant Speaker: true',
+      'DSCP Tagging: true',
+      'Enable DSCP: false',
+      'Ice Servers: undefined',
+      'Ice Transport Policy: undefined',
+      'Insights: true',
+      'Max Audio Bitrate: 1600',
+      'Max Video Bitrate: null',
+      'Name: testRoom',
+      'Network Quality: true',
+      'Region: testRegion',
+      'Logger Name: logger-twilio-video',
+      'connection option tracks: mockTrack',
+      'Video: true',
+    ].forEach((text) => expect(screen.getByText(text)).toBeInTheDocument());
+    expect(screen.getByText('Preferred Audio Codecs')).toBeInTheDocument();
+    expect(screen.getByText('Preferred Video Codecs')).toBeInTheDocument();
+  });
+
+  it('should not render anything if the room does not exist', () => {
     mockUseRoom.mockImplementationOnce(() => null);
-    const wrapper = shallow(<RoomInfo />);
-    expect(wrapper.getElement()).toBe(null);
+    const { container } = render(<RoomInfo />);
+    expect(container).toBeEmptyDOMElement();
   });
 
-  it('should display warning when not connected to a Twilio Video room', () => {
+  it('should display a warning when not connected to a Twilio Video room', () => {
     mockUseRoomState.mockImplementationOnce(() => 'disconnected');
-    const wrapper = shallow(<RoomInfo />);
-    expect(wrapper.contains(<span>Not connected to a Twilio Video room.</span>)).toBe(true);
+    render(<RoomInfo />);
+    expect(screen.getByText('Not connected to a Twilio Video room.')).toBeInTheDocument();
+    expect(screen.queryByText('Room Name: test123')).not.toBeInTheDocument();
   });
 });

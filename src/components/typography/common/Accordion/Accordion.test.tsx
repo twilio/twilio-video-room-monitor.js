@@ -1,38 +1,37 @@
-import { Accordion, LabelContainer } from './Accordion';
-import { mount } from 'enzyme';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { Accordion } from './Accordion';
 
 describe('the Accordion component', () => {
   describe('with children', () => {
-    it('should have clickable elements', () => {
-      const wrapper = mount(
+    it('should have a clickable label', () => {
+      render(
         <Accordion label="test">
           <span>test span</span>
         </Accordion>
       );
 
-      expect(wrapper.find({ $isClickable: true }).length).toBe(2);
+      expect(screen.getByText('test').parentElement).toHaveStyle({ cursor: 'pointer' });
     });
 
     it('should toggle the display of children when clicked', () => {
-      const Child = () => <span>test span</span>;
-      const wrapper = mount(
+      render(
         <Accordion label="test">
-          <Child />
+          <span>test span</span>
         </Accordion>
       );
 
-      expect(wrapper.find(Child).exists()).toBe(false);
-      wrapper.find(LabelContainer).simulate('click');
-      expect(wrapper.find(Child).exists()).toBe(true);
-      wrapper.find(LabelContainer).simulate('click');
-      expect(wrapper.find(Child).exists()).toBe(false);
+      expect(screen.queryByText('test span')).not.toBeInTheDocument();
+      fireEvent.click(screen.getByText('test'));
+      expect(screen.getByText('test span')).toBeInTheDocument();
+      fireEvent.click(screen.getByText('test'));
+      expect(screen.queryByText('test span')).not.toBeInTheDocument();
     });
   });
 
   describe('without children', () => {
-    it('should not have clickable elements', () => {
-      const wrapper = mount(<Accordion label="test" />);
-      expect(wrapper.find({ $isClickable: true }).length).toBe(0);
+    it('should not have a clickable label', () => {
+      render(<Accordion label="test" />);
+      expect(screen.getByText('test').parentElement).not.toHaveStyle({ cursor: 'pointer' });
     });
   });
 });

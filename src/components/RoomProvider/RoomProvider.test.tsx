@@ -1,9 +1,9 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react';
 import React from 'react';
 import useRoom from '../../hooks/useRoom/useRoom';
 import RoomProvider, * as RoomProviderObj from './RoomProvider';
 
-const wrapper: React.FC = ({ children }) => <RoomProvider>{children}</RoomProvider>;
+const wrapper: React.FC<React.PropsWithChildren> = ({ children }) => <RoomProvider>{children}</RoomProvider>;
 
 describe('the RoomProvider component', () => {
   afterEach(() => {

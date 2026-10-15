@@ -1,4 +1,4 @@
-import { renderHook, act } from '@testing-library/react-hooks';
+import { renderHook, act } from '@testing-library/react';
 import usePublications from './usePublications';
 import EventEmitter from 'events';
 import { UPDATE_INTERVAL } from '../../constants';

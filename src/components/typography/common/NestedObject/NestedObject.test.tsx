@@ -1,81 +1,44 @@
+import { fireEvent, render, screen } from '@testing-library/react';
 import NestedObject from './NestedObject';
-import { shallow } from 'enzyme';
 
 const testObject = { outerObject: { innerObject: 'testVal' }, primitiveValue: 'foo' };
 
 describe('the NestedObject component', () => {
   describe('when there is no object', () => {
-    it('should return a Datum component with a label when the object is undefined', () => {
-      const wrapper = shallow(<NestedObject label="mockTest" obj={undefined} />);
-      expect(wrapper).toMatchInlineSnapshot(`
-              <Memo(Datum)
-                label="mockTest"
-              />
-            `);
+    it('should display the label with an undefined value when the object is undefined', () => {
+      render(<NestedObject label="mockTest" obj={undefined} />);
+      expect(screen.getByText('mockTest: undefined')).toBeInTheDocument();
     });
-    it('should return the Datum component with a null value when the object is null', () => {
-      const wrapper = shallow(<NestedObject label="mockTest" obj={null} />);
-      expect(wrapper).toMatchInlineSnapshot(`
-              <Memo(Datum)
-                label="mockTest"
-                value={null}
-              />
-            `);
+
+    it('should display the label with a null value when the object is null', () => {
+      render(<NestedObject label="mockTest" obj={null} />);
+      expect(screen.getByText('mockTest: null')).toBeInTheDocument();
     });
-    it('should return a Datum component for a primitive value', () => {
-      const wrapper = shallow(<NestedObject label="mockTest" obj={6} />);
-      expect(wrapper).toMatchInlineSnapshot(`
-              <Memo(Datum)
-                label="mockTest"
-                value={6}
-              />
-            `);
+
+    it('should display the label and value for a primitive value', () => {
+      render(<NestedObject label="mockTest" obj={6} />);
+      expect(screen.getByText('mockTest: 6')).toBeInTheDocument();
     });
   });
-  describe('when there is a object', () => {
-    it('should return an object in an Accordion component when there is a label', () => {
-      const wrapper = shallow(<NestedObject label="mockTest" obj={testObject} />);
-      expect(wrapper).toMatchInlineSnapshot(`
-        <Accordion
-          label="mockTest"
-        >
-          <NestedObject
-            key="0"
-            label="outerObject"
-            obj={
-              Object {
-                "innerObject": "testVal",
-              }
-            }
-          />
-          <Memo(Datum)
-            key="1"
-            label="primitiveValue"
-            value="foo"
-          />
-        </Accordion>
-      `);
+
+  describe('when there is an object', () => {
+    it('should display the object in nested Accordions when there is a label', () => {
+      render(<NestedObject label="mockTest" obj={testObject} />);
+      expect(screen.queryByText('primitiveValue: foo')).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByText('mockTest'));
+      expect(screen.getByText('primitiveValue: foo')).toBeInTheDocument();
+      expect(screen.queryByText('innerObject: testVal')).not.toBeInTheDocument();
+
+      fireEvent.click(screen.getByText('outerObject'));
+      expect(screen.getByText('innerObject: testVal')).toBeInTheDocument();
     });
-    it('should return a container when there is no label', () => {
-      const wrapper = shallow(<NestedObject obj={testObject} />);
-      expect(wrapper).toMatchInlineSnapshot(`
-        <Memo(styled.div)>
-          <NestedObject
-            key="0"
-            label="outerObject"
-            obj={
-              Object {
-                "innerObject": "testVal",
-              }
-            }
-          />
-          <Memo(Datum)
-            key="1"
-            label="primitiveValue"
-            value="foo"
-          />
-        </Memo(styled.div)>
-      `);
+
+    it('should display the object without an Accordion when there is no label', () => {
+      render(<NestedObject obj={testObject} />);
+      expect(screen.getByText('primitiveValue: foo')).toBeInTheDocument();
+      expect(screen.getByText('outerObject')).toBeInTheDocument();
+      expect(screen.queryByText('innerObject: testVal')).not.toBeInTheDocument();
     });
   });
 });

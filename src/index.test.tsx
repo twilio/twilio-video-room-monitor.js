@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import { roomRegistry } from './components/RoomProvider/RoomProvider';
 import { VideoRoomMonitor } from './index';
 
-jest.mock('./App', () => () => <div>Test</div>);
+const mockAppUnmounted = jest.fn();
+
+jest.mock('./App', () => () => {
+  useEffect(() => mockAppUnmounted, []);
+  return <div>Test</div>;
+});
 
 describe('the Twilio Video Room Monitor API', () => {
   afterEach(() => VideoRoomMonitor.closeMonitor());
@@ -61,6 +67,46 @@ describe('the Twilio Video Room Monitor API', () => {
 
     VideoRoomMonitor.toggleMonitor();
     expect(VideoRoomMonitor.emit).toHaveBeenCalledWith('closed');
+  });
+
+  it('should render the app synchronously, before the "opened" event is emitted', () => {
+    let contentWhenOpened: string | null | undefined;
+    const handleOpened = () => {
+      contentWhenOpened = document.getElementById('TwilioVideoRoomMonitorContainer')?.textContent;
+    };
+    VideoRoomMonitor.once('opened', handleOpened);
+
+    VideoRoomMonitor.openMonitor();
+    expect(contentWhenOpened).toBe('Test');
+  });
+
+  it('should unmount the app before the container is removed and the "closed" event is emitted', () => {
+    mockAppUnmounted.mockClear();
+    let unmountedWhenClosed: boolean | undefined;
+    VideoRoomMonitor.once('closed', () => {
+      unmountedWhenClosed = mockAppUnmounted.mock.calls.length === 1;
+    });
+
+    VideoRoomMonitor.openMonitor();
+    expect(mockAppUnmounted).not.toHaveBeenCalled();
+
+    VideoRoomMonitor.closeMonitor();
+    expect(unmountedWhenClosed).toBe(true);
+    expect(document.getElementById('TwilioVideoRoomMonitorContainer')).toBeNull();
+  });
+
+  it('should support repeatedly opening and closing the monitor without leaking containers or logging errors', () => {
+    const consoleError = jest.spyOn(console, 'error');
+    for (let i = 0; i < 5; i++) {
+      VideoRoomMonitor.toggleMonitor();
+      expect(document.querySelectorAll('#TwilioVideoRoomMonitorContainer').length).toBe(1);
+      expect(document.getElementById('TwilioVideoRoomMonitorContainer')?.textContent).toBe('Test');
+      VideoRoomMonitor.toggleMonitor();
+      expect(document.querySelectorAll('#TwilioVideoRoomMonitorContainer').length).toBe(0);
+    }
+    expect(document.body.childElementCount).toBe(0);
+    expect(consoleError).not.toHaveBeenCalled();
+    consoleError.mockRestore();
   });
 
   it('should register a room with the roomRegistry when registerVideoRoom is called', () => {

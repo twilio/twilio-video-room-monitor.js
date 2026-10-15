@@ -1,5 +1,5 @@
 import useGetStats from './useGetStats';
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 import { UPDATE_INTERVAL } from '../../constants';
 
 const mockRoom = {
@@ -10,13 +10,12 @@ jest.useFakeTimers();
 
 describe('the useGetStats hook', () => {
   it('should periodically return stats at the specified interval', async () => {
-    const { result, waitForNextUpdate } = renderHook(() => useGetStats(mockRoom as any));
+    const { result } = renderHook(() => useGetStats(mockRoom as any));
 
     expect(result.current).toBe(undefined);
 
     await act(async () => {
       jest.advanceTimersByTime(UPDATE_INTERVAL);
-      await waitForNextUpdate();
     });
 
     expect(result.current).toBe('mockStats');
@@ -24,7 +23,6 @@ describe('the useGetStats hook', () => {
     await act(async () => {
       mockRoom.getStats.mockImplementationOnce(() => Promise.resolve('mockStats2'));
       jest.advanceTimersByTime(UPDATE_INTERVAL);
-      await waitForNextUpdate();
     });
 
     expect(result.current).toBe('mockStats2');
@@ -32,13 +30,12 @@ describe('the useGetStats hook', () => {
 
   it('should call clearInterval on unmount', async () => {
     jest.spyOn(window, 'clearInterval');
-    const { waitForNextUpdate, unmount } = renderHook(() => useGetStats(mockRoom as any));
+    const { unmount } = renderHook(() => useGetStats(mockRoom as any));
 
     expect(window.clearInterval).not.toHaveBeenCalled();
 
-    await act(async () => {
-      await waitForNextUpdate();
-    });
+    // Let the initial getStats() promise resolve before unmounting.
+    await act(async () => {});
 
     unmount();
     expect(window.clearInterval).toHaveBeenCalled();

@@ -1,8 +1,6 @@
-import { mount } from 'enzyme';
+import { act, render, renderHook, screen } from '@testing-library/react';
 import { useIntervalUpdate, withIntervalUpdate } from './useIntervalUpdate';
-import { act } from 'react-dom/test-utils';
 import { UPDATE_INTERVAL } from '../../constants';
-import { renderHook } from '@testing-library/react-hooks';
 
 jest.useFakeTimers();
 
@@ -20,18 +18,18 @@ describe('the useIntervalUpdate hook', () => {
 });
 
 describe('the withIntervalUpdate higher-order component', () => {
-  it('should produce a component that updates after UPDATE_INTERVAL duration', async () => {
+  it('should produce a component that updates after UPDATE_INTERVAL duration', () => {
     const BaseComponent = () => <h1>{mockObj.mockMutableValue}</h1>;
     const IntervalUpdateBaseComponent = withIntervalUpdate(BaseComponent);
-    const wrapper = mount(<IntervalUpdateBaseComponent />);
+    render(<IntervalUpdateBaseComponent />);
 
-    expect(wrapper.text()).toBe('0');
+    expect(screen.getByRole('heading')).toHaveTextContent('0');
 
     mockObj.mockMutableValue = 1;
     act(() => {
       jest.advanceTimersByTime(UPDATE_INTERVAL);
     });
 
-    expect(wrapper.text()).toBe('1');
+    expect(screen.getByRole('heading')).toHaveTextContent('1');
   });
 });
