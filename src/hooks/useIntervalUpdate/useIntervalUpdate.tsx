@@ -16,7 +16,7 @@ export function useIntervalUpdate() {
 }
 
 // This higher-order component returns a new component that will rerender periodically.
-export function withIntervalUpdate<T>(Component: React.ComponentType<T>) {
+export function withIntervalUpdate<T extends object>(Component: React.ComponentType<T>) {
   return (props: T) => {
     useIntervalUpdate();
     return <Component {...props} />;

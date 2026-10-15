@@ -1,4 +1,3 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 import ParticipantInfo from './ParticipantInfo';
 import useRoom from '../../hooks/useRoom/useRoom';

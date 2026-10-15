@@ -1,4 +1,3 @@
-import React from 'react';
 import ArrayData from './ArrayData';
 import { shallow } from 'enzyme';
 import { Arr } from '../../../../types';

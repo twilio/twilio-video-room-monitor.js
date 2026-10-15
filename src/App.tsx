@@ -1,4 +1,3 @@
-import React from 'react';
 import AppContainer from './components/AppContainer/AppContainer';
 import ParticipantInfo from './components/ParticipantInfo/ParticipantInfo';
 import RoomInfo from './components/RoomInfo/RoomInfo';

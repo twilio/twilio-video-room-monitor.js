@@ -1,4 +1,3 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 import { DataTrackPublicationInfo, DataTrackInfo } from './DataTrackPublicationInfo';
 import useTrack from '../../../hooks/useTrack/useTrack';

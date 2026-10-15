@@ -1,4 +1,3 @@
-import React from 'react';
 import AppContainer from './AppContainer';
 import { shallow } from 'enzyme';
 import { theme } from '../theme';

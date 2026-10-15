@@ -1,4 +1,3 @@
-import React from 'react';
 import Datum from '../typography/common/Datum/Datum';
 import Headline from '../typography/common/Headline/Headline';
 import useDominantSpeaker from '../../hooks/useDominantSpeaker/useDominantSpeaker';

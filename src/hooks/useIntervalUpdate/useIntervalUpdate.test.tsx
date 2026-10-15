@@ -1,4 +1,3 @@
-import React from 'react';
 import { mount } from 'enzyme';
 import { useIntervalUpdate, withIntervalUpdate } from './useIntervalUpdate';
 import { act } from 'react-dom/test-utils';
@@ -30,7 +29,7 @@ describe('the withIntervalUpdate higher-order component', () => {
 
     mockObj.mockMutableValue = 1;
     act(() => {
-      jest.runTimersToTime(UPDATE_INTERVAL);
+      jest.advanceTimersByTime(UPDATE_INTERVAL);
     });
 
     expect(wrapper.text()).toBe('1');

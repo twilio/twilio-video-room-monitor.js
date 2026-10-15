@@ -1,4 +1,3 @@
-import React from 'react';
 import useParticipants from '../../hooks/useParticipants/useParticipants';
 import useRoom from '../../hooks/useRoom/useRoom';
 import useRoomState from '../../hooks/useRoomState/useRoomState';

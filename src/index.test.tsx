@@ -1,4 +1,3 @@
-import React from 'react';
 import { roomRegistry } from './components/RoomProvider/RoomProvider';
 import { VideoRoomMonitor } from './index';
 

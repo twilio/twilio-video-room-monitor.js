@@ -1,4 +1,3 @@
-import React from 'react';
 import { Accordion, LabelContainer } from './Accordion';
 import { mount } from 'enzyme';
 

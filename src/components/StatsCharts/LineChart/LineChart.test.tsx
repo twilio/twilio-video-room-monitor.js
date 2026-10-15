@@ -1,4 +1,3 @@
-import React from 'react';
 import * as constants from '../../../constants';
 import LineChart, { formatBitrate } from './LineChart';
 import { shallow } from 'enzyme';

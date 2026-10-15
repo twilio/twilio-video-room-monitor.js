@@ -1,4 +1,3 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 import { CopyButton, Tooltip, CopyButtonContainer } from './CopyButton';
 import useRoom from '../../../hooks/useRoom/useRoom';
@@ -39,12 +38,12 @@ describe('the CopyButton component', () => {
     expect(wrapper.find(Tooltip).text()).toBe('Copy Room Information');
     wrapper.find(CopyButtonContainer).simulate('click');
 
-    setImmediate(() => {
+    setTimeout(() => {
       expect(wrapper.find(Tooltip).text()).toBe('Room information copied to clipboard');
       wrapper.find(CopyButtonContainer).simulate('mouseleave');
       expect(wrapper.find(Tooltip).contains('Copy Room Information')).toBe(true);
       done();
-    });
+    }, 0);
   });
 
   it('should change the processor values to booleans for the room object when clicked', () => {

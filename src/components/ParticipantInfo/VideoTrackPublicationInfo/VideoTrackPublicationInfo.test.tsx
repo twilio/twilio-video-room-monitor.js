@@ -1,4 +1,3 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 import { VideoTrackPublicationInfo, VideoTrackInfo } from './VideoTrackPublicationInfo';
 import { useTrackBandwidth, useTrackData } from '../../../hooks/useStats/useStatsUtils';

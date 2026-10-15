@@ -1,4 +1,3 @@
-import React from 'react';
 import LineChart from '../LineChart/LineChart';
 import useStats from '../../../hooks/useStats/useStats';
 

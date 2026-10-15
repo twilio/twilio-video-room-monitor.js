@@ -1,4 +1,3 @@
-import React from 'react';
 import { shallow } from 'enzyme';
 import RoomInfo from './RoomInfo';
 import useRoomState from '../../hooks/useRoomState/useRoomState';

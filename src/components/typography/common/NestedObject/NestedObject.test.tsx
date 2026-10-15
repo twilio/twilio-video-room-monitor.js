@@ -1,4 +1,3 @@
-import React from 'react';
 import NestedObject from './NestedObject';
 import { shallow } from 'enzyme';
 

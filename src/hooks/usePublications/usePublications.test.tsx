@@ -64,7 +64,7 @@ describe('the usePublications hook', () => {
       expect(result.current).toEqual([{ trackSid: 'track1' }, { trackSid: 'track2' }]);
       mockParticipant.tracks.set(2, { trackSid: 'track3' });
       act(() => {
-        jest.runTimersToTime(UPDATE_INTERVAL);
+        jest.advanceTimersByTime(UPDATE_INTERVAL);
       });
       expect(result.current).toEqual([{ trackSid: 'track1' }, { trackSid: 'track2' }, { trackSid: 'track3' }]);
     });
@@ -77,7 +77,7 @@ describe('the usePublications hook', () => {
         [1, { trackSid: 'track1' }],
       ]);
       act(() => {
-        jest.runTimersToTime(UPDATE_INTERVAL);
+        jest.advanceTimersByTime(UPDATE_INTERVAL);
       });
       expect(result.current).toEqual([{ trackSid: 'track1' }, { trackSid: 'track2' }]);
     });

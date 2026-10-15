@@ -1,4 +1,3 @@
-import React from 'react';
 import DataTrack from './DataTrack';
 import { shallow } from 'enzyme';
 import { LocalDataTrack, RemoteDataTrack } from 'twilio-video';
