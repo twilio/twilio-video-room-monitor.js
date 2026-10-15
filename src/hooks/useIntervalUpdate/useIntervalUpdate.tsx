@@ -5,7 +5,7 @@ import { UPDATE_INTERVAL } from '../../constants';
 // value of properties of the Room object that don't emit events when they update.
 export function useIntervalUpdate() {
   const [, setState] = useState(0);
-  const intervalIdRef = useRef<number>();
+  const intervalIdRef = useRef<number>(undefined);
 
   useEffect(() => {
     intervalIdRef.current = window.setInterval(() => setState((count) => count + 1), UPDATE_INTERVAL);

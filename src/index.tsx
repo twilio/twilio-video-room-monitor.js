@@ -1,4 +1,5 @@
-import ReactDOM from 'react-dom';
+import { flushSync } from 'react-dom';
+import { createRoot, Root } from 'react-dom/client';
 import App from './App';
 import EventEmitter from 'eventemitter3';
 import { Room } from 'twilio-video';
@@ -10,6 +11,8 @@ class VideoRoomMonitorImpl extends EventEmitter<{
 }> {
   // @internal
   private container?: HTMLDivElement;
+  // @internal
+  private root?: Root;
 
   get isOpen() {
     return Boolean(this.container);
@@ -20,17 +23,21 @@ class VideoRoomMonitorImpl extends EventEmitter<{
       const container = document.createElement('div');
       document.body.appendChild(container);
       container.id = 'TwilioVideoRoomMonitorContainer';
-      ReactDOM.render(<App />, container);
+      const root = createRoot(container);
+      // Render synchronously, as ReactDOM.render did, so the monitor is in the DOM before 'opened' is emitted.
+      flushSync(() => root.render(<App />));
       this.container = container;
+      this.root = root;
       this.emit('opened');
     }
   }
 
   closeMonitor() {
     if (this.container) {
-      ReactDOM.unmountComponentAtNode(this.container!);
+      this.root?.unmount();
       this.container.remove();
       this.container = undefined;
+      this.root = undefined;
       this.emit('closed');
     }
   }

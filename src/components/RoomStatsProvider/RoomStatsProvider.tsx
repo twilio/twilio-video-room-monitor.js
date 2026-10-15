@@ -19,8 +19,8 @@ export const truncateFront = (arr: any[], limit: number) => arr.slice(Math.max(0
 
 export const RoomStatsContext = React.createContext<RoomStats>(null!);
 
-export const RoomStatsProvider: React.FC = ({ children }) => {
-  const previousStatsRef = useRef<StatsReport[]>();
+export const RoomStatsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+  const previousStatsRef = useRef<StatsReport[]>(undefined);
   const receivedBitrateHistoryRef = useRef<chartDatum[]>([]);
   const sentBitrateHistoryRef = useRef<chartDatum[]>([]);
 

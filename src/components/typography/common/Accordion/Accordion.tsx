@@ -32,7 +32,7 @@ export const LabelContainer = styled.div<{ isClickable: boolean }>`
   }
 `;
 
-export const Accordion: React.FC<{ label: string }> = ({ children, label }) => {
+export const Accordion: React.FC<React.PropsWithChildren<{ label: string }>> = ({ children, label }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasChildren = React.Children.count(children) > 0;
 
