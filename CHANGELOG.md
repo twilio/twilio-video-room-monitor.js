@@ -11,6 +11,8 @@
 ### Maintenance
 
 - Upgraded `@visx/xychart` and `@visx/curve` to 4.x, which support React 19. `@react-spring/web` is now a dependency.
+- Upgraded `styled-components` to 6.x and `eventemitter3` to 5.x.
+- Removed the unused `react-spring` 8.x dependency.
 - Upgraded the development toolchain (TypeScript 6, Jest 30, ESLint 9, Parcel 2.16) and now track `package-lock.json`. Local development requires Node.js 22 or later.
 
 # 1.0.1 (August 5, 2022)

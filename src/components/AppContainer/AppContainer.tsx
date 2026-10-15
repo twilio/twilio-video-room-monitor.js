@@ -42,10 +42,10 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
       <Bar ref={draggableRef as any}>
         <span style={{ padding: '0.57em' }}>Twilio Video Room Monitor</span>
         <RightBarContainer>
-          <TabSelector isActive={activeTab === 'info'} onClick={() => setActiveTab('info')}>
+          <TabSelector $isActive={activeTab === 'info'} onClick={() => setActiveTab('info')}>
             Info
           </TabSelector>
-          <TabSelector isActive={activeTab === 'stats'} onClick={() => setActiveTab('stats')}>
+          <TabSelector $isActive={activeTab === 'stats'} onClick={() => setActiveTab('stats')}>
             Stats
           </TabSelector>
           <CopyButton />

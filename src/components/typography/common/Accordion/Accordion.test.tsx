@@ -10,7 +10,7 @@ describe('the Accordion component', () => {
         </Accordion>
       );
 
-      expect(wrapper.find({ isClickable: true }).length).toBe(2);
+      expect(wrapper.find({ $isClickable: true }).length).toBe(2);
     });
 
     it('should toggle the display of children when clicked', () => {
@@ -32,7 +32,7 @@ describe('the Accordion component', () => {
   describe('without children', () => {
     it('should not have clickable elements', () => {
       const wrapper = mount(<Accordion label="test" />);
-      expect(wrapper.find({ isClickable: true }).length).toBe(0);
+      expect(wrapper.find({ $isClickable: true }).length).toBe(0);
     });
   });
 });
