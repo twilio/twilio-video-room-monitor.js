@@ -35,6 +35,8 @@ You can install directly from npm.
 npm install @twilio/video-room-monitor --save
 ```
 
+The NPM package requires `react` and `react-dom` 18 or 19 (as peer dependencies) and `twilio-video` 2.14 or later. If your application uses React 16 or 17, use version 1.x of the Monitor, or use the [Script Tag](#script-tag) method, which bundles its own copy of React.
+
 Using this method, you can import `@twilio/video-room-monitor` and open the monitor like so:
 
 ```js
@@ -148,8 +150,8 @@ VideoRoomMonitor.isOpen;
 
 You must have the following installed:
 
-- [Node.js v14+](https://nodejs.org/en/download/)
-- NPM v7+ (comes installed with newer Node versions)
+- [Node.js v22+](https://nodejs.org/en/download/) (see `.nvmrc`)
+- NPM v10+ (comes installed with Node.js v22)
 
 ### Install dependencies
 

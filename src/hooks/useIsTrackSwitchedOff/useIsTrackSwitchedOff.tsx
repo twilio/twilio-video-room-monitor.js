@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import type { EventEmitter } from 'events';
 import { LocalVideoTrack, LocalDataTrack, RemoteVideoTrack, RemoteDataTrack } from 'twilio-video';
 
 type TrackType = RemoteVideoTrack | RemoteDataTrack | LocalVideoTrack | LocalDataTrack | undefined | null;
@@ -16,11 +17,14 @@ export default function useIsTrackSwitchedOff(track: TrackType) {
     if (track) {
       const handleSwitchedOff = () => setIsSwitchedOff(true);
       const handleSwitchedOn = () => setIsSwitchedOff(false);
-      track.on('switchedOff', handleSwitchedOff);
-      track.on('switchedOn', handleSwitchedOn);
+      // Subscribe through the shared EventEmitter base, since TypeScript can't resolve the
+      // overloaded 'on' and 'off' methods across a union of track types.
+      const emitter: EventEmitter = track;
+      emitter.on('switchedOff', handleSwitchedOff);
+      emitter.on('switchedOn', handleSwitchedOn);
       return () => {
-        track.off('switchedOff', handleSwitchedOff);
-        track.off('switchedOn', handleSwitchedOn);
+        emitter.off('switchedOff', handleSwitchedOff);
+        emitter.off('switchedOn', handleSwitchedOn);
       };
     }
   }, [track]);

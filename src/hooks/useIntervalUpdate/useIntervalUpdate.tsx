@@ -5,7 +5,7 @@ import { UPDATE_INTERVAL } from '../../constants';
 // value of properties of the Room object that don't emit events when they update.
 export function useIntervalUpdate() {
   const [, setState] = useState(0);
-  const intervalIdRef = useRef<number>();
+  const intervalIdRef = useRef<number>(undefined);
 
   useEffect(() => {
     intervalIdRef.current = window.setInterval(() => setState((count) => count + 1), UPDATE_INTERVAL);
@@ -16,7 +16,7 @@ export function useIntervalUpdate() {
 }
 
 // This higher-order component returns a new component that will rerender periodically.
-export function withIntervalUpdate<T>(Component: React.ComponentType<T>) {
+export function withIntervalUpdate<T extends object>(Component: React.ComponentType<T>) {
   return (props: T) => {
     useIntervalUpdate();
     return <Component {...props} />;

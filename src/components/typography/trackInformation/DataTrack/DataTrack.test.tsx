@@ -1,6 +1,5 @@
-import React from 'react';
+import { render, screen } from '@testing-library/react';
 import DataTrack from './DataTrack';
-import { shallow } from 'enzyme';
 import { LocalDataTrack, RemoteDataTrack } from 'twilio-video';
 
 jest.mock('twilio-video', () => ({
@@ -30,11 +29,13 @@ jest.mock('twilio-video', () => ({
 
 describe('the DataTrack component', () => {
   it('should have the ID property display when there is a LocalDataTrack', () => {
-    const wrapper = shallow(<DataTrack track={new LocalDataTrack()} />);
-    expect(wrapper.find({ label: 'ID', value: 'mockIdLocal' }).exists()).toBe(true);
+    render(<DataTrack track={new LocalDataTrack()} />);
+    expect(screen.getByText('ID: mockIdLocal')).toBeInTheDocument();
+    expect(screen.queryByText(/^SID:/)).not.toBeInTheDocument();
   });
   it('should have the SID property display when there is a RemoteDataTrack', () => {
-    const wrapper = shallow(<DataTrack track={new RemoteDataTrack()} />);
-    expect(wrapper.find({ label: 'SID', value: 'mockSidRemote' }).exists()).toBe(true);
+    render(<DataTrack track={new RemoteDataTrack()} />);
+    expect(screen.getByText('SID: mockSidRemote')).toBeInTheDocument();
+    expect(screen.queryByText(/^ID:/)).not.toBeInTheDocument();
   });
 });

@@ -1,3 +1,21 @@
+# 2.0.0 (in progress)
+
+### Breaking Changes
+
+- React 18 or 19 is now required when installing from NPM. Support for React 16 and 17 has been removed. Applications on React 16 or 17 can continue to use version 1.x, or load the Monitor with the [Script Tag](https://github.com/twilio/twilio-video-room-monitor.js#script-tag) method, which bundles its own copy of React.
+
+### Bug Fixes
+
+- Fixed `TypeError: react_dom_1.default.render is not a function` when calling `openMonitor()` in applications using React 19. The Monitor now renders with `createRoot` instead of the removed `ReactDOM.render` API.
+
+### Maintenance
+
+- Upgraded `@visx/xychart` and `@visx/curve` to 4.x, which support React 19. `@react-spring/web` is now a dependency.
+- Upgraded `styled-components` to 6.x and `eventemitter3` to 5.x.
+- Removed the unused `react-spring` 8.x dependency.
+- Upgraded the development toolchain (TypeScript 6, Jest 30, ESLint 9, Parcel 2.16) and now track `package-lock.json`. Local development requires Node.js 22 or later.
+- Migrated the test suite from Enzyme to React Testing Library, replaced snapshot tests with explicit assertions, and added tests for opening and closing the Monitor with React 18 and 19. Test files are now type-checked by `npm run ts`.
+
 # 1.0.1 (August 5, 2022)
 
 ### Improvements
