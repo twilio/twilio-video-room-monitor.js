@@ -60,7 +60,7 @@ export default function AppContainer({ children }: { children: (activeTab: 'info
               <path
                 fillRule="evenodd"
                 clipRule="evenodd"
-                d="M18.232 1.768a.347.347 0 010 .491L2.258 18.232a.347.347 0 11-.49-.491L17.74 1.768a.347.347 0 01.492"
+                d="M18.232 1.768a.347.347 0 010 .491L2.258 18.232a.347.347 0 11-.49-.491L17.74 1.768a.347.347 0 01.492 0z"
                 fill="#DDD"
               />
             </svg>
