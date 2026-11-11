@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 import EventEmitter from 'events';
 import useParticipantNetworkQualityLevel from './useParticipantNetworkQualityLevel';
 

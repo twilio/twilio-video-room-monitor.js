@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import type { EventEmitter } from 'events';
 import {
   LocalAudioTrack,
   LocalVideoTrack,
@@ -26,11 +27,14 @@ export default function useIsTrackEnabled(track: TrackType) {
     if (track) {
       const setEnabled = () => setIsEnabled(true);
       const setDisabled = () => setIsEnabled(false);
-      track.on('enabled', setEnabled);
-      track.on('disabled', setDisabled);
+      // Subscribe through the shared EventEmitter base, since TypeScript can't resolve the
+      // overloaded 'on' and 'off' methods across a union of track types.
+      const emitter: EventEmitter = track;
+      emitter.on('enabled', setEnabled);
+      emitter.on('disabled', setDisabled);
       return () => {
-        track.off('enabled', setEnabled);
-        track.off('disabled', setDisabled);
+        emitter.off('enabled', setEnabled);
+        emitter.off('disabled', setDisabled);
       };
     }
   }, [track]);

@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import { theme } from '../../components/theme';
 import useDrag from './useDrag';
 

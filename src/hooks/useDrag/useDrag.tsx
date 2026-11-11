@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import { theme } from '../../components/theme';
 
 export default function useDrag() {
-  const draggableRef = useRef<HTMLDivElement>(); // The element that the user drags
-  const dragContainerRef = useRef<HTMLDivElement>(); // The container that is moved when dragged
+  const draggableRef = useRef<HTMLDivElement>(null); // The element that the user drags
+  const dragContainerRef = useRef<HTMLDivElement>(null); // The container that is moved when dragged
   const mousePositionRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {

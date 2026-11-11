@@ -83,13 +83,13 @@ export const RightBarContainer = styled.div`
   align-items: center;
 `;
 
-export const TabSelector = styled.span<{ isActive: boolean }>`
+export const TabSelector = styled.span<{ $isActive: boolean }>`
   position: relative;
   margin: 0px 6px;
-  color: ${(props) => (props.isActive ? theme.textColor : '#555')};
+  color: ${(props) => (props.$isActive ? theme.textColor : '#555')};
   cursor: pointer;
   padding: 8px;
-  border-bottom: ${(props) => (props.isActive ? '2px solid white' : '')};
+  border-bottom: ${(props) => (props.$isActive ? '2px solid white' : '')};
   &:hover {
     background: rgba(50, 50, 50, 0.9);
   }

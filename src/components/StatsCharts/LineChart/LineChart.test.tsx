@@ -1,8 +1,15 @@
-import React from 'react';
+import { render } from '@testing-library/react';
 import * as constants from '../../../constants';
 import LineChart, { formatBitrate } from './LineChart';
-import { shallow } from 'enzyme';
 import { XYChart } from '@visx/xychart';
+
+// Record the props passed to XYChart while still rendering the real chart.
+jest.mock('@visx/xychart', () => {
+  const actual = jest.requireActual('@visx/xychart');
+  return { ...actual, XYChart: jest.fn((props: any) => <actual.XYChart {...props} />) };
+});
+const mockXYChart = XYChart as unknown as jest.Mock;
+const xyChartProps = () => mockXYChart.mock.calls[mockXYChart.mock.calls.length - 1][0];
 
 // @ts-ignore
 constants.MAX_STAT_HISTORY_LENGTH = 5;
@@ -31,13 +38,30 @@ describe('the formatBitrate function', () => {
 });
 
 describe('the LineChart component', () => {
+  it('should render the title, axis labels, and a line for the data', () => {
+    const { container, getByText } = render(
+      <LineChart
+        title="Test Chart"
+        yAxisLabel="Y Axis"
+        data={[
+          { x: 1400, y: 10 },
+          { x: 2000, y: 20 },
+        ]}
+      />
+    );
+    expect(getByText('Test Chart')).toBeInTheDocument();
+    expect(getByText('Time')).toBeInTheDocument();
+    expect(getByText('Y Axis')).toBeInTheDocument();
+    expect(container.querySelector('svg path[d]')?.getAttribute('d')).toMatch(/^M[\d.]+,[\d.]+L/);
+  });
+
   it('it should correctly set the xScale when the largest x value is greater than xDomainMin', () => {
-    const wrapper = shallow(<LineChart title="Test Chart" yAxisLabel="Y Axis" data={[{ x: 2000, y: 10 }]} />);
-    expect(wrapper.find(XYChart).prop('xScale')).toEqual({ domain: [1500, 2000], type: 'time' });
+    render(<LineChart title="Test Chart" yAxisLabel="Y Axis" data={[{ x: 2000, y: 10 }]} />);
+    expect(xyChartProps().xScale).toEqual({ domain: [1500, 2000], type: 'time' });
   });
 
   it('it should correctly set the xScale when the largest x value is less than xDomainMin', () => {
-    const wrapper = shallow(
+    render(
       <LineChart
         title="Test Chart"
         yAxisLabel="Y Axis"
@@ -47,16 +71,16 @@ describe('the LineChart component', () => {
         ]}
       />
     );
-    expect(wrapper.find(XYChart).prop('xScale')).toEqual({ domain: [1400, 2000], type: 'time' });
+    expect(xyChartProps().xScale).toEqual({ domain: [1400, 2000], type: 'time' });
   });
 
   it('it should correctly set the yScale when the largest y value is less than 50', () => {
-    const wrapper = shallow(<LineChart title="Test Chart" yAxisLabel="Y Axis" data={[{ x: 2000, y: 0 }]} />);
-    expect(wrapper.find(XYChart).prop('yScale')).toEqual({ domain: [0, 50], type: 'linear' });
+    render(<LineChart title="Test Chart" yAxisLabel="Y Axis" data={[{ x: 2000, y: 0 }]} />);
+    expect(xyChartProps().yScale).toEqual({ domain: [0, 50], type: 'linear' });
   });
 
   it('it should correctly set the yScale when the largest y value is greater than 50', () => {
-    const wrapper = shallow(<LineChart title="Test Chart" yAxisLabel="Y Axis" data={[{ x: 1400, y: 10000 }]} />);
-    expect(wrapper.find(XYChart).prop('yScale')).toEqual({ domain: [0, 10000], type: 'linear' });
+    render(<LineChart title="Test Chart" yAxisLabel="Y Axis" data={[{ x: 1400, y: 10000 }]} />);
+    expect(xyChartProps().yScale).toEqual({ domain: [0, 10000], type: 'linear' });
   });
 });

@@ -20,7 +20,7 @@ function arePublicationArraysEqual(arr1: TrackPublication[], arr2: TrackPublicat
 
 export default function usePublications(participant: Participant, isLocal?: boolean) {
   const [publications, setPublications] = useState<TrackPublication[]>([]);
-  const intervalIdRef = useRef<number>();
+  const intervalIdRef = useRef<number>(undefined);
 
   useEffect(() => {
     // Local participants do not emit the 'trackUnpublished' event when a local track is unpublished.

@@ -1,17 +1,17 @@
 import cloneDeepWith from 'lodash/cloneDeepWith';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import useRoom from '../../../hooks/useRoom/useRoom';
 import { theme } from '../../theme';
 
-export const CopyButtonContainer = styled.div<{ hasRoom: boolean }>`
+export const CopyButtonContainer = styled.div<{ $hasRoom: boolean }>`
   display: flex;
   position: relative;
   margin: 0 1em;
-  cursor: ${({ hasRoom }) => (hasRoom ? 'pointer' : 'initial')};
+  cursor: ${({ $hasRoom }) => ($hasRoom ? 'pointer' : 'initial')};
 
   & svg {
-    stroke: ${({ hasRoom }) => (hasRoom ? theme.borderColor : '#333')};
+    stroke: ${({ $hasRoom }) => ($hasRoom ? theme.borderColor : '#333')};
   }
 `;
 
@@ -74,7 +74,7 @@ export function CopyButton() {
   };
 
   return (
-    <CopyButtonContainer onClick={handleRoomCopy} onMouseLeave={() => setHasCopiedRoomInfo(false)} hasRoom={!!room}>
+    <CopyButtonContainer onClick={handleRoomCopy} onMouseLeave={() => setHasCopiedRoomInfo(false)} $hasRoom={!!room}>
       <Tooltip>{hasCopiedRoomInfo ? 'Room information copied to clipboard' : 'Copy Room Information'}</Tooltip>
 
       <svg width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg">

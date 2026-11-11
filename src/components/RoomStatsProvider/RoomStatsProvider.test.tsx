@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook } from '@testing-library/react';
 import RoomStatsProvider, { truncateFront } from './RoomStatsProvider';
 import useGetStats from '../../hooks/useGetStats/useGetStats';
 import useRoom from '../../hooks/useRoom/useRoom';
@@ -26,7 +26,9 @@ describe('the truncateFront function', () => {
 
 describe('the RoomStatsProvider component', () => {
   it('should correctly return stats and previousStats', () => {
-    const wrapper: React.FC = ({ children }) => <RoomStatsProvider>{children}</RoomStatsProvider>;
+    const wrapper: React.FC<React.PropsWithChildren> = ({ children }) => (
+      <RoomStatsProvider>{children}</RoomStatsProvider>
+    );
     const { result, rerender } = renderHook(useStats, { wrapper });
 
     expect(mockUseRoom).toHaveBeenCalled();
@@ -43,7 +45,9 @@ describe('the RoomStatsProvider component', () => {
   it('should correctly return bandwidth statistics and history', () => {
     Date.now = () => 1000;
 
-    const wrapper: React.FC = ({ children }) => <RoomStatsProvider>{children}</RoomStatsProvider>;
+    const wrapper: React.FC<React.PropsWithChildren> = ({ children }) => (
+      <RoomStatsProvider>{children}</RoomStatsProvider>
+    );
     const { result, rerender } = renderHook(useStats, { wrapper });
 
     expect(result.current).toMatchObject({

@@ -1,4 +1,3 @@
-import React from 'react';
 import { chartDatum } from '../../../types';
 import { curveMonotoneX } from '@visx/curve';
 import Headline from '../../typography/common/Headline/Headline';

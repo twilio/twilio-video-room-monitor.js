@@ -35,6 +35,8 @@ You can install directly from npm.
 npm install @twilio/video-room-monitor --save
 ```
 
+The NPM package requires `react` and `react-dom` 18 or 19 (as peer dependencies) and `twilio-video` 2.14 or later. If your application uses React 16 or 17, use version 1.x of the Monitor, or use the [Script Tag](#script-tag) method, which bundles its own copy of React.
+
 Using this method, you can import `@twilio/video-room-monitor` and open the monitor like so:
 
 ```js
@@ -100,7 +102,7 @@ VideoRoomMonitor.registerVideoRoom(newRoom);
 
 #### `openMonitor()`
 
-This opens the monitor and emits the `opened` event. To open the monitor, you can run this line of code in the console:
+This opens the monitor and emits the `opened` event. The monitor renders asynchronously, so `opened` is emitted once it has been added to the page, not before `openMonitor()` returns. To open the monitor, you can run this line of code in the console:
 
 ```js
 VideoRoomMonitor.openMonitor();
@@ -114,7 +116,7 @@ VideoRoomMonitor.on('opened', () => console.log('the monitor has been opened'));
 
 #### `closeMonitor()`
 
-This closes the monitor and emits the `closed` event. To close the monitor, you can run this line of code in the console:
+This closes the monitor and emits the `closed` event. The `closed` event is emitted asynchronously, once the monitor has been removed from the page. To close the monitor, you can run this line of code in the console:
 
 ```js
 VideoRoomMonitor.closeMonitor();
@@ -136,7 +138,7 @@ VideoRoomMonitor.toggleMonitor();
 
 #### `isOpen`
 
-This is a boolean value that indicates whether or not the monitor is currently open.
+This is a boolean value that indicates whether or not the monitor is currently open. It changes as soon as `openMonitor()` or `closeMonitor()` is called, before the `opened` or `closed` event is emitted.
 
 ```js
 VideoRoomMonitor.isOpen;
@@ -148,8 +150,8 @@ VideoRoomMonitor.isOpen;
 
 You must have the following installed:
 
-- [Node.js v14+](https://nodejs.org/en/download/)
-- NPM v7+ (comes installed with newer Node versions)
+- [Node.js v22+](https://nodejs.org/en/download/) (see `.nvmrc`)
+- NPM v10+ (comes installed with Node.js v22)
 
 ### Install dependencies
 
@@ -192,7 +194,7 @@ Runs the linter.
 This will host the app on a local server. This server can then be used to run the tool in the browser by using a script tag:
 
 ```html
-<script src="http://localhost:1234/twilio-video-room-monitor.js></script>
+<script src="http://localhost:1234/twilio-video-room-monitor.js"></script>
 ```
 
 Or by running this code snippet in the console of your browser:

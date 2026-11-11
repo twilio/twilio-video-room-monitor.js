@@ -1,5 +1,6 @@
 module.exports = {
   roots: ['<rootDir>/src'],
+  testEnvironment: 'jsdom',
   transform: {
     '^.+\\.tsx?$': 'ts-jest',
   },
@@ -7,6 +8,5 @@ module.exports = {
   reporters: ['default', 'jest-junit'],
   coveragePathIgnorePatterns: ['node_modules'],
   clearMocks: true,
-  snapshotSerializers: ['enzyme-to-json/serializer'],
-  setupFiles: ['<rootDir>/src/setupTests.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
 };

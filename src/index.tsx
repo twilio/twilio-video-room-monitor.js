@@ -1,9 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { useLayoutEffect } from 'react';
+import { createRoot, Root } from 'react-dom/client';
 import App from './App';
 import EventEmitter from 'eventemitter3';
 import { Room } from 'twilio-video';
 import { roomRegistry } from './components/RoomProvider/RoomProvider';
+
+// Renders the app and calls onCommit once it has been committed to the DOM.
+function MonitorRoot({ onCommit }: { onCommit: () => void }) {
+  useLayoutEffect(onCommit, [onCommit]);
+  return <App />;
+}
 
 class VideoRoomMonitorImpl extends EventEmitter<{
   opened: [];
@@ -11,6 +17,8 @@ class VideoRoomMonitorImpl extends EventEmitter<{
 }> {
   // @internal
   private container?: HTMLDivElement;
+  // @internal
+  private root?: Root;
 
   get isOpen() {
     return Boolean(this.container);
@@ -21,18 +29,32 @@ class VideoRoomMonitorImpl extends EventEmitter<{
       const container = document.createElement('div');
       document.body.appendChild(container);
       container.id = 'TwilioVideoRoomMonitorContainer';
-      ReactDOM.render(<App />, container);
+      const root = createRoot(container);
       this.container = container;
-      this.emit('opened');
+      this.root = root;
+      // createRoot renders asynchronously, so 'opened' is emitted once the app is in the DOM. flushSync isn't used
+      // because React ignores it, with a warning, when openMonitor is called from a host app's effect. The event is
+      // emitted after the commit, not during it, so a throwing listener can't make React unmount the app.
+      const onCommit = () =>
+        queueMicrotask(() => {
+          if (this.root === root) this.emit('opened');
+        });
+      root.render(<MonitorRoot onCommit={onCommit} />);
     }
   }
 
   closeMonitor() {
-    if (this.container) {
-      ReactDOM.unmountComponentAtNode(this.container!);
-      this.container.remove();
+    const { container, root } = this;
+    if (container && root) {
       this.container = undefined;
-      this.emit('closed');
+      this.root = undefined;
+      // Unmounting while React is rendering logs a warning, which happens when closeMonitor is called from a host
+      // app's effect cleanup. Deferring to a microtask avoids that, and 'closed' is emitted once the app is unmounted.
+      queueMicrotask(() => {
+        root.unmount();
+        container.remove();
+        this.emit('closed');
+      });
     }
   }
 
