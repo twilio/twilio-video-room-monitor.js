@@ -194,7 +194,7 @@ Runs the linter.
 This will host the app on a local server. This server can then be used to run the tool in the browser by using a script tag:
 
 ```html
-<script src="http://localhost:1234/twilio-video-room-monitor.js></script>
+<script src="http://localhost:1234/twilio-video-room-monitor.js"></script>
 ```
 
 Or by running this code snippet in the console of your browser:
