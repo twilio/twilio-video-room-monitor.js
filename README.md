@@ -102,7 +102,7 @@ VideoRoomMonitor.registerVideoRoom(newRoom);
 
 #### `openMonitor()`
 
-This opens the monitor and emits the `opened` event. To open the monitor, you can run this line of code in the console:
+This opens the monitor and emits the `opened` event. The monitor renders asynchronously, so `opened` is emitted once it has been added to the page, not before `openMonitor()` returns. To open the monitor, you can run this line of code in the console:
 
 ```js
 VideoRoomMonitor.openMonitor();
@@ -116,7 +116,7 @@ VideoRoomMonitor.on('opened', () => console.log('the monitor has been opened'));
 
 #### `closeMonitor()`
 
-This closes the monitor and emits the `closed` event. To close the monitor, you can run this line of code in the console:
+This closes the monitor and emits the `closed` event. The `closed` event is emitted asynchronously, once the monitor has been removed from the page. To close the monitor, you can run this line of code in the console:
 
 ```js
 VideoRoomMonitor.closeMonitor();
@@ -138,7 +138,7 @@ VideoRoomMonitor.toggleMonitor();
 
 #### `isOpen`
 
-This is a boolean value that indicates whether or not the monitor is currently open.
+This is a boolean value that indicates whether or not the monitor is currently open. It changes as soon as `openMonitor()` or `closeMonitor()` is called, before the `opened` or `closed` event is emitted.
 
 ```js
 VideoRoomMonitor.isOpen;
