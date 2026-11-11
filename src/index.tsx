@@ -33,10 +33,12 @@ class VideoRoomMonitorImpl extends EventEmitter<{
       this.container = container;
       this.root = root;
       // createRoot renders asynchronously, so 'opened' is emitted once the app is in the DOM. flushSync isn't used
-      // because React ignores it, with a warning, when openMonitor is called from a host app's effect.
-      const onCommit = () => {
-        if (this.root === root) this.emit('opened');
-      };
+      // because React ignores it, with a warning, when openMonitor is called from a host app's effect. The event is
+      // emitted after the commit, not during it, so a throwing listener can't make React unmount the app.
+      const onCommit = () =>
+        queueMicrotask(() => {
+          if (this.root === root) this.emit('opened');
+        });
       root.render(<MonitorRoot onCommit={onCommit} />);
     }
   }

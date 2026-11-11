@@ -102,6 +102,29 @@ describe('the Twilio Video Room Monitor API', () => {
     expect(stateWhenClosed).toEqual({ unmounted: true, container: null });
   });
 
+  it('should keep the app rendered and report the error when an "opened" listener throws', async () => {
+    const listenerError = new Error('opened listener failed');
+    const reportedErrors: unknown[] = [];
+    const onWindowError = (event: ErrorEvent) => {
+      reportedErrors.push(event.error);
+      event.preventDefault();
+    };
+    window.addEventListener('error', onWindowError);
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    VideoRoomMonitor.once('opened', () => {
+      throw listenerError;
+    });
+
+    await run(() => VideoRoomMonitor.openMonitor());
+
+    expect(getContainer()?.textContent).toBe('Test');
+    expect(VideoRoomMonitor.isOpen).toBe(true);
+    expect(reportedErrors).toEqual([listenerError]);
+
+    window.removeEventListener('error', onWindowError);
+    consoleError.mockRestore();
+  });
+
   it('should only emit "closed" when the monitor is closed before it has rendered', async () => {
     jest.spyOn(VideoRoomMonitor, 'emit');
 
